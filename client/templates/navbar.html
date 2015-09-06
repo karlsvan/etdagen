@@ -1,0 +1,41 @@
+
+<div class="navbar navbar-et shadow-z-1" role="navigation" ng-controller="NavbarCtrl as NAV">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+			  <span class="sr-only">Toggle navigation</span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			</button>
+
+			<a class="navbar-brand" ui-sref="news">
+			  <img src="images/ETlogos/logo.svg" alt="{{etvars.title}}">
+			</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="js-navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li ui-sref-active="active"><a ui-sref="news"><i class="fa fa-newspaper-o"></i> Nyheter</a></li>
+				<li ui-sref-active="active"><a ui-sref="about"><i class="fa fa-info"></i> Rekrutteringsdagen</a></li>
+				<li ui-sref-active="active"><a ui-sref="companies"><i class="fa fa-building-o"></i> Bedrifter</a></li>
+				<li ui-sref-active="active"><a ui-sref="board"><i class="fa fa-users"></i> Styret</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li ui-sref-active="active"><a ui-sref="login"><i class="fa fa-sign-in"></i> Logg inn</a></li>
+				<li ui-sref-active="active"><a ui-sref="register"><i class="fa fa-pencil-square-o"></i> Registrer deg</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown">Brukernavn <i class="fa fa-caret-down"></i></a>
+					<ul class="dropdown-menu">
+						<li><a>Profil</a></li>
+						<li class="divider"></li>
+						<li><a ng-click="NAV.logout()">Logg ut</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script>$.material.init()</script>

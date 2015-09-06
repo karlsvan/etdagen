@@ -1,0 +1,26 @@
+{
+  "name": "etdagen",
+  "version": "1.0.0",
+  "homepage": "www.etdagen.no",
+  "description": "Nettside for arrangementet Elektronikk & Teknologi dagen",
+  "license": "Unlicense",
+  "authors": [
+    "Glenn Flø Karlsen <glenn.fk@hotmail.com>"
+  ],
+  "main": "./bower_components/*",
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-animate": "~1.4.5",
+    "angular-aria": "~1.4.5",
+    "angular-cookies": "~1.4.5",
+    "angular-messages": "~1.4.5",
+    "angular-resource": "~1.4.5",
+    "angular-route": "~1.4.5",
+    "angular-sanitize": "~1.4.5",
+    "angular-touch": "~1.4.5",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5",
+    "bootstrap-material-design": "~0.3.0",
+    "font-awesome": "~4.4.0"
+  }
+}

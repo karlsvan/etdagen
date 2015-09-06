@@ -1,0 +1,157 @@
+@et-navbar-sizes: xs 20px, sm 40px, md 60px, lg 80px, xl 100px;
+
+.navbar {
+	margin-bottom: 0;
+
+	.for(@et-navbar-sizes); .-each(@size){
+		@a: extract(@size, 1);
+		&-@{a} {
+			position: relative;
+			min-height: extract(extract(@et-navbar-sizes, 1), 2);
+			border: 1px solid transparent;
+			height: extract(@size, 2);
+		}
+	}
+}
+
+
+.navbar-et.navbar {
+  background-color: @navbar-et-bg;
+  border-color: @navbar-et-border;
+
+  .navbar-brand {
+    color: @navbar-et-brand-color;
+    &:hover,
+    &:focus {
+      color: @navbar-et-brand-hover-color;
+      background-color: @navbar-et-brand-hover-bg;
+    }
+	padding: 0;
+	margin-right: 10px;
+	> img {
+		height: 95%;
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+  }
+
+  .navbar-text {
+    color: @navbar-et-color;
+  }
+
+  .navbar-nav {
+    > li > a {
+      color: @navbar-et-link-color;
+
+      &:hover,
+      &:focus {
+        color: @navbar-et-link-hover-color;
+        background-color: @navbar-et-link-hover-bg;
+      }
+    }
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-et-link-active-color;
+        background-color: @navbar-et-link-active-bg;
+      }
+    }
+    > .disabled > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @navbar-et-link-disabled-color;
+        background-color: @navbar-et-link-disabled-bg;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border-color: @navbar-et-toggle-border-color;
+    &:hover,
+    &:focus {
+      background-color: @navbar-et-toggle-hover-bg;
+    }
+    .icon-bar {
+      background-color: @navbar-et-toggle-icon-bar-bg;
+    }
+  }
+
+  .navbar-collapse,
+  .navbar-form {
+    border-color: @navbar-et-border;
+    background-color: @navbar-et-bg;
+  }
+
+  // Dropdown menu items
+  .navbar-nav {
+    // Remove background color from open dropdown
+    > .open > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: @navbar-et-link-active-bg;
+        color: @navbar-et-link-active-color;
+      }
+    }
+
+    @media (max-width: @et-breakpoint-max) {
+      // Dropdowns get custom display when collapsed
+      .open .dropdown-menu {
+        > li > a {
+          color: @navbar-et-link-color;
+          &:hover,
+          &:focus {
+            color: @navbar-et-link-hover-color;
+            background-color: @navbar-et-link-hover-bg;
+          }
+        }
+        > .active > a {
+          &,
+          &:hover,
+          &:focus {
+            color: @navbar-et-link-active-color;
+            background-color: @navbar-et-link-active-bg;
+          }
+        }
+        > .disabled > a {
+          &,
+          &:hover,
+          &:focus {
+            color: @navbar-et-link-disabled-color;
+            background-color: @navbar-et-link-disabled-bg;
+          }
+        }
+      }
+    }
+  }
+
+
+  // Links in navbars
+  //
+  // Add a class to ensure links outside the navbar nav are colored correctly.
+
+  .navbar-link {
+    color: @navbar-et-link-color;
+    &:hover {
+      color: @navbar-et-link-hover-color;
+    }
+  }
+
+  .btn-link {
+    color: @navbar-et-link-color;
+    &:hover,
+    &:focus {
+      color: @navbar-et-link-hover-color;
+    }
+    &[disabled],
+    fieldset[disabled] & {
+      &:hover,
+      &:focus {
+        color: @navbar-et-link-disabled-color;
+      }
+    }
+  }
+}

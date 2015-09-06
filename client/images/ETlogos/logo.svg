@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="38.113px" height="60px" viewBox="0 0 38.113 60" enable-background="new 0 0 38.113 60" xml:space="preserve">
+<text transform="matrix(1 0 0 1 38.1133 58.3874)" fill="#2D2D2B" font-family="'HelveticaNeue-UltraLight'" font-size="43.4065">E&amp;T-Dagen</text>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="24.9697" y1="44.9177" x2="2.5205" y2="44.9177">
+	<stop  offset="0" style="stop-color:#732D2B"/>
+	<stop  offset="1" style="stop-color:#CE3C3C"/>
+</linearGradient>
+<polygon fill="url(#SVGID_1_)" points="24.97,31.446 9.396,35.608 2.52,58.389 16.03,49.923 "/>
+<polygon fill="#2D2D2B" points="9.396,35.608 28.813,24.387 35.5,27.13 28.166,42.604 "/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="2.5205" y1="22.1567" x2="35.5" y2="22.1567">
+	<stop  offset="0" style="stop-color:#732D2B"/>
+	<stop  offset="1" style="stop-color:#CE3C3C"/>
+</linearGradient>
+<polygon fill="url(#SVGID_2_)" points="28.166,42.604 35.5,27.13 32.21,13.942 2.52,1.709 "/>
+<polygon fill="#2D2D2B" points="37.68,58.389 18.432,50.233 22.187,42.604 29.662,45.325 "/>
+<text transform="matrix(1 0 0 1 42.019 72.0265)" opacity="0.9" font-family="'HelveticaNeue-UltraLight'" font-size="8.6813">Glassgården - NTNU Gløshaugen</text>
+</svg>
