@@ -1,178 +1,223 @@
-/*
-*	Gulpfile
-*
-*	Available tasks:
-*	del 				:	Delete files
-*	gulp 				:	The streaming build system
-*	gulp-autoprefixer	:	Prefix CSS
-*	gulp-concat			:	Concatinate files
-*	gulp-filter			:	Filter files
-*	gulp-if 			:	Use if-statement
-*	gulp-imagemin		:	Minifies images
-*	gulp-inject			:	Inject dependencies into files
-*	gulp-less			:	Compile LESS to CSS
-*	gulp-load-plugins	:	Automatically load gulp plugins
-*	gulp-minify-css		:	Minifies CSS
-*	gulp-minify-html	:	Minifies HTML
-*	gulp-sequence		:	Run tasks in sequence
-*	gulp-uglify			:	Minifies JS
-*	gulp-useref			:	Concatinates references in a file to partial files
-*	gulp-watch			:	Watches for changes in files
-*	wiredep				:	Inject bower dependencies into files
-*/
+// ==================================================
+//					Gulpfile
+// ==================================================
 
-// ========== Gulp dependencies ==========
+// Dependencies. See package.json for available plugins
+
 var	del 			= require('del'),
 	wiredep			= require('wiredep').stream,
 	path			= require('path').resolve;
 
 var gulp 			= require('gulp'),
-	plugins			= require('gulp-load-plugins')({
-		pattern: ['gulp-*'],
-		scope: ['devDependencies']
-	});
+	plugins			= require('gulp-load-plugins')();
 
-// ========== Gulp config ==========
-//var env = process.env.NODE_ENV || 'development';
-var root = path(__dirname),
-	client = path(root, 'client'),
-	server = path(root, 'server');
 
-var wiredepOptions = {
-	overrides: {
-		'bootstrap': {
-		  'main': [
-		    'dist/js/bootstrap.js',
-		    'dist/css/bootstrap.css'
-		  ]
-		},
-		'font-awesome': {
-		    'main': [
-		        'css/font-awesome.css'
-		    ]
+/*	---------------------------------------------------------------------------
+*	@Task: inject:all
+*	@description:
+*		This task will inject bower, angular and custom dependency-referances
+*		into index.ejs between the "<!-- {name}:{ext} -->" and "<!-- end{name} -->".
+*		It uses gulp-plumber to handle errors during the piping. It uses
+*		gulp-wiredep to inject references from bower_components and gulp-inject
+*		to inject references from the angular app and other custom styles
+*		or scripts.
+*/
+var injectConfig = {
+ 	wiredepOptions: {
+		overrides: {
+			'bootstrap': {
+			  'main': [
+			    'dist/js/bootstrap.js',
+			    'dist/css/bootstrap.css'
+			  ]
+			},
+			'font-awesome': {
+			    'main': [
+			        'css/font-awesome.css'
+			    ]
+			}
 		}
-	}
+	},
+	anguarSourcePath: [ path(__dirname, 'client', 'scripts', '**/*.js') ],
+	angularOpt: { relative: true, starttag: '<!-- angular:{{ext}} -->', endtag: '<!-- endangular -->' },
+	customSourcePath: [ path(__dirname, 'client', 'styles', '**/*.css') ],
+	customOpt: { relative: true, starttag: '<!-- custom:{{ext}} -->', endtag: '<!-- endcustom -->'},
+	inputSource: path(__dirname, 'client', 'views', 'index.ejs'),
+	outputDestination: path(__dirname, 'client', 'views')
 }
 
-// ========== Gulp minor tasks ==========
-
-// Inject bower dependencies into index.ejs
-gulp.task('inject:bower', function(){
-	return gulp.src(path(client,'views', 'index.ejs'))
-		.pipe(wiredep(wiredepOptions))
-		.pipe(gulp.dest(path(client, 'views')));
+gulp.task('inject', function(callback){
+	gulp.src(injectConfig.inputSource)
+		// Use plumber
+		.pipe(plugins.plumber())
+		// Inject references (no need to read data here)
+		.pipe(wiredep(injectConfig.wiredepOptions))
+		.pipe(plugins.inject(gulp.src(injectConfig.anguarSourcePath, {read:false}), injectConfig.angularOpt))
+		.pipe(plugins.inject(gulp.src(injectConfig.customSourcePath, {read:false}), injectConfig.customOpt))
+		.pipe(gulp.dest(injectConfig.outputDestination));
+		plugins.util.log('All files injected.');
+		callback(null);
 });
 
-// Inject angular clientApp into index.ejs
-gulp.task('inject:angular', function(){
-	return gulp.src(path(client,'views', 'index.ejs'))
-		.pipe(plugins.inject(
-			gulp.src([path(client, 'scripts', '**/*.js')], {read:false}),
-			{
-				relative: true,
-				starttag: '<!-- angular:{{ext}} -->',
-				endtag: '<!-- endangular -->'
-			}
-		))
-		.pipe(gulp.dest(path(client, 'views')));
-});
 
-// Inject custom styles (and scripts) into index.ejs
-gulp.task('inject:custom', function(){
-	return gulp.src(path(client,'views', 'index.ejs'))
-		.pipe(plugins.inject(
-			gulp.src([path(client, 'styles', '**/*.css')], {read:false}),
-			{
-				relative: true,
-				starttag: '<!-- custom:{{ext}} -->',
-				endtag: '<!-- endcustom -->'
-			}
-		))
-		.pipe(gulp.dest(path(client, 'views')));
-});
 
-// Copy and minify the partials to dist
-gulp.task('source:partials', function(){
-	return gulp.src(path(client, 'partials', '*.html'))
-		.pipe(plugins.minifyHtml())
-		.pipe(gulp.dest(path(server, 'dist', 'partials')));
-});
 
-// Copy and minify the templates to dist
-gulp.task('source:templates', function(){
-	return gulp.src(path(client, 'templates', '*.html'))
-		.pipe(plugins.minifyHtml())
-		.pipe(gulp.dest(path(server, 'dist', 'templates')));
-});
-
-// Copy and minify images to dist
-gulp.task('source:images', function(){
-	return gulp.src(path(client, 'images', '**/*'))
-		.pipe(plugins.imagemin({progressive: true}))
-		.pipe(gulp.dest(path(server, 'dist', 'images')));
-});
-
-// Copy fonts from bower_components to dist
-gulp.task('source:fonts', function(){
-	return gulp.src(['./bower_components/font-awesome/fonts/*.{eot,svg,ttf,woff,woff2}',
-					 './bower_components/bootstrap/fonts/*.{eot,svg,ttf,woff,woff2}',
-					 './bower_components/bootstrap-material-design/fonts/*.{eot,svg,ttf,woff,woff2}'])
-		.pipe(gulp.dest(path(server, 'dist', 'fonts')));
-});
-
-// Delete all files in dist
-gulp.task('clean:dist', function(){
-	del(path(server, 'dist', '*'));
-});
-
-// ========== Gulp major tasks ==========
-
-// Inject dependencies into index.ejs
-gulp.task('inject', plugins.sequence('inject:bower', 'inject:angular', 'inject:custom'));
-
-// Concat and minify dependencies in index.ejs and copy to dist
-gulp.task('useref', function(){
-	var assets = plugins.useref.assets();
-	return gulp.src(path(client,'views', 'index.ejs'))
-		.pipe(assets)
-		.pipe(plugins.if('*.css', plugins.minifyCss()))
-		.pipe(plugins.if('*.js', plugins.uglify()))
-		.pipe(assets.restore())
-		.pipe(plugins.useref())
-		.pipe(gulp.dest(path(server, 'dist')));
-});
-
-// Convert main.less into main.css
-gulp.task('less', function(){
-	return gulp.src(path(client, 'styles', 'less', 'main.less'))
-		.pipe(plugins.less())
-		.pipe(plugins.autoprefixer({ browsers: ['last 2 version'] }))
-		.pipe(gulp.dest(path(client, 'styles')));
-});
-
-// Copy and minify sources from client to dist
-gulp.task('source', plugins.sequence('source:fonts', 'source:images', 'source:partials', 'source:templates'));
-
-// ========== Gulp watchers ==========
-
-// gulp.task('watch:styles', function(){
-// 	gulp.watch(path(client, 'styles', 'less', '**/*.less'), ['less']);
-// });
-
-// ****************************************
-// ========== Gulp Project tasks ==========
-// ****************************************
-
-/*	@task: build
-*	@description
-*		Delete all files/folders in the dist directory, compile less files into css,
-*		inject all dependencies into index.ejs in client folder and use useref to
-*		fetch, concat and build files into the dist directory. Then import (and minify)
-*		partials, templates, fonts and images to dist directory.
+/*	---------------------------------------------------------------------------
+*	@Task: source:client
+*	@description:
+*		This task will copy necessary project files(partials, templates and
+*		images), minify them and put them in the dist directory. It uses
+*		sourcemaps to
 */
-gulp.task('build', plugins.sequence('clean:dist', 'less', 'inject', 'useref', 'source'));
+var sourceConfig = {
+	partialsSourcePath: 	[ path(__dirname, 'client', 'partials', '*.html') ],
+	partialsDestination: 	  path(__dirname, 'server', 'dist', 'partials'),
+	templatesSourcePath: 	[ path(__dirname, 'client', 'templates', '*.html') ],
+	templatesDestination: 	  path(__dirname, 'server', 'dist', 'templates'),
+	imagesSourcePath: 		[ path(__dirname, 'client', 'images', '**/*') ],
+	imagesDestination: 		  path(__dirname, 'server', 'dist', 'images')
+}
+
+gulp.task('source:client', function (callback){
+	// Delete current folders from dist
+	del([sourceConfig.partialsDestination, sourceConfig.templatesDestination, sourceConfig.imagesDestination], function (){
+		plugins.util.log('partials, templates and images in dist/ deleted. Copying files...');
+		// Copy partials
+		gulp.src(sourceConfig.partialsSourcePath)
+			.pipe(plugins.plumber())
+			.pipe(plugins.minifyHtml())
+			.pipe(gulp.dest(sourceConfig.partialsDestination))
+
+		// Copy templates
+		gulp.src(sourceConfig.templatesSourcePath)
+			.pipe(plugins.plumber())
+			.pipe(plugins.minifyHtml())
+			.pipe(gulp.dest(sourceConfig.templatesDestination))
+
+		// Copy images
+		gulp.src(sourceConfig.imagesSourcePath)
+			.pipe(plugins.plumber())
+			.pipe(plugins.imagemin({progressive: true}))
+			.pipe(gulp.dest(sourceConfig.imagesDestination))
+
+		callback(null);
+	}, function (error){ callback(error); })
+
+});
+
+
+
+
+/*	---------------------------------------------------------------------------
+*	@Task: source:fonts
+*	@description:
+*		This task will copy all fonts from the bower_components, compress them
+*		and move them to the dist directory.
+*/
+function fontPathFor(vendor){ return path(__dirname, 'bower_components', vendor, 'fonts', '*.{eot,svg,ttf,woff,woff2}') }
+
+var fontsConfig = {
+	fontsSourcePath: [fontPathFor('font-awesome'), fontPathFor('bootstrap'), fontPathFor('bootstrap-material-design')],
+	fontsDestination: path(__dirname, 'server', 'dist', 'fonts')
+}
+// Copy fonts from bower_components to dist
+gulp.task('source:fonts', function(callback){
+	// Delete current folder from dist
+	del([fontsConfig.fontsDestination], function (){
+		plugins.util.log('dist/fonts deleted. Copying fonts...');
+		// Copy fonts from bower_components
+		gulp.src(fontsConfig.fontsSourcePath)
+			.pipe(gulp.dest(fontsConfig.fontsDestination))
+		callback(null);
+	}, function (error){ callback(error); })
+});
+
+
+
+
+/*	---------------------------------------------------------------------------
+*	@Task: source:all
+*	@description:
+*		This task combines the source:client and the source:fonts tasks
+*/
+gulp.task('source:all', ['source:client', 'source:fonts'], function (callback){
+	plugins.util.log('All files sourced to dist');
+	callback(null);
+});
+
+
+
+
+/*	---------------------------------------------------------------------------
+*	@Task: useref
+*	@description:
+*		This task will use the references in index.ejs. It copies the files
+*		referenced, concatinates them by group and places the copies in the
+*		dist directory. A copy of index.ejs with new references will also be
+*		placed in the dist directory. It also uses sourcemaps for the styles
+*		and scripts.
+*/
+var userefConfig = {
+	assets: plugins.useref.assets(),
+	inputSource: path(__dirname, 'client','views', 'index.ejs'),
+	outputDestination: path(__dirname, 'server', 'dist'),
+	autoprefixerOpt: { browsers: ['last 2 versions'] },
+	outputFolders: [ path(__dirname, 'server', 'dist', 'js'),
+					 path(__dirname, 'server', 'dist', 'css') ]
+}
+
+gulp.task('useref', function(callback){
+	del(userefConfig.outputFolders, function (){
+		plugins.util.log('Building assets...');
+		gulp.src(userefConfig.inputSource)
+			.pipe(plugins.plumber())
+			.pipe(userefConfig.assets)
+				.pipe(plugins.sourcemaps.init())
+				// If CSS-file, use autoprefixer and minify
+				.pipe(plugins.if('*.css', plugins.autoprefixer(userefConfig.autoprefixerOpt)))
+				.pipe(plugins.if('*.css', plugins.minifyCss()))
+				// If JS-file, uglify
+				.pipe(plugins.if('*.js', plugins.uglify()))
+				.pipe(plugins.sourcemaps.write('.'))
+			.pipe(userefConfig.assets.restore())
+			.pipe(plugins.useref())
+			.pipe(gulp.dest(userefConfig.outputDestination));
+			callback(null);
+	}, function (error){ callback(error); })
+});
+
+
+
+
+/*	---------------------------------------------------------------------------
+*	@Task: less
+*	@description:
+*		This task will convert main.less (all .less files) into main.css.
+*/
+var lessConfig = {
+	inputSource: path(__dirname, 'client', 'styles', 'less', 'main.less'),
+	outputDestination: path(__dirname, 'client', 'styles')
+}
+gulp.task('less', function(callback){
+	gulp.src(lessConfig.inputSource)
+		.pipe(plugins.plumber())
+		.pipe(plugins.less())
+		.pipe(gulp.dest(lessConfig.outputDestination));
+	callback(null);
+});
+
+
+
+
+/*	---------------------------------------------------------------------------
+*	@Task: build
+*	@description
+*		This task will build the project in the dist folder. Note that source:fonts
+*		is not in the build task.
+*/
+gulp.task('build', plugins.sequence('less', 'inject', 'useref', 'source:client'));
 
 
 gulp.task('default', function (){
-	console.log('dirname is ');
+	plugins.util.log('tasks: build, less, inject, useref, source:{all, fonts, client}');
 });
