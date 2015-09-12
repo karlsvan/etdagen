@@ -1,12 +1,31 @@
 // ==================================================
 //					Gulpfile
 // ==================================================
+/*
+*	@partial tasks:
+*	inject:all			:	all injects
+*		inject:bower	:	requires bower components for wiredep
+*		inject:angular	:	requires angular scripts in client/scripts
+*		inject:custom	:	requires custom  scripts/styles in client/{scripts/custom, styles/main.css}
+*	source:all			:	all source
+*		source:client	:	requires partials(html), templates(html), and images in client
+*		source:fonts	:	requires bower components fonts for import
+*	useref				:	requires bower components for import
+*	less				:	requires main.less to contain all styles
+*	nodemon				:
+*	browser-sync		:
+*
+*	@main tasks:
+*	build			:	less, inject, useref, source:client
+*	serve			:	nodemon, browser-sync
+*/
 
 // Dependencies. See package.json for available plugins
 
 var	del 			= require('del'),
 	wiredep			= require('wiredep').stream,
-	path			= require('path').resolve;
+	path			= require('path').resolve,
+	browserSync		= require('browser-sync');
 
 var gulp 			= require('gulp'),
 	plugins			= require('gulp-load-plugins')();
@@ -46,7 +65,7 @@ var injectConfig = {
 	outputDestination: path(__dirname, 'client', 'views')
 }
 
-gulp.task('inject', function(callback){
+gulp.task('inject:all', function(callback){
 	gulp.src(injectConfig.inputSource)
 		// Use plumber
 		.pipe(plugins.plumber())
@@ -59,6 +78,36 @@ gulp.task('inject', function(callback){
 		callback(null);
 });
 
+/*
+*	@Tasks: inject:{bower, angular, custom}
+*	@description:
+*		This tasks is the partials of inject:all. Use these when there's only
+*		need for injecting one of them.
+*/
+gulp.task('inject:bower', function(callback){
+	gulp.src(injectConfig.inputSource)
+		.pipe(plugins.plumber())
+		.pipe(wiredep(injectConfig.wiredepOptions))
+		.pipe(gulp.dest(injectConfig.outputDestination));
+		plugins.util.log('Bower files injected.');
+		callback(null);
+});
+gulp.task('inject:angular', function(callback){
+	gulp.src(injectConfig.inputSource)
+		.pipe(plugins.plumber())
+		.pipe(plugins.inject(gulp.src(injectConfig.anguarSourcePath, {read:false}), injectConfig.angularOpt))
+		.pipe(gulp.dest(injectConfig.outputDestination));
+		plugins.util.log('Angular files injected.');
+		callback(null);
+});
+gulp.task('inject:custom', function(callback){
+	gulp.src(injectConfig.inputSource)
+		.pipe(plugins.plumber())
+		.pipe(plugins.inject(gulp.src(injectConfig.customSourcePath, {read:false}), injectConfig.customOpt))
+		.pipe(gulp.dest(injectConfig.outputDestination));
+		plugins.util.log('Custom files injected.');
+		callback(null);
+});
 
 
 
@@ -207,6 +256,50 @@ gulp.task('less', function(callback){
 });
 
 
+/*
+*	@Task: serve
+*	@description:
+*		This task starts up a local testserver for development on
+*		localhost:5000. It watches for changes in files under the client
+*		folder and reloads the page when changes are made. The page can
+*		be shown on multiple devices thanks to browser-sync, and nodemon
+*		handles the back-end.
+*/
+gulp.task('serve', ['browser-sync'], function (){
+	gulp.watch('./client/styles/less/**/*', ['less'], browserSync.reload);
+	gulp.watch('.client/**/*.{html, ejs}', browserSync.reload);
+});
+
+
+gulp.task('nodemon', function(callback){
+	var initialized = false;
+	plugins.nodemon({
+		script: './server/bin/www',
+		ext: 'html ejs less css js',
+		watch: ['client/**/*'],
+		env: { 'NODE_ENV': 'development' }
+	}).on('start', function(){
+		if(!initialized){
+			initialized = true;
+			callback(null);
+		}
+	}).on('restart', function (){
+		console.log('server restarted');
+		setTimeout(function () {
+			browserSync.reload({ stream: false });
+    	}, 1000);
+	});
+});
+
+gulp.task('browser-sync', ['nodemon'], function(callback){
+	var port = process.env.PORT || 3000;
+	browserSync({
+		proxy: 'localhost:' + port,
+		port: 5000,
+		notify: true
+	});
+	callback(null);
+});
 
 
 /*	---------------------------------------------------------------------------

@@ -40,6 +40,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', function (req ,res){
 	res.render('index', {title: 'E&T-dagen', year: 2016});
 });
-app.all('/:path', function (req, res){ res.redirect('/#'+path); })
+app.all('/:path', function (req, res){ res.redirect('/#'+path); });
 
 module.exports.app = app;
