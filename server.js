@@ -4,7 +4,8 @@
 var express		= require('express'),
 	path		= require('path'),
 	logger      = require('morgan'),
-    bodyParser  = require('body-parser');
+    bodyParser  = require('body-parser'),
+	favicon		= require('serve-favicon');
 
 // ========== Initialize and setup express app ==========
 var app 	= express();
@@ -25,7 +26,7 @@ else if (env === 'production') {
 }
 else app.error('Node environment is invalid.');
 
-
+app.use(favicon(path.resolve(__dirname, 'favicon.ico')));
 
 
 // In development, requests will be logged
