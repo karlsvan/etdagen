@@ -1,0 +1,26 @@
+<div class="et-navbar" role="navigation">
+	<div class="navbar-container">
+		<div class="navbar-logo">
+			<img src="images/ETlogos/logo.svg" alt="E&amp;T-Dagen">
+		</div>
+		<div class="navbar-navs">
+			<ul id="navbar-list-left" class="navbar-list">
+				<li ng-repeat="link in navbar.links" ui-sref-active="active">
+					<a ui-sref="{{link.state}}"><i class="fa {{link.icon}}"></i><span> {{link.name}}</span></a>
+				</li>
+			</ul>
+			<ul id="navbar-list-right" class="navbar-list">
+				<li ui-sref-active="active"><a ui-sref="login"><i class="fa fa-sign-in"></i> Logg inn</a></li>
+				<!--<li ui-sref-active="active"><a ui-sref="register"><i class="fa fa-pencil-square-o"></i> Registrer deg</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown">Brukernavn <i class="fa fa-caret-down"></i></a>
+					<ul class="dropdown-menu">
+						<li><a>Profil</a></li>
+						<li class="divider"></li>
+						<li><a>Logg ut</a></li>
+					</ul>
+				</li>-->
+			</ul>
+		</div>
+	</div>
+</div>

@@ -29,7 +29,7 @@ else app.error('Node environment is invalid.');
 app.use(favicon(path.resolve(__dirname, 'favicon.ico')));
 
 
-// In development, requests will be logged
+// Log requests
 app.use(logger('dev'));
 // Support parsing of json- and URL-encoded bodies
 app.use(bodyParser.json());
