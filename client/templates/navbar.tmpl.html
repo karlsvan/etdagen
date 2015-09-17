@@ -5,7 +5,7 @@
 		</div>
 		<div class="navbar-navs">
 			<ul id="navbar-list-left" class="navbar-list">
-				<li ng-repeat="link in navbar.links" ui-sref-active="active">
+				<li ng-repeat="link in navbar.links" ui-sref-active="active" class="waves-effect waves-light-red">
 					<a ui-sref="{{link.state}}"><i class="fa {{link.icon}}"></i><span> {{link.name}}</span></a>
 				</li>
 			</ul>

@@ -44,12 +44,6 @@ var gulp 			= require('gulp'),
 var injectConfig = {
  	wiredepOptions: {
 		overrides: {
-			'bootstrap': {
-			  'main': [
-			    'dist/js/bootstrap.js',
-			    'dist/css/bootstrap.css'
-			  ]
-			},
 			'font-awesome': {
 			    'main': [
 			        'css/font-awesome.css'
@@ -251,6 +245,7 @@ gulp.task('less', function(callback){
 	gulp.src(lessConfig.inputSource)
 		.pipe(plugins.plumber())
 		.pipe(plugins.less())
+		.pipe(plugins.autoprefixer())
 		.pipe(gulp.dest(lessConfig.outputDestination));
 	callback(null);
 });
