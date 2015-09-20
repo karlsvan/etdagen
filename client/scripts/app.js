@@ -18,7 +18,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.router'
+    'ui.router',
+    'lumx'
   ])
   .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/news');
@@ -54,5 +55,5 @@ angular
         templateUrl: 'partials/register.html',
         controller: 'RegisterCtrl'
       });
-      
+
   }]);
