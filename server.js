@@ -10,7 +10,7 @@ var express		= require('express'),
 // ========== Initialize and setup express app ==========
 var app 	= express();
 var env		= app.get('env') || 'development';
-var appConfig = require('./gulpfile.js').appConfig;
+var appConfig = require('./gulp/config').appConfig;
 
 // Support ejs templating for views
 app.set('view engine', 'ejs');
