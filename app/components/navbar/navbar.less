@@ -1,0 +1,83 @@
+@navbar-bp-sm: 380px;
+@navbar-bp-md: 640px;
+@navbar-bp-lg: 720px;
+
+@et-navbar-height: 4em;
+@et-navbar-bg: rgb(252, 250, 250);
+@et-navbar-container-width: 90%;
+@et-navbar-font-size: 14px;
+
+.et-navbar {
+	position: relative;
+	width: 100%;
+	background-color: @et-navbar-bg;
+	height: @et-navbar-height;
+	font-size: 14px;
+	line-height: @et-navbar-height;
+	transition: all 150ms ease-in-out;
+}
+
+.navbar-container {
+	position: relative;
+	height: inherit;
+	width: @et-navbar-container-width;
+	max-width: 1024px;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+
+	> * {
+		height: inherit;
+		.link {
+			color: @red-samfundet;
+			text-decoration: none;
+			padding: 0 15px;
+		}
+	}
+	> .navbar-left {
+		
+	}
+	> .navbar-right {
+		&:first-child {
+			margin-left: auto;
+		}
+	}
+}
+
+.navbar-logo {
+	height: inherit;
+
+	img {
+		height: 100%;
+		padding-top: 10%;
+		padding-bottom: 10%;
+		padding-left: 20px;
+		padding-right: 20px;;
+		max-height: 80px;
+		box-sizing: border-box;
+	}
+}
+
+
+// ---------- Media Queries ----------
+
+/*
+*	Expand the navbar when to short
+*/
+@media (max-width: @navbar-bp-lg) {
+	.navbar-container { width: 100%; }
+}
+
+/*
+*	Show only icons in links, remove navbar-list-right and show menu link
+*/
+@media (max-width: @navbar-bp-md) {
+
+}
+
+/*
+*	Shrink the navbar to 90%
+*/
+@media (max-width: @navbar-bp-sm){
+	.et-navbar { font-size: 0.9*@et-navbar-font-size }
+}

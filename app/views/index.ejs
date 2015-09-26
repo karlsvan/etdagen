@@ -1,0 +1,82 @@
+<!doctype html>
+<html class="no-js" ng-app="etApp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title><%=title%> <%=year%></title>
+        <meta name="description" content="E&amp;T-dagen er en rekrutteringsdag arrangert av studenter ved faglinjen Elektronikk på NTNU.">
+        <meta keywords="E&amp;T-dagen, Rekrutteringsdag, NTNU, Glassgården, Elektronikk">
+        <base href="/">
+
+        <!-- build:css css/vendor.css -->
+            <!-- bower:css -->
+            <link rel="stylesheet" href="../../bower_components/materialize/bin/materialize.css" />
+            <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.css" />
+            <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css css/custom.css -->
+            <!-- custom:css -->
+            <link rel="stylesheet" href="../assets/styles/main.css">
+            <!-- endcustom -->
+        <!-- endbuild -->
+    </head>
+    <body >
+        <!--[if lt IE 7]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <navbar>hello</navbar>
+        <div ui-view></div>
+
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+         <script>
+           !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+           (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+           r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+           }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+           ga('create', 'UA-XXXXX-X');
+           ga('send', 'pageview');
+        </script>
+
+        <!-- build:js js/vendor.js -->
+        	<!-- bower:js -->
+        	<script src="../../bower_components/angular/angular.js"></script>
+        	<script src="../../bower_components/angular-animate/angular-animate.js"></script>
+        	<script src="../../bower_components/angular-aria/angular-aria.js"></script>
+        	<script src="../../bower_components/angular-cookies/angular-cookies.js"></script>
+        	<script src="../../bower_components/jquery/dist/jquery.js"></script>
+        	<script src="../../bower_components/materialize/bin/materialize.js"></script>
+        	<script src="../../bower_components/angular-materialize/src/angular-materialize.js"></script>
+        	<script src="../../bower_components/angular-messages/angular-messages.js"></script>
+        	<script src="../../bower_components/angular-resource/angular-resource.js"></script>
+        	<script src="../../bower_components/angular-route/angular-route.js"></script>
+        	<script src="../../bower_components/angular-sanitize/angular-sanitize.js"></script>
+        	<script src="../../bower_components/angular-touch/angular-touch.js"></script>
+        	<script src="../../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        	<!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:js js/angular.js -->
+            <!-- angular:js -->
+            <script src="../app.js"></script>
+            <script src="../components/navbar/navbar.ctrl.js"></script>
+            <script src="../components/navbar/navbar.js"></script>
+            <script src="../partials/about/about.ctrl.js"></script>
+            <script src="../partials/board/board.ctrl.js"></script>
+            <script src="../partials/companies/companies.ctrl.js"></script>
+            <script src="../partials/login/login.ctrl.js"></script>
+            <script src="../partials/news/news.ctrl.js"></script>
+            <script src="../partials/register/register.ctrl.js"></script>
+            <!-- endangular -->
+        <!-- endbuild -->
+        <!-- build:js js/custom.js -->
+            <!-- custom:js -->
+            <script src="../assets/scripts/custom.js"></script>
+            <!-- endcustom -->
+        <!-- endbuild -->
+    </body>
+</html>
