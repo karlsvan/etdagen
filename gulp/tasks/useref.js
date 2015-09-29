@@ -1,29 +1,40 @@
-'use strict';
-var gulp 		= require('gulp'),
-	$			= require('../plugins'),
-	config  	= require('../config').userefConfig;
-	
-/*	
-*	@task: useref
-*	@description:
-*		Use references in index.ejs to get files, concat and copy to dist
-*/
-module.exports = function useref(callback){
-	$.del(config.outputFolders, function (){
-		$.util.log('Building assets...');
-		gulp.src(config.inputSource)
-			.pipe($.plumber())
-			.pipe(config.assets)
+module.exports = (function(){
+	'use strict';
+
+	var gulp 		= require('gulp'),
+		$			= require('../plugins'),
+		appConfig  	= require('../../gulpfile');
+
+	var fileWithReferences 	= appConfig.indexFile,
+		autoprefixerOptions = { browsers: ['last 2 versions'] },
+		distFolder 			= appConfig.dist,
+		outputDestinations 	= [ $.path.join(appConfig.dist, 'assets', 'js'),
+								$.path.join(appConfig.dist, 'assets', 'css') ];
+
+	/*	
+	*	@task: useref
+	*	@description:
+	*		Use references in index.ejs to get files, concat and copy to dist
+	*/
+	return function useref(callback){
+		var assets = $.useref.assets();
+		$.del(outputDestinations,
+			function then(){
+			$.util.log('Importing assets...');
+			gulp.src(fileWithReferences)
+				.pipe($.plumber())
+				.pipe(assets)
 				.pipe($.sourcemaps.init())
 				// If CSS-file, use autoprefixer and minify
-				.pipe($.if('*.css', $.autoprefixer(config.autoprefixerOpt)))
+				.pipe($.if('*.css', $.autoprefixer(autoprefixerOptions)))
 				.pipe($.if('*.css', $.minifyCss()))
 				// If JS-file, uglify
 				.pipe($.if('*.js', $.uglify()))
 				.pipe($.sourcemaps.write('.'))
-			.pipe(config.assets.restore())
-			.pipe($.useref())
-			.pipe(gulp.dest(config.outputDestination));
-			callback(null);
-	}, function (error){ callback(error); })
-}
+				.pipe(assets.restore())
+				.pipe($.useref())
+				.pipe(gulp.dest(distFolder));
+				callback(null);
+		});
+	}
+})();

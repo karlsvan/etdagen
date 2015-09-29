@@ -12,8 +12,7 @@
 	  .controller('NewsCtrl', NewsCtrl);
 
 		/*@ngInject*/
-		function NewsCtrl($scope){
+		function NewsCtrl(){
 			
 		}
-
 })();

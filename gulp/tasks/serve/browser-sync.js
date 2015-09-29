@@ -1,20 +1,25 @@
-'use strict';
+module.exports = (function(){
+	'use strict';
 
-var $ = require('../../plugins');
+	var $ = require('../../plugins');
 	
-/*
-*	@task: serve.browserSync
-*	@description:
-*		Use browser-sync to serve the frontend
-*/
-module.exports = function browserSync(callback){
-	var port = process.env.PORT || 3000;
-	$.browserSync({
-		proxy: 'localhost:' + port,
-		port: 5000,
-		notify: true
-	});
-	callback(null);
-}
+	var servePort = 5000,
+		proxyHost = 'localhost';
 
-module.exports.preTasks = ['serve:nodemon']
+	/*
+	*	@task: serve.browserSync
+	*	@description:
+	*		Use browser-sync to serve the frontend
+	*/
+	return function browserSync(callback){
+		var port = process.env.PORT || 3000;
+		$.browserSync({
+			proxy: proxyHost + ':' + port,
+			port: servePort,
+			notify: true
+		});
+		callback(null);
+	}
+})();
+
+module.exports.preTasks = ['serve:nodemon'];

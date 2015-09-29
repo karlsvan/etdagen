@@ -10,14 +10,14 @@ var express		= require('express'),
 // ========== Initialize and setup express app ==========
 var app 	= express();
 var env		= app.get('env') || 'development';
-var appConfig = require('./gulp/config').appConfig;
+var appConfig = require('./gulpfile');
 
 // Support ejs templating for views
 app.set('view engine', 'ejs');
 
 // Set views path and serve static files
 if(env === 'development'){
-	app.set('views', path.resolve(appConfig.app, 'views'));
+	app.set('views', path.resolve(appConfig.app));
 	app.use(express.static(path.resolve(appConfig.app)));
 	app.use('/bower_components', express.static(path.resolve(__dirname, 'bower_components')));
 }

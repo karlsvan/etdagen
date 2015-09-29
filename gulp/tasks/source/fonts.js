@@ -1,22 +1,31 @@
-'use strict';
-var gulp 		= require('gulp'),
-	$			= require('../../plugins'),
-	config  	= require('../../config').sourceConfig;
-	
-/*
-*	@task: source.fonts
-*	@description:
-*		Copy fonts from bower dependencies to dist
-*/
-module.exports = function fonts(callback){
-	// Delete current folder from dist
-	$.del([config.fontsDestination], 
-		function success(){
-			$.util.log('dist/fonts deleted. Copying fonts...');
-			// Copy fonts from bower_components
-			gulp.src(config.fontsSourcePath)
-				.pipe(gulp.dest(config.fontsDestination))
-			callback(null);
-		},
-		function failure(error){ callback(error); })
-}
+module.exports = (function(){
+	'use strict';
+
+	var gulp 		= require('gulp'),
+		$			= require('../../plugins'),
+		appConfig  	= require('../../../gulpfile');
+
+	var fontFiles 			= $.path.join(appConfig.root, 'bower_components', 'materialize', 'font', '**', '*.{eot,svg,ttf,woff,woff2}'),
+		fontsFiles 			= $.path.join(appConfig.root, 'bower_components', 'font-awesome', 'fonts', '*.{eot,svg,ttf,woff,woff2}'),
+		fontDistFolder 		= $.path.join(appConfig.dist, 'assets', 'font'),
+		fontsDistFolder 	= $.path.join(appConfig.dist, 'assets', 'fonts');
+		
+	/*
+	*	@task: source.fonts
+	*	@description:
+	*		This task copies fonts from bower_components and puts them in dist
+	*/
+	return function fonts(callback){
+		$.del(fontsDistFolder,
+			function then(){
+			$.util.log('Copying fonts...');
+			gulp.src(fontFiles)
+				.pipe($.plumber())
+				.pipe(gulp.dest(fontDistFolder));
+			gulp.src(fontsFiles)
+				.pipe($.plumber())
+				.pipe(gulp.dest(fontsDistFolder));
+				callback(null);
+		});
+	}
+})();

@@ -15,5 +15,4 @@
 	  	function LoginCtrl(AuthService) {
 	      this.login = AuthService.login;
 	    }
-
 })();

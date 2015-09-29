@@ -23,13 +23,26 @@
 *			module.exports.preTasks = $.sequence(<task1>, <task2> ... )
 */
 
+/*
+*	Gulp plugins and app configurations
+*/
+var gulp 	= require('gulp'),
+	$		= require('./gulp/plugins');
 
-// plugins
-var gulp 		= require('gulp'),
-	$			= require('./gulp/plugins'),
-	serveConfig 	= require('./gulp/config').serveConfig;
+module.exports = {
+	root: 	$.path.resolve(__dirname),
+	app:  	$.path.resolve(__dirname, 'app'),
+	dist: 	$.path.resolve(__dirname, 'server', 'dist'),
 
-// tasks from gulp/tasks/
+	indexFile: 		$.path.resolve(__dirname, 'app', 'index.ejs'),
+	mainLessFile: 	$.path.resolve(__dirname, 'app', 'assets', 'styles', 'main.less')
+
+};
+
+
+/*
+*	Gulp minor tasks
+*/
 var tasks = require('require-dir')('./gulp/tasks', {recurse: true});
 for(var key in tasks){
 	if(typeof tasks[key] === 'function'){ 
@@ -40,15 +53,19 @@ for(var key in tasks){
 	}
 }
 
-// project tasks
-gulp.task('inject:all', $.sequence('inject:bower', 'inject:angular', 'inject:less', 'inject:custom'));
-gulp.task('source:all', $.sequence('source:client', 'source:fonts'));
 
-gulp.task('serve', ['serve:browser-sync'], function(){
-	gulp.watch(serveConfig.lessSourcePath, ['style:less'], $.browserSync.reload);
-	gulp.watch(serveConfig.htmlSourcePath, $.browserSync.reload);
-});
+/*
+*	Gulp major tasks
+*/
+gulp.task('inject:all', $.sequence('inject:bower', 'inject:annotate', 'inject:angular', 'inject:custom', 'inject:less'));
+gulp.task('source:all', ['source:images', 'source:partials', 'source:templates', 'source:fonts', 'source:angular']);
 
+
+
+/*
+*	Gulp project tasks
+*/
+gulp.task('serve', $.sequence('serve:browser-sync', 'serve:watch'));
 gulp.task('build', $.sequence('style:less', 'inject:all', 'useref', 'source:all'));
 
 gulp.task('default', function(){
@@ -60,4 +77,4 @@ gulp.task('default', function(){
 			$.util.log('task(\"'+key+':'+skey+'\", '+tasks[key][skey].preTasks+', '+typeof tasks[key][skey]+')');
 		}
 	}
-})
+});
