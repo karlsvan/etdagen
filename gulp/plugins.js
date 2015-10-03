@@ -1,12 +1,15 @@
-var $; //plugins variable
-(function loadGulpPlugins(callback){
-	$ = require('gulp-load-plugins')();
-	callback();
-})(function loadOtherPlugins(){
-	$.del 			= require('del');
-	$.wiredep 		= require('wiredep').stream;
-	$.path 			= require('path');
-	$.browserSync 	= require('browser-sync');
-});
+module.exports = (function(){
+	'use strict';
 
-module.exports = $;
+	/*
+	*	@description
+	*		This task loads all plugins and puts them in a variable
+	*/
+	return (function(plugins){
+		plugins.del 			= require('del');
+		plugins.wiredep 		= require('wiredep').stream;
+		plugins.path 			= require('path');
+		plugins.browserSync 	= require('browser-sync').create();
+		return plugins;
+	})(require('gulp-load-plugins')());
+})();

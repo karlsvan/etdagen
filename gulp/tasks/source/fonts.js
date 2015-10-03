@@ -1,9 +1,5 @@
-module.exports = (function(){
+module.exports = function(gulp, $, appConfig){
 	'use strict';
-
-	var gulp 		= require('gulp'),
-		$			= require('../../plugins'),
-		appConfig  	= require('../../../gulpfile');
 
 	var fontFiles 			= $.path.join(appConfig.root, 'bower_components', 'materialize', 'font', '**', '*.{eot,svg,ttf,woff,woff2}'),
 		fontsFiles 			= $.path.join(appConfig.root, 'bower_components', 'font-awesome', 'fonts', '*.{eot,svg,ttf,woff,woff2}'),
@@ -28,4 +24,4 @@ module.exports = (function(){
 				callback(null);
 		});
 	}
-})();
+}

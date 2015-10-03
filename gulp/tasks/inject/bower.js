@@ -1,9 +1,5 @@
-module.exports = (function(){
+module.exports = function(gulp, $, appConfig){
 	'use strict';
-
-	var gulp 		= require('gulp'),
-		$			= require('../../plugins'),
-		appConfig 	= require('../../../gulpfile');
 
 	var fileToInjectInto 	= appConfig.indexFile,
 		wiredepOptions 		= { overrides: { 'font-awesome': { 'main': [ 'css/font-awesome.css' ] } } };
@@ -18,7 +14,6 @@ module.exports = (function(){
 			.pipe($.plumber())
 			.pipe($.wiredep(wiredepOptions))
 			.pipe(gulp.dest($.path.dirname(fileToInjectInto)));
-			$.util.log('Bower files injected.');
 			callback(null);
 	}
-})();
+}

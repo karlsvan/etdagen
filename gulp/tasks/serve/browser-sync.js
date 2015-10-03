@@ -1,7 +1,5 @@
-module.exports = (function(){
+module.exports = function(gulp, $, appConfig){
 	'use strict';
-
-	var $ = require('../../plugins');
 	
 	var servePort = 5000,
 		proxyHost = 'localhost';
@@ -13,13 +11,13 @@ module.exports = (function(){
 	*/
 	return function browserSync(callback){
 		var port = process.env.PORT || 3000;
-		$.browserSync({
+		$.browserSync.init({
 			proxy: proxyHost + ':' + port,
 			port: servePort,
 			notify: true
 		});
 		callback(null);
 	}
-})();
+}
 
 module.exports.preTasks = ['serve:nodemon'];

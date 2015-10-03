@@ -26,17 +26,16 @@
 /*
 *	Gulp plugins and app configurations
 */
-var gulp 	= require('gulp'),
-	$		= require('./gulp/plugins');
+var gulp 		= require('gulp'),
+	$			= require('./gulp/plugins');
 
-module.exports = {
+var appConfig = module.exports = {
 	root: 	$.path.resolve(__dirname),
 	app:  	$.path.resolve(__dirname, 'app'),
 	dist: 	$.path.resolve(__dirname, 'server', 'dist'),
 
 	indexFile: 		$.path.resolve(__dirname, 'app', 'index.ejs'),
 	mainLessFile: 	$.path.resolve(__dirname, 'app', 'assets', 'styles', 'main.less')
-
 };
 
 
@@ -45,11 +44,11 @@ module.exports = {
 */
 var tasks = require('require-dir')('./gulp/tasks', {recurse: true});
 for(var key in tasks){
-	if(typeof tasks[key] === 'function'){ 
-		gulp.task(key, tasks[key].preTasks, tasks[key]);
+	if(typeof tasks[key] === 'function'){
+		gulp.task(key, tasks[key].preTasks, tasks[key](gulp, $, appConfig));
 	}
 	for(var skey in tasks[key]){
-		gulp.task(key+':'+skey, tasks[key][skey].preTasks, tasks[key][skey]);
+		gulp.task(key+':'+skey, tasks[key][skey].preTasks, tasks[key][skey](gulp, $, appConfig));
 	}
 }
 
@@ -69,12 +68,5 @@ gulp.task('serve', $.sequence('serve:browser-sync', 'serve:watch'));
 gulp.task('build', $.sequence('style:less', 'inject:all', 'useref', 'source:all'));
 
 gulp.task('default', function(){
-	for(var key in tasks){
-		if(typeof tasks[key] === 'function'){
-			$.util.log('task(\"'+key+'\", '+tasks[key].preTasks+', '+typeof tasks[key]+')');
-		}
-		for(var skey in tasks[key]){
-			$.util.log('task(\"'+key+':'+skey+'\", '+tasks[key][skey].preTasks+', '+typeof tasks[key][skey]+')');
-		}
-	}
+	$.util.log('No default gulp task defined. See gulpfile for other tasks.');
 });

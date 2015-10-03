@@ -1,8 +1,5 @@
-module.exports = (function(){
+module.exports = function(gulp, $, appConfig){
 	'use strict';
-
-	var $ 			= require('../../plugins'),
-		appConfig 	= require('../../../gulpfile');
 
 	var lessFiles 	= [ $.path.join(appConfig.app, 'assets', 'styles', '**/*.less'),
 						$.path.join(appConfig.app, 'components', '**/*.less'),
@@ -16,7 +13,7 @@ module.exports = (function(){
 	*		using gulp serve.
 	*/
 	return function watch(){
-		gulp.watch(lessFiles, ['style:less'], $.browserSync.reload);
-		gulp.watch(htmlFiles, $.browserSync.reload);
+		gulp.watch(lessFiles, ['style:less']);
+		gulp.watch(htmlFiles).on('change', $.browserSync.reload);
 	}
-})();
+}

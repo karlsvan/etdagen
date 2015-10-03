@@ -1,9 +1,5 @@
-module.exports = (function(){
+module.exports = function(gulp, $, appConfig){
 	'use strict';
-
-	var gulp 		= require('gulp'),
-		$ 			= require('../../plugins'),
-		appConfig 	= require('../../../gulpfile');;
 
 	var partialFiles 		= $.path.join(appConfig.app, 'partials', '**/*.html'),
 		partialsDistFolder 	= $.path.join(appConfig.dist, 'partials');
@@ -24,4 +20,4 @@ module.exports = (function(){
 				callback(null);
 		});
 	}
-})();
+}

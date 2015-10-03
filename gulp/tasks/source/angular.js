@@ -1,9 +1,5 @@
-module.exports = (function(){
+module.exports = function(gulp, $, appConfig){
 	'use strict';
-
-	var gulp 		= require('gulp'),
-		$			= require('../../plugins'),
-		appConfig  	= require('../../../gulpfile');
 
 	var appFile 	= $.path.join(appConfig.app, 'app.js'),
 		distFolder 	= appConfig.dist;
@@ -22,4 +18,4 @@ module.exports = (function(){
 			.pipe(gulp.dest(distFolder));
 			callback(null);	
 	}
-})();
+}

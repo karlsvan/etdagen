@@ -1,9 +1,5 @@
-module.exports = (function(){
+module.exports = function(gulp, $, appConfig){
 	'use strict';
-
-	var gulp 		= require('gulp'),
-		$			= require('../../plugins'),
-		appConfig  	= require('../../../gulpfile');
 
 	var fileToInjectInto 	=   appConfig.indexFile,
 		filesToInject 		= [ $.path.join(appConfig.app, 'assets', 'styles', '**/*.css'),
@@ -20,7 +16,6 @@ module.exports = (function(){
 			.pipe($.plumber())
 			.pipe($.inject(gulp.src(filesToInject, {read:false}), injectOptions))
 			.pipe(gulp.dest($.path.dirname(fileToInjectInto)));
-			$.util.log('Custom files injected.');
 			callback(null);
 	}
-})();
+}

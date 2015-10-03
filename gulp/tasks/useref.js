@@ -1,9 +1,5 @@
-module.exports = (function(){
+module.exports = function(gulp, $, appConfig){
 	'use strict';
-
-	var gulp 		= require('gulp'),
-		$			= require('../plugins'),
-		appConfig  	= require('../../gulpfile');
 
 	var fileWithReferences 	= appConfig.indexFile,
 		autoprefixerOptions = { browsers: ['last 2 versions'] },
@@ -20,7 +16,6 @@ module.exports = (function(){
 		var assets = $.useref.assets();
 		$.del(outputDestinations,
 			function then(){
-			$.util.log('Importing assets...');
 			gulp.src(fileWithReferences)
 				.pipe($.plumber())
 				.pipe(assets)
@@ -37,4 +32,4 @@ module.exports = (function(){
 				callback(null);
 		});
 	}
-})();
+}

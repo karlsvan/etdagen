@@ -1,16 +1,14 @@
-module.exports = (function(){
+module.exports = function(gulp, $, appConfig){
 	'use strict';
-
-	var gulp 		= require('gulp'),
-		$			= require('../../plugins'),
-		appConfig  	= require('../../../gulpfile');
 	
 	var fileToInjectInto 	= appConfig.mainLessFile,
 		filesToInject 		= {
+			mixins: 	$.path.join(appConfig.app, 'assets', 'styles', 'mixins', '*.less'),
 			components: $.path.join(appConfig.app, 'components', '**/*.less'),
 			partials: 	$.path.join(appConfig.app, 'partials', '**/*.less')
 		},
 		injectOptions 		= {
+			mixins: 	{ relative: true, starttag: '/* inject:mixins:{{ext}} */', endtag: '/* endinject */'},
 			components: { relative: true, starttag: '/* inject:components:{{ext}} */', endtag: '/* endinject */'},
 			partials: 	{ relative: true, starttag: '/* inject:partials:{{ext}} */', endtag: '/* endinject */'}
 		};
@@ -23,10 +21,10 @@ module.exports = (function(){
 	return function less(callback){
 		gulp.src(fileToInjectInto)
 			.pipe($.plumber())
+			.pipe($.inject(gulp.src(filesToInject.mixins, {read: false}), injectOptions.mixins))
 			.pipe($.inject(gulp.src(filesToInject.components, {read: false}), injectOptions.components))
 			.pipe($.inject(gulp.src(filesToInject.partials, {read: false}), injectOptions.partials))
 			.pipe(gulp.dest($.path.dirname(fileToInjectInto)));
-			$.util.log('Less files injected');
 			callback(null);
 	}
-})();
+}

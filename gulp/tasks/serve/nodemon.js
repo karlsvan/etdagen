@@ -1,12 +1,8 @@
-module.exports = (function(){
+module.exports = function(gulp, $, appConfig){
 	'use strict';
 	
-	var	$ 			= require('../../plugins'),
-		appConfig 	= require('../../../gulpfile');
-	
 	var filesToWatch 	= [ $.path.join(appConfig.root, 'server', '**/*'),
-							$.path.join(appConfig.root, '*.{json, js, md, ico}'),
-							$.path.join(appConfig.app, '**/*.{html, ejs}') ];
+							$.path.join(appConfig.root, '*.{json, js, md, ico}') ];
 
 	/*
 	*	@task: serve.nodemon
@@ -32,4 +28,4 @@ module.exports = (function(){
 	    	}, 1000);
 		});
 	}
-})();
+}
