@@ -15,4 +15,5 @@
 	  	function LoginCtrl(AuthService) {
 	      this.login = AuthService.login;
 	    }
+	    LoginCtrl.$inject = ["AuthService"];
 })();

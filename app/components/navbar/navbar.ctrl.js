@@ -30,4 +30,5 @@
 
 
 		}
+		NavbarCtrl.$inject = ["$scope"];
 })();

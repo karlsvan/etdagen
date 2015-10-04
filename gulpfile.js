@@ -64,7 +64,7 @@ gulp.task('source:all', ['source:images', 'source:partials', 'source:templates',
 /*
 *	Gulp project tasks
 */
-gulp.task('serve', $.sequence('serve:browser-sync', 'serve:watch'));
+gulp.task('serve', $.sequence('inject:all', 'serve:browser-sync', 'serve:watch'));
 gulp.task('build', $.sequence('style:less', 'inject:all', 'useref', 'source:all'));
 
 gulp.task('default', function(){

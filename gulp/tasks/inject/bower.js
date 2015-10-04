@@ -2,7 +2,12 @@ module.exports = function(gulp, $, appConfig){
 	'use strict';
 
 	var fileToInjectInto 	= appConfig.indexFile,
-		wiredepOptions 		= { overrides: { 'font-awesome': { 'main': [ 'css/font-awesome.css' ] } } };
+		wiredepOptions 		= { 
+			overrides: {
+				'font-awesome': { 'main': [ 'css/font-awesome.css' ] },
+				'angular-material': { 'main': [ 'angular-material.js', 'angular-material.css' ] }
+			}
+		};
 		
 	/*
 	*	@task: inject.bower

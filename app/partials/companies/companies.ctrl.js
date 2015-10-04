@@ -19,4 +19,5 @@
 		      'Karma'
 		    ];
 		}
+		CompaniesCtrl.$inject = ["$scope"];
 })();

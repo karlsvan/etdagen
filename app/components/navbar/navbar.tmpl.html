@@ -1,25 +1,12 @@
-<div class="et-navbar" role="navigation">
-	<div class="navbar-container">
-		<div class="navbar-logo navbar-left">
-			<img src="../../assets/images/ETlogos/logo.svg" alt="E&amp;T-Dagen">
+<nav id="et-navbar" class="md-whiteframe-2dp" role="navigation">
+	<div class="container">
+		<div class="brand"><img layout-fill src="../../assets/images/ETlogos/logo.svg" alt="E&amp;T-Dagen"></div>
+		<div class="navbar-nav" ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" md-ink-ripple="#a03033">
+			<i class="fa {{link.icon}}"></i><span> {{link.name}}</span>
 		</div>
-		<div ng-repeat="link in navbar.links.main" ui-sref-active="active" lx-ripple>
-			<div class="link" ui-sref="{{link.state}}">
-				<i class="fa {{link.icon}}"></i><span> {{link.name}}</span>
-			</div>
+		<div flex></div>
+		<div class="navbar-nav">
+			<i class="fa {{navbar.links.side[1].icon}}"></i><span> {{navbar.links.side[1].name}}</span>
 		</div>
-		<lx-dropdown class="navbar-right" position="right" from-top="false">
-			<div class="link" lx-dropdown-toggle lx-ripple><span>{{navbar.links.side[1].name}} </span><i class="fa {{navbar.links.side[1].icon}}"></i></div>
-			<lx-dropdown-menu>
-		        <ul>
-		            <li><a class="dropdown-link">Min Profil</a></li>
-		            <li><a class="dropdown-link">Bedrifter</a></li>
-		            <li><a class="dropdown-link">Studenter</a></li>
-		            <li class="dropdown-divider"></li>
-		            <li><a class="dropdown-link">Instilinger</a></li>
-		            <li><a class="dropdown-link">Logg ut</a></li>
-		        </ul>
-			</lx-dropdown-menu>
-		<lx-dropdown>
 	</div>
-</div>
+</nav>

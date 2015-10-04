@@ -15,7 +15,7 @@
 	    'ngSanitize',
 	    'ngTouch',
 	    'ui.router',
-	    'ui.materialize'
+	    'ngMaterial'
  	])
  	.config(configure);
 

@@ -437,66 +437,81 @@
   background-color: #719;
 }
 /* inject:components:less */
-.et-navbar {
+nav#et-navbar {
   position: relative;
-  width: 100%;
-  background-color: #fcfafa;
-  height: 4em;
   font-size: 14px;
-  line-height: 4em;
-  transition: all 150ms ease-in-out;
+  height: 5em;
+  background-color: #fefefe;
 }
-.navbar-container {
+nav#et-navbar > .container {
   position: relative;
-  height: inherit;
-  width: 90%;
   max-width: 1024px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  height: inherit;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-.navbar-container > * {
-  height: inherit;
+nav#et-navbar .brand {
+  width: 4.5em;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
 }
-.navbar-container > * .link {
-  color: #a03033;
-  text-decoration: none;
-  padding: 0 15px;
-}
-.navbar-container > .navbar-right:first-child {
-  margin-left: auto;
-}
-.navbar-logo {
-  height: inherit;
-}
-.navbar-logo img {
-  height: 100%;
-  padding-top: 10%;
-  padding-bottom: 10%;
-  padding-left: 20px;
-  padding-right: 20px;
-  max-height: 80px;
+nav#et-navbar .brand > img {
+  width: 100%;
   box-sizing: border-box;
+  padding: 0.2em 1em;
 }
-/*
-*	Expand the navbar when to short
-*/
-@media (max-width: 720px) {
-  .navbar-container {
-    width: 100%;
+nav#et-navbar .navbar-nav {
+  position: relative;
+  cursor: pointer;
+  padding: 0 1em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: #a03033;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  background-color: transparent;
+  transition: background-color 0.4s ease-in-out;
+}
+nav#et-navbar .navbar-nav > * {
+  padding: 0.1em;
+}
+nav#et-navbar .navbar-nav:hover {
+  background-color: rgba(160, 48, 51, 0.08);
+}
+@media (max-width: 650px) {
+  nav#et-navbar > .container {
+    max-width: 500px;
   }
-}
-/*
-*	Show only icons in links, remove navbar-list-right and show menu link
-*/
-/*
-*	Shrink the navbar to 90%
-*/
-@media (max-width: 380px) {
-  .et-navbar {
-    font-size: 12.6px;
+  nav#et-navbar > .container > .brand {
+    width: 4em;
+  }
+  nav#et-navbar > .container > .navbar-nav {
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+  }
+  nav#et-navbar > .container > .navbar-nav > i {
+    margin: 0 auto;
+  }
+  nav#et-navbar > .container > .flex,
+  nav#et-navbar > .container .navbar-nav > span {
+    display: none;
   }
 }
 /* endinject */

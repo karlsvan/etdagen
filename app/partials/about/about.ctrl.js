@@ -19,4 +19,5 @@
 		      'Karma'
 		    ];
 		}
+		AboutCtrl.$inject = ["$scope"];
 })();
