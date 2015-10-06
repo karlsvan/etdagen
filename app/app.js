@@ -27,7 +27,7 @@
  	    .state('news', {
  	      url: '/news',
  	      templateUrl: 'partials/news/news.html',
- 	      controller: 'NewsCtrl'
+ 	      controller: 'NewsCtrl as pagenews'
  	    })
  	    .state('about', {
  	      url: '/about',
