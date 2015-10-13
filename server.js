@@ -5,8 +5,8 @@ var express		= require('express'),
 	path		= require('path'),
 	logger      = require('morgan'),
     bodyParser  = require('body-parser'),
-	favicon		= require('serve-favicon');
-
+	favicon		= require('serve-favicon'),
+	mysql       = require('./server/mysql/mysql_functions.js');
 // ========== Initialize and setup express app ==========
 var app 	= express();
 var env		= app.get('env') || 'development';
@@ -39,9 +39,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // ========== App routes ==========
+var api = express.Router();
 app.get('/', function (req ,res){
 	res.render('index', {title: 'E&T-dagen', year: 2016});
 });
-app.all('/:path', function (req, res){ res.redirect('/#'+path); });
 
+api.get('/news', function (req,res){
+	//var news = mysql.get.news();
+	var n = {
+		string: 'hei',
+		navn: 'none'
+	};
+	res.json(n);
+})
+
+api.get('/user', function (req,res){
+	//var user = mysql.get.user();
+	var u = {
+		name: 'hurrdurr',
+		birth: '090792'
+	}
+	res.json(u);
+})
+
+app.all('/:path', function (req, res){ res.redirect('/#'+path); });
+app.use('/api',api);
 module.exports.app = app;

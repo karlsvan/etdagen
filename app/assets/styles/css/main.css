@@ -514,9 +514,6 @@ nav#et-navbar .navbar-nav:hover {
     display: none;
   }
 }
-.newsWidget {
-  background-color: rgba(255, 255, 255, 0.5);
-}
 /* endinject */
 /* inject:partials:less */
 .circular {
