@@ -33,8 +33,9 @@ function Query(sql, callback){
 // ========== Exports ==========
 // 
 module.exports.get = {
+
 	news: function(callback){
-		Query('SELECT * FROM nyheter', function(error, rows, fields){ callback(error, rows); });
+		Query('SELECT * FROM nyheter', function (error, rows, fields){ callback(error, rows); });
 	},
 
 	user: function(userobj, callback){
@@ -56,5 +57,15 @@ module.exports.get = {
 				}
 			}
 		});
+	},
+
+	company: function(callback){
+		var sql = 'SELECT * FROM bedrift';
+		Query(sql, function (error, rows, fields){ callback(error)});
 	}
 };
+
+
+
+
+

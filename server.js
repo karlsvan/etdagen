@@ -62,6 +62,15 @@ api.get('/user', function (req,res){
 	res.json(u);
 })
 
+api.get('/company', function (req,res){
+	//var comp = mysql.get.company();
+	var c = {
+		nome: 'Texasconductors',
+		status: 'cash'
+	}
+	res.json(c);
+})
+
 app.all('/:path', function (req, res){ res.redirect('/#'+path); });
 app.use('/api',api);
 module.exports.app = app;
