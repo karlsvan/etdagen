@@ -3,7 +3,8 @@ module.exports = function(gulp, $, appConfig){
 
 	var fileToInjectInto 	=   appConfig.indexFile,
 		filesToInject 		= [ $.path.join(appConfig.app, 'components', '**/*.js'),
-								$.path.join(appConfig.app, 'partials', '**/*.js') ],
+								$.path.join(appConfig.app, 'partials', '**/*.js'),
+								$.path.join(appConfig.app, 'services', '**/*.js') ],
 		injectOptions 		= { relative: true, starttag: '<!-- angular:{{ext}} -->', endtag: '<!-- endangular -->' };
 
 	/*
