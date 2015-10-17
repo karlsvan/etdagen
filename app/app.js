@@ -20,7 +20,7 @@
  	.config(configure);
 
  	/*@ngInject*/
- 	function configure($stateProvider, $urlRouterProvider) {
+ 	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
  		$urlRouterProvider.otherwise('/news');
 
  		$stateProvider
@@ -54,6 +54,12 @@
  	      templateUrl: 'partials/register/register.html',
  	      controller: 'RegisterCtrl'
  	    });
+
+ 	    $mdThemingProvider.theme('default')
+ 	    	.primaryPalette('red')
+ 	    	.accentPalette('blue')
+ 	    	.warnPalette('yellow')
+ 	    	.backgroundPalette('red');
  	}
- 	configure.$inject = ['$stateProvider', '$urlRouterProvider'];
+ 	configure.$inject = ['$stateProvider', '$urlRouterProvider', '$mdThemingProvider'];
 })();

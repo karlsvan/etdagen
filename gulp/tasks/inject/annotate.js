@@ -19,7 +19,7 @@ module.exports = function(gulp, $, appConfig){
 	return function annotate(callback){
 		for(var i=0; i<filesToBeAnnotated.length; i++){
 			gulp.src(filesToBeAnnotated[i])
-				.pipe($.ngAnnotate(annotateOptions[i]))
+				.pipe($.ngAnnotate(annotateOptions))
 				.pipe(gulp.dest(annotatedDist[i]));
 		}
 		callback(null);

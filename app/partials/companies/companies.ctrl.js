@@ -19,5 +19,5 @@
 		      'Karma'
 		    ];
 		}
-		CompaniesCtrl.$inject = ["$scope"];
+		CompaniesCtrl.$inject = ['$scope'];
 })();

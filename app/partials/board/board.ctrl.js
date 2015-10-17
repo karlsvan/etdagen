@@ -121,5 +121,5 @@
 		    	}
 		    ];
 		}
-		BoardCtrl.$inject = ["$scope"];
+		BoardCtrl.$inject = ['$scope'];
 })();

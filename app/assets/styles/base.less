@@ -1,0 +1,65 @@
+
+/*---------- TYPHOGRAFY ----------*/
+/* Root elements (use pixels) */
+html {
+	font-size: 17px !default;
+}
+
+/* Standard document elements (use rem) */
+.header {
+	font-size: 1.5rem;
+}
+.footer {
+	font-size: 0.75rem;
+}
+.sidebar {
+	font-size: 0.85rem;
+}
+
+/* Standard module elements (use em) */
+h1 {
+	font-size: 3em !default;
+}
+h2 {
+	font-size: 2.5em !default;
+}
+h3 {
+	font-size: 2em !default;
+}
+h4 {
+	font-size: 1.5em !default;
+}
+h5 {
+	font-size: 1em !default;
+}
+
+
+/*---------- CONTAINERS ----------*/
+
+
+.container, .container-fluid {
+	position: relative;
+	font-size: 1rem;
+}
+
+.container {
+	width: 90%;
+	max-width: 1000px;
+}
+
+.container-fluid {
+	width: 100%;
+}
+
+@media (max-width: 900px){
+	.container {
+		font-size: 0.9rem;
+		width: 100%;
+	}
+}
+@media (max-width: 400px){
+	.container {
+		font-size: 0.8rem;
+	}
+}
+

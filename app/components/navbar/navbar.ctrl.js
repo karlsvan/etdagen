@@ -30,5 +30,5 @@
 
 
 		}
-		NavbarCtrl.$inject = ["$scope"];
+		NavbarCtrl.$inject = ['$scope'];
 })();
