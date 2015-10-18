@@ -16,7 +16,7 @@
 	overflow: hidden;
 	height: 33vw;
 
-	&#fb-comm { 
+	&#fb-comm {
 		background: @fb-blue;
 	}
 	&#et-comm {
@@ -69,3 +69,28 @@
 }
 .skew-lb:before { transform: skewY(-3deg); }
 .skew-rb:before { transform: skewY(3deg); }
+
+@media (min-width: @breakpoint-sm){
+	#promo-section {
+		background: url('/assets/images/ETlogos/logo.svg') no-repeat;
+		background-size: 50% 250%;
+		background-position: 100% 50%;
+		padding: 3% 0;
+	}
+}
+//url(http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-257410.jpg)
+
+.bg-image-container {
+	position: relative;
+	overflow: hidden;
+	z-index: 2;
+
+	.bg-image {
+		position: absolute;
+		left: 0;
+	    top: 0;
+	    width: 100%;
+	    height: auto;
+	    opacity: 0.5;
+	}
+}

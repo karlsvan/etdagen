@@ -1,63 +1,52 @@
-<div id="page-news" class="page-section" flex="column">
+<div id="page-news" class="container-fluid" flex="column">
 	<!-- Promovideo -->
-	<section class="container-fluid" layout-align="start center" layout="column">
-		<div class="container md-whiteframe-2dp">
+	<section id="promo-section" class="container-fluid" layout-align="start center" layout="column" ng-cloak>
+		<div class="container md-whiteframe-12dp" style="border: 2px solid #222">
 			<div class="video-wrapper">
 				<iframe src="https://www.youtube.com/embed/BZFMVFaBY1w" frameborder="0" allowfullscreen></iframe>
 			</div>
 		</div>
 	</section>
-
+	<!--<section layout="column" layout-align="center center" class="bg-image-container" style="background: white; padding: 20px 0;">
+		<img src="/assets/images/backgrounds/glassgarden-1.jpg" class="bg-image">
+		<h1 class="md-display-1" style="color: black;">28. Januar 2016</h1>
+		<md-button class="md-primary md-hue-2 md-raised">Informasjon</md-button>
+	</section>-->
 	<!-- Program -->
-	<section class="container-fluid" layout-align="start center" layout="column">
-		<md-list class="container md-whiteframe-4dp" style="padding: 0;">
-			<md-list-item ng-repeat="event in pagenews.program" layout="row" style="background: #a03033;" class="md-2-line" ng-click="alert('clicked')">
-			<img class="md-avatar" src="/assets/images/ETlogos/logo.svg" alt="">
-				<div class="md-list-item-text">
-			        <h3>{{event.action}}</h3>
-					<p><i class="fa fa-clock-o"></i> {{event.time}} <span style="padding: 0 5px;">|</span> <i class="fa fa-map-marker"></i> {{event.place}}</p>
-		        </div>
-		        <p class="md-secondary"><i class="fa fa-chevron-circle-down"></i></p>
-				<md-divider ng-if="!$last"></md-divider>
-			</md-list-item>
-		</md-list>
-	</section>
-	
-	<!-- Commersial -->
-	<section flex layout="row">
-		<!-- Facebook -->
-		<div flex layout-align="center center" layout="column" class="commersial" id="fb-comm">
-			<md-button class="md-raised">Følg oss</md-button>
+	<section class="container-fluid" layout-gt-md="row" style="background: #eee;" ng-cloak>
+		<div flex-gt-md="50" layout="column" layout-align="center center">
+			<span class="md-display-1">28. Januar 2016</span>
+			<md-button class="md-primary md-hue-2 md-raised">Informasjon</md-button>
 		</div>
-		<!-- ET-account -->
-		<div flex layout-align="center center" layout="column" class="commersial" id="et-comm">
-			<md-button class="md-raised">Registrer</md-button>
-		</div>
-		<!-- Positions -->
-		<div flex layout-align="center center" layout="column" class="commersial" id="pos-comm">
-			<md-button class="md-raised">Stillinger</md-button>
+		<div flex-gt-md="50" style="background: rgba(240,240,240,0); width: 100%;">
+			<md-list style="padding: 0;">
+				<md-list-item ng-repeat="event in pagenews.program" layout="row" class="md-2-line">
+					<img class="md-avatar" src="/assets/images/ETlogos/logo.svg" alt="">
+					<div class="md-list-item-text">
+				        <h3>{{event.action}}</h3>
+						<p><i class="fa fa-clock-o"></i> {{event.time}} <span style="padding: 0 5px;">|</span> <i class="fa fa-map-marker"></i> {{event.place}}</p>
+			        </div>
+				</md-list-item>
+			</md-list>
 		</div>
 	</section>
 
-	<!-- Companies -->
-	<section layout="column">
-		<div layout-gt-sm="row">
-			<div>
-				<h3>Hovedsamarbeidspartner</h3>
-				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est nemo ad aliquid repellat, consequatur distinctio in deserunt consequuntur enim quisquam pariatur iure fugit vero voluptates. Aperiam, illum! Reprehenderit, doloremque.</div>
-				<img src="/assets/images/gifs/blurb.gif">
-			</div>
-			<div>
-				<h3>Hovedsponsor</h3>
-				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos est nemo ad aliquid repellat, consequatur distinctio in deserunt consequuntur enim quisquam pariatur iure fugit vero voluptates. Aperiam, illum! Reprehenderit, doloremque.</div>
-				<img src="/assets/images/gifs/blurb.gif">
-			</div>
-		</div>
-		<div layout="column">
-			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe possimus eum laboriosam iure, explicabo corporis voluptates, perferendis expedita nesciunt aperiam debitis quam, quaerat officiis. Vel eius blanditiis nemo, temporibus quo!</div>
-			<md-button>
-				Bedrifter
-			</md-button>
-		</div>
+	<!-- Commersial -->
+	<section layout-gt-sm="row" layout="column">
+		<!-- Facebook -->
+		<md-button flex layout-align="center center" layout="column" style="padding: 30px 0;">
+			<div><i class="fa fa-4x fa-commenting"></i></div>
+			<span class="md-title">Bedrifter</span>
+		</md-button>
+		<!-- ET-account -->
+		<md-button flex layout-align="center center" layout="column" style="padding: 30px 0;">
+			<div><i class="fa fa-4x fa-map"></i></div>
+			<span class="md-title">Stands</span>
+		</md-button>
+		<!-- Positions -->
+		<md-button flex layout-align="center center" layout="column" style="padding: 30px 0;">
+			<div><i class="fa fa-4x fa-television"></i></div>
+			<span class="md-title">Utstyr</span>
+		</md-button>
 	</section>
 </div>
