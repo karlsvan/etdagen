@@ -13,21 +13,28 @@
 		<md-button class="md-primary md-hue-2 md-raised">Informasjon</md-button>
 	</section>-->
 	<!-- Program -->
-	<section class="container-fluid" layout-gt-md="row" style="background: #eee;" ng-cloak>
-		<div flex-gt-md="50" layout="column" layout-align="center center">
-			<span class="md-display-1">28. Januar 2016</span>
-			<md-button class="md-primary md-hue-2 md-raised">Informasjon</md-button>
+	<section class="container-fluid md-whiteframe-1dp" layout-gt-sm="row" style="background: #eee; padding: 20px 0;" ng-cloak>
+		<div flex flex-gt-md="50" layout="column" layout-align="center center">
+			<div layout="column" layout-align="center center">
+				<span class="date-month md-display-1">Januar</span>
+				<span class="date-day md-display-4">28</span>
+				<span class="date-year md-headline">2016</span>
+			</div>
+			<md-button class="md-primary md-raised" hide-sm>Informasjon</md-button>
 		</div>
-		<div flex-gt-md="50" style="background: rgba(240,240,240,0); width: 100%;">
-			<md-list style="padding: 0;">
+		<div flex-md="60" flex-gt-md="50" layout-gt-sm="row">
+			<md-list>
 				<md-list-item ng-repeat="event in pagenews.program" layout="row" class="md-2-line">
-					<img class="md-avatar" src="/assets/images/ETlogos/logo.svg" alt="">
+					<img class="md-avatar" src="/assets/images/icons/{{event.icon}}Icon.png" alt="">
 					<div class="md-list-item-text">
 				        <h3>{{event.action}}</h3>
 						<p><i class="fa fa-clock-o"></i> {{event.time}} <span style="padding: 0 5px;">|</span> <i class="fa fa-map-marker"></i> {{event.place}}</p>
 			        </div>
 				</md-list-item>
 			</md-list>
+		</div>
+		<div layout="column" layout-align="center center">
+			<md-button class="md-primary md-raised" hide-gt-sm>Informasjon</md-button>
 		</div>
 	</section>
 

@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    
+
     /*
     *	The application main module
     *	@module: etApp
@@ -57,9 +57,9 @@
 
  	    $mdThemingProvider.theme('default')
  	    	.primaryPalette('red')
- 	    	.accentPalette('blue')
- 	    	.warnPalette('yellow')
- 	    	.backgroundPalette('red');
+ 	    	.accentPalette('grey')
+ 	    	.warnPalette('amber')
+ 	    	.backgroundPalette('blue-grey');
  	}
  	configure.$inject = ['$stateProvider', '$urlRouterProvider', '$mdThemingProvider'];
 })();

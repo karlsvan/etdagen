@@ -251,21 +251,6 @@ nav#et-navbar .navbar-nav:hover {
   width: 100%;
   height: 100%;
 }
-.commersial {
-  overflow: hidden;
-  height: 33vw;
-}
-.commersial#fb-comm {
-  background: #3b5998;
-}
-.commersial#et-comm {
-  background: url('/assets/images/ETlogos/logo.svg') no-repeat center, white;
-  background-size: cover;
-}
-.commersial#pos-comm {
-  background: url('/assets/images/tiles.jpg') no-repeat center;
-  background-size: cover;
-}
 .programme-header {
   background-color: #fff;
   font-size: 1rem;
@@ -320,19 +305,6 @@ nav#et-navbar .navbar-nav:hover {
     background-position: 100% 50%;
     padding: 3% 0;
   }
-}
-.bg-image-container {
-  position: relative;
-  overflow: hidden;
-  z-index: 2;
-}
-.bg-image-container .bg-image {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: auto;
-  opacity: 0.5;
 }
 /* endinject */
 
