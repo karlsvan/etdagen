@@ -21,13 +21,13 @@
 
  	/*@ngInject*/
  	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
- 		$urlRouterProvider.otherwise('/news');
+ 		$urlRouterProvider.otherwise('/home');
 
  		$stateProvider
- 	    .state('news', {
- 	      url: '/news',
- 	      templateUrl: 'partials/news/news.html',
- 	      controller: 'NewsCtrl as pagenews'
+ 	    .state('home', {
+ 	      url: '/home',
+ 	      templateUrl: 'partials/home/home.html',
+ 	      controller: 'HomeCtrl as pagehome'
  	    })
  	    .state('about', {
  	      url: '/about',

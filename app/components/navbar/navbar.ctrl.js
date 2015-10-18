@@ -15,8 +15,8 @@
 		function NavbarCtrl($scope) {
 			this.links = {
 				main: [
-					{ state: 'news', icon: 'fa-newspaper-o', name: 'Nyheter' },
-					{ state: 'about', icon: 'fa-info', name: 'Rekrutteringsdagen' },
+					{ state: 'home', icon: 'fa-newspaper-o', name: 'Hjem' },
+					{ state: 'about', icon: 'fa-info', name: 'Informasjon' },
 					{ state: 'companies', icon: 'fa-building-o', name: 'Bedrifter' },
 					{ state: 'board', icon: 'fa-users', name: 'Styret' }
 

@@ -1,17 +1,13 @@
-<div id="page-news" class="container-fluid" flex="column">
+<div id="page-home" class="container-fluid" flex="column">
 	<!-- Promovideo -->
 	<section id="promo-section" class="container-fluid" layout-align="start center" layout="column" ng-cloak>
-		<div class="container md-whiteframe-12dp" style="border: 2px solid #222">
+		<div class="container md-whiteframe-12dp" style="background: #222; padding: 2px;">
 			<div class="video-wrapper">
 				<iframe src="https://www.youtube.com/embed/BZFMVFaBY1w" frameborder="0" allowfullscreen></iframe>
 			</div>
 		</div>
 	</section>
-	<!--<section layout="column" layout-align="center center" class="bg-image-container" style="background: white; padding: 20px 0;">
-		<img src="/assets/images/backgrounds/glassgarden-1.jpg" class="bg-image">
-		<h1 class="md-display-1" style="color: black;">28. Januar 2016</h1>
-		<md-button class="md-primary md-hue-2 md-raised">Informasjon</md-button>
-	</section>-->
+
 	<!-- Program -->
 	<section class="container-fluid md-whiteframe-1dp" layout-gt-sm="row" style="background: #eee; padding: 20px 0;" ng-cloak>
 		<div flex flex-gt-md="50" layout="column" layout-align="center center">
@@ -22,17 +18,15 @@
 			</div>
 			<md-button class="md-primary md-raised" hide-sm>Informasjon</md-button>
 		</div>
-		<div flex-md="60" flex-gt-md="50" layout-gt-sm="row">
-			<md-list>
-				<md-list-item ng-repeat="event in pagenews.program" layout="row" class="md-2-line">
-					<img class="md-avatar" src="/assets/images/icons/{{event.icon}}Icon.png" alt="">
-					<div class="md-list-item-text">
-				        <h3>{{event.action}}</h3>
-						<p><i class="fa fa-clock-o"></i> {{event.time}} <span style="padding: 0 5px;">|</span> <i class="fa fa-map-marker"></i> {{event.place}}</p>
-			        </div>
-				</md-list-item>
-			</md-list>
-		</div>
+		<md-list flex-md="60" flex-gt-md="50">
+			<md-list-item ng-repeat="event in pagehome.program" layout="row" class="md-2-line">
+				<img class="md-avatar" ng-src="/assets/images/icons/{{event.icon}}Icon.png" alt="">
+				<div class="md-list-item-text">
+			        <h3>{{event.action}}</h3>
+					<p><i class="fa fa-clock-o"></i> {{event.time}} <span style="padding: 0 5px;">|</span> <i class="fa fa-map-marker"></i> {{event.place}}</p>
+		        </div>
+			</md-list-item>
+		</md-list>
 		<div layout="column" layout-align="center center">
 			<md-button class="md-primary md-raised" hide-gt-sm>Informasjon</md-button>
 		</div>

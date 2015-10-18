@@ -3,16 +3,16 @@
 
 	/**
 	 * @ngdoc function
-	 * @name etApp.controller:NewsCtrl
+	 * @name etApp.controller:HomeCtrl
 	 * @description
-	 * # NewsCtrl
+	 * # HomeCtrl
 	 * Controller of the etApp
 	 */
 	angular.module('etApp')
-	  .controller('NewsCtrl', NewsCtrl);
+	  .controller('HomeCtrl', HomeCtrl);
 
 		/*@ngInject*/
-		function NewsCtrl(NewsService){
+		function HomeCtrl(NewsService){
 			this.news = NewsService.getNews();
 
 			this.tiles = (function(){
@@ -38,5 +38,5 @@
 				{time: '15.15', action: 'Sommerjobbmaraton', place: 'glassgården', icon: 'Clock'}
 			];
 		}
-		NewsCtrl.$inject = ['NewsService'];
+		HomeCtrl.$inject = ['NewsService'];
 })();
