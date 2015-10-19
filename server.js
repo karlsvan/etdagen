@@ -45,21 +45,17 @@ app.get('/', function (req ,res){
 });
 
 api.get('/news', function (req,res){
-	//var news = mysql.get.news();
-	var n = {
-		string: 'hei',
-		navn: 'none'
-	};
-	res.json(n);
+	var news = mysql.get.news(function (error, rows, fields) {
+		res.json(rows);
+	});
+	
 })
 
 api.get('/user', function (req,res){
-	//var user = mysql.get.user();
-	var u = {
-		name: 'hurrdurr',
-		birth: '090792'
-	}
-	res.json(u);
+	var user = mysql.get.user(null ,function (error, rows, fields){
+		console.log('yo...' + JSON.stringify(rows));
+		res.json(rows);
+	});	
 })
 
 api.get('/company', function (req,res){

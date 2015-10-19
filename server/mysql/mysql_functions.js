@@ -35,7 +35,10 @@ function Query(sql, callback){
 module.exports.get = {
 
 	news: function(callback){
-		Query('SELECT * FROM nyheter', function (error, rows, fields){ callback(error, rows); });
+		Query('SELECT * FROM nyheter', function (error, rows, fields){  
+		callback (error, rows, fields);
+		console.log('returning..' + JSON.stringify(rows));
+		});
 	},
 
 	user: function(userobj, callback){
