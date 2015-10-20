@@ -1,38 +1,48 @@
-.circular {
-	width: 300px;
-	height: 300px;
-	border-radius: 150px;
+.board-links{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 
-.vcards{
+.board-cards-container{
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: center;
-	.vcard{
+	.board-cards{
 		display: flex;
-		align-items: center;
-		background-image: url("../../../assets/images/ETlogos/logo.svg");
-		background-position: left;
-		background-repeat: no-repeat;
-		background-size: 7em;
-		width: 300px;
-		margin: 10px;
-		padding: 2px;
-		.vcard-image{
-			height: 80px;
-			width: 80px;
-			border-radius: 50%;
-			background-size: cover;
-			margin: 0px 10px;
-			border: 1px solid @red-samfundet;
-		}
-		span{
-			font-weight: bold;
+		flex-wrap: wrap;
+		justify-content: center;
+		max-width: 1500px;
+		.board-card{
+			display: flex;
+			align-items: center;
+			background-image: url("../../../assets/images/ETlogos/logo.svg");
+			background-position: left;
+			background-repeat: no-repeat;
+			background-size: 7em;
+			width: 300px;
+			margin: 0px;
+			padding: 0px;
+			.board-card-image{
+				height: 80px;
+				width: 80px;
+				border-radius: 50%;
+				background-size: cover;
+				margin: 10px 20px;
+				border: 1px solid @red-samfundet;
+			}
+			a{
+				text-decoration: none;
+				color: @red-samfundet;
+			}
+			name{
+				font-weight: bold;
+			}
 		}
 	}
 }
 
-.paginator{
-	display: flex;
-	justify-content: center;
+
+#board-background{
+	background-color: #ef5350;
 }

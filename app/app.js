@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    
+
     /*
     *	The application main module
     *	@module: etApp
@@ -17,17 +17,21 @@
 	    'ui.router',
 	    'ngMaterial'
  	])
- 	.config(configure);
+ 	.config(configure)
+ 	.controller('appCtrl', function(){
+ 		this.name = 'E&T-dagen';
+ 		this.year = 2016;
+ 	});
 
  	/*@ngInject*/
- 	function configure($stateProvider, $urlRouterProvider) {
- 		$urlRouterProvider.otherwise('/news');
+ 	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+ 		$urlRouterProvider.otherwise('/home');
 
  		$stateProvider
- 	    .state('news', {
- 	      url: '/news',
- 	      templateUrl: 'partials/news/news.html',
- 	      controller: 'NewsCtrl as pagenews'
+ 	    .state('home', {
+ 	      url: '/home',
+ 	      templateUrl: 'partials/home/home.html',
+ 	      controller: 'HomeCtrl as pagehome'
  	    })
  	    .state('about', {
  	      url: '/about',
@@ -37,7 +41,7 @@
  	    .state('companies', {
  	      url: '/companies',
  	      templateUrl: 'partials/companies/companies.html',
- 	      controller: 'CompaniesCtrl'
+ 	      controller: 'CompaniesCtrl as pagecomp'
  	    })
  	    .state('board', {
  	      url: '/board',
@@ -54,6 +58,12 @@
  	      templateUrl: 'partials/register/register.html',
  	      controller: 'RegisterCtrl'
  	    });
+
+ 	    $mdThemingProvider.theme('default')
+ 	    	.primaryPalette('red')
+ 	    	.accentPalette('grey')
+ 	    	.warnPalette('amber')
+ 	    	.backgroundPalette('blue-grey');
  	}
- 	configure.$inject = ['$stateProvider', '$urlRouterProvider'];
+ 	configure.$inject = ['$stateProvider', '$urlRouterProvider', '$mdThemingProvider'];
 })();

@@ -1,0 +1,63 @@
+.video-wrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	height: 0;
+
+	> iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+
+.programme-header {
+	background-color: #fff;
+	font-size: 1rem;
+
+	> .header-content {
+		margin-top: 20px;
+
+		img {
+			flex: 0 0 auto;
+			margin: 0 2em;
+			width: 5em;
+		}
+		.md-display-2 {
+			font-size: 3em;
+			line-height: 2em;
+		}
+		.md-title {
+			font-size: 2.2em;
+			margin-left: 2.5em;
+		}
+	}
+}
+
+.skew-lb, .skew-rb {
+	position: relative;
+	> * {
+		z-index: 1;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: inherit;
+		top: 50%;
+	}
+}
+.skew-lb:before { transform: skewY(-3deg); }
+.skew-rb:before { transform: skewY(3deg); }
+
+@media (min-width: @breakpoint-sm){
+	#promo-section {
+		background: url('/assets/images/ETlogos/logo.svg') no-repeat;
+		background-size: 50% 250%;
+		background-position: 100% 50%;
+		padding: 3% 0;
+	}
+}

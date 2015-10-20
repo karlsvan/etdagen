@@ -1,0 +1,53 @@
+<div id="page-home" class="container-fluid" flex="column">
+	<!-- Promovideo -->
+	<section id="promo-section" class="container-fluid" layout-align="start center" layout="column" ng-cloak>
+		<div class="container md-whiteframe-12dp" style="background: #222; padding: 2px;">
+			<div class="video-wrapper">
+				<iframe src="https://www.youtube.com/embed/BZFMVFaBY1w" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</section>
+
+	<!-- Program -->
+	<section class="container-fluid md-whiteframe-1dp" layout-gt-sm="row" style="background: #eee; padding: 20px 0;" ng-cloak>
+		<div flex flex-gt-md="50" layout="column" layout-align="center center">
+			<div layout="column" layout-align="center center">
+				<span class="date-month md-display-1">Januar</span>
+				<span class="date-day md-display-4">28</span>
+				<span class="date-year md-headline">2016</span>
+			</div>
+			<md-button class="md-primary md-raised" hide-sm>Informasjon</md-button>
+		</div>
+		<md-list flex-md="60" flex-gt-md="50">
+			<md-list-item ng-repeat="event in pagehome.program" layout="row" class="md-2-line">
+				<img class="md-avatar" ng-src="/assets/images/icons/{{event.icon}}Icon.png" alt="">
+				<div class="md-list-item-text">
+			        <h3>{{event.action}}</h3>
+					<p><i class="fa fa-clock-o"></i> {{event.time}} <span style="padding: 0 5px;">|</span> <i class="fa fa-map-marker"></i> {{event.place}}</p>
+		        </div>
+			</md-list-item>
+		</md-list>
+		<div layout="column" layout-align="center center">
+			<md-button class="md-primary md-raised" hide-gt-sm>Informasjon</md-button>
+		</div>
+	</section>
+
+	<!-- Commersial -->
+	<section layout-gt-sm="row" layout="column">
+		<!-- Facebook -->
+		<md-button flex layout-align="center center" layout="column" style="padding: 30px 0;">
+			<div><i class="fa fa-4x fa-commenting"></i></div>
+			<span class="md-title">Bedrifter</span>
+		</md-button>
+		<!-- ET-account -->
+		<md-button flex layout-align="center center" layout="column" style="padding: 30px 0;">
+			<div><i class="fa fa-4x fa-map"></i></div>
+			<span class="md-title">Stands</span>
+		</md-button>
+		<!-- Positions -->
+		<md-button flex layout-align="center center" layout="column" style="padding: 30px 0;">
+			<div><i class="fa fa-4x fa-television"></i></div>
+			<span class="md-title">Utstyr</span>
+		</md-button>
+	</section>
+</div>
