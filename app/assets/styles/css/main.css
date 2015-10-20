@@ -207,6 +207,24 @@ nav#et-navbar .navbar-nav:hover {
       -ms-flex-pack: center;
           justify-content: center;
 }
+@media (max-width: 400px) {
+  #page-companies .md-display-1 {
+    font-size: 30px;
+    margin: 30px 0 5px 0;
+  }
+}
+@media (max-width: 350px) {
+  #page-companies .md-display-1 {
+    font-size: 25px;
+  }
+}
+#page-companies .company-widget {
+  padding: 20px 0;
+  border-top: 1px solid rgba(150, 150, 150, 0.4);
+}
+#page-companies .company-widget:first-of-type {
+  border-top: none;
+}
 .video-wrapper {
   position: relative;
   padding-bottom: 56.25%;

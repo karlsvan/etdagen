@@ -17,7 +17,11 @@
 	    'ui.router',
 	    'ngMaterial'
  	])
- 	.config(configure);
+ 	.config(configure)
+ 	.controller('appCtrl', function(){
+ 		this.name = 'E&T-dagen';
+ 		this.year = 2016;
+ 	});
 
  	/*@ngInject*/
  	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
@@ -37,7 +41,7 @@
  	    .state('companies', {
  	      url: '/companies',
  	      templateUrl: 'partials/companies/companies.html',
- 	      controller: 'CompaniesCtrl'
+ 	      controller: 'CompaniesCtrl as pagecomp'
  	    })
  	    .state('board', {
  	      url: '/board',
