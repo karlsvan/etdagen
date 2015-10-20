@@ -6,7 +6,10 @@ var express		= require('express'),
 	logger      = require('morgan'),
     bodyParser  = require('body-parser'),
 	favicon		= require('serve-favicon'),
-	mysql       = require('./server/mysql/mysql_functions.js');
+	mysql       = require('./server/mysql/mysql_functions.js'),
+	passport    = require('passport');require('./server/config/passport.js')(passport);
+
+
 // ========== Initialize and setup express app ==========
 var app 	= express();
 var env		= app.get('env') || 'development';
@@ -44,6 +47,16 @@ app.get('/', function (req ,res){
 	res.render('index', {title: 'E&T-dagen', year: 2016});
 });
 
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 api.get('/news', function (req,res){
 	var news = mysql.get.news(function (error, rows, fields) {
 		res.json(rows);
@@ -58,7 +71,6 @@ api.get('/user', function (req,res){
 		etternavn:'Holmefjord',
 		};
 	var user = mysql.get.user(bruker ,function (error, rows, fields){
-		console.log('yo...' + JSON.stringify(rows));
 		res.json(rows);
 	});	
 })

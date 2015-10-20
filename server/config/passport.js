@@ -3,7 +3,8 @@
 // ========== Passport dependencies ==========
 // Passport uses the mysql_functions to query the database and different strategies for authentication.
 var db 				= require('../mysql/mysql_functions')
-	, localStrategy	= require('passport-local').Strategy;
+	, localStrategy	= require('passport-local').Strategy,
+	FacebookStrategy = require('passport-facebook').Strategy;
 
 
 module.exports = function (passport){
@@ -24,6 +25,46 @@ module.exports = function (passport){
 		usernameField: 'username', 	// might use 'email'
 		passwordField: 'password',
 		passReqToCallback: false	// might use true
+	}
+
+	function User()  {
+		this.properties = {
+		 id:null
+		,fornavn:null
+		,etternavn:null
+		,tlf:null
+		,email:null
+		,facebookId:null
+		,bedriftid:null
+		,status:null
+		,inaktiv:null
+		,password:null
+		,username:null
+		,salt:null
+		,email_optout:null
+		,adresse:null
+		,nasjonalitet:null
+		,utgangsaar:null
+		,linje:null
+		,fodselsdato:null
+		,registrert:null
+		,endret:null};
+		this.findOrCreate = function(obj, callback) {
+			db.get.user(obj ,function (error, rows, fields){
+				if(!rows) {
+					//make user
+					console.log('make user');
+				} else {
+					/*
+					for (var i = 0; i <= rows.length-1; i++) {
+						this[rows[i][0]] = rows[i][1];
+					};*/
+					this.properties = JSON.stringify(rows);
+					console.log('user: '+ JSON.stringify(rows));
+					callback(error,this);
+				}
+			});
+		}
 	}
 
 	// ========== Passport strategies ==========
@@ -55,6 +96,23 @@ module.exports = function (passport){
 		// if user already exists -> error
 		// else create new user and log in
 	}));
+
+
+	passport.use(new FacebookStrategy({
+    clientID: '449983121860985',
+    clientSecret: '592186645310e89533f50f3afa1b7535',
+    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    enableProof: false
+  },
+  function(accessToken, refreshToken, profile, done) {
+  	console.log('face:..' + profile.id);
+  	var User = new User();
+    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+    console.log('user2: ' + JSON.stringify(User));
+  }
+));
 };
 
 

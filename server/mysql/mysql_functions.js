@@ -49,8 +49,6 @@ module.exports.get = {
 		sql = sql.substring(0, sql.length-4); // get rid of last AND (or space if no more keys)
 		sql += 'LIMIT 2;';
 		// resulting sql: 'SELECT * FROM brukere WHERE [{key}={userobj.key},] LIMIT 2'
-		console.log('sql: '+ sql);
-		//sql = 'SELECT * FROM bruker WHERE id=1 LIMIT 2;'
 		Query(sql, function (error, rows, fields){
 			if(error){ callback(error); }
 			else {
