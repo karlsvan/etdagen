@@ -1,11 +1,11 @@
 <!doctype html>
-<html class="no-js" ng-app="etApp">
+<html class="no-js" ng-app="etApp" ng-controller="appCtrl as app">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
 
-        <title><%=title%> <%=year%></title>
+        <title>{{app.name}} {{app.year}}</title>
         <meta name="description" content="E&amp;T-dagen er en rekrutteringsdag arrangert av studenter ved faglinjen Elektronikk på NTNU.">
         <meta keywords="E&amp;T-dagen, Rekrutteringsdag, NTNU, Glassgården, Elektronikk">
         <base href="/">
@@ -28,8 +28,8 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <navbar>hello</navbar>
-        <div ui-view></div>
+        <navbar></navbar>
+        <div ui-view style="overflow: hidden;"></div>
 
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -63,13 +63,11 @@
             <!-- angular:js -->
             <script src="components/navbar/navbar.ctrl.js"></script>
             <script src="components/navbar/navbar.js"></script>
-            <script src="components/newsWidget/newsWidget.ctrl.js"></script>
-            <script src="components/newsWidget/newsWidget.js"></script>
             <script src="partials/about/about.ctrl.js"></script>
             <script src="partials/board/board.ctrl.js"></script>
             <script src="partials/companies/companies.ctrl.js"></script>
+            <script src="partials/home/home.ctrl.js"></script>
             <script src="partials/login/login.ctrl.js"></script>
-            <script src="partials/news/news.ctrl.js"></script>
             <script src="partials/register/register.ctrl.js"></script>
             <script src="services/news.srv.js"></script>
             <!-- endangular -->

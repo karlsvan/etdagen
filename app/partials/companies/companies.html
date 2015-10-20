@@ -1,22 +1,37 @@
-<div class="et-section flex-row-center" id="main_partner">
-	<div class="card et-col-single">
-		<p>Hovedsponsor</p>
-	</div>
-	<p class="et-col-single">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor minima natus doloribus amet accusamus, asperiores sunt dolores eum veniam odit illum minus rerum. Atque dolore possimus nulla debitis repellendus reprehenderit.</p>
-</div>
-<div class="et-section flex-row-wrap-around" id="partners">
-	<div class="card et-col-single">Partner</div>
-	<div class="card et-col-single">Partner</div>
-	<div class="card et-col-single">Partner</div>
-	<div class="card et-col-single">Partner</div>
-</div>
-<div class="et-section flex-row-wrap-around" id="sponsors">
-	<div class="card et-col-single">Sponsor</div>
-	<div class="card et-col-single">Sponsor</div>
-	<div class="card et-col-single">Sponsor</div>
-	<div class="card et-col-single">Sponsor</div>
-	<div class="card et-col-single">Sponsor</div>
-	<div class="card et-col-single">Sponsor</div>
-	<div class="card et-col-single">Sponsor</div>
-	<div class="card et-col-single">Sponsor</div>
+<div id="page-companies" class="container-fluid" flex="column">
+	<section class="container-fluid" layout="column" layout-align="center center" style="padding: 3rem 0;" hide show-gt-md>
+		<h1 class="md-display-3">Samarbeidspartnere {{app.year}}</h1>
+	</section>
+
+	<section class="container-fluid" layout="column" layout-align="center center">
+		<div class="container" layout="column" layout-align="center center">
+			<h3 class="md-display-1" flex="none">Hovedsamarbeidspartner</h3>
+			<div layout-gt-sm="row" layout="column" layout-align-sm="center center">
+				<md-button flex="none" style="width: 150px;" aria-label="Gå til ekstern side">
+					<img ng-src="{{pagecomp.companies.mainPartner.logo}}" alt="" layout-fill>
+				</md-button>
+				<div style="padding: 0 10px;" class="container">
+					<h4 class="md-title">{{pagecomp.companies.mainPartner.name}}</h4>
+					<span class="md-body-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero voluptate fugiat officia dolor fugit maxime, culpa, quam, rerum excepturi assumenda repudiandae amet unde, nam nesciunt? Ea dolore laborum a sed.</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section style="height: 50px;"></section>
+
+	<section class="container-fluid" layout="column" layout-align="center center">
+		<div class="container" layout="column" layout-align="center center">
+			<h3 class="md-display-1" flex="none">Samarbeidspartnere</h3>
+			<div class="company-widget" layout-gt-sm="row" layout="column" layout-align-sm="center center" ng-repeat="company in pagecomp.companies.partners">
+				<md-button flex="none" style="width: 150px;" aria-label="Gå til ekstern side">
+					<img ng-src="{{company.logo}}" alt="" layout-fill>
+				</md-button>
+				<div style="padding: 0 10px;" class="container">
+					<h4 class="md-title">{{company.name}}</h4>
+					<span class="md-body-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero voluptate fugiat officia dolor fugit maxime, culpa, quam, rerum excepturi assumenda repudiandae amet unde, nam nesciunt? Ea dolore laborum a sed.</span>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>

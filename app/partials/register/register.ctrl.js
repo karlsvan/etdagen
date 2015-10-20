@@ -19,5 +19,5 @@
 		      'Karma'
 		    ];
 		}
-		RegisterCtrl.$inject = ["$scope"];
+		RegisterCtrl.$inject = ['$scope'];
 })();

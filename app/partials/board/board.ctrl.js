@@ -115,14 +115,8 @@
 					email: 'antonsen@etdagen.no'
 				}
 			]
-		}
-		$scope.boardlinks = [
-			2016,
-			2015
-		]
-		$scope.setNewActive = function(boardyear){
-			$scope.boards.active = boardyear;
-		}
+		};
+		BoardCtrl.$inject = ['$scope'];
 	}
-	BoardCtrl.$inject = ["$scope"];
 })();
+

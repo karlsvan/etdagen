@@ -1,60 +1,3 @@
-.et-section {
-	padding: @et-section-padding;
-}
-
-.et-w {
-	.for(7,10); .-each(@i){
-		@index: 10*@i;
-		&@{index} { 
-			width: ~"@{index}%";
-
-			&c {
-				width: ~"@{index}%";
-				margin-left: auto;
-				margin-right: auto;
-			}
-		}
-	}
-}
-
-@col-variants: ~"single" (@et-col-width), ~"double" (@et-col-width*2 + @et-col-margin*2), ~"50p" (50%);
-.et-col {
-	.for(@col-variants); .-each(@variant){
-		@a: extract(@variant, 1);
-		&-@{a} {
-			width: extract(@variant, 2);
-			margin: 0 @et-col-margin;
-		}
-	}
-}
-
-@directions: column ~"-col", row ~"-row";
-@wraps: wrap ~"-wrap", nowrap ~"";
-@justifies: flex-start ~"",flex-start ~"-start", flex-end ~"-end", center ~"-center", space-between ~"-between", space-around ~"-around";
-.flex {
-	.for(@directions); .-each(@direction){
-		.for(@wraps); .-each(@wrap){
-			.for(@justifies); .-each(@justify){
-				@dir1: extract(@direction, 1); @wr1: extract(@wrap, 1); @just1: extract(@justify, 1);
-				@dir2: extract(@direction, 2); @wr2: extract(@wrap, 2); @just2: extract(@justify, 2);
-				&@{dir2}@{wr2}@{just2} { .flex( ~"@{dir1}", ~"@{wr1}", ~"@{just1}" ); }
-			}
-		}
-	}
-}
-
-
-.flex {
-	.for(2); .-each(@i){
-		&-r@{i} { order:  @i; }
-		&-l@{i} { order: -@i; }
-	}
-	
-	&-0 { order: 0; }
-	&-static { flex: 0 0 auto; }
-}
-
-
 #description {
 	background-color: #36a;
 }
@@ -80,4 +23,31 @@
 }
 #sponsors {
 	background-color: #719;
+}
+
+
+.container, .container-fluid {
+	position: relative;
+	font-size: 1rem;
+}
+
+.container {
+	width: 90%;
+	max-width: 1200px;
+}
+
+.container-fluid {
+	width: 100%;
+}
+
+@media (max-width: 599px){
+	.container {
+		font-size: 0.9rem;
+		width: 100%;
+	}
+}
+@media (max-width: 400px){
+	.container {
+		font-size: 0.8rem;
+	}
 }
