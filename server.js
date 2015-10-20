@@ -52,7 +52,12 @@ api.get('/news', function (req,res){
 })
 
 api.get('/user', function (req,res){
-	var user = mysql.get.user(null ,function (error, rows, fields){
+	var bruker = {
+		id:1,
+		fornavn:'Jørgen',
+		etternavn:'Holmefjord',
+		};
+	var user = mysql.get.user(bruker ,function (error, rows, fields){
 		console.log('yo...' + JSON.stringify(rows));
 		res.json(rows);
 	});	
