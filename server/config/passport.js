@@ -31,8 +31,14 @@ module.exports = function (passport){
 	User.prototype.findOrCreate = function(obj, callback) {
 			db.get.user(obj ,function (error, rows, fields){
 				if(!rows) {
-					//make user
-					console.log('make user');
+					db.get.adduser(obj,function(error, rows) {
+						if(error){
+							console.log(error);
+						} else {
+							callback(null,rows);
+						}
+					})
+					//console.log('make user');
 				} else {
 					callback(error,rows);
 				}

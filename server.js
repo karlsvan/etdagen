@@ -58,7 +58,7 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/api/user/'+req.user.username);
+    res.redirect('/api/user/'+req.user.id);
   });
 
 api.get('/news', function (req,res){
@@ -68,7 +68,7 @@ api.get('/news', function (req,res){
 	
 })
 
-api.get('/user/:username', function (req,res){
+api.get('/user/:userid', function (req,res){
 	res.json(req.user);
 })
 
