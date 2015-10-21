@@ -7,6 +7,7 @@ var express		= require('express'),
     bodyParser  = require('body-parser'),
 	favicon		= require('serve-favicon'),
 	mysql       = require('./server/mysql/mysql_functions.js'),
+	session     = require('express-session'),
 	passport    = require('passport');require('./server/config/passport.js')(passport);
 
 
@@ -38,6 +39,9 @@ app.use(logger('dev'));
 // Support parsing of json- and URL-encoded bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({ secret: 'GlennThaBaws' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 
@@ -54,7 +58,7 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/api/user/'+req.user.username);
   });
 
 api.get('/news', function (req,res){
@@ -64,15 +68,8 @@ api.get('/news', function (req,res){
 	
 })
 
-api.get('/user', function (req,res){
-	var bruker = {
-		id:1,
-		fornavn:'Jørgen',
-		etternavn:'Holmefjord',
-		};
-	var user = mysql.get.user(bruker ,function (error, rows, fields){
-		res.json(rows);
-	});	
+api.get('/user/:username', function (req,res){
+	res.json(req.user);
 })
 
 api.get('/company', function (req,res){

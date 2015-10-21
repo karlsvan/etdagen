@@ -37,18 +37,19 @@ module.exports.get = {
 	news: function(callback){
 		Query('SELECT * FROM nyheter', function (error, rows, fields){  
 		callback (error, rows, fields);
-		console.log('returning..' + JSON.stringify(rows));
 		});
 	},
 
 	user: function(userobj, callback){
 		var sql = 'SELECT * FROM bruker WHERE ';
 		for(var key in userobj){
+			console.log(key + ' | ' + userobj[key]);
 			sql += key + '=' + userobj[key] + ' AND ';
 		}
 		sql = sql.substring(0, sql.length-4); // get rid of last AND (or space if no more keys)
 		sql += 'LIMIT 2;';
 		// resulting sql: 'SELECT * FROM brukere WHERE [{key}={userobj.key},] LIMIT 2'
+		//console.log('sql: '+ sql);
 		Query(sql, function (error, rows, fields){
 			if(error){ callback(error); }
 			else {

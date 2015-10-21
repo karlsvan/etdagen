@@ -157,12 +157,27 @@ nav#et-navbar .navbar-nav:hover {
 }
 /* endinject */
 /* inject:partials:less */
-.circular {
-  width: 300px;
-  height: 300px;
-  border-radius: 150px;
+.board-links {
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
 }
-.vcards {
+.board-cards-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.board-cards-container .board-cards {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -172,8 +187,9 @@ nav#et-navbar .navbar-nav:hover {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
+  max-width: 1500px;
 }
-.vcards .vcard {
+.board-cards-container .board-cards .board-card {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -185,27 +201,26 @@ nav#et-navbar .navbar-nav:hover {
   background-repeat: no-repeat;
   background-size: 7em;
   width: 300px;
-  margin: 10px;
-  padding: 2px;
+  margin: 0px;
+  padding: 0px;
 }
-.vcards .vcard .vcard-image {
+.board-cards-container .board-cards .board-card .board-card-image {
   height: 80px;
   width: 80px;
   border-radius: 50%;
   background-size: cover;
-  margin: 0px 10px;
+  margin: 10px 20px;
   border: 1px solid #a03033;
 }
-.vcards .vcard span {
+.board-cards-container .board-cards .board-card a {
+  text-decoration: none;
+  color: #a03033;
+}
+.board-cards-container .board-cards .board-card name {
   font-weight: bold;
 }
-.paginator {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+#board-background {
+  background-color: #ef5350;
 }
 @media (max-width: 400px) {
   #page-companies .md-display-1 {
@@ -224,6 +239,37 @@ nav#et-navbar .navbar-nav:hover {
 }
 #page-companies .company-widget:first-of-type {
   border-top: none;
+}
+.login-container {
+  margin: 0 auto;
+  padding: 50px 0;
+  max-width: 300px;
+  text-align: center;
+}
+.login-container .login-btn-group-vertical > .btn {
+  margin: 2px 0;
+}
+.login-container .login-header {
+  margin: 25px 0 5px 0;
+}
+.login-container .login-content {
+  padding: 15px 5px;
+}
+.login-container .login-separator {
+  margin: 15px 0;
+}
+.login-container .login-separator:before,
+.login-container .login-separator:after {
+  background-color: #aaa;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 40%;
+}
+.login-container .login-separator > .separator-text {
+  padding: 0 15px;
 }
 .video-wrapper {
   position: relative;
@@ -292,37 +338,6 @@ nav#et-navbar .navbar-nav:hover {
     background-position: 100% 50%;
     padding: 3% 0;
   }
-}
-.login-container {
-  margin: 0 auto;
-  padding: 50px 0;
-  max-width: 300px;
-  text-align: center;
-}
-.login-container .login-btn-group-vertical > .btn {
-  margin: 2px 0;
-}
-.login-container .login-header {
-  margin: 25px 0 5px 0;
-}
-.login-container .login-content {
-  padding: 15px 5px;
-}
-.login-container .login-separator {
-  margin: 15px 0;
-}
-.login-container .login-separator:before,
-.login-container .login-separator:after {
-  background-color: #aaa;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 40%;
-}
-.login-container .login-separator > .separator-text {
-  padding: 0 15px;
 }
 /* endinject */
 

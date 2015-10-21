@@ -5,6 +5,7 @@
 var db 				= require('../mysql/mysql_functions')
 	, localStrategy	= require('passport-local').Strategy,
 	FacebookStrategy = require('passport-facebook').Strategy;
+	//User = require('./user.js');
 
 
 module.exports = function (passport){
@@ -26,46 +27,19 @@ module.exports = function (passport){
 		passwordField: 'password',
 		passReqToCallback: false	// might use true
 	}
-
-	function User()  {
-		this.properties = {
-		 id:null
-		,fornavn:null
-		,etternavn:null
-		,tlf:null
-		,email:null
-		,facebookId:null
-		,bedriftid:null
-		,status:null
-		,inaktiv:null
-		,password:null
-		,username:null
-		,salt:null
-		,email_optout:null
-		,adresse:null
-		,nasjonalitet:null
-		,utgangsaar:null
-		,linje:null
-		,fodselsdato:null
-		,registrert:null
-		,endret:null};
-		this.findOrCreate = function(obj, callback) {
+	function User() {}
+	User.prototype.findOrCreate = function(obj, callback) {
 			db.get.user(obj ,function (error, rows, fields){
 				if(!rows) {
 					//make user
 					console.log('make user');
 				} else {
-					/*
-					for (var i = 0; i <= rows.length-1; i++) {
-						this[rows[i][0]] = rows[i][1];
-					};*/
-					this.properties = JSON.stringify(rows);
-					console.log('user: '+ JSON.stringify(rows));
-					callback(error,this);
+					callback(error,rows);
 				}
 			});
-		}
-	}
+		};
+
+
 
 	// ========== Passport strategies ==========
 	// ET-login : Login with the ET-user
@@ -106,11 +80,11 @@ module.exports = function (passport){
   },
   function(accessToken, refreshToken, profile, done) {
   	console.log('face:..' + profile.id);
-  	var User = new User();
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-      return done(err, user);
+  	var Usr = new User();
+    Usr.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    	return done(err, user);
     });
-    console.log('user2: ' + JSON.stringify(User));
+
   }
 ));
 };
