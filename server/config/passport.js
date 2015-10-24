@@ -2,11 +2,11 @@
 
 // ========== Passport dependencies ==========
 // Passport uses the mysql_functions to query the database and different strategies for authentication.
-var db 				= require('../mysql/mysql_functions')
-	, localStrategy	= require('passport-local').Strategy,
-	FacebookStrategy = require('passport-facebook').Strategy;
-	//User = require('./user.js');
-
+var db 				 = require('../mysql/mysql_functions'), 
+	LocalStrategy	 = require('passport-local').Strategy,
+	FacebookStrategy = require('passport-facebook').Strategy,
+	auth             = require('passport-local-authenticate'),
+	sha              = require('./sha1.js');
 
 module.exports = function (passport){
 
@@ -29,7 +29,7 @@ module.exports = function (passport){
 	}
 	function User() {}
 	User.prototype.findOrCreate = function(obj, callback) {
-			db.get.user(obj ,function (error, rows, fields){
+			db.get.user({facebookId:obj.facebookId} ,function (error, rows){
 				if(!rows) {
 					db.get.adduser(obj,function(error, rows) {
 						if(error){
@@ -45,49 +45,58 @@ module.exports = function (passport){
 			});
 		};
 
+	User.prototype.findOne = function(obj, callback) {
+		db.get.user(obj, function (error, user) {
+			if(!user){
+				//bruker finnes ikke
+				console.log('fant ikke bruker');
+				callback(error,user);
+			} else {
+				//console.log('user: '+JSON.stringify(user));
+				callback(error, user);
+			}
+		})
+	};
+
 
 
 	// ========== Passport strategies ==========
 	// ET-login : Login with the ET-user
-	passport.use('et-login', new localStrategy(passportStrategyOptions,	function (username, password, done){
-		//---------- midlertidig -----------
-		if(username === password){ return done(null, {username: username, password: password}); }
-		else return done(null, false, {message: 'Incorrect username or password.'});
-		//----------
-
-		// attemt to find user
-		// if no single user exists -> error
-		// else log in user
-		// mysql_functions.get.user({username: username}, function (error, user){
-		// 	if(error){ done(error); }
-		// 	else {
-		// 		if(!user){ done(null, false, {message: 'Username or password is invalid'}); }
-		// 		else {
-		// 			done(null, user);
-		// 		}
-		// 	}
-		// });
-	}));
-
-
-
-	passport.use('et-signup', new localStrategy(passportStrategyOptions, function (username, password, done){
-		// attempt to find user
-		// if user already exists -> error
-		// else create new user and log in
-	}));
+	passport.use(new LocalStrategy(
+	  function(username, password, done) {
+	  	var Usr = new User();
+	    Usr.findOne({ username: username }, function (err, user) {
+	      if (err) { return done(err); }
+	      if (!user) { 
+	      	//fant ikke bruker, bør gi beskjed
+	      	return done(null, false); 
+	      } else{
+	      		if (user.id < 500) {
+				    if (user.password != sha.sha1(password+user.salt) ) { 
+				      	console.log('FAIL!!!');
+				      	return done(null, false); 
+				    }
+				    console.log('SUCSESS§§');
+				    return done(null, user);
+				} else {
+					//ny crypto kommer
+				}
+		  }
+	    });
+	  }
+	));
 
 
 	passport.use(new FacebookStrategy({
     clientID: '449983121860985',
     clientSecret: '592186645310e89533f50f3afa1b7535',
     callbackURL: "http://localhost:3000/auth/facebook/callback",
-    enableProof: false
+    enableProof: false,
+    profileFields: ['id', 'name', 'emails']
   },
   function(accessToken, refreshToken, profile, done) {
-  	console.log('face:..' + profile.id);
   	var Usr = new User();
-    Usr.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    Usr.findOrCreate({ facebookId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }, function (err, user) {
     	return done(err, user);
     });
 

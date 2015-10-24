@@ -44,7 +44,7 @@ module.exports.get = {
 		var sql = 'SELECT * FROM bruker WHERE ';
 		for(var key in userobj){
 			//console.log(key + ' | ' + userobj[key]);
-			sql += key + '=' + userobj[key] + ' AND ';
+			sql += key + '="' + userobj[key] + '" AND ';
 		}
 		sql = sql.substring(0, sql.length-4); // get rid of last AND (or space if no more keys)
 		sql += 'LIMIT 2;';
@@ -83,7 +83,7 @@ module.exports.get = {
 				callback(null,rows[0]);
 			}
 		})
-		console.log('sql: '+ sql);
+		//console.log('sql: '+ sql);
 	},
 
 	company: function(callback){

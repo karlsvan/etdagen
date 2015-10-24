@@ -52,13 +52,20 @@ app.get('/', function (req ,res){
 });
 
 app.get('/auth/facebook',
-  passport.authenticate('facebook'));
+  passport.authenticate('facebook',{ scope: 'email'}));
 
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  passport.authenticate('facebook', { failureRedirect: '/#/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
+    console.log('session: '+JSON.stringify(req.session));
     res.redirect('/api/user/'+req.user.id);
+  });
+
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/api/user/'+req.user.username);
   });
 
 api.get('/news', function (req,res){
