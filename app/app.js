@@ -57,6 +57,11 @@
  	      url: '/register',
  	      templateUrl: 'partials/register/register.html',
  	      controller: 'RegisterCtrl'
+ 	    })
+ 	    .state('contact',{
+ 	    	url: '/contact',
+ 	    	templateUrl: 'partials/contact/contact.html',
+ 	    	controller: 'ContactCtrl as contact'
  	    });
 
  	    $mdThemingProvider.theme('default')

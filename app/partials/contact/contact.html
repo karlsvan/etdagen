@@ -1,0 +1,26 @@
+<div id="page-contact" class="container-fluid" flex="column">
+	<section>
+		generell info
+	</section>
+	<section class="container-fluid md-whiteframe-1dp" style="background: #eee; padding: 20px 0" layout="column" layout-align="center center">
+		<div class="container" layout="column" layout-align="start center">
+			<div layout-gt-sm="row" layout="column" layout-align="center center" ng-repeat="person in contact.boards.y16" layout-padding ng-cloak>
+				<div layout="column" layout-align="center center" style="width: 10em;" flex="none">
+					<img ng-src="/assets/images/boards/{{person.img}}" alt="" width="100" layout-fill>
+				</div>
+				<div layout="column" layout-margin layout-padding>
+					<div class="md-headline">{{person.position.title}}</div>
+					<div class="md-body-1" layout-sm="column" layout="row">
+						<div style="padding-right: 1em;">{{person.name}}</div>
+						<a ng-href="mailto:{{person.mail}}" style="padding-right: 1em;" ng-if="person.mail"><i class="fa fa-envelope"></i> {{person.mail}}</a>
+						<div style="padding-right: 1em;" ng-if="person.phone"><i class="fa fa-phone"></i> {{person.phone}}</div>
+					</div>
+					<p class="md-body-1">{{person.position.description}}</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section layout="row" layout-align="end center">
+		<h2 class="md-display-1">Se tidligere styrer her <i class="fa fa-arrow-right"></i></h2>
+	</section>
+</div>
