@@ -66,9 +66,11 @@
 
  	    $mdThemingProvider.theme('default')
  	    	.primaryPalette('red')
- 	    	.accentPalette('grey')
- 	    	.warnPalette('amber')
- 	    	.backgroundPalette('blue-grey');
+ 	    	.accentPalette('brown')
+ 	    	.warnPalette('yellow')
+ 	    	.backgroundPalette('grey', {
+ 	    		'hue-1': '200',
+ 	    	});
  	}
  	configure.$inject = ['$stateProvider', '$urlRouterProvider', '$mdThemingProvider'];
 })();

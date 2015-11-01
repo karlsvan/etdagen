@@ -12,9 +12,12 @@
 	.controller('ContactCtrl', ContactCtrl);
 
 	/*@ngInject*/
-	function ContactCtrl(BoardService) {
+	function ContactCtrl(BoardService, $scope, $mdToast) {
 		this.boards = BoardService.boards;
+		this.sendMail = function($event){
+			alert($scope.form.name);
+		};
 	}
-	ContactCtrl.$inject = ['BoardService'];
+	ContactCtrl.$inject = ['BoardService', '$scope', '$mdToast'];
 })();
 

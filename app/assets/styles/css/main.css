@@ -253,6 +253,18 @@ nav#et-navbar .navbar-nav:hover {
   width: 500px;
   height: 400px;
 }
+.circular {
+  border-radius: 50%;
+  overflow: hidden;
+}
+.circular-200 {
+  width: 200px;
+  height: 200px;
+}
+.facebook-link {
+  color: #133783;
+  font-weight: 900;
+}
 .video-wrapper {
   position: relative;
   padding-bottom: 56.25%;
