@@ -1,26 +1,63 @@
 <div id="page-contact" class="container-fluid" flex="column">
-	<section>
-		generell info
-	</section>
-	<section class="container-fluid md-whiteframe-1dp" style="background: #eee; padding: 20px 0" layout="column" layout-align="center center">
-		<div class="container" layout="column" layout-align="start center">
-			<div layout-gt-sm="row" layout="column" layout-align="center center" ng-repeat="person in contact.boards.y16" layout-padding ng-cloak>
-				<div layout="column" layout-align="center center" style="width: 10em;" flex="none">
-					<img ng-src="/assets/images/boards/{{person.img}}" alt="" width="100" layout-fill>
+
+	<section class="container-fluid" layout="column" layout-align="center center">
+		<div class="container" layout="row" layout-align="center center" layout-wrap>
+			<div layout="column" ng-repeat="person in contact.boards.y16" style="margin: 1em 2em;">
+				<div style="border-radius: 50%; overflow: hidden; width:200px; height: 200px; position: relative;">
+					<img ng-src="/assets/images/boards/{{person.img}}" width="100%">
 				</div>
-				<div layout="column" layout-margin layout-padding>
-					<div class="md-headline">{{person.position.title}}</div>
-					<div class="md-body-1" layout-sm="column" layout="row">
-						<div style="padding-right: 1em;">{{person.name}}</div>
-						<a ng-href="mailto:{{person.mail}}" style="padding-right: 1em;" ng-if="person.mail"><i class="fa fa-envelope"></i> {{person.mail}}</a>
-						<div style="padding-right: 1em;" ng-if="person.phone"><i class="fa fa-phone"></i> {{person.phone}}</div>
-					</div>
-					<p class="md-body-1">{{person.position.description}}</p>
-				</div>
+				<div class="md-headline">{{person.position.title}}</div>
+				<div class="md-body-1">{{person.name}}</div>
+				<a ng-href="mailto:{{person.mail}}" style="padding-right: 1em;" ng-if="person.mail"><i class="fa fa-envelope"></i> {{person.mail}}</a>
+				<div style="padding-right: 1em;" ng-if="person.phone"><i class="fa fa-phone"></i> {{person.phone}}</div>
 			</div>
 		</div>
 	</section>
-	<section layout="row" layout-align="end center">
-		<h2 class="md-display-1">Se tidligere styrer her <i class="fa fa-arrow-right"></i></h2>
+
+	<section id="section-contact" class="container-fluid md-whiteframe-2dp" layout="column" layout-align="center center">
+		<div class="container" layout-gt-md="row" layout="column" layout-align="center center">
+			<div flex layout="column" layout-align="center center">
+				Send oss en melding
+			</div>
+			<form flex-gt-md="40" style="padding: 0 20px;" layout-fill>
+				<md-input-container>
+				    <label>Navn/Firma</label>
+				    <input ng-model="user.title">
+				</md-input-container>
+				<md-input-container>
+				    <label>E-post</label>
+				    <input ng-model="user.email">
+				</md-input-container>
+				<md-input-container>
+				    <label>Melding</label>
+					<textarea ng-model="user.biography" columns="5" md-maxlength="500" style="min-height:200px;"></textarea>
+				</md-input-container>
+				<md-button class="md-primary md-raised" layout-fill style="margin: 0;">Send</md-button>
+			</form>
+		</div>
 	</section>
+
+	<section class="container-fluid" layout="column" layout-align="center center">
+		<div class="container" layout="row" layout-sm="column" layout-margin style="margin-top: 3em;">
+				<div layout="column" layout-margin flex>
+					<div class="md-headline">Besøksadresse</div>
+					<p class="md-body-1">Elektrobygget <br/> NTNU Gløshaugen <br/> O. S. Bragstads plass 2 <br/> 7034 Trondheim</p>
+				</div>
+				<div layout="column" layout-margin flex>
+					<div class="md-headline">Postadresse</div>
+					<p class="md-body-1">E&amp;T-dagen {{app.year}} <br/> NTNU Gløshaugen <br/> Elektrobygget <br/> 7491 Trondheim</p>
+				</div>
+				<div layout="column" layout-margin flex>
+					<div class="md-headline">Vareadresse</div>
+					<p class="md-body-1">Varemottaket <br/> NTNU Gløshaugen <br/> Sem Sælandsvei 13 <br/> 7034 Trondheim</p>
+				</div>
+			</div>
+	</section>
+
+	<section class="container-fluid" style="height: 450px;">
+		<iframe src="https://www.google.com/maps/d/embed?mid=zXtiyoEUQ-X0.k5wZPFjwCM70" width="100%" height="100%"></iframe>
+	</section>
+
+
+
 </div>

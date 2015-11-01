@@ -245,6 +245,14 @@ nav#et-navbar .navbar-nav:hover {
 #page-companies .company-widget:first-of-type {
   border-top: none;
 }
+#page-contact #section-contact {
+  background-color: #eee;
+  padding: 5em 0;
+}
+#googlemaps {
+  width: 500px;
+  height: 400px;
+}
 .video-wrapper {
   position: relative;
   padding-bottom: 56.25%;

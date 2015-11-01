@@ -18,7 +18,7 @@
 					{ state: 'home', icon: 'fa-newspaper-o', name: 'Hjem' },
 					{ state: 'about', icon: 'fa-info', name: 'Informasjon' },
 					{ state: 'companies', icon: 'fa-building-o', name: 'Bedrifter' },
-					{ state: 'board', icon: 'fa-users', name: 'Styret' }
+					{ state: 'contact', icon: 'fa-users', name: 'Kontakt' }
 
 				],
 				side: [

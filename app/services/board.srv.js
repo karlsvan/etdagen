@@ -15,35 +15,35 @@
 	  	var positions = {
 	  		leader: {
 	  			title: 'Leder',
-	  			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea dignissimos est, hic itaque consectetur at quasi, earum fugiat qui laboriosam quis eveniet, labore inventore molestias! Repellendus consequuntur nobis accusamus ducimus.'
+	  			description: 'Har ansvaret for øvrige hendvendelser.'
 	  		},
 	  		deputy: {
 	  			title: 'Nestleder',
-	  			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima beatae distinctio harum debitis veniam impedit expedita vel esse dolorem numquam laboriosam repellendus sed doloremque, quae modi incidunt iure reiciendis odit.'
+	  			description: 'Har ansvaret for øvrige hendvendelser'
 	  		},
 	  		it: {
 	  			title: 'IT-ansvarlig',
-	  			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo quis ab nam, facere voluptas. Ipsam ut obcaecati temporibus adipisci. Repudiandae voluptates exercitationem earum, dolore atque, ipsam ex consequatur aspernatur vitae.'
+	  			description: 'Har ansvaret for nettsiden og CV-database.'
 	  		},
 	  		marketing: {
 	  			title: 'Markedsføring',
-	  			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae a iste error maxime cum illum sint rerum pariatur quis magni quod placeat ullam, officia, dolore id assumenda beatae in, commodi.'
+	  			description: 'Har ansvaret for promotering av E&T-dagen. Ønsker om å være med i årets promoteringvideo meldes her.'
 	  		},
 	  		logistics: {
 	  			title: 'Logistikk',
-	  			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur explicabo dicta voluptas dolor cupiditate voluptates assumenda minus consectetur suscipit temporibus esse, minima amet qui nam, fuga culpa facilis quae!'
+	  			description: 'Har ansvaret for logistikk under arrangementet. Kan kontaktes angående utstyr og annet.'
 	  		},
 	  		economy: {
 	  			title: 'Økonomi',
-	  			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis, et iure assumenda a voluptatibus magnam aspernatur voluptas. Officiis vitae possimus cum necessitatibus, quas, omnis tenetur sint commodi enim esse, dolor.'
+	  			description: 'Har ansvaret for økonomi'
 	  		},
 	  		business: {
 	  			title: 'Bedriftskontakt',
-	  			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus cupiditate ratione consectetur, saepe obcaecati fuga, rerum sint, quibusdam in, maiores velit vitae illo! Vitae impedit at nam magnam magni doloremque?'
+	  			description: 'Har ansvaret for bedrifter.'
 	  		},
 	  		travel: {
 	  			title: 'Turansvarlig',
-	  			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium sequi aspernatur quam sunt quidem modi omnis dolorum quod fugit corporis! Sunt assumenda minus, saepe cum distinctio deserunt beatae, inventore magni?'
+	  			description: 'Har ansvaret for klasseturen.'
 	  		}
 
 	  	};
