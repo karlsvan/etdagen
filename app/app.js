@@ -62,6 +62,11 @@
  	    	url: '/contact',
  	    	templateUrl: 'partials/contact/contact.html',
  	    	controller: 'ContactCtrl as contact'
+ 	    })
+      .state('profile', {
+ 	      url: '/profile',
+ 	      templateUrl: 'partials/profile/profile.html',
+ 	      controller: 'ProfileCtrl'
  	    });
 
  	    $mdThemingProvider.theme('default')
