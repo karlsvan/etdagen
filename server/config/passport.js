@@ -38,7 +38,6 @@ module.exports = function (passport){
 							callback(null,rows);
 						}
 					})
-					//console.log('make user');
 				} else {
 					callback(error,rows);
 				}
@@ -56,6 +55,10 @@ module.exports = function (passport){
 				callback(error, user);
 			}
 		})
+	};
+
+	User.prototype.adduser = function(obj, callback) {
+
 	};
 
 
@@ -79,7 +82,15 @@ module.exports = function (passport){
 				    console.log('SUCSESS§§');
 				    return done(null, user);
 				} else {
-					//ny crypto kommer
+					auth.verify(password,{hash:user.password,salt:user.salt},function(err,verified){
+						if(verified){
+							console.log('SUCSESS§§');
+							return done(null, user);
+						} else {
+							console.log('FAIL!!');
+				      		return done(null, false);
+						}
+					});
 				}
 		  }
 	    });

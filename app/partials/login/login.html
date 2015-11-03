@@ -9,21 +9,8 @@
 		<div class="login-separator"><span class="separator-text">eller</span></div>
 
 		<h4 class="login-header">Logg inn med E&amp;T-konto</h4>
-		<form action="/login" method="post">
-    <div>
-        <label>Username:</label>
-        <input type="text" name="username"/>
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
-    </div>
-    <div>
-        <input type="submit" value="Log In"/>
-    </div>
-	</form>
-<!--
-		<form class="flex-col login-content" ng-submit="LOGIN.login(credentials)">
+
+		<form name="loginForm" class="flex-col login-content" ng-submit="login(credentials)">
 			<div class="form-group">
 			    <input class="form-control floating-label" id="focusedInput" type="text" placeholder="Epost" ng-model="credentials.username">
 			</div>
@@ -32,7 +19,7 @@
 			</div>
 			<button type="submit" class="btn btn-raised btn-primary">Logg inn</button>
 		</form>
--->
+
 		<div class="flex-row-between">
 			<a>Glemt Passord?</a>
 			<p>|</p>

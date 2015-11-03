@@ -54,9 +54,9 @@
  	      controller: 'LoginCtrl as LOGIN'
  	    })
  	    .state('register', {
- 	      url: '/register',
+ 	      url: '/register/:user',
  	      templateUrl: 'partials/register/register.html',
- 	      controller: 'RegisterCtrl'
+ 	      controller: 'RegisterCtrl as form'
  	    });
 
  	    $mdThemingProvider.theme('default')
