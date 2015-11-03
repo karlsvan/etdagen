@@ -39,7 +39,10 @@ app.use(logger('dev'));
 // Support parsing of json- and URL-encoded bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: 'GlennThaBaws' }));
+app.use(session({
+	resave: false,
+	saveUninitialized: false,
+	secret: 'GlennThaBaws'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -68,13 +71,11 @@ app.post('/login',
     	res.redirect('/#/register/'+req.user.username);
   });
 
-app.post('/register', 
+app.post('/register',
 	function (req,res) {
 		if(req.user){
-			console.log('yey');
 			res.redirect('/#/home');
 		} else {
-			console.log('hmmm');
 			passport.authenticate('local', { failureRedirect: '/login' },
   			function(req, res) {
     			res.redirect('/#/');
@@ -87,20 +88,20 @@ api.get('/news', function (req,res){
 	var news = mysql.get.news(function (error, rows, fields) {
 		res.jsonp(rows);
 	});
-})
+});
 
 api.get('/user', function (req,res){
 	res.json(req.user);
-})
+});
 
 api.get('/company', function (req,res){
 	//var comp = mysql.get.company();
 	var c = {
 		nome: 'Texasconductors',
 		status: 'cash'
-	}
+	};
 	res.json(c);
-})
+});
 app.all('/:path', function (req, res){ res.redirect('/#'+path); });
 
 app.use('/api',api);

@@ -9,10 +9,10 @@
 	 * Controller of the etApp
 	 */
 	angular.module('etApp')
-		.controller('etFooterCtrl', etFooterCtrl);
+		.controller('EtFooterCtrl', EtFooterCtrl);
 
 		/*@ngInject*/
-		function etFooterCtrl() {
+		function EtFooterCtrl() {
 
-		};
+		}
 })();
