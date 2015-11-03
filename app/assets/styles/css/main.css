@@ -227,28 +227,6 @@ nav#et-navbar .navbar-nav:hover {
 #board-background {
   background-color: #ef5350;
 }
-@media (max-width: 400px) {
-  #page-companies .md-display-1 {
-    font-size: 30px;
-    margin: 30px 0 5px 0;
-  }
-}
-@media (max-width: 350px) {
-  #page-companies .md-display-1 {
-    font-size: 25px;
-  }
-}
-#page-companies .company-widget {
-  padding: 20px 0;
-  border-top: 1px solid rgba(150, 150, 150, 0.4);
-}
-#page-companies .company-widget:first-of-type {
-  border-top: none;
-}
-#page-contact #section-contact {
-  background-color: #eee;
-  padding: 5em 0;
-}
 #googlemaps {
   width: 500px;
   height: 400px;
@@ -264,6 +242,12 @@ nav#et-navbar .navbar-nav:hover {
 .facebook-link {
   color: #133783;
   font-weight: 900;
+}
+.section-padding {
+  padding: 2em 10px;
+}
+.section-padding-2x {
+  padding: 4em 10px;
 }
 .video-wrapper {
   position: relative;
@@ -363,6 +347,24 @@ nav#et-navbar .navbar-nav:hover {
 }
 .login-container .login-separator > .separator-text {
   padding: 0 15px;
+}
+@media (max-width: 400px) {
+  #page-companies .md-display-1 {
+    font-size: 30px;
+    margin: 30px 0 5px 0;
+  }
+}
+@media (max-width: 350px) {
+  #page-companies .md-display-1 {
+    font-size: 25px;
+  }
+}
+#page-companies .company-widget {
+  padding: 20px 0;
+  border-top: 1px solid rgba(150, 150, 150, 0.4);
+}
+#page-companies .company-widget:first-of-type {
+  border-top: none;
 }
 /* endinject */
 

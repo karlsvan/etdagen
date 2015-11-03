@@ -71,6 +71,9 @@
  	    	.backgroundPalette('grey', {
  	    		'hue-1': '200',
  	    	});
+ 	    $mdThemingProvider.theme('formTheme')
+ 	    	.primaryPalette('red')
+ 	    	.warnPalette('deep-orange');
  	}
  	configure.$inject = ['$stateProvider', '$urlRouterProvider', '$mdThemingProvider'];
 })();

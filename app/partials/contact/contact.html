@@ -1,6 +1,6 @@
 <div id="page-contact" class="container-fluid" flex="column">
 
-	<section class="container-fluid" layout="column" layout-align="center center" style="padding: 2em 0;">
+	<section class="container-fluid section-padding" layout="column" layout-align="center center">
 		<div class="container" layout="row" layout-align="center center" layout-wrap>
 			<div layout="column" ng-repeat="person in contact.boards.y16" style="margin: 1em 2em;" layout-align="center center">
 				<div class="circular circular-200">
@@ -14,37 +14,37 @@
 		</div>
 	</section>
 
-	<section id="section-contact" class="container-fluid md-whiteframe-2dp" layout="column" layout-align="center center">
+	<section id="toastParent" class="container-fluid md-whiteframe-2dp section-padding-2x" layout="column" layout-align="center center" style="background: #eee;" md-theme="formTheme">
 		<div class="container" layout-gt-md="row" layout="column" layout-align="center center">
 			<div flex="50" layout="column" layout-align="center start" layout-padding>
 				<div class="md-title">Kontakt oss</div>
 				<p class="md-body-1">Hvis du har spørsmål eller andre hendvendelser angående Elektronikk- og Teknologidagen kan du sende oss en melding, så skal vi svare så fort som mulig. Du kan også ta kontakt på vår <a href="https://www.facebook.com/etdagen/" class="facebook-link">facebook</a> side. Der vil det bli lagt ut informasjon fortløpende.</p>
 				<p class="md-body-1">Vennligst fyll ut alle feltene</p>
 			</div>
-			<form flex-gt-md="40" style="padding: 0 20px;" layout-fill novalidate ng-submit="contact.sendMail()">
+			<form name="form" flex-gt-md="40" style="padding: 0 20px;" layout-fill novalidate ng-submit="contact.sendMail()">
 				<md-input-container>
 				    <label>Navn/Firma</label>
-				    <input ng-model="form.name">
+				    <input ng-model="form.name" required>
 				</md-input-container>
 				<md-input-container>
 				    <label>E-post</label>
-				    <input ng-model="form.email">
+				    <input type="email" ng-model="form.email" required>
 				</md-input-container>
 				<md-input-container>
 				    <label>Emne</label>
-				    <input ng-model="form.subject">
+				    <input ng-model="form.subject" required>
 				</md-input-container>
 				<md-input-container>
 				    <label>Melding</label>
-					<textarea ng-model="form.message" columns="5" md-maxlength="500" style="min-height:200px;"></textarea>
+					<textarea ng-model="form.message" columns="5" style="min-height:200px;" required></textarea>
 				</md-input-container>
 				<md-button class="md-primary md-raised" layout-fill style="margin: 0;">Send</md-button>
 			</form>
 		</div>
 	</section>
 
-	<section class="container-fluid" layout="column" layout-align="center center">
-		<div class="container" layout="row" layout-sm="column" layout-margin style="margin: 2em 0;">
+	<section class="container-fluid section-padding" layout="column" layout-align="center center">
+		<div class="container" layout="row" layout-sm="column" layout-margin>
 				<div layout="column" layout-margin flex layout-align="center center">
 					<div style="width: 200px;">
 						<div class="md-headline">Besøksadresse</div>
