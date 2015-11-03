@@ -259,6 +259,37 @@ nav#et-navbar .navbar-nav:hover {
 .section-padding-2x {
   padding: 4em 10px;
 }
+.login-container {
+  margin: 0 auto;
+  padding: 50px 0;
+  max-width: 300px;
+  text-align: center;
+}
+.login-container .login-btn-group-vertical > .btn {
+  margin: 2px 0;
+}
+.login-container .login-header {
+  margin: 25px 0 5px 0;
+}
+.login-container .login-content {
+  padding: 15px 5px;
+}
+.login-container .login-separator {
+  margin: 15px 0;
+}
+.login-container .login-separator:before,
+.login-container .login-separator:after {
+  background-color: #aaa;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 40%;
+}
+.login-container .login-separator > .separator-text {
+  padding: 0 15px;
+}
 .video-wrapper {
   position: relative;
   padding-bottom: 56.25%;

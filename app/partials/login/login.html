@@ -2,13 +2,27 @@
 	<div class="flex-col">
 		<h4 class="login-header">Logg inn til E&amp;T-dagen med</h4>
 		<div class="flex-col login-btn-group-vertical login-content" role="group">
-			<div class="btn btn-raised btn-rounded btn-primary btn-sm" disabled >Facebook</div>
+			<a class="btn btn-raised btn-rounded btn-primary btn-sm" href="localhost:3000/auth/facebook/" >Facebook</a>
 			<div class="btn btn-raised btn-rounded btn-warning btn-sm" disabled >Gmail</div>
 			<div class="btn btn-raised btn-rounded btn-info btn-sm" disabled>Feide</div>
 		</div>
 		<div class="login-separator"><span class="separator-text">eller</span></div>
 
 		<h4 class="login-header">Logg inn med E&amp;T-konto</h4>
+		<form action="/login" method="post">
+    <div>
+        <label>Username:</label>
+        <input type="text" name="username"/>
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" name="password"/>
+    </div>
+    <div>
+        <input type="submit" value="Log In"/>
+    </div>
+	</form>
+<!--
 		<form class="flex-col login-content" ng-submit="LOGIN.login(credentials)">
 			<div class="form-group">
 			    <input class="form-control floating-label" id="focusedInput" type="text" placeholder="Epost" ng-model="credentials.username">
@@ -18,7 +32,7 @@
 			</div>
 			<button type="submit" class="btn btn-raised btn-primary">Logg inn</button>
 		</form>
-
+-->
 		<div class="flex-row-between">
 			<a>Glemt Passord?</a>
 			<p>|</p>

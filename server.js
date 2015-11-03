@@ -5,7 +5,11 @@ var express		= require('express'),
 	path		= require('path'),
 	logger      = require('morgan'),
     bodyParser  = require('body-parser'),
-	favicon		= require('serve-favicon');
+	favicon		= require('serve-favicon'),
+	mysql       = require('./server/mysql/mysql_functions.js'),
+	session     = require('express-session'),
+	passport    = require('passport');require('./server/config/passport.js')(passport);
+
 
 // ========== Initialize and setup express app ==========
 var app 	= express();
@@ -35,13 +39,55 @@ app.use(logger('dev'));
 // Support parsing of json- and URL-encoded bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({ secret: 'GlennThaBaws' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 
 // ========== App routes ==========
+var api = express.Router();
 app.get('/', function (req ,res){
 	res.render('index', {title: 'E&T-dagen', year: 2016});
 });
-app.all('/:path', function (req, res){ res.redirect('/#'+path); });
 
+app.get('/auth/facebook',
+  passport.authenticate('facebook',{ scope: 'email'}));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/#/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    console.log('session: '+JSON.stringify(req.session));
+    res.redirect('/api/user/'+req.user.id);
+  });
+
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/api/user/'+req.user.username);
+  });
+
+api.get('/news', function (req,res){
+	var news = mysql.get.news(function (error, rows, fields) {
+		res.json(rows);
+	});
+	
+})
+
+api.get('/user/:userid', function (req,res){
+	res.json(req.user);
+})
+
+api.get('/company', function (req,res){
+	//var comp = mysql.get.company();
+	var c = {
+		nome: 'Texasconductors',
+		status: 'cash'
+	}
+	res.json(c);
+})
+
+app.all('/:path', function (req, res){ res.redirect('/#'+path); });
+app.use('/api',api);
 module.exports.app = app;

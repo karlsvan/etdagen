@@ -33,19 +33,23 @@ function Query(sql, callback){
 // ========== Exports ==========
 // 
 module.exports.get = {
+
 	news: function(callback){
-		Query('SELECT * FROM nyheter', function(error, rows, fields){ callback(error, rows); });
+		Query('SELECT * FROM nyheter', function (error, rows, fields){  
+		callback (error, rows, fields);
+		});
 	},
 
 	user: function(userobj, callback){
 		var sql = 'SELECT * FROM bruker WHERE ';
 		for(var key in userobj){
-			sql += key + '=' + userobj.key + ',';
+			//console.log(key + ' | ' + userobj[key]);
+			sql += key + '="' + userobj[key] + '" AND ';
 		}
-		sql = sql.substring(0, sql.length-1); // get rid of last comma (or space if no keys)
-		sql += ' LIMIT 2';
+		sql = sql.substring(0, sql.length-4); // get rid of last AND (or space if no more keys)
+		sql += 'LIMIT 2;';
 		// resulting sql: 'SELECT * FROM brukere WHERE [{key}={userobj.key},] LIMIT 2'
-
+		//console.log('sql: '+ sql);
 		Query(sql, function (error, rows, fields){
 			if(error){ callback(error); }
 			else {
@@ -56,5 +60,39 @@ module.exports.get = {
 				}
 			}
 		});
+	},
+
+	adduser: function(userobj, callback){
+		var sql = 'INSERT INTO bruker (';
+		for(var key in userobj) {
+			sql += key + ", ";
+		}
+		sql = sql.substring(0, sql.length-2);
+		sql += ") VALUES ("
+		for(var key in userobj) {
+			sql += "'" + userobj[key] + "',";
+		}
+		sql = sql.substring(0, sql.length-1);
+		sql += ");"
+		Query(sql, function (error, rows, fields){
+			if(error){ callback(error); }
+			else {
+				if(rows){
+				console.log('sucsess!?');
+				}
+				callback(null,rows[0]);
+			}
+		})
+		//console.log('sql: '+ sql);
+	},
+
+	company: function(callback){
+		var sql = 'SELECT * FROM bedrift';
+		Query(sql, function (error, rows, fields){ callback(error)});
 	}
 };
+
+
+
+
+
