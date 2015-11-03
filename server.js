@@ -39,7 +39,10 @@ app.use(logger('dev'));
 // Support parsing of json- and URL-encoded bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: 'GlennThaBaws' }));
+app.use(session({
+	resave: false,
+	saveUninitialized: false,
+	secret: 'GlennThaBaws'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -62,7 +65,7 @@ app.get('/auth/facebook/callback',
     res.redirect('/api/user/'+req.user.id);
   });
 
-app.post('/login', 
+app.post('/login',
   passport.authenticate('local', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/api/user/'+req.user.username);
@@ -72,7 +75,7 @@ api.get('/news', function (req,res){
 	var news = mysql.get.news(function (error, rows, fields) {
 		res.json(rows);
 	});
-	
+
 })
 
 api.get('/user/:userid', function (req,res){

@@ -12,8 +12,13 @@
 	  .controller('LoginCtrl', LoginCtrl);
 
 	  	/*@ngInject*/
-	  	function LoginCtrl(AuthService) {
-	      this.login = AuthService.login;
+	  	function LoginCtrl($scope, $http, $state) {
+	  		$scope.login = function(credentials){
+	  			$http.post('/login', credentials)
+	  				.then(function success(){
+	  					$state.go('register');
+	  				});
+	  		};
 	    }
 	    LoginCtrl.$inject = ['AuthService'];
 })();
