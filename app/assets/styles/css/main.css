@@ -85,13 +85,10 @@ a {
 /* inject:components:less */
 footer#et-footer {
   background-color: #333;
+  color: #999;
 }
 footer#et-footer > .container {
   margin: 0px auto;
-}
-div#et-footer-container a {
-  text-decoration: none;
-  color: #000;
 }
 nav#et-navbar {
   position: relative;
@@ -237,6 +234,24 @@ nav#et-navbar .navbar-nav:hover {
 #board-background {
   background-color: #ef5350;
 }
+@media (max-width: 400px) {
+  #page-companies .md-display-1 {
+    font-size: 30px;
+    margin: 30px 0 5px 0;
+  }
+}
+@media (max-width: 350px) {
+  #page-companies .md-display-1 {
+    font-size: 25px;
+  }
+}
+#page-companies .company-widget {
+  padding: 20px 0;
+  border-top: 1px solid rgba(150, 150, 150, 0.4);
+}
+#page-companies .company-widget:first-of-type {
+  border-top: none;
+}
 #googlemaps {
   width: 500px;
   height: 400px;
@@ -258,37 +273,6 @@ nav#et-navbar .navbar-nav:hover {
 }
 .section-padding-2x {
   padding: 4em 10px;
-}
-.login-container {
-  margin: 0 auto;
-  padding: 50px 0;
-  max-width: 300px;
-  text-align: center;
-}
-.login-container .login-btn-group-vertical > .btn {
-  margin: 2px 0;
-}
-.login-container .login-header {
-  margin: 25px 0 5px 0;
-}
-.login-container .login-content {
-  padding: 15px 5px;
-}
-.login-container .login-separator {
-  margin: 15px 0;
-}
-.login-container .login-separator:before,
-.login-container .login-separator:after {
-  background-color: #aaa;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 40%;
-}
-.login-container .login-separator > .separator-text {
-  padding: 0 15px;
 }
 .video-wrapper {
   position: relative;
@@ -388,24 +372,6 @@ nav#et-navbar .navbar-nav:hover {
 }
 .login-container .login-separator > .separator-text {
   padding: 0 15px;
-}
-@media (max-width: 400px) {
-  #page-companies .md-display-1 {
-    font-size: 30px;
-    margin: 30px 0 5px 0;
-  }
-}
-@media (max-width: 350px) {
-  #page-companies .md-display-1 {
-    font-size: 25px;
-  }
-}
-#page-companies .company-widget {
-  padding: 20px 0;
-  border-top: 1px solid rgba(150, 150, 150, 0.4);
-}
-#page-companies .company-widget:first-of-type {
-  border-top: none;
 }
 /* endinject */
 
