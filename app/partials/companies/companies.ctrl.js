@@ -25,7 +25,7 @@
 	  			SopraSteria: {name: 'Sopra Steria', logo: logoFolder+'sopra_steria.png'},
 	  			zenitel: {name: 'Zenitel', logo: null},
 	  			academicWork: {name: 'Academic Work', logo: logoFolder+'academic_work.png'},
-	  			arm: {name: 'ARM', logo: logoFolder+'arm.png'},
+	  			arm: {name: 'ARM', logo: logoFolder+'arm.gif'},
 	  			asc: {name: 'ASC', logo: logoFolder+'asc.png'},
 	  			autronica: {name: 'Autronica', logo: logoFolder+'autronica.png'},
 	  			brekkeStrand: {name: 'Brekke Strand', logo: logoFolder+'brekkestrand.gif'},
