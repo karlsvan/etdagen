@@ -83,6 +83,16 @@ a {
   }
 }
 /* inject:components:less */
+footer#et-footer {
+  background-color: #333;
+}
+footer#et-footer > .container {
+  margin: 0px auto;
+}
+div#et-footer-container a {
+  text-decoration: none;
+  color: #000;
+}
 nav#et-navbar {
   position: relative;
   font-size: 14px;
