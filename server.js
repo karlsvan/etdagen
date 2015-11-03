@@ -54,6 +54,7 @@ app.get('/', function (req ,res){
 	res.render('index', {title: 'E&T-dagen', year: 2016});
 });
 
+
 app.get('/auth/facebook',
   passport.authenticate('facebook',{ scope: 'email'}));
 
@@ -61,36 +62,47 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/#/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    console.log('session: '+JSON.stringify(req.session));
-    res.redirect('/api/user/'+req.user.id);
+    res.redirect('/#/register/'+req.user.fornavn);
   });
 
 app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/api/user/'+req.user.username);
+	passport.authenticate('local', { failureRedirect: '/login' }),
+	function(req, res) {
+    	res.redirect('/#/register/'+req.user.username);
   });
+
+app.post('/register',
+	function (req,res) {
+		if(req.user){
+			res.redirect('/#/home');
+		} else {
+			passport.authenticate('local', { failureRedirect: '/login' },
+  			function(req, res) {
+    			res.redirect('/#/');
+  			});
+		}
+	});
+
 
 api.get('/news', function (req,res){
 	var news = mysql.get.news(function (error, rows, fields) {
-		res.json(rows);
+		res.jsonp(rows);
 	});
+});
 
-})
-
-api.get('/user/:userid', function (req,res){
+api.get('/user', function (req,res){
 	res.json(req.user);
-})
+});
 
 api.get('/company', function (req,res){
 	//var comp = mysql.get.company();
 	var c = {
 		nome: 'Texasconductors',
 		status: 'cash'
-	}
+	};
 	res.json(c);
-})
-
+});
 app.all('/:path', function (req, res){ res.redirect('/#'+path); });
+
 app.use('/api',api);
 module.exports.app = app;
