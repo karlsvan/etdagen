@@ -1,0 +1,75 @@
+<div id="page-contact" class="container-fluid" flex="column">
+
+	<section class="container-fluid section-padding" layout="column" layout-align="center center">
+		<div class="container" layout="row" layout-align="center center" layout-wrap>
+			<div layout="column" ng-repeat="person in contact.boards.y16" style="margin: 1em 2em;" layout-align="center center">
+				<div class="circular circular-200">
+					<img ng-src="/assets/images/boards/{{person.img}}" width="100%">
+				</div>
+				<div class="md-headline">{{person.position.title}}</div>
+				<div class="md-body-1">{{person.name}}</div>
+				<a ng-href="mailto:{{person.mail}}" ng-if="person.mail"><i class="fa fa-envelope"></i> {{person.mail}}</a>
+				<div ng-if="person.phone"><i class="fa fa-phone"></i> {{person.phone}}</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="toastParent" class="container-fluid md-whiteframe-2dp section-padding-2x" layout="column" layout-align="center center" style="background: #eee;" md-theme="formTheme">
+		<div class="container" layout-gt-md="row" layout="column" layout-align="center center">
+			<div flex="50" layout="column" layout-align="center start" layout-padding>
+				<div class="md-title">Kontakt oss</div>
+				<p class="md-body-1">Hvis du har spørsmål eller andre hendvendelser angående Elektronikk- og Teknologidagen kan du sende oss en melding, så skal vi svare så fort som mulig. Du kan også ta kontakt på vår <a href="https://www.facebook.com/etdagen/" class="facebook-link">facebook</a> side. Der vil det bli lagt ut informasjon fortløpende.</p>
+				<p class="md-body-1">Vennligst fyll ut alle feltene</p>
+			</div>
+			<form name="form" flex-gt-md="40" style="padding: 0 20px;" layout-fill novalidate ng-submit="contact.sendMail()">
+				<md-input-container>
+				    <label>Navn/Firma</label>
+				    <input ng-model="form.name" required>
+				</md-input-container>
+				<md-input-container>
+				    <label>E-post</label>
+				    <input type="email" ng-model="form.email" required>
+				</md-input-container>
+				<md-input-container>
+				    <label>Emne</label>
+				    <input ng-model="form.subject" required>
+				</md-input-container>
+				<md-input-container>
+				    <label>Melding</label>
+					<textarea ng-model="form.message" columns="5" style="min-height:200px;" required></textarea>
+				</md-input-container>
+				<md-button class="md-primary md-raised" layout-fill style="margin: 0;">Send</md-button>
+			</form>
+		</div>
+	</section>
+
+	<section class="container-fluid section-padding" layout="column" layout-align="center center">
+		<div class="container" layout="row" layout-sm="column" layout-margin>
+				<div layout="column" layout-margin flex layout-align="center center">
+					<div style="width: 200px;">
+						<div class="md-headline">Besøksadresse</div>
+						<p class="md-body-1">Elektrobygget <br/> NTNU Gløshaugen <br/> O. S. Bragstads plass 2 <br/> 7034 Trondheim</p>
+					</div>
+				</div>
+				<div layout="column" layout-margin flex layout-align="center center">
+					<div style="width: 200px;">
+						<div class="md-headline">Postadresse</div>
+						<p class="md-body-1">E&amp;T-dagen {{app.year}} <br/> NTNU Gløshaugen <br/> Elektrobygget <br/> 7491 Trondheim</p>
+					</div>
+				</div>
+				<div layout="column" layout-margin flex layout-align="center center">
+					<div style="width: 200px;">
+						<div class="md-headline">Vareadresse</div>
+						<p class="md-body-1">Varemottaket <br/> NTNU Gløshaugen <br/> Sem Sælandsvei 13 <br/> 7034 Trondheim</p>
+					</div>
+				</div>
+			</div>
+	</section>
+
+	<section class="container-fluid" style="height: 450px;">
+		<iframe src="https://www.google.com/maps/d/embed?mid=zXtiyoEUQ-X0.k5wZPFjwCM70" width="100%" height="100%"></iframe>
+	</section>
+
+
+
+</div>

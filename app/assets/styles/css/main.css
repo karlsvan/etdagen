@@ -33,6 +33,11 @@ h4 {
 h5 {
   font-size: 1em !default;
 }
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
 #description {
   background-color: #36a;
 }
@@ -78,6 +83,13 @@ h5 {
   }
 }
 /* inject:components:less */
+footer#et-footer {
+  background-color: #333;
+  color: #999;
+}
+footer#et-footer > .container {
+  margin: 0px auto;
+}
 nav#et-navbar {
   position: relative;
   font-size: 14px;
@@ -240,36 +252,27 @@ nav#et-navbar .navbar-nav:hover {
 #page-companies .company-widget:first-of-type {
   border-top: none;
 }
-.login-container {
-  margin: 0 auto;
-  padding: 50px 0;
-  max-width: 300px;
-  text-align: center;
+#googlemaps {
+  width: 500px;
+  height: 400px;
 }
-.login-container .login-btn-group-vertical > .btn {
-  margin: 2px 0;
+.circular {
+  border-radius: 50%;
+  overflow: hidden;
 }
-.login-container .login-header {
-  margin: 25px 0 5px 0;
+.circular-200 {
+  width: 200px;
+  height: 200px;
 }
-.login-container .login-content {
-  padding: 15px 5px;
+.facebook-link {
+  color: #133783;
+  font-weight: 900;
 }
-.login-container .login-separator {
-  margin: 15px 0;
+.section-padding {
+  padding: 2em 10px;
 }
-.login-container .login-separator:before,
-.login-container .login-separator:after {
-  background-color: #aaa;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 40%;
-}
-.login-container .login-separator > .separator-text {
-  padding: 0 15px;
+.section-padding-2x {
+  padding: 4em 10px;
 }
 .video-wrapper {
   position: relative;
@@ -338,6 +341,37 @@ nav#et-navbar .navbar-nav:hover {
     background-position: 100% 50%;
     padding: 3% 0;
   }
+}
+.login-container {
+  margin: 0 auto;
+  padding: 50px 0;
+  max-width: 300px;
+  text-align: center;
+}
+.login-container .login-btn-group-vertical > .btn {
+  margin: 2px 0;
+}
+.login-container .login-header {
+  margin: 25px 0 5px 0;
+}
+.login-container .login-content {
+  padding: 15px 5px;
+}
+.login-container .login-separator {
+  margin: 15px 0;
+}
+.login-container .login-separator:before,
+.login-container .login-separator:after {
+  background-color: #aaa;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 40%;
+}
+.login-container .login-separator > .separator-text {
+  padding: 0 15px;
 }
 /* endinject */
 

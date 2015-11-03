@@ -56,14 +56,24 @@
  	    .state('register', {
  	      url: '/register/:user',
  	      templateUrl: 'partials/register/register.html',
- 	      controller: 'RegisterCtrl as form'
+ 	      controller: 'RegisterCtrl'
+ 	    })
+ 	    .state('contact',{
+ 	    	url: '/contact',
+ 	    	templateUrl: 'partials/contact/contact.html',
+ 	    	controller: 'ContactCtrl as contact'
  	    });
 
  	    $mdThemingProvider.theme('default')
  	    	.primaryPalette('red')
- 	    	.accentPalette('grey')
- 	    	.warnPalette('amber')
- 	    	.backgroundPalette('blue-grey');
+ 	    	.accentPalette('brown')
+ 	    	.warnPalette('yellow')
+ 	    	.backgroundPalette('grey', {
+ 	    		'hue-1': '200',
+ 	    	});
+ 	    $mdThemingProvider.theme('formTheme')
+ 	    	.primaryPalette('red')
+ 	    	.warnPalette('deep-orange');
  	}
  	configure.$inject = ['$stateProvider', '$urlRouterProvider', '$mdThemingProvider'];
 })();
