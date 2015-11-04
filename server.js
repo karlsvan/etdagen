@@ -8,8 +8,8 @@ var express		= require('express'),
 	favicon		= require('serve-favicon'),
 	mysql       = require('./server/mysql/mysql_functions.js'),
 	session     = require('express-session'),
+	mail        = require('./server/config/mail.js'),
 	passport    = require('passport');require('./server/config/passport.js')(passport);
-
 
 // ========== Initialize and setup express app ==========
 var app 	= express();
@@ -83,6 +83,15 @@ app.post('/register',
 		}
 	});
 
+app.post('/contact', function (req,res) {
+	mail.sendMail(req.body, function(error, info){
+		if(error){
+			res.status(500).send(error)
+		} else {
+			res.status(200).send(info);
+		}
+	});
+});
 
 api.get('/news', function (req,res){
 	var news = mysql.get.news(function (error, rows, fields) {
