@@ -40,9 +40,11 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <navbar style="z-index:100;"></navbar>
-        <div ui-view style="overflow: hidden;"></div>
-        <et-footer></et-footer>
+        <div layout="column" style="min-height: 100%;">
+            <navbar style="z-index:100;"></navbar>
+            <md-content ui-view style="overflow: hidden;" flex></md-content>
+            <et-footer></et-footer>
+        </div>
 
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

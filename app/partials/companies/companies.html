@@ -19,7 +19,7 @@
 		<div class="container-fluid" layout="column" layout-align="center center" style="background: rgba(255,255,255, 0.8);">
 			<div class="container" layout="column" layout-align="center center">
 				<div class="company-widget" layout-gt-sm="row" layout="column" layout-align-sm="center center" ng-repeat="company in pagecomp.companies.collaborators">
-					<md-button flex="none" style="width: 200px;" aria-label="toProfile{{company.name}}">
+					<md-button flex="none" style="width: 200px;" aria-label="toProfile{{company.name}}" ng-href="{{company.homepage}}">
 						<img ng-src="{{company.logo}}" alt="" layout-fill>
 					</md-button>
 					<div class="container container-padding">
@@ -33,7 +33,7 @@
 
 	<section class="container-fluid section-padding-2x" layout="column" layout-align="center center">
 		<div class="container" layout="row" layout-align="center center" layout-wrap>
-			<md-button ng-repeat="sponsor in pagecomp.companies.partners" aria-label="toProfile{{sponsor.name}}" style="height: 100px; width:150px; background: url({{sponsor.logo}}) center no-repeat; background-size: contain;">
+			<md-button ng-repeat="sponsor in pagecomp.companies.partners" aria-label="toProfile{{sponsor.name}}" style="height: 100px; width:150px; background: url({{sponsor.logo}}) center no-repeat; background-size: contain;" ng-href="{{sponsor.homepage}}">
 			</md-button>
 		</div>
 	</section>
