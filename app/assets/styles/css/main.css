@@ -82,6 +82,16 @@ a {
     font-size: 0.8rem;
   }
 }
+.container-padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.section-padding {
+  padding: 2em 10px;
+}
+.section-padding-2x {
+  padding: 4em 10px;
+}
 /* inject:components:less */
 footer#et-footer {
   background-color: #333;
@@ -267,12 +277,6 @@ nav#et-navbar .navbar-nav:hover {
 .facebook-link {
   color: #133783;
   font-weight: 900;
-}
-.section-padding {
-  padding: 2em 10px;
-}
-.section-padding-2x {
-  padding: 4em 10px;
 }
 .video-wrapper {
   position: relative;

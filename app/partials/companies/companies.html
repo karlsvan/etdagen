@@ -1,9 +1,6 @@
 <div id="page-companies" class="container-fluid" flex="column">
-	<section class="container-fluid" layout="column" layout-align="center center" style="padding: 3rem 0;" hide show-gt-md>
-		<h1 class="md-display-3">Samarbeidspartnere {{app.year}}</h1>
-	</section>
 
-	<section class="container-fluid" layout="column" layout-align="center center">
+	<!--<section class="container-fluid" layout="column" layout-align="center center">
 		<div class="container" layout="column" layout-align="center center">
 			<h3 class="md-display-1" flex="none">Hovedsamarbeidspartner</h3>
 			<div layout-gt-sm="row" layout="column" layout-align-sm="center center">
@@ -16,22 +13,28 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section>-->
 
-	<section style="height: 50px;"></section>
-
-	<section class="container-fluid" layout="column" layout-align="center center">
-		<div class="container" layout="column" layout-align="center center">
-			<h3 class="md-display-1" flex="none">Samarbeidspartnere</h3>
-			<div class="company-widget" layout-gt-sm="row" layout="column" layout-align-sm="center center" ng-repeat="company in pagecomp.companies.partners">
-				<md-button flex="none" style="width: 150px;" aria-label="Gå til ekstern side">
-					<img ng-src="{{company.logo}}" alt="" layout-fill>
-				</md-button>
-				<div style="padding: 0 10px;" class="container">
-					<h4 class="md-title">{{company.name}}</h4>
-					<span class="md-body-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero voluptate fugiat officia dolor fugit maxime, culpa, quam, rerum excepturi assumenda repudiandae amet unde, nam nesciunt? Ea dolore laborum a sed.</span>
+	<section class="container-fluid" style="background: url(/assets/images/backgrounds/eloptic.jpg) center no-repeat; background-size: cover;">
+		<div class="container-fluid" layout="column" layout-align="center center" style="background: rgba(255,255,255, 0.8);">
+			<div class="container" layout="column" layout-align="center center">
+				<div class="company-widget" layout-gt-sm="row" layout="column" layout-align-sm="center center" ng-repeat="company in pagecomp.companies.collaborators">
+					<md-button flex="none" style="width: 200px;" aria-label="toProfile{{company.name}}">
+						<img ng-src="{{company.logo}}" alt="" layout-fill>
+					</md-button>
+					<div class="container container-padding">
+						<div class="md-title title-padding">{{company.name}}</div>
+						<p class="md-body-1">{{company.description}}</p>
+					</div>
 				</div>
 			</div>
+		</div>
+	</section>
+
+	<section class="container-fluid section-padding-2x" layout="column" layout-align="center center">
+		<div class="container" layout="row" layout-align="center center" layout-wrap>
+			<md-button ng-repeat="sponsor in pagecomp.companies.partners" aria-label="toProfile{{sponsor.name}}" style="height: 100px; width:150px; background: url({{sponsor.logo}}) center no-repeat; background-size: contain;">
+			</md-button>
 		</div>
 	</section>
 </div>
