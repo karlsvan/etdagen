@@ -18,22 +18,28 @@
         var attendings = {
             neo: [
                 {year: 2016, type: types.collaborator},
-                {year: 2015, type: types.collaborator}
+                {year: 2015, type: types.collaborator},
+                {year: 2014, type: types.partner}
             ],
             cisco: [
-                {year: 2016, type: types.partner}
+                {year: 2016, type: types.partner},
+                {year: 2014, type: types.collaborator}
             ],
             kongsberg: [
-                {year: 2016, type: types.partner}
+                {year: 2016, type: types.partner},
+                {year: 2014, type: types.collaborator}
             ],
             nordic: [
-                {year: 2016, type: types.partner}
+                {year: 2016, type: types.partner},
+                {year: 2014, type: types.collaborator}
             ],
             siliconLabs: [
-                {year: 2016, type: types.partner}
+                {year: 2016, type: types.partner},
+                {year: 2014, type: types.collaborator}
             ],
             sopraSteria: [
-                {year: 2016, type: types.partner}
+                {year: 2016, type: types.partner},
+                {year: 2014, type: types.partner}
             ],
             zenitel: [
                 {year: 2016, type: types.partner}
@@ -42,19 +48,53 @@
                 {year: 2016, type: types.partner}
             ],
             qFree: [
-                {year: 2016, type: types.partner}
+                {year: 2016, type: types.partner},
+                {year: 2014, type: types.collaborator}
             ],
             microsoft: [
                 {year: 2016, type: types.partner}
             ],
             brekkeStrand: [
-                {year: 2016, type: types.partner}
+                {year: 2016, type: types.partner},
+                {year: 2014, type: types.partner}
             ],
             jernbaneverket: [
-                {year: 2015, type: types.collaborator}
+                {year: 2015, type: types.collaborator},
+                {year: 2014, type: types.partner}
             ],
             dataRespons: [
                 {year: 2015, type: types.collaborator}
+            ],
+            texas: [
+                {year: 2014, type: types.collaborator}
+            ],
+            hatteland: [
+                {year: 2014, type: types.partner}
+            ],
+            hittite: [
+                {year: 2014, type: types.partner}
+            ],
+            academicWork: [
+                {year: 2014, type: types.partner}
+            ],
+            autronica: [
+                {year: 2014, type: types.partner}
+            ],
+            norbit: [
+                {year: 2014, type: types.partner}
+            ],
+            zedge: [
+                {year: 2014, type: types.partner}
+            ],
+            ideas: [
+                {year: 2014, type: types.partner}
+            ],
+            arm: [
+                {year: 2014, type: types.collaborator}
+            ],
+            hifiklubben: [
+                {year: 2015, type: types.sponsor},
+                {year: 2014, type: types.sponsor}
             ]
         };
         var companies = {
