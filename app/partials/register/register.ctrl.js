@@ -25,7 +25,7 @@
   			});
 
   			$scope.register = function() {
-  				$http.post('/register', $scope.registerForm).then(function() {
+  				$http.post('/register', $scope.registerForm).then(function sucsessCB(response) {
   					$state.go('home');
   				});
 

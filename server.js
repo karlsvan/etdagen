@@ -9,6 +9,7 @@ var express		= require('express'),
 	mysql       = require('./server/mysql/mysql_functions.js'),
 	session     = require('express-session'),
 	mail        = require('./server/config/mail.js'),
+	User             = require('./server/config/user.js'),
 	passport    = require('passport');require('./server/config/passport.js')(passport);
 
 // ========== Initialize and setup express app ==========
@@ -54,7 +55,6 @@ app.get('/', function (req ,res){
 	res.render('index', {title: 'E&T-dagen', year: 2016});
 });
 
-
 app.get('/auth/facebook',
   passport.authenticate('facebook',{ scope: 'email'}));
 
@@ -62,11 +62,21 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/#/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/#/register/'+req.user.fornavn);
+		res.redirect('/#/register/'+req.user.username);
   });
 
+app.get('/auth/google',
+  passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+	res.redirect('/#/register/'+req.user.username);
+	});
+
 app.post('/login',
-	passport.authenticate('local', { failureRedirect: '/login' }),
+	passport.authenticate('local', { failureFlash: true }),
 	function(req, res) {
     	res.redirect('/#/register/'+req.user.username);
   });
@@ -74,12 +84,26 @@ app.post('/login',
 app.post('/register',
 	function (req,res) {
 		if(req.user){
-			res.redirect('/#/home');
+			//bruker finnes, oppdater
+			User.update(req.body, function(error, info) {
+				if(error) {
+					console.log(error);
+				} else {
+					console.log(info);
+				}
+			});
 		} else {
-			passport.authenticate('local', { failureRedirect: '/login' },
-  			function(req, res) {
-    			res.redirect('/#/');
-  			});
+			User.adduser(req.body, function(error,info) {
+				if (error) {
+					console.log('error: '+error);
+				} else {
+					res.status(200).send(info);
+				}
+			});
+			//passport.authenticate('local', { failureRedirect: '/login' },
+  			//function(req, res) {
+    		//	res.redirect('/#/');
+  			//});
 		}
 	});
 

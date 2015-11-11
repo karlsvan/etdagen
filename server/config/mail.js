@@ -23,8 +23,7 @@ module.exports = {
             subject: data.subject,
             text: 'Fra: ' + data.name + '\nMail: ' + data.email + '\nMelding: ' + data.message
         }
-		console.log('hit2');
-
+        
 		transporter.sendMail(mailOptions,function(error, info){
     		if(error){
         		callback(error,null);

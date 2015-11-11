@@ -83,13 +83,6 @@ a {
   }
 }
 /* inject:components:less */
-footer#et-footer {
-  background-color: #333;
-  color: #999;
-}
-footer#et-footer > .container {
-  margin: 0px auto;
-}
 nav#et-navbar {
   position: relative;
   font-size: 14px;
@@ -166,6 +159,13 @@ nav#et-navbar .navbar-nav:hover {
   nav#et-navbar > .container .navbar-nav > span {
     display: none;
   }
+}
+footer#et-footer {
+  background-color: #333;
+  color: #999;
+}
+footer#et-footer > .container {
+  margin: 0px auto;
 }
 /* endinject */
 /* inject:partials:less */
@@ -251,6 +251,37 @@ nav#et-navbar .navbar-nav:hover {
 }
 #page-companies .company-widget:first-of-type {
   border-top: none;
+}
+.login-container {
+  margin: 0 auto;
+  padding: 50px 0;
+  max-width: 300px;
+  text-align: center;
+}
+.login-container .login-btn-group-vertical > .btn {
+  margin: 2px 0;
+}
+.login-container .login-header {
+  margin: 25px 0 5px 0;
+}
+.login-container .login-content {
+  padding: 15px 5px;
+}
+.login-container .login-separator {
+  margin: 15px 0;
+}
+.login-container .login-separator:before,
+.login-container .login-separator:after {
+  background-color: #aaa;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 40%;
+}
+.login-container .login-separator > .separator-text {
+  padding: 0 15px;
 }
 #googlemaps {
   width: 500px;
@@ -341,37 +372,6 @@ nav#et-navbar .navbar-nav:hover {
     background-position: 100% 50%;
     padding: 3% 0;
   }
-}
-.login-container {
-  margin: 0 auto;
-  padding: 50px 0;
-  max-width: 300px;
-  text-align: center;
-}
-.login-container .login-btn-group-vertical > .btn {
-  margin: 2px 0;
-}
-.login-container .login-header {
-  margin: 25px 0 5px 0;
-}
-.login-container .login-content {
-  padding: 15px 5px;
-}
-.login-container .login-separator {
-  margin: 15px 0;
-}
-.login-container .login-separator:before,
-.login-container .login-separator:after {
-  background-color: #aaa;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 40%;
-}
-.login-container .login-separator > .separator-text {
-  padding: 0 15px;
 }
 /* endinject */
 
