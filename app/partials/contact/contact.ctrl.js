@@ -12,7 +12,7 @@
 	.controller('ContactCtrl', ContactCtrl);
 
 	/*@ngInject*/
-	function ContactCtrl(BoardService, $scope, $mdToast) {
+	function ContactCtrl(BoardService, $scope, $mdToast, $http) {
 		this.boards = BoardService.boards;
 
 		function clearForm(){
@@ -37,11 +37,16 @@
 			if(!$scope.form.$valid){
 				showToast('Vennligst fyll ut alle feltene');
 			} else {
-				showToast('Melding sendt');
-				clearForm();
+				$http.post('/contact', $scope.form).then(function sucsessCB(res) {
+					showToast('Melding sendt');
+					clearForm();  				
+				},function errorCB(res) {
+					showToast('Noe gikk galt')
+				});
+				
 			}
 		};
 	}
-	ContactCtrl.$inject = ['BoardService', '$scope', '$mdToast'];
+	ContactCtrl.$inject = ['BoardService', '$scope', '$mdToast', '$http'];
 })();
 
