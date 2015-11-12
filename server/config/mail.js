@@ -19,11 +19,11 @@ module.exports = {
 	sendMail: function(data, callback) {
         var mailOptions = {
             from: 'E&T-kontakt <kontakt@etdagen.no>',
-            to: 'glenn.floe.karlsen@gmail.com',
+            to: 'post@etdagen.no',
             subject: data.subject,
             text: 'Fra: ' + data.name + '\nMail: ' + data.email + '\nMelding: ' + data.message
-        }
-        
+        };
+
 		transporter.sendMail(mailOptions,function(error, info){
     		if(error){
         		callback(error,null);
@@ -34,4 +34,4 @@ module.exports = {
 
 	}
 
-}
+};
