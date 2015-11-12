@@ -1,6 +1,6 @@
 <nav id="et-navbar" class="md-whiteframe-2dp" role="navigation">
 	<div class="container">
-		<div class="brand"><img layout-fill src="../../assets/images/ETlogos/logo.svg" alt="E&amp;T-Dagen"></div>
+		<div class="brand"><img layout-fill src="../../assets/images/ETlogos/logo.svg" alt="E&amp;T-Dagen" ui-active="active" ui-sref="home" class="navbar-nav"></div>
 		<div class="navbar-nav" ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" md-ink-ripple="#a03033">
 			<i class="fa {{link.icon}}"></i><span> {{link.name}}</span>
 		</div>

@@ -93,6 +93,13 @@ a {
   padding: 4em 10px;
 }
 /* inject:components:less */
+footer#et-footer {
+  background-color: #333;
+  color: #999;
+}
+footer#et-footer > .container {
+  margin: 0px auto;
+}
 nav#et-navbar {
   position: relative;
   font-size: 14px;
@@ -170,13 +177,6 @@ nav#et-navbar .navbar-nav:hover {
     display: none;
   }
 }
-footer#et-footer {
-  background-color: #333;
-  color: #999;
-}
-footer#et-footer > .container {
-  margin: 0px auto;
-}
 /* endinject */
 /* inject:partials:less */
 .board-links {
@@ -244,6 +244,22 @@ footer#et-footer > .container {
 #board-background {
   background-color: #ef5350;
 }
+#googlemaps {
+  width: 500px;
+  height: 400px;
+}
+.circular {
+  border-radius: 50%;
+  overflow: hidden;
+}
+.circular-200 {
+  width: 200px;
+  height: 200px;
+}
+.facebook-link {
+  color: #133783;
+  font-weight: 900;
+}
 @media (max-width: 400px) {
   #page-companies .md-display-1 {
     font-size: 30px;
@@ -261,53 +277,6 @@ footer#et-footer > .container {
 }
 #page-companies .company-widget:first-of-type {
   border-top: none;
-}
-.login-container {
-  margin: 0 auto;
-  padding: 50px 0;
-  max-width: 300px;
-  text-align: center;
-}
-.login-container .login-btn-group-vertical > .btn {
-  margin: 2px 0;
-}
-.login-container .login-header {
-  margin: 25px 0 5px 0;
-}
-.login-container .login-content {
-  padding: 15px 5px;
-}
-.login-container .login-separator {
-  margin: 15px 0;
-}
-.login-container .login-separator:before,
-.login-container .login-separator:after {
-  background-color: #aaa;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 40%;
-}
-.login-container .login-separator > .separator-text {
-  padding: 0 15px;
-}
-#googlemaps {
-  width: 500px;
-  height: 400px;
-}
-.circular {
-  border-radius: 50%;
-  overflow: hidden;
-}
-.circular-200 {
-  width: 200px;
-  height: 200px;
-}
-.facebook-link {
-  color: #133783;
-  font-weight: 900;
 }
 .video-wrapper {
   position: relative;
@@ -376,6 +345,37 @@ footer#et-footer > .container {
     background-position: 100% 50%;
     padding: 3% 0;
   }
+}
+.login-container {
+  margin: 0 auto;
+  padding: 50px 0;
+  max-width: 300px;
+  text-align: center;
+}
+.login-container .login-btn-group-vertical > .btn {
+  margin: 2px 0;
+}
+.login-container .login-header {
+  margin: 25px 0 5px 0;
+}
+.login-container .login-content {
+  padding: 15px 5px;
+}
+.login-container .login-separator {
+  margin: 15px 0;
+}
+.login-container .login-separator:before,
+.login-container .login-separator:after {
+  background-color: #aaa;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 40%;
+}
+.login-container .login-separator > .separator-text {
+  padding: 0 15px;
 }
 /* endinject */
 

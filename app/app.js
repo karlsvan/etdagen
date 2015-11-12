@@ -43,21 +43,21 @@
  	      templateUrl: 'partials/companies/companies.html',
  	      controller: 'CompaniesCtrl as pagecomp'
  	    })
- 	    .state('board', {
- 	      url: '/board',
- 	      templateUrl: 'partials/board/board.html',
- 	      controller: 'BoardCtrl'
- 	    })
- 	    .state('login', {
- 	      url: '/login',
- 	      templateUrl: 'partials/login/login.html',
- 	      controller: 'LoginCtrl as LOGIN'
- 	    })
- 	    .state('register', {
- 	      url: '/register/:user',
- 	      templateUrl: 'partials/register/register.html',
- 	      controller: 'RegisterCtrl'
- 	    })
+ 	    // .state('board', {
+ 	    //   url: '/board',
+ 	    //   templateUrl: 'partials/board/board.html',
+ 	    //   controller: 'BoardCtrl'
+ 	    // })
+ 	    // .state('login', {
+ 	    //   url: '/login',
+ 	    //   templateUrl: 'partials/login/login.html',
+ 	    //   controller: 'LoginCtrl as LOGIN'
+ 	    // })
+ 	    // .state('register', {
+ 	    //   url: '/register/:user',
+ 	    //   templateUrl: 'partials/register/register.html',
+ 	    //   controller: 'RegisterCtrl'
+ 	    // })
  	    .state('contact',{
  	    	url: '/contact',
  	    	templateUrl: 'partials/contact/contact.html',
