@@ -63,10 +63,30 @@
  	    	templateUrl: 'partials/contact/contact.html',
  	    	controller: 'ContactCtrl as contact'
  	    })
-      .state('profile', {
+      .state('user', {
+ 	      url: '/user',
+        abstract: true,
+ 	      template: '<ui-view/>',
+ 	    })
+      .state('users', {
+ 	      url: '/users',
+        abstract: true,
+ 	      template: '<ui-view/>',
+ 	    })
+      .state('user.profile', {
  	      url: '/profile',
  	      templateUrl: 'partials/profile/profile.html',
  	      controller: 'ProfileCtrl'
+ 	    })
+      .state('users.students', {
+ 	      url: '/students',
+ 	      templateUrl: 'partials/students/students.html',
+ 	      controller: 'StudentsCtrl'
+ 	    })
+      .state('users.', {
+ 	      url: '/students',
+ 	      templateUrl: 'partials/students/students.html',
+ 	      controller: 'StudentsCtrl'
  	    });
 
  	    $mdThemingProvider.theme('default')
