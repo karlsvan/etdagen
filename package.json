@@ -9,8 +9,8 @@
   ],
   "private": true,
   "scripts": {
-    "start": "set \"NODE_ENV=production\" && nodemon ./server/bin/www",
-    "test": " set \"NODE_ENV=development\" && nodemon ./server/bin/www"
+    "start": "set \"NODE_ENV=production\" && node ./server/bin/www",
+    "test": " set \"NODE_ENV=development\" && node ./server/bin/www"
   },
   "dependencies": {
     "body-parser": "^1.13.3",
