@@ -7,9 +7,10 @@ var express		= require('express'),
     bodyParser  = require('body-parser'),
 	favicon		= require('serve-favicon'),
 	mysql       = require('./server/mysql/mysql_functions.js'),
-	session     = require('express-session'),
+	cookieSession = require('cookie-session'),
+	cookieParser = require('cookie-parser'), 
 	mail        = require('./server/config/mail.js'),
-	User             = require('./server/config/user.js'),
+	User        = require('./server/config/user.js'),
 	passport    = require('passport');require('./server/config/passport.js')(passport);
 
 // ========== Initialize and setup express app ==========
@@ -40,10 +41,13 @@ app.use(logger('dev'));
 // Support parsing of json- and URL-encoded bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({
-	resave: false,
-	saveUninitialized: false,
-	secret: 'GlennThaBaws'}));
+app.use(cookieSession({ 
+	name: 'user',
+	secret: 'GlennThaBaws',
+    cookie: {
+    	maxage: 1000
+  	}
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -78,6 +82,7 @@ app.get('/auth/google/callback',
 app.post('/login',
 	passport.authenticate('local', { failureFlash: true }),
 	function(req, res) {
+		req.sessionOptions.maxAge = 2*24*60*60*1000;
     	res.redirect('/#/register/'+req.user.username);
   });
 
@@ -124,6 +129,8 @@ api.get('/news', function (req,res){
 });
 
 api.get('/user', function (req,res){
+	console.log(req.session);
+	console.log(req.sessionOptions);
 	res.json(req.user);
 });
 

@@ -19,7 +19,7 @@ module.exports = function (passport){
 
 	// deserializeUser function takes the serialized user and finds the matching user in the database. User object is attached to req.user.
 	passport.deserializeUser(function (id, done){
-		db.get.user({id: id}, function (error, user){
+		User.findOne({id:id}, function (error, user){
 			done(error, user);
 		});
 	});
@@ -76,7 +76,7 @@ module.exports = function (passport){
 	passport.use(new FacebookStrategy({
     clientID: '449983121860985',
     clientSecret: '592186645310e89533f50f3afa1b7535',
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    callbackURL: "/auth/facebook/callback",
     enableProof: false,
     profileFields: ['id', 'name', 'emails']
   },

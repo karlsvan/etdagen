@@ -83,6 +83,13 @@ a {
   }
 }
 /* inject:components:less */
+footer#et-footer {
+  background-color: #333;
+  color: #999;
+}
+footer#et-footer > .container {
+  margin: 0px auto;
+}
 nav#et-navbar {
   position: relative;
   font-size: 14px;
@@ -159,13 +166,6 @@ nav#et-navbar .navbar-nav:hover {
   nav#et-navbar > .container .navbar-nav > span {
     display: none;
   }
-}
-footer#et-footer {
-  background-color: #333;
-  color: #999;
-}
-footer#et-footer > .container {
-  margin: 0px auto;
 }
 /* endinject */
 /* inject:partials:less */
