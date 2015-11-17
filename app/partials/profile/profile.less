@@ -1,3 +1,15 @@
+divi{
+	border-style: dashed;
+	border-width: thin;
+}
+
+.vertical-divider{
+	border-left: 1px solid #b71c1c;
+	height: 500px;
+	margin: 10px;
+	margin-right: 40px;
+}
+
 div#et-profile {
 	position: relative;
   background-color: #eee;
@@ -19,12 +31,11 @@ div#et-profile {
   border-radius: 50%;
   width: 240px;
   height: 240px;
-  margin: 10px;
+	margin: 10px;
+	margin-bottom: 20px;
 }
 
-#profile-basics{
-  width: 640px;
-}
+
 
 #profile-CV{
   position: absolute;
@@ -32,10 +43,30 @@ div#et-profile {
 }
 
 .profile-sidenav{
+	width: 150px;
 	ul{
 		list-style-type: none;
 		li{
 			margin-bottom: 5px;
 		}
+	}
+}
+
+.profile-basics-table{
+	line-height: 100%;
+	td{
+		vertical-align: top;
+	}
+	i{
+		opacity: 0.6;
+	}
+	span{
+		opacity: 0.5;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	#profile-container{
+		width: 1024px;
 	}
 }
