@@ -12,17 +12,17 @@
 		.controller('RegisterCtrl', RegisterCtrl);
 
 	  	/*@ngInject*/
-	  	function RegisterCtrl($scope, $http, $state) {
+	  	function RegisterCtrl($scope, $http, $state, UserService) {
 		    $scope.awesomeThings = [
 		      'HTML5 Boilerplate',
 		      'AngularJS',
 		      'Karma'
 		    ];
-		    $http.get('/api/user').then(function(res) {
-    			$scope.user = res.data;
-  			}, function() {
-  				$scope.user = {fornavn: 'error'};
-  			});
+
+		    $scope.$on('$stateChangeSuccess',
+		    	function(event, toState, toParams, fromState, fromParams){
+		    		$scope.user = UserService.returnUser();
+		    	})
 
   			$scope.register = function() {
   				$http.post('/register', $scope.registerForm).then(function sucsessCB(response) {
@@ -31,5 +31,5 @@
 
   			}
 		}
-		RegisterCtrl.$inject = ['$scope', '$http', '$state'];
+		RegisterCtrl.$inject = ['$scope', '$http', '$state', 'UserService'];
 })();

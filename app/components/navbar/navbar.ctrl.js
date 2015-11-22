@@ -12,7 +12,21 @@
 		.controller('NavbarCtrl', NavbarCtrl);
 
 		/*@ngInject*/
-		function NavbarCtrl($scope) {
+		function NavbarCtrl($scope,UserService) {
+			
+			var username = UserService.returnUser().username || 'LOL';
+			$scope.loggedIn = UserService.getLoggedIn() || 0;
+
+			$scope.$on('$stateChangeStart',
+		    	function(event, toState, toParams, fromState, fromParams){
+		    		if (UserService.getLoggedIn()){
+		    			username = UserService.returnUser().username;
+		    			$scope.loggedIn = UserService.getLoggedIn();
+		    		}
+		    	})
+			
+
+
 			this.links = {
 				main: [
 					{ state: 'home', icon: 'fa-newspaper-o', name: 'Hjem' },
@@ -22,13 +36,12 @@
 
 				],
 				side: [
-					{ state: 'login', icon: 'fa-sign-in', name: 'Logg inn' },
-					{ state: 'user', icon: 'fa-cog', name: 'Brukernavn' },
+					{ state: 'login', icon: 'fa-sign-in', name: function() {return 'Logg inn'} },
+					{ state: 'user', icon: 'fa-cog', name: function() {return username} },
 					{ state: 'menu', icon: 'fa-bars', name: 'Meny' }
 				]
 			};
 
-
 		}
-		NavbarCtrl.$inject = ['$scope'];
+		NavbarCtrl.$inject = ['$scope', 'UserService'];
 })();

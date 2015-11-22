@@ -4,7 +4,6 @@ var db 				 = require('../mysql/mysql_functions'),
 module.exports = {
 	//function User() {}
 
-	//User.prototype.findOrCreate = function(obj, callback) {
 	findOrCreate: function (obj,callback) {
 		if (obj.facebookId) {
 			var userSearch = {facebookId:obj.facebookId};
@@ -26,7 +25,6 @@ module.exports = {
 			});
 		},
 
-	//User.prototype.findOne = function(obj, callback) {
 	findOne: function (obj,callback){
 		db.get.user(obj, function (error, user) {
 			if(!user){

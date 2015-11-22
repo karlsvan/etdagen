@@ -48,6 +48,11 @@ app.use(cookieSession({
     	maxage: 1000
   	}
 }));
+
+app.get('/', function (req ,res){
+	res.render('index', {title: 'E&T-dagen', year: 2016});
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -55,9 +60,6 @@ app.use(passport.session());
 
 // ========== App routes ==========
 var api = express.Router();
-app.get('/', function (req ,res){
-	res.render('index', {title: 'E&T-dagen', year: 2016});
-});
 
 app.get('/auth/facebook',
   passport.authenticate('facebook',{ scope: 'email'}));
@@ -83,8 +85,15 @@ app.post('/login',
 	passport.authenticate('local', { failureFlash: true }),
 	function(req, res) {
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
+		req.session.passport.email = req.user.email;
+		req.session.passport.username = req.user.username;
     	res.redirect('/#/register/'+req.user.username);
   });
+
+app.get('/logout', function(req, res){
+  req.logout();
+  //jobb med denne
+});
 
 app.post('/register',
 	function (req,res) {
@@ -129,8 +138,6 @@ api.get('/news', function (req,res){
 });
 
 api.get('/user', function (req,res){
-	console.log(req.session);
-	console.log(req.sessionOptions);
 	res.json(req.user);
 });
 

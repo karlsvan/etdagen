@@ -18,11 +18,12 @@
 	    'ngMaterial'
  	])
  	.config(configure)
- 	.controller('appCtrl', function(){
+ 	.controller('appCtrl', appCtrl);
+
+ 	function appCtrl($rootScope,$http){
  		this.name = 'E&T-dagen';
  		this.year = 2016;
- 	});
-
+ 	};
  	/*@ngInject*/
  	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
  		$urlRouterProvider.otherwise('/home');
@@ -56,7 +57,7 @@
  	    .state('register', {
  	      url: '/register/:user',
  	      templateUrl: 'partials/register/register.html',
- 	      controller: 'RegisterCtrl'
+ 	      controller: 'RegisterCtrl',
  	    })
  	    .state('contact',{
  	    	url: '/contact',
