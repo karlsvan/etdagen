@@ -38,27 +38,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-#description {
-  background-color: #36a;
-}
-#program {
-  background-color: #a36;
-}
-#main_sponsor {
-  background-color: #6a3;
-}
-#prices {
-  background-color: #ccc;
-}
-#main_partner {
-  background-color: #971;
-}
-#partners {
-  background-color: #197;
-}
-#sponsors {
-  background-color: #719;
-}
 .container,
 .container-fluid {
   position: relative;
@@ -169,13 +148,6 @@ nav#et-navbar .navbar-nav:hover {
   nav#et-navbar > .container .navbar-nav > span {
     display: none;
   }
-}
-footer#et-footer {
-  background-color: #333;
-  color: #999;
-}
-footer#et-footer > .container {
-  margin: 0px auto;
 }
 /* endinject */
 /* inject:partials:less */
@@ -358,24 +330,6 @@ footer#et-footer > .container {
 }
 .login-container .login-separator > .separator-text {
   padding: 0 15px;
-}
-@media (max-width: 400px) {
-  #page-companies .md-display-1 {
-    font-size: 30px;
-    margin: 30px 0 5px 0;
-  }
-}
-@media (max-width: 350px) {
-  #page-companies .md-display-1 {
-    font-size: 25px;
-  }
-}
-#page-companies .company-widget {
-  padding: 20px 0;
-  border-top: 1px solid rgba(150, 150, 150, 0.4);
-}
-#page-companies .company-widget:first-of-type {
-  border-top: none;
 }
 divi {
   border-style: dashed;

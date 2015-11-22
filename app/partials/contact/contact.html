@@ -16,12 +16,12 @@
 
 	<section id="toastParent" class="container-fluid md-whiteframe-2dp section-padding-2x" layout="column" layout-align="center center" style="background: #eee;" md-theme="formTheme">
 		<div class="container" layout-gt-md="row" layout="column" layout-align="center center">
-			<div flex="50" layout="column" layout-align="center start" layout-padding>
+			<div flex class="container-padding" layout="column" layout-align="center start">
 				<div class="md-title">Kontakt oss</div>
 				<p class="md-body-1">Hvis du har spørsmål eller andre hendvendelser angående Elektronikk- og Teknologidagen kan du sende oss en melding, så skal vi svare så fort som mulig. Du kan også ta kontakt på vår <a href="https://www.facebook.com/etdagen/" class="facebook-link">facebook</a> side. Der vil det bli lagt ut informasjon fortløpende.</p>
 				<p class="md-body-1">Vennligst fyll ut alle feltene</p>
 			</div>
-			<form name="form" flex-gt-md="40" style="padding: 0 20px;" layout-fill novalidate ng-submit="contact.sendMail()">
+			<form name="form" flex class="container-padding" novalidate ng-submit="contact.sendMail()" layout-fill>
 				<md-input-container>
 				    <label>Navn/Firma</label>
 				    <input ng-model="form.name" required>
