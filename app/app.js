@@ -83,10 +83,10 @@
  	      templateUrl: 'partials/students/students.html',
  	      controller: 'StudentsCtrl'
  	    })
-      .state('users.', {
- 	      url: '/students',
- 	      templateUrl: 'partials/students/students.html',
- 	      controller: 'StudentsCtrl'
+      .state('users.search', {
+ 	      url: '/search',
+ 	      templateUrl: 'partials/users/search/search.html',
+ 	      controller: 'SearchCtrl'
  	    });
 
  	    $mdThemingProvider.theme('default')
