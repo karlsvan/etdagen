@@ -40,9 +40,11 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <navbar></navbar>
-        <div ui-view style="overflow: hidden;"></div>
-        <et-footer></et-footer>
+        <div layout="column" style="min-height: 100%;">
+            <navbar style="z-index:100;"></navbar>
+            <md-content ui-view style="overflow: hidden;" flex></md-content>
+            <et-footer></et-footer>
+        </div>
 
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -73,18 +75,19 @@
         <script src="app.js"></script>
         <!-- build:js assets/js/angular.js -->
             <!-- angular:js -->
-            <script src="components/navbar/navbar.ctrl.js"></script>
-            <script src="components/navbar/navbar.js"></script>
             <script src="components/et-footer/et-footer.ctrl.js"></script>
             <script src="components/et-footer/et-footer.js"></script>
+            <script src="components/navbar/navbar.ctrl.js"></script>
+            <script src="components/navbar/navbar.js"></script>
             <script src="partials/about/about.ctrl.js"></script>
             <script src="partials/board/board.ctrl.js"></script>
             <script src="partials/companies/companies.ctrl.js"></script>
-            <script src="partials/login/login.ctrl.js"></script>
-            <script src="partials/register/register.ctrl.js"></script>
             <script src="partials/contact/contact.ctrl.js"></script>
             <script src="partials/home/home.ctrl.js"></script>
+            <script src="partials/login/login.ctrl.js"></script>
+            <script src="partials/register/register.ctrl.js"></script>
             <script src="services/board.srv.js"></script>
+            <script src="services/companies.srv.js"></script>
             <script src="services/news.srv.js"></script>
             <script src="services/user.srv.js"></script>
             <!-- endangular -->

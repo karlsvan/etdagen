@@ -38,27 +38,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-#description {
-  background-color: #36a;
-}
-#program {
-  background-color: #a36;
-}
-#main_sponsor {
-  background-color: #6a3;
-}
-#prices {
-  background-color: #ccc;
-}
-#main_partner {
-  background-color: #971;
-}
-#partners {
-  background-color: #197;
-}
-#sponsors {
-  background-color: #719;
-}
 .container,
 .container-fluid {
   position: relative;
@@ -82,7 +61,24 @@ a {
     font-size: 0.8rem;
   }
 }
+.container-padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.section-padding {
+  padding: 2em 10px;
+}
+.section-padding-2x {
+  padding: 4em 10px;
+}
 /* inject:components:less */
+footer#et-footer {
+  background-color: #333;
+  color: #999;
+}
+footer#et-footer > .container {
+  margin: 0px auto;
+}
 nav#et-navbar {
   position: relative;
   font-size: 14px;
@@ -159,13 +155,6 @@ nav#et-navbar .navbar-nav:hover {
   nav#et-navbar > .container .navbar-nav > span {
     display: none;
   }
-}
-footer#et-footer {
-  background-color: #333;
-  color: #999;
-}
-footer#et-footer > .container {
-  margin: 0px auto;
 }
 /* endinject */
 /* inject:partials:less */
@@ -252,37 +241,6 @@ footer#et-footer > .container {
 #page-companies .company-widget:first-of-type {
   border-top: none;
 }
-.login-container {
-  margin: 0 auto;
-  padding: 50px 0;
-  max-width: 300px;
-  text-align: center;
-}
-.login-container .login-btn-group-vertical > .btn {
-  margin: 2px 0;
-}
-.login-container .login-header {
-  margin: 25px 0 5px 0;
-}
-.login-container .login-content {
-  padding: 15px 5px;
-}
-.login-container .login-separator {
-  margin: 15px 0;
-}
-.login-container .login-separator:before,
-.login-container .login-separator:after {
-  background-color: #aaa;
-  content: "";
-  display: inline-block;
-  height: 1px;
-  position: relative;
-  vertical-align: middle;
-  width: 40%;
-}
-.login-container .login-separator > .separator-text {
-  padding: 0 15px;
-}
 #googlemaps {
   width: 500px;
   height: 400px;
@@ -298,12 +256,6 @@ footer#et-footer > .container {
 .facebook-link {
   color: #133783;
   font-weight: 900;
-}
-.section-padding {
-  padding: 2em 10px;
-}
-.section-padding-2x {
-  padding: 4em 10px;
 }
 .video-wrapper {
   position: relative;
@@ -372,6 +324,47 @@ footer#et-footer > .container {
     background-position: 100% 50%;
     padding: 3% 0;
   }
+}
+.fb-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.fb-link .link-img {
+  background: url("/assets/images/icons/facebook.png") center no-repeat;
+  background-size: contain;
+}
+.google-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.google-link .link-img {
+  background: url("/assets/images/icons/google.png") center no-repeat;
+  background-size: contain;
+}
+.feide-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.feide-link .link-img {
+  background: url("/assets/images/icons/feide.png") center no-repeat;
+  background-size: contain;
+}
+.ntnu-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.ntnu-link .link-img {
+  background: url("/assets/images/icons/ntnu.png") center no-repeat;
+  background-size: contain;
+}
+.login-container {
+  max-width: 30em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 /* endinject */
 

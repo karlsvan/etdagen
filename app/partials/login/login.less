@@ -1,34 +1,21 @@
+
+.link(@img) {
+	.link-img {
+		background: url("/assets/images/icons/@{img}.png") center no-repeat;
+		background-size: contain;
+	}
+	width: 10em;
+	height: 5em;
+	padding: 1em;
+}
+
+.fb-link { .link(facebook) }
+.google-link {.link(google) }
+.feide-link { .link(feide) }
+.ntnu-link { .link(ntnu) }
+
 .login-container {
-	margin: 0 auto;
-	padding: 50px 0;
-	max-width: 300px;
-	text-align: center;
-
-	.login-btn-group-vertical > .btn {
-		margin: 2px 0;
-	}
-
-	.login-header {
-		margin: 25px 0 5px 0;
-	}
-
-	.login-content {
-		padding: 15px 5px;
-	}
-
-	.login-separator {
-		margin: 15px 0;
-		&:before, &:after {
-			background-color: #aaa;
-			content: "";
-		    display: inline-block;
-		    height: 1px;
-		    position: relative;
-		    vertical-align: middle;
-		    width: 40%;
-		}
-		> .separator-text {
-			padding: 0 15px;
-		}
-	}
+	max-width: 30em;
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 10px;
 }
