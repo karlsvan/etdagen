@@ -16,7 +16,10 @@
 
 		    $scope.$on('$stateChangeSuccess',
 		    	function(event, toState, toParams, fromState, fromParams){
-		    		$scope.user = UserService.returnUser();
+		    		UserService.init(function(user,loggedIn,error) {
+						$scope.loggedIn = loggedIn;
+						$scope.user = user;
+						});
 		    	});
 
   			$scope.register = function() {

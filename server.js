@@ -45,20 +45,12 @@ app.use(cookieSession({
 	name: 'user',
 	secret: 'GlennThaBaws',
     cookie: {
-    	maxage: 1000
+    	maxage: 2*24*60*60*1000
   	}
 }));
 
 app.get('/', function (req ,res){
-	req.session.authenticated = 0;
 	res.render('index', {title: 'E&T-dagen', year: 2016});
-});
-
-app.get('/logout', function (req, res){
-	res.clearCookie('user');
-	res.sendStatus(200);
-	req.session = null;
-	req.logout();
 });
 
 app.use(passport.initialize());
@@ -76,7 +68,8 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/#/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-		res.redirect('/#/register/'+req.user.username);
+    	req.sessionOptions.maxAge = 2*24*60*60*1000;
+		res.redirect('/#/register/'+req.user.fornavn);
   });
 
 app.get('/auth/google',
@@ -86,16 +79,23 @@ app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-	res.redirect('/#/register/'+req.user.username);
+    req.sessionOptions.maxAge = 2*24*60*60*1000;
+	res.redirect('/#/register/'+req.user.fornavn);
 	});
 
 app.post('/login',
 	passport.authenticate('local', { failureFlash: true }),
 	function(req, res) {
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
-		req.session.authenticated = 1;
     	res.redirect('/#/register/'+req.user.username);
   });
+
+app.get('/logout', function (req, res){
+	res.clearCookie('user.sig');
+	res.sendStatus(200);
+	req.session = null;
+	req.logout();
+});
 
 app.post('/register',
 	function (req,res) {
@@ -140,7 +140,6 @@ api.get('/news', function (req,res){
 });
 
 api.get('/user', function (req,res){
-	console.log(req.session.authenticated+' | '+req.user);
 	if(req.user) {
 		res.json(req.user);
 	} else {

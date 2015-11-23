@@ -31,26 +31,14 @@
 			},
 
 			init : function(cb) {
-				getUser(function() {
+				getUser(function (user,loggedIn,error) {
 					cb(user,loggedIn,error);
 				})
-				/*
-				$http.get('/api/user').then(function successCB(res) {
-					loggedIn = 1;
-	    			user = res.data;
-	    			if (cb) {
-	    				cb(user,loggedIn);
-	    			};
-	  			}, function errorCB(res) {
-	  				loggedIn = 0;
-	  				user = null;
-	  				cb(user,loggedIn,res.data);
-	  			});*/
 			},
 
 			login : function(credentials) {
 		  		$http.post('/login', credentials).then(function successCB(res) {
-		  				getUser(function(user,loggedIn,error) {
+		  				getUser( function (user,loggedIn,error) {
 			  				loggedIn = 1;
 				      		$state.go('register');
 			      		});
@@ -58,15 +46,7 @@
 			      		$state.reload('login');
 			      	});
 		  	},
-
-		  	facebook : function() {
-		  		$http.get('/auth/facebook').then(function successCB() {
-		    			$state.go('register');
-			      	},function errorCB(res) {
-			      		$state.reload('login');
-		    		});
-		  	},
-
+		  	
 		  	register : function(cred) {
 		  		$http.post('/register', cred).then(function sucsessCB(response) {
   					$state.go('home');
