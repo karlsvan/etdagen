@@ -72,13 +72,6 @@ a {
   padding: 4em 10px;
 }
 /* inject:components:less */
-footer#et-footer {
-  background-color: #333;
-  color: #999;
-}
-footer#et-footer > .container {
-  margin: 0px auto;
-}
 nav#et-navbar {
   position: relative;
   font-size: 14px;
@@ -223,24 +216,6 @@ nav#et-navbar .navbar-nav:hover {
 #board-background {
   background-color: #ef5350;
 }
-@media (max-width: 400px) {
-  #page-companies .md-display-1 {
-    font-size: 30px;
-    margin: 30px 0 5px 0;
-  }
-}
-@media (max-width: 350px) {
-  #page-companies .md-display-1 {
-    font-size: 25px;
-  }
-}
-#page-companies .company-widget {
-  padding: 20px 0;
-  border-top: 1px solid rgba(150, 150, 150, 0.4);
-}
-#page-companies .company-widget:first-of-type {
-  border-top: none;
-}
 #googlemaps {
   width: 500px;
   height: 400px;
@@ -365,6 +340,70 @@ nav#et-navbar .navbar-nav:hover {
   max-width: 30em;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+}
+divi {
+  border-style: dashed;
+  border-width: thin;
+}
+.vertical-divider {
+  border-left: 1px solid #b71c1c;
+  height: 500px;
+  margin: 10px;
+  margin-right: 40px;
+}
+div#et-profile {
+  position: relative;
+  background-color: #eee;
+}
+div#et-profile > .container {
+  position: relative;
+  margin: 0 auto;
+  height: inherit;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+#profile-picture {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #b71c1c;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
+  width: 240px;
+  height: 240px;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+#profile-CV {
+  position: absolute;
+  right: 0;
+}
+.profile-sidenav {
+  width: 150px;
+}
+.profile-sidenav ul {
+  list-style-type: none;
+}
+.profile-sidenav ul li {
+  margin-bottom: 5px;
+}
+.profile-basics-table {
+  line-height: 100%;
+}
+.profile-basics-table td {
+  vertical-align: top;
+}
+.profile-basics-table i {
+  opacity: 0.6;
+}
+.profile-basics-table span {
+  opacity: 0.5;
+}
+@media screen and (min-width: 600px) {
+  #profile-container {
+    width: 1024px;
+  }
 }
 /* endinject */
 

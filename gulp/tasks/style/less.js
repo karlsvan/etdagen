@@ -3,8 +3,8 @@ module.exports = function(gulp, $, appConfig){
 
 	var fileToConvert 		= $.path.join(appConfig.app, 'assets', 'styles', 'main.less'),
 		outputDestination 	= $.path.join(appConfig.app, 'assets', 'styles', 'css'),
-		autoprefixerOpt 	= { browsers:['last 2 version'] };
-		
+		autoprefixerOpt 	= { browsers:['last 2 versions'] };
+
 	/*
 	*	@task: style.less
 	*	@description:
@@ -20,5 +20,5 @@ module.exports = function(gulp, $, appConfig){
 			.pipe(gulp.dest(outputDestination))
 			.pipe($.browserSync.stream());
 			callback(null);
-	}
-}
+	};
+};
