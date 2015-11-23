@@ -12,14 +12,10 @@
 	  .controller('LoginCtrl', LoginCtrl);
 
 	  	/*@ngInject*/
-	  	function LoginCtrl($http, $state) {
+	  	function LoginCtrl($http, $state, UserService) {
 
 	    	this.login = function(credentials) {
-		      	$http.post('/login', credentials).then(function successCB(res) {
-		      		$state.go('register');
-		      	},function errorCB(res) {
-		      		$state.reload('login');
-		      	});
+			    UserService.login(credentials);
 	      	};
 
 		    this.adduser = function() {
@@ -27,15 +23,11 @@
 			};
 
 	    	this.facebook = function() {
-	    		$http.get('/auth/facebook').then(function successCB() {
-	    			$state.go('register');
-		      	},function errorCB(res) {
-		      		$state.reload('login');
-	    		})
+	    		UserService.facebook();
 	    	}
 
 	    }
 
 
-	    LoginCtrl.$inject = ['$http', '$state'];
+	    LoginCtrl.$inject = ['$http', '$state', 'UserService'];
 })();

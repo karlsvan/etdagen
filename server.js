@@ -7,9 +7,10 @@ var express		= require('express'),
     bodyParser  = require('body-parser'),
 	favicon		= require('serve-favicon'),
 	mysql       = require('./server/mysql/mysql_functions.js'),
-	session     = require('express-session'),
+	cookieSession = require('cookie-session'),
+	cookieParser = require('cookie-parser'), 
 	mail        = require('./server/config/mail.js'),
-	User             = require('./server/config/user.js'),
+	User        = require('./server/config/user.js'),
 	passport    = require('passport');require('./server/config/passport.js')(passport);
 
 // ========== Initialize and setup express app ==========
@@ -40,10 +41,26 @@ app.use(logger('dev'));
 // Support parsing of json- and URL-encoded bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({
-	resave: false,
-	saveUninitialized: false,
-	secret: 'GlennThaBaws'}));
+app.use(cookieSession({ 
+	name: 'user',
+	secret: 'GlennThaBaws',
+    cookie: {
+    	maxage: 1000
+  	}
+}));
+
+app.get('/', function (req ,res){
+	req.session.authenticated = 0;
+	res.render('index', {title: 'E&T-dagen', year: 2016});
+});
+
+app.get('/logout', function (req, res){
+	res.clearCookie('user');
+	res.sendStatus(200);
+	req.session = null;
+	req.logout();
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -51,9 +68,6 @@ app.use(passport.session());
 
 // ========== App routes ==========
 var api = express.Router();
-app.get('/', function (req ,res){
-	res.render('index', {title: 'E&T-dagen', year: 2016});
-});
 
 app.get('/auth/facebook',
   passport.authenticate('facebook',{ scope: 'email'}));
@@ -78,6 +92,8 @@ app.get('/auth/google/callback',
 app.post('/login',
 	passport.authenticate('local', { failureFlash: true }),
 	function(req, res) {
+		req.sessionOptions.maxAge = 2*24*60*60*1000;
+		req.session.authenticated = 1;
     	res.redirect('/#/register/'+req.user.username);
   });
 
@@ -124,7 +140,12 @@ api.get('/news', function (req,res){
 });
 
 api.get('/user', function (req,res){
-	res.json(req.user);
+	console.log(req.session.authenticated+' | '+req.user);
+	if(req.user) {
+		res.json(req.user);
+	} else {
+		res.sendStatus(403);
+	}
 });
 
 api.get('/company', function (req,res){
