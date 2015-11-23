@@ -13,9 +13,14 @@
 
 		/*@ngInject*/
 		function NavbarCtrl($scope,UserService) {
-			
-			var username = UserService.returnUser().username || 'LOL';
-			$scope.loggedIn = UserService.getLoggedIn() || 0;
+			$scope.loggedIn = 0;
+			var username;
+			UserService.init(function(user,loggedIn,error){
+				$scope.loggedIn = loggedIn;
+				if (!error) {
+					username = user.username;
+				};
+			});
 
 			$scope.$on('$stateChangeStart',
 		    	function(event, toState, toParams, fromState, fromParams){
@@ -25,7 +30,10 @@
 		    		}
 		    	})
 			
-
+			$scope.logout = function() {
+				UserService.logout();
+				$scope.loggedIn=0;
+			}
 
 			this.links = {
 				main: [
@@ -37,7 +45,7 @@
 				],
 				side: [
 					{ state: 'login', icon: 'fa-sign-in', name: function() {return 'Logg inn'} },
-					{ state: 'user', icon: 'fa-cog', name: function() {return username} },
+					{ state: 'user', icon: 'fa-cog', name: function() { return username }},
 					{ state: 'menu', icon: 'fa-bars', name: 'Meny' }
 				]
 			};

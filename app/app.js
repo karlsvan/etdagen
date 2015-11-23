@@ -23,7 +23,8 @@
  	function appCtrl($rootScope,$http){
  		this.name = 'E&T-dagen';
  		this.year = 2016;
- 	};
+ 	}
+ 	appCtrl.$inject = ['$rootScope', '$http'];;
  	/*@ngInject*/
  	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
  		$urlRouterProvider.otherwise('/home');

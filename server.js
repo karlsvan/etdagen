@@ -50,7 +50,15 @@ app.use(cookieSession({
 }));
 
 app.get('/', function (req ,res){
+	req.session.authenticated = 0;
 	res.render('index', {title: 'E&T-dagen', year: 2016});
+});
+
+app.get('/logout', function (req, res){
+	res.clearCookie('user');
+	res.sendStatus(200);
+	req.session = null;
+	req.logout();
 });
 
 app.use(passport.initialize());
@@ -85,15 +93,9 @@ app.post('/login',
 	passport.authenticate('local', { failureFlash: true }),
 	function(req, res) {
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
-		req.session.passport.email = req.user.email;
-		req.session.passport.username = req.user.username;
+		req.session.authenticated = 1;
     	res.redirect('/#/register/'+req.user.username);
   });
-
-app.get('/logout', function(req, res){
-  req.logout();
-  //jobb med denne
-});
 
 app.post('/register',
 	function (req,res) {
@@ -138,7 +140,12 @@ api.get('/news', function (req,res){
 });
 
 api.get('/user', function (req,res){
-	res.json(req.user);
+	console.log(req.session.authenticated+' | '+req.user);
+	if(req.user) {
+		res.json(req.user);
+	} else {
+		res.sendStatus(403);
+	}
 });
 
 api.get('/company', function (req,res){

@@ -6,20 +6,23 @@
 	  .factory('UserService', UserService);
 	  	function UserService($http,$state) {
 			var loggedIn = 0;
-			var user = {username:'testYo',fornavn:'karlyo'};
+			var user;
 
 			var getUser = function(cb) {
 				$http.get('/api/user').then(function(res) {
+					loggedIn = 1;
 	    			user = res.data;
-	    			cb()
+	    			if (cb) {
+	    				cb(user,loggedIn,0);
+	    			};
 	  			}, function(res) {
-	  				alert('error: '+ res);
+					cb(null,0,res.data);
 	  			});
 			};
 
 			return {
 
-			returnUser : function(cb) {
+			returnUser : function() {
 				return user;
 			},
 
@@ -27,9 +30,27 @@
 				return loggedIn
 			},
 
+			init : function(cb) {
+				getUser(function() {
+					cb(user,loggedIn,error);
+				})
+				/*
+				$http.get('/api/user').then(function successCB(res) {
+					loggedIn = 1;
+	    			user = res.data;
+	    			if (cb) {
+	    				cb(user,loggedIn);
+	    			};
+	  			}, function errorCB(res) {
+	  				loggedIn = 0;
+	  				user = null;
+	  				cb(user,loggedIn,res.data);
+	  			});*/
+			},
+
 			login : function(credentials) {
 		  		$http.post('/login', credentials).then(function successCB(res) {
-		  				getUser(function() {
+		  				getUser(function(user,loggedIn,error) {
 			  				loggedIn = 1;
 				      		$state.go('register');
 			      		});
@@ -46,8 +67,16 @@
 		    		});
 		  	},
 
+		  	register : function(cred) {
+		  		$http.post('/register', cred).then(function sucsessCB(response) {
+  					$state.go('home');
+  				});
+		  	},
+
 	  		logout : function() {
-				$http.get('/logout').then(function successCB() {
+	  			loggedIn = 0;
+	  			user = null;
+				$http.get('/logout').then(function successCB(res) {
 	    			$state.go('home');
 		      	},function errorCB(res) {
 		      		$state.reload('login');
@@ -55,18 +84,6 @@
 			}
 
 			};
-
-		// $rootScope.$on('$stateChangeSuccess',
-		// function(event, toState, toParams, fromState, fromParams){
-		// 	if(fromState.name == 'login' && toParams.user == 1) {
-		// 		$http.get('/api/user').then(function successCB(res) {
-	 //     			$rootScope.username = res.data.username;
-		//        	},function errorCB(res) {
-		//        		$rootScope.username = error;
-	 //     		});
-		// 	}
-		// })
-
 
 		};
 

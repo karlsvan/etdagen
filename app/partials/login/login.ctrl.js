@@ -29,5 +29,5 @@
 	    }
 
 
-	    LoginCtrl.$inject = ['$http', '$state','UserService'];
+	    LoginCtrl.$inject = ['$http', '$state', 'UserService'];
 })();
