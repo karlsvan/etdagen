@@ -38,27 +38,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-#description {
-  background-color: #36a;
-}
-#program {
-  background-color: #a36;
-}
-#main_sponsor {
-  background-color: #6a3;
-}
-#prices {
-  background-color: #ccc;
-}
-#main_partner {
-  background-color: #971;
-}
-#partners {
-  background-color: #197;
-}
-#sponsors {
-  background-color: #719;
-}
 .container,
 .container-fluid {
   position: relative;
@@ -82,14 +61,17 @@ a {
     font-size: 0.8rem;
   }
 }
+.container-padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.section-padding {
+  padding: 2em 10px;
+}
+.section-padding-2x {
+  padding: 4em 10px;
+}
 /* inject:components:less */
-footer#et-footer {
-  background-color: #333;
-  color: #999;
-}
-footer#et-footer > .container {
-  margin: 0px auto;
-}
 nav#et-navbar {
   position: relative;
   font-size: 14px;
@@ -234,24 +216,6 @@ nav#et-navbar .navbar-nav:hover {
 #board-background {
   background-color: #ef5350;
 }
-@media (max-width: 400px) {
-  #page-companies .md-display-1 {
-    font-size: 30px;
-    margin: 30px 0 5px 0;
-  }
-}
-@media (max-width: 350px) {
-  #page-companies .md-display-1 {
-    font-size: 25px;
-  }
-}
-#page-companies .company-widget {
-  padding: 20px 0;
-  border-top: 1px solid rgba(150, 150, 150, 0.4);
-}
-#page-companies .company-widget:first-of-type {
-  border-top: none;
-}
 #googlemaps {
   width: 500px;
   height: 400px;
@@ -267,12 +231,6 @@ nav#et-navbar .navbar-nav:hover {
 .facebook-link {
   color: #133783;
   font-weight: 900;
-}
-.section-padding {
-  padding: 2em 10px;
-}
-.section-padding-2x {
-  padding: 4em 10px;
 }
 .video-wrapper {
   position: relative;
@@ -342,36 +300,110 @@ nav#et-navbar .navbar-nav:hover {
     padding: 3% 0;
   }
 }
+.fb-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.fb-link .link-img {
+  background: url("/assets/images/icons/facebook.png") center no-repeat;
+  background-size: contain;
+}
+.google-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.google-link .link-img {
+  background: url("/assets/images/icons/google.png") center no-repeat;
+  background-size: contain;
+}
+.feide-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.feide-link .link-img {
+  background: url("/assets/images/icons/feide.png") center no-repeat;
+  background-size: contain;
+}
+.ntnu-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.ntnu-link .link-img {
+  background: url("/assets/images/icons/ntnu.png") center no-repeat;
+  background-size: contain;
+}
 .login-container {
-  margin: 0 auto;
-  padding: 50px 0;
-  max-width: 300px;
-  text-align: center;
+  max-width: 30em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
-.login-container .login-btn-group-vertical > .btn {
-  margin: 2px 0;
+divi {
+  border-style: dashed;
+  border-width: thin;
 }
-.login-container .login-header {
-  margin: 25px 0 5px 0;
+.vertical-divider {
+  border-left: 1px solid #b71c1c;
+  height: 500px;
+  margin: 10px;
+  margin-right: 40px;
 }
-.login-container .login-content {
-  padding: 15px 5px;
-}
-.login-container .login-separator {
-  margin: 15px 0;
-}
-.login-container .login-separator:before,
-.login-container .login-separator:after {
-  background-color: #aaa;
-  content: "";
-  display: inline-block;
-  height: 1px;
+div#et-profile {
   position: relative;
-  vertical-align: middle;
-  width: 40%;
+  background-color: #eee;
 }
-.login-container .login-separator > .separator-text {
-  padding: 0 15px;
+div#et-profile > .container {
+  position: relative;
+  margin: 0 auto;
+  height: inherit;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+#profile-picture {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #b71c1c;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
+  width: 240px;
+  height: 240px;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+#profile-CV {
+  position: absolute;
+  right: 0;
+}
+.profile-sidenav {
+  width: 150px;
+}
+.profile-sidenav ul {
+  list-style-type: none;
+}
+.profile-sidenav ul li {
+  margin-bottom: 5px;
+}
+.profile-basics-table {
+  line-height: 100%;
+}
+.profile-basics-table td {
+  vertical-align: top;
+}
+.profile-basics-table i {
+  opacity: 0.6;
+}
+.profile-basics-table span {
+  opacity: 0.5;
+}
+@media screen and (min-width: 600px) {
+  #profile-container {
+    width: 1024px;
+  }
 }
 divi {
   border-style: dashed;

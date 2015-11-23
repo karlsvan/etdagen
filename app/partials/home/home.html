@@ -9,16 +9,17 @@
 	</section>
 
 	<!-- Program -->
-	<section class="container-fluid md-whiteframe-1dp" layout-gt-sm="row" style="background: #eee; padding: 20px 0;" ng-cloak>
+	<section class="container-fluid md-whiteframe-1dp section-padding" layout-gt-sm="row" style="background: #eee;" ng-cloak>
 		<div flex flex-gt-md="50" layout="column" layout-align="center center">
 			<div layout="column" layout-align="center center">
 				<span class="date-month md-display-1">Januar</span>
 				<span class="date-day md-display-4">28</span>
 				<span class="date-year md-headline">2016</span>
 			</div>
-			<md-button class="md-primary md-raised" hide-sm>Informasjon</md-button>
+			<md-button class="md-primary md-raised" hide-sm ui-sref="about">Informasjon</md-button>
 		</div>
 		<md-list flex-md="60" flex-gt-md="50">
+			<div class="md-2-line" ng-show="true"><p class="md-offset md-list-item-text md-body-1" style="color: rgba(230,0,0,0.87)">Programmet er ikke oppdatert fra 2015</p></div>
 			<md-list-item ng-repeat="event in pagehome.program" layout="row" class="md-2-line">
 				<img class="md-avatar" ng-src="/assets/images/icons/{{event.icon}}Icon.png" alt="" style="opacity: 0.9;">
 				<div class="md-list-item-text">
@@ -33,7 +34,7 @@
 	</section>
 
 	<!-- Commersial -->
-	<section layout-gt-sm="row" layout="column">
+	<section layout-gt-sm="row" layout="column" ng-show="false">
 		<!-- Facebook -->
 		<md-button flex layout-align="center center" layout="column" style="padding: 30px 0;">
 			<div><i class="fa fa-4x fa-commenting"></i></div>

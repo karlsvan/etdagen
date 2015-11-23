@@ -5,7 +5,9 @@
 var db 				 = require('../mysql/mysql_functions'), 
 	LocalStrategy	 = require('passport-local').Strategy,
 	FacebookStrategy = require('passport-facebook').Strategy,
+	GoogleStrategy 	 = require('passport-google-oauth').OAuth2Strategy,
 	auth             = require('passport-local-authenticate'),
+	User             = require('./user.js'),
 	sha              = require('./sha1.js');
 
 module.exports = function (passport){
@@ -27,39 +29,7 @@ module.exports = function (passport){
 		passwordField: 'password',
 		passReqToCallback: false	// might use true
 	}
-	function User() {}
-	User.prototype.findOrCreate = function(obj, callback) {
-			db.get.user({facebookId:obj.facebookId} ,function (error, rows){
-				if(!rows) {
-					db.get.adduser(obj,function(error, rows) {
-						if(error){
-							console.log(error);
-						} else {
-							callback(null,rows);
-						}
-					})
-				} else {
-					callback(error,rows);
-				}
-			});
-		};
-
-	User.prototype.findOne = function(obj, callback) {
-		db.get.user(obj, function (error, user) {
-			if(!user){
-				//bruker finnes ikke
-				console.log('fant ikke bruker');
-				callback(error,user);
-			} else {
-				//console.log('user: '+JSON.stringify(user));
-				callback(error, user);
-			}
-		})
-	};
-
-	User.prototype.adduser = function(obj, callback) {
-
-	};
+	
 
 
 
@@ -67,8 +37,13 @@ module.exports = function (passport){
 	// ET-login : Login with the ET-user
 	passport.use(new LocalStrategy(
 	  function(username, password, done) {
-	  	var Usr = new User();
-	    Usr.findOne({ username: username }, function (err, user) {
+	  	//var Usr = new User();
+	  	if (username.indexOf('@') > -1){
+	  		var userSearch = {email:username};
+	  	} else {
+	  		var userSearch = {username:username}
+	  	}
+	    User.findOne(userSearch, function (err, user) {
 	      if (err) { return done(err); }
 	      if (!user) { 
 	      	//fant ikke bruker, bør gi beskjed
@@ -106,16 +81,27 @@ module.exports = function (passport){
     profileFields: ['id', 'name', 'emails']
   },
   function(accessToken, refreshToken, profile, done) {
-  	var Usr = new User();
-    Usr.findOrCreate({ facebookId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }, function (err, user) {
+    User.findOrCreate({ facebookId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }, function (err, user) {
     	return done(err, user);
     });
 
   }
 ));
+
+
+	passport.use(new GoogleStrategy({
+    clientID: '735968634827-2v36mg1s3njskrhqjo87b8v8nij3n1ob.apps.googleusercontent.com',
+    clientSecret: 'YTFSfXRL_C9diN0vEkYRDePE',
+    callbackURL: "http://localhost:3000/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ googleId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }, function (err, user) {
+      	return done(err, user);
+    });
+  }
+));
 };
-
-
+//{ googleId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }
 // mysql_functions.getUser({username: username}, function(result){
 // 	if(result.error){ return done(result.error); }
 // 	else{
