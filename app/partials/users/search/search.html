@@ -1,14 +1,60 @@
 <div class="container-fluid" layout="column" layout-align="center center">
-	<div class="container-fluid">
-		<section>
-			<md-input-container>
-			  <label>Søk</label>
-			  <input type="text">
-			</md-input-container>
+	<div class="container-fluid" id="profiles-container">
+		<section layout="row" layout-align="center center" flex>
+			<div flex style="max-width: 800px; margin:0px 10px;" layout="row">
+				<div flex>
+					<md-input-container>
+					  <label>Søk</label>
+					  <input type="text">
+					</md-input-container>
+				</div>
+				<div flex-shrink layout layout-align="center center">
+					<md-menu>
+					 <md-button id="filter-button" ng-click="$mdOpenMenu($event)" aria-label="Søkefilter">
+						 <md-icon md-svg-src="assets\images\icons\ic_filter_list_black_24px.svg"></md-icon>
+						 <a hide-sm>filter</a>
+					 </md-button>
+					 <md-menu-content>
+					   <md-menu-item>
+					     <md-button ng-click="doSomething()" aria-label="Do something">
+					       <p>Bedrifter</p>
+					     </md-button>
+					   </md-menu-item>
+						 <md-menu-item>
+					     <md-button ng-click="doSomething()" aria-label="Do something">
+					       <p>Personer</p>
+					     </md-button>
+					   </md-menu-item>
+						 <md-menu-divider></md-menu-divider>
+						 <md-menu-item>
+					     <md-button ng-click="doSomething()" aria-label="Do something">
+					       <p>Linje</p>
+					     </md-button>
+					   </md-menu-item>
+						 <md-menu-item>
+					     <md-button ng-click="doSomething()" aria-label="Do something">
+					       <p>Epostadresse</p>
+					     </md-button>
+					   </md-menu-item>
+						 <md-menu-item>
+					     <md-button ng-click="doSomething()" aria-label="Do something">
+					       <p>Venn med Glenn</p>
+					     </md-button>
+					   </md-menu-item>
+					 </md-menu-content>
+					</md-menu>
+				</div>
+			</div>
 		</section>
 		<section>
 			<md-list>
 				<md-divider></md-divider>
+				<md-list-item ng-repeat="user in SearchCtrl.users">
+					<img src="user.img" alt="">
+					<p>{{user.name}}</p>
+					<i class="fa fa-building"></i>
+				</md-list-item>
+
   			<md-subheader class="md-no-sticky">Bedrifter:</md-subheader>
 				<md-list-item ng-click="hei">
 					<img src="assets\images\avatar.jpg" class="md-avatar">

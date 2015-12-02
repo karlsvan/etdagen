@@ -1,25 +1,9 @@
-divi{
-	border-style: dashed;
-	border-width: thin;
+#et-profile{
+	background-color: #eee;
 }
 
-.vertical-divider{
-	border-left: 1px solid #b71c1c;
-	height: 500px;
-	margin: 10px;
-	margin-right: 40px;
-}
-
-div#et-profile {
-	position: relative;
-  background-color: #eee;
-
-	> .container {
-		position: relative;
-		margin: 0 auto;
-		height: inherit;
-		display: flex;
-	}
+#profile-main{
+	max-width: 1000px;
 }
 
 #profile-picture {
@@ -35,38 +19,16 @@ div#et-profile {
 	margin-bottom: 20px;
 }
 
-
-
-#profile-CV{
-  position: absolute;
-  right: 0;
-}
-
-.profile-sidenav{
-	width: 150px;
-	ul{
-		list-style-type: none;
-		li{
-			margin-bottom: 5px;
-		}
-	}
-}
-
 .profile-basics-table{
 	line-height: 100%;
-	td{
-		vertical-align: top;
-	}
-	i{
-		opacity: 0.6;
-	}
-	span{
-		opacity: 0.5;
-	}
+	td{vertical-align: top;}
+	i{opacity: 0.6;}
+	span{opacity: 0.5;}
 }
 
-@media screen and (min-width: 600px) {
-	#profile-container{
-		width: 1024px;
+h2:hover{
+	cursor: pointer;
+	span{
+		display: inline;
 	}
 }
