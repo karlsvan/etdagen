@@ -43,7 +43,9 @@
 				      		$state.go('register');
 			      		});
 			      	},function errorCB(res) {
-			      		alert(JSON.stringify(res.data));
+			      		if(res.data == "Unauthorized"){
+			      			alert('Brukernavn eller passord er feil');
+			      		}
 			      		$state.reload('login');
 			      	});
 		  	},

@@ -36,26 +36,21 @@ module.exports = function (passport){
 	// ET-login : Login with the ET-user
 	passport.use(new LocalStrategy(
 	  function(username, password, done) {
-	    User.findOne({email:username}, function (err, user) {
+	    User.findOne({email:username}, function (err, user, msg) {
 	      if (err) { return done(err); }
 	      if (!user) { 
-	      	//fant ikke bruker, bør gi beskjed
 	      	return done(null, false); 
 	      } else {
 	      		if (user.id < 500) {
 				    if (user.password != sha.sha1(password+user.salt) ) { 
-				      	console.log('FAIL!!!');
 				      	return done(null, false); 
 				    }
-				    console.log('SUCSESS§§');
 				    return done(null, user);
 				} else {
 					auth.verify(password,{hash:user.password,salt:user.salt},function(err,verified){
 						if(verified){
-							console.log('SUCSESS§§');
 							return done(null, user);
 						} else {
-							console.log('FAIL!!');
 				      		return done(null, false);
 						}
 					});

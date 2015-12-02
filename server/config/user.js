@@ -29,7 +29,7 @@ module.exports = {
 	findOne: function (obj,callback){
 		db.findUsers(obj).then(function successCB(rows,fields) {
 			if (rows.length == 0) {
-				//fant ikke bruker
+				callback(null,null);
 			} else {
 				callback(null,rows[0]);
 			}
