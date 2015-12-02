@@ -1,8 +1,8 @@
-var db 				 = require('../mysql/mysql_functions'), 
+var db 				 = require('../mysql/mysql_functions.js'),
+	q				 = require('q'),
 	auth             = require('passport-local-authenticate');
 
 module.exports = {
-	//function User() {}
 
 	findOrCreate: function (obj,callback) {
 		if (obj.facebookId) {
@@ -10,32 +10,32 @@ module.exports = {
 		} else if (obj.googleId) {
 			var userSearch = {googleID:obj.googleId};
 		}
-			db.get.user(userSearch ,function (error, rows){
-				if(!rows) {
-					db.get.adduser(obj,function(error, rows) {
-						if(error){
-							console.log(error);
-						} else {
-							callback(null,rows);
-						}
+		db.findUsers(userSearch).then(function successCB(rows, fields){
+				if(rows.length == 0) {
+					db.addUser(obj).then(function successCB(rows, fields) {
+						callback(null,rows[0]);
+					},function errorCB (error){
+						callback(error,null);
 					})
 				} else {
-					callback(error,rows);
+					callback(null,rows[0]);
 				}
-			});
-		},
+			}, function errorCB() {
+					callback(error,null);
+			}
+		);
+	},
 
 	findOne: function (obj,callback){
-		db.get.user(obj, function (error, user) {
-			if(!user){
-				//bruker finnes ikke
-				console.log('fant ikke bruker');
-				callback(error,user);
+		db.findUsers(obj).then(function successCB(rows,fields) {
+			if (rows.length == 0) {
+				//fant ikke bruker
 			} else {
-				//console.log('user: '+JSON.stringify(user));
-				callback(error, user);
+				callback(null,rows[0]);
 			}
-		})
+		}, function errorCB(error) {
+			callback(error,null);
+		});
 	},
 
 	//User.prototype.adduser = function(obj, callback) {
@@ -59,8 +59,10 @@ module.exports = {
 		auth.hash(obj.password.$modelValue, function(err, hashed) {
 			userobj.password = hashed.hash; // Hashed password
 			userobj.salt = hashed.salt; // Salt
-			db.get.adduser(userobj,function(error,noe) {
-				callback(error,noe);
+			db.adduser(userobj).then(function successCB(rows,fields) {
+				callback(rows[0]);
+			},function errorCB(error) {
+				callback(error);
 			})
 		});
 		

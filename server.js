@@ -68,6 +68,7 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/#/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
+    	console.log('heyhey');
     	req.sessionOptions.maxAge = 2*24*60*60*1000;
 		res.redirect('/#/register/'+req.user.fornavn);
   });
@@ -84,8 +85,8 @@ app.get('/auth/google/callback',
 	});
 
 app.post('/login',
-	passport.authenticate('local', { failureFlash: true }),
-	function(req, res) {
+	passport.authenticate('local', { failureFlash: false }),
+	function (req, res) {
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
     	res.redirect('/#/register/'+req.user.username);
   });
@@ -141,7 +142,10 @@ api.get('/news', function (req,res){
 
 api.get('/user', function (req,res){
 	if(req.user) {
-		res.json(req.user);
+		var obj = req.user;
+		delete obj.password;
+		delete obj.salt;
+		res.json(obj);
 	} else {
 		res.sendStatus(403);
 	}

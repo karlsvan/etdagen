@@ -257,47 +257,6 @@ nav#et-navbar .navbar-nav:hover {
   color: #133783;
   font-weight: 900;
 }
-.fb-link {
-  width: 10em;
-  height: 5em;
-  padding: 1em;
-}
-.fb-link .link-img {
-  background: url("/assets/images/icons/facebook.png") center no-repeat;
-  background-size: contain;
-}
-.google-link {
-  width: 10em;
-  height: 5em;
-  padding: 1em;
-}
-.google-link .link-img {
-  background: url("/assets/images/icons/google.png") center no-repeat;
-  background-size: contain;
-}
-.feide-link {
-  width: 10em;
-  height: 5em;
-  padding: 1em;
-}
-.feide-link .link-img {
-  background: url("/assets/images/icons/feide.png") center no-repeat;
-  background-size: contain;
-}
-.ntnu-link {
-  width: 10em;
-  height: 5em;
-  padding: 1em;
-}
-.ntnu-link .link-img {
-  background: url("/assets/images/icons/ntnu.png") center no-repeat;
-  background-size: contain;
-}
-.login-container {
-  max-width: 30em;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
 .video-wrapper {
   position: relative;
   padding-bottom: 56.25%;
@@ -365,6 +324,47 @@ nav#et-navbar .navbar-nav:hover {
     background-position: 100% 50%;
     padding: 3% 0;
   }
+}
+.fb-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.fb-link .link-img {
+  background: url("/assets/images/icons/facebook.png") center no-repeat;
+  background-size: contain;
+}
+.google-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.google-link .link-img {
+  background: url("/assets/images/icons/google.png") center no-repeat;
+  background-size: contain;
+}
+.feide-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.feide-link .link-img {
+  background: url("/assets/images/icons/feide.png") center no-repeat;
+  background-size: contain;
+}
+.ntnu-link {
+  width: 10em;
+  height: 5em;
+  padding: 1em;
+}
+.ntnu-link .link-img {
+  background: url("/assets/images/icons/ntnu.png") center no-repeat;
+  background-size: contain;
+}
+.login-container {
+  max-width: 30em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 /* endinject */
 

@@ -18,7 +18,7 @@
 			UserService.init(function(user,loggedIn,error){
 				$scope.loggedIn = loggedIn;
 				if (!error) {
-					username = user.username || user.fornavn;
+					username = user.username || user.fornavn || user.email;
 				};
 			});
 

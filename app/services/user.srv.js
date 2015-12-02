@@ -37,12 +37,13 @@
 			},
 
 			login : function(credentials) {
-		  		$http.post('/login', credentials).then(function successCB(res) {
+		  		$http.post('/login',credentials).then(function successCB(res) {
 		  				getUser( function (user,loggedIn,error) {
 			  				loggedIn = 1;
 				      		$state.go('register');
 			      		});
 			      	},function errorCB(res) {
+			      		alert(JSON.stringify(res.data));
 			      		$state.reload('login');
 			      	});
 		  	},
