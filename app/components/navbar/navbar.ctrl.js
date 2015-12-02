@@ -18,14 +18,14 @@
 			UserService.init(function(user,loggedIn,error){
 				$scope.loggedIn = loggedIn;
 				if (!error) {
-					username = user.username;
+					username = user.username || user.fornavn || user.email;
 				};
 			});
 
 			$scope.$on('$stateChangeStart',
 		    	function(event, toState, toParams, fromState, fromParams){
 		    		if (UserService.getLoggedIn()){
-		    			username = UserService.returnUser().username;
+		    			username = UserService.returnUser().username || UserService.returnUser().fornavn;
 		    			$scope.loggedIn = UserService.getLoggedIn();
 		    		}
 		    	})

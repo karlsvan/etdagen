@@ -14,6 +14,7 @@ module.exports = function (passport){
 
 	// serializeUser function desides what will be stored in session (req.session.passport.user)
 	passport.serializeUser(function (user, done){
+		console.log('user: '+JSON.stringify(user));
 		done(null, user.id);
 	});
 
@@ -31,38 +32,25 @@ module.exports = function (passport){
 	}
 	
 
-
-
 	// ========== Passport strategies ==========
 	// ET-login : Login with the ET-user
 	passport.use(new LocalStrategy(
 	  function(username, password, done) {
-	  	//var Usr = new User();
-	  	if (username.indexOf('@') > -1){
-	  		var userSearch = {email:username};
-	  	} else {
-	  		var userSearch = {username:username}
-	  	}
-	    User.findOne(userSearch, function (err, user) {
+	    User.findOne({email:username}, function (err, user, msg) {
 	      if (err) { return done(err); }
 	      if (!user) { 
-	      	//fant ikke bruker, bør gi beskjed
 	      	return done(null, false); 
-	      } else{
+	      } else {
 	      		if (user.id < 500) {
 				    if (user.password != sha.sha1(password+user.salt) ) { 
-				      	console.log('FAIL!!!');
 				      	return done(null, false); 
 				    }
-				    console.log('SUCSESS§§');
 				    return done(null, user);
 				} else {
 					auth.verify(password,{hash:user.password,salt:user.salt},function(err,verified){
 						if(verified){
-							console.log('SUCSESS§§');
 							return done(null, user);
 						} else {
-							console.log('FAIL!!');
 				      		return done(null, false);
 						}
 					});
@@ -76,13 +64,15 @@ module.exports = function (passport){
 	passport.use(new FacebookStrategy({
     clientID: '449983121860985',
     clientSecret: '592186645310e89533f50f3afa1b7535',
-    callbackURL: "/auth/facebook/callback",
+    callbackURL: "http://localhost:3000/auth/facebook/callback",
     enableProof: false,
     profileFields: ['id', 'name', 'emails']
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({ facebookId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }, function (err, user) {
-    	return done(err, user);
+    		//console.log('user: '+user);
+    		console.log('error: '+ err);
+    		return done(err, user);
     });
 
   }
@@ -96,22 +86,9 @@ module.exports = function (passport){
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({ googleId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }, function (err, user) {
+    	console.log('yo: '+user);
       	return done(err, user);
     });
   }
 ));
 };
-//{ googleId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }
-// mysql_functions.getUser({username: username}, function(result){
-// 	if(result.error){ return done(result.error); }
-// 	else{
-// 		if(result.rows.length > 1){ return done('Fatal error. Dublicates exist in the database.'); }
-// 		else if(result.rows.length < 1){ return done(null, false, {message: 'Username or password is incorrect.'}); }
-// 		else { // Found user
-// 			if(result.rows[0].password !== password){ return done(null, false, {message: 'Username or password is incorrect.'}); }
-// 			else{ // correct login info
-// 				return done(null, user);
-// 			}
-// 		}
-// 	}
-// });

@@ -12,7 +12,7 @@
 	  .controller('LoginCtrl', LoginCtrl);
 
 	  	/*@ngInject*/
-	  	function LoginCtrl($http, $state, UserService) {
+	  	function LoginCtrl($window, $state, UserService) {
 
 	    	this.login = function(credentials) {
 			    UserService.login(credentials);
@@ -22,12 +22,8 @@
 		    	$state.go('register');
 			};
 
-	    	this.facebook = function() {
-	    		UserService.facebook();
-	    	}
-
 	    }
 
 
-	    LoginCtrl.$inject = ['$http', '$state', 'UserService'];
+	    LoginCtrl.$inject = ['$window', '$state', 'UserService'];
 })();

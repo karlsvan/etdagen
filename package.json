@@ -29,6 +29,7 @@
     "passport-google-oauth": "^0.2.0",
     "passport-local": "^1.0.0",
     "passport-local-authenticate": "^1.0.0",
+    "q": "^1.4.1",
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
