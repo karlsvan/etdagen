@@ -6,6 +6,7 @@
 // logMysql : A boolean value for logging
 var pool 	= require('./mysql_pool'),
 	q       = require('q'),
+	mysql   = require('mysql'),
 	logMysql= require('../config/database').mysql.options.log;
 
 
@@ -59,7 +60,14 @@ addUser: function (user){
 		var sql = 'INSERT INTO bruker (??) VALUES (?);';
 		return new Query(sql,inserts);
 	}
+},
+
+searchAll: function(text,coll){
+	var sql = 'SELECT fornavn, etternavn, email FROM bruker WHERE MATCH (??) AGAINST (?);';
+	var inserts = [coll,text];
+	return new Query(sql,inserts);
 }
+
 
 }
 
