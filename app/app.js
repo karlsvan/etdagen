@@ -72,25 +72,20 @@
         abstract: true,
  	      template: '<ui-view/>',
  	    })
-      .state('users', {
- 	      url: '/users',
-        abstract: true,
- 	      template: '<ui-view/>',
- 	    })
       .state('user.profile', {
  	      url: '/profile',
  	      templateUrl: 'partials/profile/profile.html',
  	      controller: 'ProfileCtrl'
  	    })
-      .state('users.students', {
+      .state('students', {
  	      url: '/students',
  	      templateUrl: 'partials/students/students.html',
  	      controller: 'StudentsCtrl'
  	    })
-      .state('users.search', {
+      .state('search', {
  	      url: '/search',
  	      templateUrl: 'partials/users/search/search.html',
- 	      controller: 'SearchCtrl'
+ 	      controller: 'SearchCtrl as SearchCtrl'
  	    });
 
  	    $mdThemingProvider.theme('default')
