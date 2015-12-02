@@ -6,7 +6,7 @@
 			    <div layout="row" layout-sm="column">
 			      <md-input-container>
 			        <label>Søketekst</label>
-			        <input ng-model="searchText">
+			        <input ng-model="SearchCtrl.searchText" ng-change="SearchCtrl.update()">
 			      </md-input-container>
 			      <md-input-container>
 			        <label>Søk i</label>
@@ -95,7 +95,7 @@
 				<md-divider></md-divider>
 				<div ng-hide="visibleResults == 'Studenter'">
 					<md-subheader class="md-no-sticky">Bedrifter:</md-subheader>
-					<md-list-item ng-repeat="user in SearchCtrl.users | filter:searchText | filter:{usertype:'bedrift'}" ng-click=".">
+					<md-list-item ng-repeat="user in SearchCtrl.users | filter:searchText | filter:{usertype:'bedrift'}" ng-click="">
 						<img src="{{user.img}}" alt="" class="md-avatar">
 						<p>{{user.name}}</p>
 						<i class="fa fa-building"></i>
@@ -104,7 +104,7 @@
 				</div>
 				<div ng-hide="visibleResults == 'Bedrifter'">
 					<md-subheader class="md-no-sticky">Studenter:</md-subheader>
-					<md-list-item ng-repeat="user in SearchCtrl.users | filter:searchText | filter:{usertype:'student'}" ng-click=".">
+					<md-list-item ng-repeat="user in SearchCtrl.users | filter:searchText | filter:{usertype:'student'}" ng-click="">
 						<img src="{{user.img}}" alt="" class="md-avatar">
 						<p>{{user.name}}</p>
 						<i class="fa fa-user"></i>

@@ -133,6 +133,7 @@ app.post('/contact', function (req,res) {
 	});
 });
 
+
 api.get('/news', function (req,res){
 	var news = mysql.get.news(function (error, rows, fields) {
 		res.jsonp(rows);
