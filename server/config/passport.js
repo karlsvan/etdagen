@@ -8,13 +8,12 @@ var db 				 = require('../mysql/mysql_functions'),
 	GoogleStrategy 	 = require('passport-google-oauth').OAuth2Strategy,
 	auth             = require('passport-local-authenticate'),
 	User             = require('./user.js'),
-	sha              = require('./sha1.js');
+	crypto           = require('crypto');
 
 module.exports = function (passport){
 
 	// serializeUser function desides what will be stored in session (req.session.passport.user)
 	passport.serializeUser(function (user, done){
-		console.log('user: '+JSON.stringify(user));
 		done(null, user.id);
 	});
 
@@ -42,10 +41,14 @@ module.exports = function (passport){
 	      	return done(null, false); 
 	      } else {
 	      		if (user.id < 500) {
-				    if (user.password != sha.sha1(password+user.salt) ) { 
-				      	return done(null, false); 
-				    }
-				    return done(null, user);
+	      			var sha1 = crypto.createHash('sha1');
+	      			sha1.update(password+user.salt);
+      				if (user.password != sha1.digest('hex')) { 
+			      		return done(null, false); 
+			    	} else {
+			    		return done(null, user);
+			    	}
+	      		
 				} else {
 					auth.verify(password,{hash:user.password,salt:user.salt},function(err,verified){
 						if(verified){
@@ -70,7 +73,6 @@ module.exports = function (passport){
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({ facebookId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }, function (err, user) {
-    		//console.log('user: '+user);
     		console.log('error: '+ err);
     		return done(err, user);
     });
