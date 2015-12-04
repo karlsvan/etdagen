@@ -17,13 +17,13 @@
 
 	<div id="profile-main" class="container" layout="row" layout-sm="column" layout-align-sm="center center">
 		<div align="center">
-			<div class="md-whiteframe-5dp" id="profile-picture" style="background-image: url(assets/images/avatar.jpg)">
+			<div class="md-whiteframe-5dp" id="profile-picture" style="background-image: url({{user.bilde}})">
 			</div>
-			<h2 class="md-headline">Ola Nordmann</h2>
+			<h2 class="md-headline">{{user.fornavn+' '+user.etternavn}}</h2>
 			<table class="profile-basics-table md-body-2">
 				<tr>
 					<td><i class="fa fa-graduation-cap"></i></td>
-					<td>Elektronikk <span>2018</span></td>
+					<td>{{user.linje}} <span>{{user.utgangsaar}}</span></td>
 				</tr>
 			</table>
 			<md-button>

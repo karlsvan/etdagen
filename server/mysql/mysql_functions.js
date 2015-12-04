@@ -56,14 +56,13 @@ addUser: function (user){
 			values.push(user[key]);
 		}
 		var inserts = [keys,values]
-		console.log(JSON.stringify(inserts));
 		var sql = 'INSERT INTO bruker (??) VALUES (?);';
 		return new Query(sql,inserts);
 	}
 },
 
 searchAll: function(text,coll){
-	var sql = 'SELECT fornavn, etternavn, email FROM bruker WHERE MATCH (??) AGAINST (?);';
+	var sql = 'SELECT id, fornavn, etternavn, email FROM bruker WHERE MATCH (??) AGAINST (?);';
 	var inserts = [coll,text];
 	return new Query(sql,inserts);
 }

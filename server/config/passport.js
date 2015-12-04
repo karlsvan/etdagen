@@ -69,11 +69,16 @@ module.exports = function (passport){
     clientSecret: '592186645310e89533f50f3afa1b7535',
     callbackURL: "http://localhost:3000/auth/facebook/callback",
     enableProof: false,
-    profileFields: ['id', 'name', 'emails']
+    profileFields: ['id', 'name', 'emails','picture.type(large)']
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ facebookId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }, function (err, user) {
-    		console.log('error: '+ err);
+    User.findOrCreate({ 
+    	facebookId: profile.id,
+    	fornavn: profile.name.givenName,
+    	etternavn:profile.name.familyName,
+    	email: profile.emails[0].value,
+    	bilde: profile.photos[0].value 
+    }, function (err, user) {
     		return done(err, user);
     });
 
@@ -87,8 +92,16 @@ module.exports = function (passport){
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ googleId: profile.id,fornavn: profile.name.givenName,etternavn:profile.name.familyName,email: profile.emails[0].value }, function (err, user) {
-    	console.log('yo: '+user);
+  	//vi vil ha størrelse på bildet 200x200px
+  	profile.photos[0].value = profile.photos[0].value.replace('sz=50','sz=200');
+
+    User.findOrCreate({ 
+    	googleId: profile.id,
+    	fornavn: profile.name.givenName,
+    	etternavn:profile.name.familyName,
+    	email: profile.emails[0].value,
+    	bilde: profile.photos[0].value 
+    }, function (err, user) {
       	return done(err, user);
     });
   }

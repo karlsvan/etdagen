@@ -13,7 +13,9 @@ module.exports = {
 		db.findUsers(userSearch).then(function successCB(rows, fields){
 				if(rows.length == 0) {
 					db.addUser(obj).then(function successCB(rows, fields) {
-						callback(null,rows[0]);
+						db.findUsers({id:rows.insertId}).then(function successCB(rows, fields) {
+							callback(null,rows[0]);
+						}, function errorCB(error) {callback(error,null)})
 					},function errorCB (error){
 						callback(error,null);
 					})

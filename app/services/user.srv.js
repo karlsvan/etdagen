@@ -40,7 +40,7 @@
 		  		$http.post('/login',credentials).then(function successCB(res) {
 		  				getUser( function (user,loggedIn,error) {
 			  				loggedIn = 1;
-				      		$state.go('register');
+				      		$state.go('user.profile');
 			      		});
 			      	},function errorCB(res) {
 			      		if(res.data == "Unauthorized"){

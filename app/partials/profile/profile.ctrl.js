@@ -12,12 +12,26 @@
 	  .controller('ProfileCtrl', ProfileCtrl);
 
 		/*@ngInject*/
-	  	function ProfileCtrl($scope) {
+	  	function ProfileCtrl($scope,UserService,$state) {
 		    $scope.awesomeThings = [
 		      'HTML5 Boilerplate',
 		      'AngularJS',
 		      'Karma'
 		    ];
+
+		    $scope.$on('$stateChangeSuccess',
+		    	function(event, toState, toParams, fromState, fromParams){
+		    		UserService.init(function(user,loggedIn,error) {
+		    			if (loggedIn) {
+		    				$scope.user = user;
+		    			} else {
+		    				$state.go('login');
+		    			}
+						
+						});
+		    	});
+
+		    
 		}
-		ProfileCtrl.$inject = ['$scope'];
+		ProfileCtrl.$inject = ['$scope','UserService','$state'];
 })();

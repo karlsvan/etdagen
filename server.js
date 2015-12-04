@@ -66,9 +66,8 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/#/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    	console.log('heyhey');
     	req.sessionOptions.maxAge = 2*24*60*60*1000;
-		res.redirect('/#/register/'+req.user.fornavn);
+		res.redirect('/#/user/profile');
   });
 
 app.get('/auth/google',
@@ -79,7 +78,7 @@ app.get('/auth/google/callback',
   function(req, res) {
     // Successful authentication, redirect home.
     req.sessionOptions.maxAge = 2*24*60*60*1000;
-	res.redirect('/#/register/'+req.user.fornavn);
+	res.redirect('/#/user/profile');
 	});
 
 app.post('/login',
