@@ -56,8 +56,6 @@ app.get('/', function (req ,res){
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
 // ========== App routes ==========
 var api = express.Router();
 
@@ -132,6 +130,14 @@ app.post('/contact', function (req,res) {
 			res.status(200).send(info);
 		}
 	});
+});
+
+app.post('/search', function (req,res) {
+	mysql.searchAll(req.body.text,['fornavn','etternavn','email']).then(function successCB(rows, fields){
+	res.send(rows);
+},function errorCB(err) {
+	res.status(500).send(err);
+});
 });
 
 api.get('/news', function (req,res){

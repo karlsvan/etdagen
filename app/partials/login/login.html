@@ -2,9 +2,9 @@
 	<section class="container-fluid" layout="column" layout-align="center center">
 		<h2 class="md-headline">Logg inn med</h2>
 		<div class="container" layout="row" layout-align="center center">
-			<md-button class="fb-link md-raised" ng-href="../auth/facebook" style="color: #3b5998"><div class="link-img" layout-fill></div></md-button>
-			<md-button class="google-link md-raised" ng-href="../auth/google" style="color: #d62d20"><div class="link-img" layout-fill></div></md-button>
-			<md-button class="ntnu-link md-raised" disabled style="color: #0057e7"><div class="link-img" layout-fill></div></md-button>
+			<md-button class="fb-link md-raised" ng-href="../auth/facebook" style="color: #3b5998" aria-label="fb-login"><div class="link-img" layout-fill></div></md-button>
+			<md-button class="google-link md-raised" ng-href="../auth/google" style="color: #d62d20" aria-label="google-login"><div class="link-img" layout-fill></div></md-button>
+			<md-button class="ntnu-link md-raised" disabled style="color: #0057e7" aria-label="ntnu-login"><div class="link-img" layout-fill></div></md-button>
 		</div>
 		<div class="md-margin" layout="row" layout-align="center center">
 			<div style="width: 100px; height: 1px; background: rgba(50,50,50,0.5);"></div>
@@ -21,7 +21,7 @@
 					<label>Passord</label>
 					<input type="password" ng-model="credentials.password">
 				</md-input-container>
-				<md-button class="md-raised md-primary md-hue-2" type="submit">Logg inn</md-button>
+				<md-button class="md-raised md-primary md-hue-2" type="submit" aria-label="submit">Logg inn</md-button>
 			</form>
 			<div layout="row" layout-margin>
 				<a href="" class="md-body-1">Glemt passord</a><span class="md-body-1" style="margin: 0 1em;">|</span><a href="" ng-click="LOGIN.adduser()" class="md-body-1">Registrer</a>

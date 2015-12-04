@@ -1,0 +1,73 @@
+<div id="et-profile" class="container-fluid" layout="row" layout-align="center center">
+	<!--
+	<div id="profile-container" class="container" layout-align="space-between" layout="row" layout-sm="column">
+		<div class="profile-sidenav" hide-sm>
+			<ul class="md-caption">
+				<li><a href="#"><u>Min profil</u></a></li>
+				<li><a href="#">Bedrifter</a></li>
+				<li><a href="#">Studenter</a></li>
+			</ul>
+		</div>
+		<div hide-gt-sm class="profile-sidenav-sm">NAV</div>
+		<div hide-sm class="vertical-divider md-whiteframe-1dp"></div>
+	-->
+	<!--
+	<div ui-view><h1>UI-VIEW</h1></div>
+	-->
+
+	<div id="profile-main" class="container" layout="row" layout-sm="column" layout-align-sm="center center">
+		<div align="center">
+			<div class="md-whiteframe-5dp" id="profile-picture" style="background-image: url(assets/images/avatar.jpg)">
+			</div>
+			<h2 class="md-headline">Ola Nordmann</h2>
+			<table class="profile-basics-table md-body-2">
+				<tr>
+					<td><i class="fa fa-graduation-cap"></i></td>
+					<td>Elektronikk <span>2018</span></td>
+				</tr>
+			</table>
+			<md-button>
+				<i class="fa fa-pencil"></i> Rediger profil
+			</md-button>
+		</div>
+		<div flex style="width:100%">
+
+
+			<!--
+			<p class="md-caption" style="text-transform: uppercase;">Student</p>
+			-->
+
+			<md-card>
+				<md-card-content>
+					<h2 class="md-title" ng-click="doSomething"><span>
+						<i class="fa fa-pencil"></i>
+					</span>
+						Interesser
+					</h2>
+					<p class="md-body-1">
+						C++
+					</p>
+				</md-card-content>
+			</md-card>
+			<md-card>
+				<md-card-content>
+					<h2 class="md-title">Erfaring</h2>
+					<p class="md-body-1">
+						Studass
+					</p>
+				</md-card-content>
+			</md-card>
+			<md-card>
+				<md-card-content>
+					<h2 class="md-title">Filer</h2>
+					<md-list>
+						<md-list-item ng-click="hei">
+							<md-icon class="fa fa-file-pdf-o"></md-icon>
+							<p>cv.pdf</p>
+						</md-list-item>
+					</md-list>
+				</md-card-content>
+			</md-card>
+		</div>
+	</div>
+</div>

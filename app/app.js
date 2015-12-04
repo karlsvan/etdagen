@@ -66,6 +66,26 @@
  	    	url: '/contact',
  	    	templateUrl: 'partials/contact/contact.html',
  	    	controller: 'ContactCtrl as contact'
+ 	    })
+      .state('user', {
+ 	      url: '/user',
+        abstract: true,
+ 	      template: '<ui-view/>',
+ 	    })
+      .state('user.profile', {
+ 	      url: '/profile',
+ 	      templateUrl: 'partials/profile/profile.html',
+ 	      controller: 'ProfileCtrl'
+ 	    })
+      .state('students', {
+ 	      url: '/students',
+ 	      templateUrl: 'partials/students/students.html',
+ 	      controller: 'StudentsCtrl'
+ 	    })
+      .state('search', {
+ 	      url: '/search',
+ 	      templateUrl: 'partials/users/search/search.html',
+ 	      controller: 'SearchCtrl as SearchCtrl'
  	    });
 
  	    $mdThemingProvider.theme('default')

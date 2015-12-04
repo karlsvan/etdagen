@@ -1,0 +1,140 @@
+<div class="container-fluid" layout="column" layout-align="center center">
+	<div class="container-fluid" id="profiles-container">
+		<section layout="row" layout-align="center center" flex>
+			<div class="md-padding" ng-cloak>
+			  <div>
+			    <div layout="row" layout-sm="column">
+			      <md-input-container>
+			        <label>Søketekst</label>
+			        <input ng-model="SearchCtrl.searchText" ng-change="SearchCtrl.update()">
+			      </md-input-container>
+			      <md-input-container>
+			        <label>Søk i</label>
+			        <md-select ng-model="SearchCtrl.userField">
+			          <md-option ng-repeat="field in SearchCtrl.fields" value="{{field.fieldname}}">
+			            {{field.fieldname}}
+			          </md-option>
+			        </md-select>
+			      </md-input-container>
+						<md-input-container>
+			        <label>Vis</label>
+			        <md-select ng-model="visibleResults">
+			          <md-option>Alle</md-option>
+								<md-option>Bedrifter</md-option>
+								<md-option>Studenter</md-option>
+			        </md-select>
+			      </md-input-container>
+			    </div>
+			  </div>
+			</div>
+
+<!--
+			<div flex style="max-width: 800px; margin:0px 10px;" layout="row">
+				<div flex>
+					<md-input-container>
+					  <label>Søk</label>
+					  <input type="text" ng-model="searchText">
+					</md-input-container>
+					<md-input-container>
+						<label>hei{{SearchCtrl.userState}}</label>
+						<md-select ng-model="SearchCtrl.userState">
+		          <md-option ng-repeat="state in SearchCtrl.states" value="{{state.abbrev}}">
+		            {{state.abbrev}}
+		          </md-option>
+		        </md-select>
+					</md-input-container>
+				</div>
+				<div flex-shrink layout layout-align="center center">
+
+					<!--   Søkefiltrering
+					       https://docs.angularjs.org/api/ng/filter/filter
+					-->
+
+
+
+					<!-- old menu
+					<md-menu>
+					 <md-button id="filter-button" ng-click="$mdOpenMenu($event)" aria-label="Søkefilter">
+						 <md-icon md-svg-src="assets\images\icons\ic_filter_list_black_24px.svg"></md-icon>
+						 <a hide-sm>filter</a>
+					 </md-button>
+					 <md-menu-content>
+					   <md-menu-item>
+					     <md-button ng-click="doSomething()" aria-label="Do something">
+					       <p>Bedrifter</p>
+					     </md-button>
+					   </md-menu-item>
+						 <md-menu-item>
+					     <md-button ng-click="doSomething()" aria-label="Do something">
+					       <p>Personer</p>
+					     </md-button>
+					   </md-menu-item>
+						 <md-menu-divider></md-menu-divider>
+						 <md-menu-item>
+					     <md-button ng-click="doSomething()" aria-label="Do something">
+					       <p>Linje</p>
+					     </md-button>
+					   </md-menu-item>
+						 <md-menu-item>
+					     <md-button ng-click="doSomething()" aria-label="Do something">
+					       <p>Epostadresse</p>
+					     </md-button>
+					   </md-menu-item>
+						 <md-menu-item>
+					     <md-button ng-click="doSomething()" aria-label="Do something">
+					       <p>Venn med Glenn</p>
+					     </md-button>
+					   </md-menu-item>
+					 </md-menu-content>
+					</md-menu>
+					-->
+
+		</section>
+		<section>
+			<md-list>
+				<md-divider></md-divider>
+				<div ng-hide="visibleResults == 'Studenter'">
+					<md-subheader class="md-no-sticky">Bedrifter:</md-subheader>
+					<md-list-item ng-repeat="user in SearchCtrl.users | filter:searchText | filter:{usertype:'bedrift'}" ng-click="">
+						<img src="{{user.img}}" alt="" class="md-avatar">
+						<p>{{user.name}}</p>
+						<i class="fa fa-building"></i>
+					</md-list-item>
+					<md-divider></md-divider>
+				</div>
+				<div ng-hide="visibleResults == 'Bedrifter'">
+					<md-subheader class="md-no-sticky">Studenter:</md-subheader>
+					<md-list-item ng-repeat="user in SearchCtrl.users | filter:searchText | filter:{usertype:'student'}" ng-click="">
+						<img src="{{user.img}}" alt="" class="md-avatar">
+						<p>{{user.name}}</p>
+						<i class="fa fa-user"></i>
+					</md-list-item>
+				</div>
+				<!--
+				<md-list-item ng-click="hei">
+					<img src="assets\images\avatar.jpg" class="md-avatar">
+					<p>Nordmann og co.</p>
+					<i class="fa fa-building"></i>
+				</md-list-item>
+				<md-list-item ng-click="hei">
+					<img src="assets\images\avatar.jpg" class="md-avatar">
+					<p>Mann fra Nord</p>
+					<i class="fa fa-building"></i>
+				</md-list-item>
+				<md-divider></md-divider>
+  			<md-subheader class="md-no-sticky">Personer:</md-subheader>
+				<md-list-item ng-click="hei">
+					<img src="assets\images\avatar.jpg" class="md-avatar">
+					<p>Ola Nordmann</p>
+					<i class="fa fa-user"></i>
+				</md-list-item>
+				<md-list-item ng-click="hei">
+					<img src="assets\images\avatar.jpg" class="md-avatar">
+					<p>Per Nordmann</p>
+					<i class="fa fa-user"></i>
+				</md-list-item>
+			-->
+			</md-list>
+		</section>
+	</div>
+</div>
