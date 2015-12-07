@@ -1,11 +1,13 @@
+'use strict';
+
 var fs     = require('fs'),
     crypto = require('crypto');
 
 
-module.exports =  function SSOclient(data, sign64, clientip, target){
+function SSOclient(data, sign64, clientip, target){
     // set initial values
     this.loginvalues = {};
-    this.crtfile = "/sti/til/din/lokale/crtfil";
+    this.crtfile = "/home/etstaff/etdagen.no/etdagen/server/config/innsida.crt";
     this.verifies = false;
     this.oktime = false;
     this.reason = "";
@@ -13,15 +15,16 @@ module.exports =  function SSOclient(data, sign64, clientip, target){
     this.oktarget = false;
 
     // parse the data-field
-    dataar=data.split(",");
-    while(k=dataar.shift()){
+    var dataar=data.split(",");
+    while(dataar.length > 0) {
+      var k = dataar.shift();
       this.loginvalues[k] = dataar.shift(); 
       // if this value is a list
       if(this.loginvalues[k].indexOf(":") != -1){
         this.loginvalues[k] = this.loginvalues[k].split(":");
       }
-    }
-
+    };
+      
 
     // check the target
     if(this.loginvalues['target'] == target){
@@ -31,8 +34,10 @@ module.exports =  function SSOclient(data, sign64, clientip, target){
     }
    
     // check the timestamp
-    tdif = this.loginvalues['time'] - ((new Date()).getTime/1000));
-    if ((tdif > -10) && (tdif < 10)) {
+    var d = Date.now();
+    var tdif = this.loginvalues['time'] - d/1000;
+    console.log('query time: '+this.loginvalues['time']+' | time diff: '+tdif);
+    if ((tdif > -120) && (tdif < 120)) {
       this.oktime = true;
     } else {
       this.reason = "wrong time";
@@ -45,55 +50,41 @@ module.exports =  function SSOclient(data, sign64, clientip, target){
 
     var verifier = crypto.createVerify('SHA1');
     verifier.update(data);
-    var res = verifier.verify(key, sig, 'base64');
+    var res = verifier.verify(key, sign64, 'base64');
 
     if (res) {
       this.verifies = true;
     } else {
       this.verifies = false;
     }
-
-    // get the public key
-    /*
-    fp = fopen(this.crtfile, "r");
-    cert = fread(fp, 8192);
-    fclose(fp);
-    pubkey = openssl_get_publickey(cert);
-   
-    // verify the sig
-    if(openssl_verify("data", sign, pubkey) != 1){
-      this.verifies = false;
-      this.reason = "could not verify signature";
-    } else {
-      this.verifies = true;
-    }
-    openssl_free_key(pubkey);*/
   }
 
-  SSOclient.prototype.verifies = function(first_argument) {
+  SSOclient.prototype.getVerifies = function() {
     return this.verifies;
   }
 
-  SSOclient.prototype.oktime = function(first_argument) {
+  SSOclient.prototype.getOktime = function() {
     return this.oktime;
   };
 
-  SSOclient.prototype.oktarget = function(first_argument) {
+  SSOclient.prototype.getOktarget = function() {
     return this.oktarget;
   };
 
-  SSOclient.prototype.loginvalues = function(first_argument) {
+  SSOclient.prototype.getLoginvalues = function() {
     return this.loginvalues;
   };
 
-  SSOclient.prototype.reason = function(first_argument) {
+  SSOclient.prototype.getReason = function() {
     return this.reason;
   };
 
-  SSOclient.prototype.oklogin = function(first_argument) {
-    if (this.oktime() && this.verifies() && this.oktarget()) {
+  SSOclient.prototype.oklogin = function() {
+    if (this.oktime && this.verifies && this.oktarget) {
       return true;
     } else {
       return false;
     }
   };
+
+  module.exports = SSOclient;

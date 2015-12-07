@@ -11,6 +11,7 @@ var express		= require('express'),
 	cookieParser = require('cookie-parser'), 
 	mail        = require('./server/config/mail.js'),
 	User        = require('./server/config/user.js'),
+	SSOclient   = require('./server/config/SSOclient.js'),
 	passport    = require('passport');require('./server/config/passport.js')(passport);
 
 // ========== Initialize and setup express app ==========
@@ -80,6 +81,18 @@ app.get('/auth/google/callback',
     req.sessionOptions.maxAge = 2*24*60*60*1000;
 	res.redirect('/#/user/profile');
 	});
+
+app.get('/auth/ntnu/callback', function (req, res) {
+	console.log('req: '+JSON.stringify(req.query));
+	var sso = new SSOclient(req.query.data, req.query.sign, null, 'etdagentest');
+	if (sso.oklogin()) {
+		console.log('FYTTEHÆLVETE');
+	} else {
+		console.log('hmm: '+ sso.getReason());
+
+	}
+
+})
 
 app.post('/login',
 	passport.authenticate('local', { failureFlash: false }),
