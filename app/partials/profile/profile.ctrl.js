@@ -33,5 +33,5 @@
 
 		    
 		}
-		ProfileCtrl.$inject = ['$scope','UserService','$state'];
+		ProfileCtrl.$inject = ['$scope', 'UserService', '$state'];
 })();

@@ -71,6 +71,17 @@ app.get('/auth/facebook/callback',
 		res.redirect('/#/user/profile');
   });
 
+app.get('/auth/feide',
+  passport.authorize('feideconnect'));
+
+app.get('/auth/feide/callback',
+  passport.authorize('feideconnect', { failureRedirect: '/#/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    	req.sessionOptions.maxAge = 2*24*60*60*1000;
+		res.redirect('/#/user/profile');
+  });
+
 app.get('/auth/google',
   passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' }));
 
@@ -86,9 +97,9 @@ app.get('/auth/ntnu/callback', function (req, res) {
 	console.log('req: '+JSON.stringify(req.query));
 	var sso = new SSOclient(req.query.data, req.query.sign, null, 'etdagentest');
 	if (sso.oklogin()) {
-		console.log('FYTTEHÆLVETE');
+		console.log('init session here');
 	} else {
-		console.log('hmm: '+ sso.getReason());
+		console.log('hmm?: '+ sso.getReason());
 
 	}
 

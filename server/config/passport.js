@@ -6,6 +6,7 @@ var db 				 = require('../mysql/mysql_functions'),
 	LocalStrategy	 = require('passport-local').Strategy,
 	FacebookStrategy = require('passport-facebook').Strategy,
 	GoogleStrategy 	 = require('passport-google-oauth').OAuth2Strategy,
+	FeideStrategy    = require('passport-feideconnect-oauth2').Strategy,
 	auth             = require('passport-local-authenticate'),
 	User             = require('./user.js'),
 	crypto           = require('crypto');
@@ -28,7 +29,7 @@ module.exports = function (passport){
 		usernameField: 'username', 	// might use 'email'
 		passwordField: 'password',
 		passReqToCallback: false	// might use true
-	}
+	};
 	
 
 	// ========== Passport strategies ==========
@@ -62,6 +63,15 @@ module.exports = function (passport){
 	    });
 	  }
 	));
+
+	passport.use(new FeideConnectStrategy({
+		clientID: '4525efbc-5c83-4362-b20a-ac46a3a78993',
+    	clientSecret: '6eff9820-fc3e-46d1-a76d-bad845a68196',
+    	callbackURL: "http://localhost:3000/auth/feide/callback"
+	},
+	function(accessToken, refreshToken, profile, done){
+		console.log('profile: '+JSON.stringify(profile));
+	}));
 
 
 	passport.use(new FacebookStrategy({
