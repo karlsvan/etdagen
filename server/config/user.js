@@ -9,6 +9,8 @@ module.exports = {
 			var userSearch = {facebookId:obj.facebookId};
 		} else if (obj.googleId) {
 			var userSearch = {googleID:obj.googleId};
+		} else if (obj.feideId) {
+			var userSearch = {feideId:obj.feideId};
 		}
 		db.findUsers(userSearch).then(function successCB(rows, fields){
 				if(rows.length == 0) {

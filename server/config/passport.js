@@ -64,13 +64,21 @@ module.exports = function (passport){
 	  }
 	));
 
-	passport.use(new FeideConnectStrategy({
+	passport.use(new FeideStrategy({
 		clientID: '4525efbc-5c83-4362-b20a-ac46a3a78993',
     	clientSecret: '6eff9820-fc3e-46d1-a76d-bad845a68196',
     	callbackURL: "http://localhost:3000/auth/feide/callback"
 	},
 	function(accessToken, refreshToken, profile, done){
-		console.log('profile: '+JSON.stringify(profile));
+		User.findOrCreate({ 
+	    	feideId: profile.id,
+	    	fornavn: profile.name.givenName,
+	    	etternavn:profile.name.familyName,
+	    	email: profile.emails[0],
+	    	bilde: profile.photos[0] 
+    	}, function (err, user) {
+    		return done(err, user);
+    	});
 	}));
 
 

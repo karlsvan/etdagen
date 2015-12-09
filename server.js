@@ -72,10 +72,10 @@ app.get('/auth/facebook/callback',
   });
 
 app.get('/auth/feide',
-  passport.authorize('feideconnect'));
+  passport.authenticate('feideconnect'));
 
 app.get('/auth/feide/callback',
-  passport.authorize('feideconnect', { failureRedirect: '/#/login' }),
+  passport.authenticate('feideconnect', { failureRedirect: '/#/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
     	req.sessionOptions.maxAge = 2*24*60*60*1000;
