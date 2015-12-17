@@ -4,9 +4,9 @@
 // Vendor dependencies and configurations.
 var mysql 			= require('mysql');
 
-var mysql_config 	= [require('../config/database').mysql.connection_vars, 
-					   require('../config/database').mysql.connection_opt]
-	, logMysql		= require('../config/database').mysql.options.log;
+var mysql_config 	= [require('../config/database').mysql.connection_vars,
+					   require('../config/database').mysql.connection_opt],
+	logMysql		= require('../config/database').mysql.options.log;
 
 
 // ========== Mysql connection pool ==========
@@ -28,8 +28,6 @@ if(logMysql){
 	pool.on('connection', function (connection){
 		console.log('Connection established (thread ' + connection.threadId + ')');
 	});
-};
-
+}
 
 module.exports = pool;
-

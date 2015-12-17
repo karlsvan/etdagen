@@ -2,7 +2,7 @@
 *					Gulpfile
 *	==================================================
 *	@plugins:
-*		see package.json under dev-dependencies 
+*		see package.json under dev-dependencies
 *		for available plugins.
 *	@tasks:
 *		see gulp-tasks/ for available tasks
@@ -26,6 +26,7 @@
 /*
 *	Gulp plugins and app configurations
 */
+'use strict';
 var gulp 		= require('gulp'),
 	$			= require('./gulp/plugins');
 

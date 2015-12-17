@@ -5,9 +5,9 @@
 // pool 	: A mysql connection pool
 // logMysql : A boolean value for logging
 var pool 	= require('./mysql_pool'),
-	q       = require('q'),
-	mysql   = require('mysql'),
-	logMysql= require('../config/database').mysql.options.log;
+	q       = require('q');
+	// mysql   = require('mysql'),
+	// logMysql= require('../config/database').mysql.options.log;
 
 
 // ========== Middleware function ==========
@@ -37,41 +37,30 @@ function append(){
 }
 
 // ========== Exports ==========
-
-
 module.exports = {
+	findUsers: function (specs){
+		//var sql = specs ? append('SELECT * FROM bruker WHERE ?', specs) : append('SELECT * FROM bruker');
+		//console.log('sql: '+sql);
+		return new Query('SELECT * FROM bruker WHERE ?',specs);
+	},
 
-findUsers: function (specs){
-	//var sql = specs ? append('SELECT * FROM bruker WHERE ?', specs) : append('SELECT * FROM bruker');
-	//console.log('sql: '+sql);
-	return new Query('SELECT * FROM bruker WHERE ?',specs);
-},
-
-addUser: function (user){
-	if(!user) return q.defer().reject(new Error('No user specified in function addUser')).promise;
-	else {
-		var keys = [], values = [];
-		for(var key in user) {
-			keys.push(key);
-			values.push(user[key]);
+	addUser: function (user){
+		if(!user) return q.defer().reject(new Error('No user specified in function addUser')).promise;
+		else {
+			var keys = [], values = [];
+			for(var key in user) {
+				keys.push(key);
+				values.push(user[key]);
+			}
+			var inserts = [keys,values];
+			var sql = 'INSERT INTO bruker (??) VALUES (?);';
+			return new Query(sql,inserts);
 		}
-		var inserts = [keys,values]
-		var sql = 'INSERT INTO bruker (??) VALUES (?);';
+	},
+
+	searchAll: function(text,coll){
+		var sql = 'SELECT id, fornavn, etternavn, email FROM bruker WHERE MATCH (??) AGAINST (?);';
+		var inserts = [coll,text];
 		return new Query(sql,inserts);
 	}
-},
-
-searchAll: function(text,coll){
-	var sql = 'SELECT id, fornavn, etternavn, email FROM bruker WHERE MATCH (??) AGAINST (?);';
-	var inserts = [coll,text];
-	return new Query(sql,inserts);
-}
-
-
-}
-
-
-
-
-
-
+};
