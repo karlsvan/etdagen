@@ -3,5 +3,8 @@
 	"undef": true,
 	"unused": true,
 	"trailing": true,
-	"strict": true
+	"strict": true,
+	"globals": {
+		"angular": false
+	}
 }

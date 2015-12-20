@@ -1,13 +1,13 @@
 module.exports = function(gulp, $, appConfig){
 	'use strict';
-	
+
 	var servePort = 5000,
 		proxyHost = 'localhost';
 
 	/*
 	*	@task: serve.browserSync
 	*	@description:
-	*		Use browser-sync to serve the frontend
+	*		This task will use the browser-sync plugin to serve up a local version of the site.
 	*/
 	return function browserSync(callback){
 		var port = process.env.PORT || 3000;
@@ -17,7 +17,7 @@ module.exports = function(gulp, $, appConfig){
 			notify: true
 		});
 		callback(null);
-	}
-}
+	};
+};
 
 module.exports.preTasks = ['serve:nodemon'];

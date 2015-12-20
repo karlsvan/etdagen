@@ -10,7 +10,8 @@ module.exports = function(gulp, $, appConfig){
 	/*
 	*	@task: inject.angular
 	*	@description:
-	*		Inject references to the angular applications into index.ejs
+	*	This task will inject all js files under components/, partials/ and services/ as
+	*	references into the file index.ejs inside the angular:js tag.
 	*/
 	return function angular(callback){
 		gulp.src(fileToInjectInto)
@@ -18,5 +19,5 @@ module.exports = function(gulp, $, appConfig){
 			.pipe($.inject(gulp.src(filesToInject, {read:false}), injectOptions))
 			.pipe(gulp.dest($.path.dirname(fileToInjectInto)));
 			callback(null);
-	}
-}
+	};
+};

@@ -3,7 +3,7 @@ module.exports = function(gulp, $, appConfig){
 
 	var appFile 	= $.path.join(appConfig.app, 'app.js'),
 		distFolder 	= appConfig.dist;
-		
+
 	/*
 	*	@task: source.angular
 	*	@description:
@@ -16,6 +16,6 @@ module.exports = function(gulp, $, appConfig){
 			.pipe($.uglify())
 			.pipe($.sourcemaps.write('.'))
 			.pipe(gulp.dest(distFolder));
-			callback(null);	
-	}
-}
+			callback(null);
+	};
+};

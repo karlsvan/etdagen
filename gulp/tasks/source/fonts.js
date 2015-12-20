@@ -5,7 +5,7 @@ module.exports = function(gulp, $, appConfig){
 		fontsFiles 			= $.path.join(appConfig.root, 'bower_components', 'font-awesome', 'fonts', '*.{eot,svg,ttf,woff,woff2}'),
 		fontDistFolder 		= $.path.join(appConfig.dist, 'assets', 'font'),
 		fontsDistFolder 	= $.path.join(appConfig.dist, 'assets', 'fonts');
-		
+
 	/*
 	*	@task: source.fonts
 	*	@description:
@@ -23,5 +23,5 @@ module.exports = function(gulp, $, appConfig){
 				.pipe(gulp.dest(fontsDistFolder));
 				callback(null);
 		});
-	}
-}
+	};
+};

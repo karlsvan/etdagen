@@ -14,7 +14,9 @@ module.exports = function(gulp, $, appConfig){
 	/*
 	*	@task: inject:annotate
 	*	@description:
-	*		This task will inject dependencies into angular related functions
+	*		This task will atomatically inject dependencies into functions in all js
+	*		files inside components/, partials/ and services/ and the app.js file.
+	*		Make sure the comment ngInject comment is present in the files.
 	*/
 	return function annotate(callback){
 		for(var i=0; i<filesToBeAnnotated.length; i++){
@@ -23,5 +25,5 @@ module.exports = function(gulp, $, appConfig){
 				.pipe(gulp.dest(annotatedDist[i]));
 		}
 		callback(null);
-	}
-}
+	};
+};

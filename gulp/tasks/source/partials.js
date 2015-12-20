@@ -19,5 +19,5 @@ module.exports = function(gulp, $, appConfig){
 				.pipe(gulp.dest(partialsDistFolder));
 				callback(null);
 		});
-	}
-}
+	};
+};

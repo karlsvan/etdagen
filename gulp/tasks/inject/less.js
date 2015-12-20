@@ -16,7 +16,7 @@ module.exports = function(gulp, $, appConfig){
 	/*
 	*	@task: inject.less
 	*	@description:
-	*		Inject references to less files into main.less
+	*		This task will inject all less files as references into main.less.
 	*/
 	return function less(callback){
 		gulp.src(fileToInjectInto)

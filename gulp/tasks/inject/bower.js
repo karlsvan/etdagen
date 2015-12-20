@@ -2,17 +2,17 @@ module.exports = function(gulp, $, appConfig){
 	'use strict';
 
 	var fileToInjectInto 	= appConfig.indexFile,
-		wiredepOptions 		= { 
+		wiredepOptions 		= {
 			overrides: {
 				'font-awesome': { 'main': [ 'css/font-awesome.css' ] },
 				'angular-material': { 'main': [ 'angular-material.js', 'angular-material.css' ] }
 			}
 		};
-		
+
 	/*
 	*	@task: inject.bower
 	*	@description:
-	*		Inject references to bower dependencies into index.ejs
+	*		This task will inject all bower dependencies as references into index.ejs inside the bower tag.
 	*/
 	return function bower(callback){
 		gulp.src(fileToInjectInto)
@@ -20,5 +20,5 @@ module.exports = function(gulp, $, appConfig){
 			.pipe($.wiredep(wiredepOptions))
 			.pipe(gulp.dest($.path.dirname(fileToInjectInto)));
 			callback(null);
-	}
-}
+	};
+};

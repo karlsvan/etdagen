@@ -7,10 +7,10 @@ module.exports = function(gulp, $, appConfig){
 		outputDestinations 	= [ $.path.join(appConfig.dist, 'assets', 'js'),
 								$.path.join(appConfig.dist, 'assets', 'css') ];
 
-	/*	
+	/*
 	*	@task: useref
 	*	@description:
-	*		Use references in index.ejs to get files, concat and copy to dist
+	*		Thiss task will use references in index.ejs to get files, concat and copy to dist.
 	*/
 	return function useref(callback){
 		var assets = $.useref.assets();
@@ -31,5 +31,5 @@ module.exports = function(gulp, $, appConfig){
 				.pipe(gulp.dest(distFolder));
 				callback(null);
 		});
-	}
-}
+	};
+};

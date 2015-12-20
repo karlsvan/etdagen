@@ -1,13 +1,13 @@
 module.exports = function(gulp, $, appConfig){
 	'use strict';
-	
+
 	var filesToWatch 	= [ $.path.join(appConfig.root, 'server', '**/*'),
 							$.path.join(appConfig.root, '*.{json, js, md, ico}') ];
 
 	/*
 	*	@task: serve.nodemon
 	*	@description:
-	*		Use nodemon to serve the backend
+	*		This task uses the nodemon plugin to serve up backend calls for the site.
 	*/
 	return function nodemon(callback){
 		var initialized = false;
@@ -25,7 +25,7 @@ module.exports = function(gulp, $, appConfig){
 			console.log('server restarted');
 			setTimeout(function () {
 				$.browserSync.reload({ stream: false });
-	    	}, 1000);
+			}, 1000);
 		});
-	}
-}
+	};
+};
