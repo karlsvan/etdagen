@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
 
 
-        <title ng-bind="app.name +' '+ app.year"></title>
+        <title ng-bind="app.name +' '+ app.year">E&amp;T-dagen</title>
         <meta name="description" content="E&amp;T-dagen er en rekrutteringsdag arrangert av studenter ved faglinjen Elektronikk på NTNU.">
         <meta keywords="E&amp;T-dagen, Rekrutteringsdag, NTNU, Glassgården, Elektronikk">
         <base href="/">
@@ -38,7 +38,7 @@
         <!-- Application content here -->
         <navbar style="z-index:10;"></navbar>
         <md-content ui-view style="overflow: hidden;" flex></md-content>
-        <footer class="container-fluid container-padding" layout="column" layout-align="center" style="background: #333; color: rgba(255,255,255,0.87);" ng-cloak>
+        <footer ng-cloak class="container-fluid container-padding" layout="column" layout-align="center" style="background: #333; color: rgba(255,255,255,0.87);" ng-cloak>
             <p class="md-body-2"><i class="fa fa-copyright"></i> <span ng-bind="app.year+' '+app.name"></span></p>
         </footer>
 
@@ -77,11 +77,13 @@
             <script src="partials/about/about.ctrl.js"></script>
             <script src="partials/board/board.ctrl.js"></script>
             <script src="partials/companies/companies.ctrl.js"></script>
-            <script src="partials/login/login.ctrl.js"></script>
-            <script src="partials/register/register.ctrl.js"></script>
-            <script src="partials/profile/profile.ctrl.js"></script>
-            <script src="partials/home/home.ctrl.js"></script>
             <script src="partials/contact/contact.ctrl.js"></script>
+            <script src="partials/home/home.ctrl.js"></script>
+            <script src="partials/login/login.ctrl.js"></script>
+            <script src="partials/profile/profile.ctrl.js"></script>
+            <script src="partials/register/register.ctrl.js"></script>
+            <script src="partials/search/search.ctrl.js"></script>
+            <script src="partials/user/user.ctrl.js"></script>
             <script src="services/board.srv.js"></script>
             <script src="services/companies.srv.js"></script>
             <script src="services/news.srv.js"></script>
