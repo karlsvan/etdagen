@@ -12,15 +12,9 @@
 	  .controller('SearchCtrl', SearchCtrl);
 
 		/*@ngInject*/
-	  	function SearchCtrl(SearchService) {
-	  		var boye = this;
-	  		this.update = function() {
-	  			SearchService.update(this.searchText,this.userField,function(users){
-	  				boye.users = users;
-	  			});
-	  		};
+		function SearchCtrl() {
 
-		    this.users = [
+			this.users = [
 					{img: '/assets/images/avatar.jpg', name: 'Eric Northman', usertype: 'student'},
 					{img: '/assets/images/avatar.jpg', name: 'Winston Eastman', usertype: 'student'},
 					{img: '/assets/images/avatar.jpg', name: 'Kanye Westman', usertype: 'student'},
@@ -30,11 +24,11 @@
 					{img: '/assets/images/avatar.jpg', name: 'Northman AS', usertype: 'bedrift'},
 					{img: '/assets/images/avatar.jpg', name: 'Winston Company', usertype: 'bedrift'}
 				];
-
-			this.userField = '';
-			this.searchText = '';
-
-        this.fields = ('Alt Navn Epostadresser Hemmelig').split(' ').map(function (field) { return { fieldname: field }; });
+			this.searchOptions = {
+				searchString: '',
+				companies: true,
+				students: true
+			};
 		}
-		SearchCtrl.$inject = ['SearchService'];
+		SearchCtrl.$inject = [];
 })();

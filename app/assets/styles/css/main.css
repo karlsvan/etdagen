@@ -377,12 +377,6 @@ h2:hover {
 h2:hover span {
   display: inline;
 }
-#profiles-container {
-  max-width: 1024px;
-}
-#filter-button {
-  min-width: 0px;
-}
 .animate-repeat {
   line-height: 40px;
   list-style: none;

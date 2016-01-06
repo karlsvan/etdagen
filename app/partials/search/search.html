@@ -1,54 +1,30 @@
 <div class="container-fluid" layout="column" layout-align="center center">
-	<div class="container-fluid" id="profiles-container">
-		<section layout="row" layout-align="center center" flex>
-			<div class="md-padding" ng-cloak>
-			  <div>
-			    <div layout="row" layout-sm="column">
-			      <md-input-container>
-			        <label>Søketekst</label>
-			        <input ng-model="SearchCtrl.searchText" ng-change="SearchCtrl.update()">
-			      </md-input-container>
-			      <md-input-container>
-			        <label>Søk i</label>
-			        <md-select ng-model="SearchCtrl.userField">
-			          <md-option ng-repeat="field in SearchCtrl.fields" value="{{field.fieldname}}">
-			            {{field.fieldname}}
-			          </md-option>
-			        </md-select>
-			      </md-input-container>
-						<md-input-container>
-			        <label>Vis</label>
-			        <md-select ng-model="visibleResults">
-			          <md-option>Alle</md-option>
-								<md-option>Bedrifter</md-option>
-								<md-option>Studenter</md-option>
-			        </md-select>
-			      </md-input-container>
-			    </div>
-			  </div>
-			</div>
-		</section>
-		<section>
+	<div class="container" layout="row">
+		<div style="width: 340px; padding: 0 2em;" layout="column">
+			<md-input-container>
+				<label>Brukere</label>
+				<input type="text" ng-model="SearchCtrl.searchString" ng-change="SearchCtrl.udate()">
+			</md-input-container>
+			<md-checkbox ng-model="SearchCtrl.searchOptions.companies" aria-label="companies-checkbox">Bedrifter</md-checkbox>
+			<md-checkbox ng-model="SearchCtrl.searchOptions.students" aria-label="students-checkbox">Studenter</md-checkbox>
+		</div>
+		<md-content flex>
 			<md-list>
-				<md-divider></md-divider>
-				<div ng-hide="visibleResults == 'Studenter'">
-					<md-subheader class="md-no-sticky">Bedrifter:</md-subheader>
-					<md-list-item ng-repeat="user in SearchCtrl.users | filter:searchText | filter:{usertype:'bedrift'}" ng-click="">
+				<div ng-show="SearchCtrl.searchOptions.companies">
+					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchString  | filter:{usertype:'bedrift'}" ng-click="">
 						<img src="{{user.img}}" alt="" class="md-avatar">
 						<p>{{user.name}}</p>
 						<i class="fa fa-building"></i>
 					</md-list-item>
-					<md-divider></md-divider>
 				</div>
-				<div ng-hide="visibleResults == 'Bedrifter'">
-					<md-subheader class="md-no-sticky">Studenter:</md-subheader>
-					<md-list-item ng-repeat="user in SearchCtrl.users | filter:searchText | filter:{usertype:'student'}" ng-click="">
+				<div ng-show="SearchCtrl.searchOptions.students">
+					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchString | filter:{usertype:'student'}" ng-click="">
 						<img src="{{user.img}}" alt="" class="md-avatar">
 						<p>{{user.name}}</p>
 						<i class="fa fa-user"></i>
 					</md-list-item>
 				</div>
 			</md-list>
-		</section>
+		</md-content>
 	</div>
 </div>
