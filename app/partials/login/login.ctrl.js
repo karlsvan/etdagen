@@ -12,7 +12,7 @@
 	  .controller('LoginCtrl', LoginCtrl);
 
 	  	/*@ngInject*/
-	  	function LoginCtrl($window, $state, UserService) {
+	  	function LoginCtrl($state, UserService) {
 
 	    	this.login = function(credentials) {
 			    UserService.login(credentials);
@@ -25,5 +25,5 @@
 	    }
 
 
-	    LoginCtrl.$inject = ['$window', '$state', 'UserService'];
+	    LoginCtrl.$inject = ['$state', 'UserService'];
 })();

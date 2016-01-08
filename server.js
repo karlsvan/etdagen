@@ -104,6 +104,33 @@ app.post('/search', function (req,res) {
 });
 });
 
+app.post('/forgot', function (req,res) {
+	User.findOne({email:req.body.text}, function(error,user) {
+		if (error) {
+			console.log(error);
+			res.status(500).send(error);
+		} else if (user){
+			console.log('id: '+user.id);
+			User.updatePass(user.id, function(error,newPass) {
+				if (error) {
+					console.log(error);
+				} else {
+					mail.passwordMail(user.email, newPass, function(error,info) {
+						if (error) {console.log(error);}
+						else {
+							res.status(200).send('success');
+						}
+						
+					})
+
+				}
+			});
+		} else {
+			res.status(404).send('User not found')
+		}
+	})
+});
+
 api.get('/user', function (req,res){
 	if(req.user) {
 		var obj = req.user;

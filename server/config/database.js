@@ -3,9 +3,9 @@
 module.exports = {
 	mysql: {
 		connection_vars: {
-			host     : 'db10.subsys.no',
-			user     : 'etdagen',
-			password : 'gyfScY',
+			host     : '62.122.255.21',
+			user     : 'etstaff',
+			password : 'teknologi',
 			database : 'etdagen'
 		},
 		connection_opt: {

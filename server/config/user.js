@@ -1,7 +1,7 @@
 'use strict';
 
 var db       = require('../mysql/mysql_functions.js'),
-	//q        = require('q'),
+	crypto   = require('crypto'),
 	auth     = require('passport-local-authenticate');
 
 module.exports = {
@@ -68,7 +68,36 @@ module.exports = {
 		});
 	},
 
-	// update: function(obj,callback) {
-	//
-	// }
+	update: function(id,obj,callback) {
+		db.updateUser(id,obj).then(function(rows) {
+			console.log(JSON.stringify(rows));
+			callback(null,rows[0]);
+		}, function(error) {
+			console.log(error);
+			callback(error,null);
+		});
+	},
+
+	updatePass: function(id,callback) {
+		var newPass='',userobj={};
+		crypto.randomBytes(9, function(ex, buf) {
+			newPass = buf.toString('base64');
+			console.log('pass: '+newPass+'  length: '+newPass.length);
+
+			auth.hash(newPass, function(err, hashed) {
+				userobj.password = hashed.hash; // Hashed password
+				userobj.salt = hashed.salt; // Salt
+
+				db.updateUser(id,userobj).then(function(rows) {
+					callback(null,newPass);
+				}, function(error) {
+					console.log(error);
+					callback(error,null);
+				});
+			
+			});
+
+		});
+		
+	}
 };

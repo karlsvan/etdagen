@@ -14,11 +14,13 @@ var //db                = require('../mysql/mysql_functions'),
 module.exports = function (passport){
 	// serializeUser function desides what will be stored in session (req.session.passport.user)
 	passport.serializeUser(function (user, done){
+		console.log('zez');
 		done(null, user.id);
 	});
 
 	// deserializeUser function takes the serialized user and finds the matching user in the database. User object is attached to req.user.
 	passport.deserializeUser(function (id, done){
+		console.log('dez');
 		User.findOne({id:id}, function (error, user){
 			done(error, user);
 		});

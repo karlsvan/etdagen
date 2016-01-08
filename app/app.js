@@ -68,6 +68,11 @@
 			templateUrl: 'partials/search/search.html',
 			controller: 'SearchCtrl as SearchCtrl'
 		})
+		.state('forgot', {
+			url: '/forgot',
+			templateUrl: 'partials/forgot/forgot.html',
+			controller: 'forgotCtrl as FORGOT'
+		})
 		.state('user', {
 			resolve: {
 				allowedUsers: function(){

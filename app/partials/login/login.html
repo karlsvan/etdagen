@@ -15,11 +15,11 @@
 			<form name="loginForm" class="login-content" ng-submit="LOGIN.login(credentials)" layout="column" layout-fill>
 				<md-input-container>
 					<label>Epost</label>
-					<input type="text" ng-model="credentials.username">
+					<input type="email" ng-model="credentials.username" required>
 				</md-input-container>
 				<md-input-container>
 					<label>Passord</label>
-					<input type="password" ng-model="credentials.password">
+					<input type="password" ng-model="credentials.password" required>
 				</md-input-container>
 				<md-button class="md-raised md-primary md-hue-2" type="submit" aria-label="submit">Logg inn</md-button>
 			</form>
