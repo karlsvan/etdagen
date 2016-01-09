@@ -21,5 +21,8 @@
     "angular-touch": "~1.4.5",
     "angular-ui-router": "~0.2.15",
     "font-awesome": "~4.4.0"
+  },
+  "resolutions": {
+    "angular": "^1.4.8"
   }
 }

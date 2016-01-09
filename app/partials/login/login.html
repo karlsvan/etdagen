@@ -15,16 +15,16 @@
 			<form name="loginForm" class="login-content" ng-submit="LOGIN.login(credentials)" layout="column" layout-fill>
 				<md-input-container>
 					<label>Epost</label>
-					<input type="text" ng-model="credentials.username">
+					<input type="email" ng-model="credentials.username" required>
 				</md-input-container>
 				<md-input-container>
 					<label>Passord</label>
-					<input type="password" ng-model="credentials.password">
+					<input type="password" ng-model="credentials.password" required>
 				</md-input-container>
 				<md-button class="md-raised md-primary md-hue-2" type="submit" aria-label="submit">Logg inn</md-button>
 			</form>
 			<div layout="row" layout-margin>
-				<a href="" class="md-body-1">Glemt passord</a><span class="md-body-1" style="margin: 0 1em;">|</span><a href="" ng-click="LOGIN.adduser()" class="md-body-1">Registrer</a>
+				<a ui-sref="forgot" class="md-body-1">Glemt passord</a><span class="md-body-1" style="margin: 0 1em;">|</span><a href="" ng-click="LOGIN.adduser()" class="md-body-1">Registrer</a>
 			</div>
 		</md-content>
 	</section>

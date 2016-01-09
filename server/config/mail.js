@@ -5,7 +5,7 @@ var nodemailer  = require('nodemailer'),
 
 
 var transporter = nodemailer.createTransport(smtpPool({
-		host: 'post.subsys.no',
+		host: 'smtp.webhuset.no',
 		port: 465,
 		secure: true,
 			auth: {
@@ -18,7 +18,7 @@ module.exports = {
 	sendMail: function(data, callback) {
 		var mailOptions = {
 			from: 'E&T-kontakt <kontakt@etdagen.no>',
-			to: 'post@etdagen.no',
+			to: 'glenn.fk@etdagen.no',
 			subject: data.subject,
 			text: 'Fra: ' + data.name + '\nMail: ' + data.email + '\nMelding: ' + data.message
 		};
@@ -30,5 +30,23 @@ module.exports = {
 				callback(null,info);
 			}
 		});
+	},
+
+	passwordMail: function(address, password, callback) {
+		var mailOptions = {
+			from: 'E&T-kontakt <kontakt@etdagen.no>',
+			to: address,
+			subject: 'Nytt passord @ etdagen.no',
+			html:'<br> Ditt nye passord hos E&T Dagen er:  <b>'+password+'<b>'
+		};
+
+		transporter.sendMail(mailOptions,function(error, info){
+			if(error){
+				callback(error,null);
+			} else {
+				callback(null,info);
+			}
+		});
 	}
+
 };

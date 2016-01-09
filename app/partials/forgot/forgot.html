@@ -1,0 +1,13 @@
+<div id="page-forgot" class="container-fluid" flex>
+	<section class="container-fluid" layout="column" layout-align="center center">
+		<md-content layout-fill layout-margin class="container container-padding section-padding md-hue-1 forgot-container" layout="column" layout-align="center center">
+			<form name="forgotForm" class="login-content" ng-submit="FORGOT.getNewPass(email)" layout="column" layout-fill>
+				<md-input-container>
+					<label>Epost</label>
+					<input type="email" ng-model="email.text" required>
+				</md-input-container>
+				<md-button class="md-raised md-primary md-hue-2" type="submit" aria-label="submit">Få nytt passord</md-button>
+			</form>
+		</md-content>
+	</section>
+</div>

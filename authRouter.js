@@ -6,8 +6,9 @@ var express   = require('express'),
 
 auth.post('/login',
 	passport.authenticate('local', { failureFlash: false }),
-	function (req) {
+	function (req,res) {
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
+		res.redirect('/#/user/profile');
 	});
 
 auth.get('/facebook',
@@ -15,7 +16,7 @@ auth.get('/facebook',
 
 auth.get('/facebook/callback',
 	passport.authenticate('facebook', { failureRedirect: '/#/login' }),
-	function(req, res) {
+	function (req, res) {
 		// Successful authentication, redirect home.
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
 		res.redirect('/#/user/profile');
@@ -26,7 +27,7 @@ auth.get('/feide',
 
 auth.get('/feide/callback',
 	passport.authenticate('feideconnect', { failureRedirect: '/#/login' }),
-	function(req, res) {
+	function (req, res) {
 		// Successful authentication, redirect home.
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
 		res.redirect('/#/user/profile');
@@ -37,7 +38,7 @@ auth.get('/google',
 
 auth.get('/google/callback',
 	passport.authenticate('google', { failureRedirect: '/login' }),
-	function(req, res) {
+	function (req, res) {
 		// Successful authentication, redirect home.
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
 		res.redirect('/#/user/profile');

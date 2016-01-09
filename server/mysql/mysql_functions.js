@@ -5,9 +5,9 @@
 // pool 	: A mysql connection pool
 // logMysql : A boolean value for logging
 var pool 	= require('./mysql_pool'),
-	q       = require('q');
-	// mysql   = require('mysql'),
-	// logMysql= require('../config/database').mysql.options.log;
+	mysql   = require('mysql'),
+	q       = require('q'),
+	logMysql= require('../config/database').mysql.options.log;
 
 
 // ========== Middleware function ==========
@@ -61,6 +61,12 @@ module.exports = {
 	searchAll: function(text,coll){
 		var sql = 'SELECT id, fornavn, etternavn, email FROM bruker WHERE MATCH (??) AGAINST (?);';
 		var inserts = [coll,text];
+		return new Query(sql,inserts);
+	},
+
+	updateUser: function(id, inserts) {
+		var sql = 'UPDATE bruker SET ? WHERE id='+id;
+		console.log('sql: '+mysql.format(sql, inserts));
 		return new Query(sql,inserts);
 	}
 };
