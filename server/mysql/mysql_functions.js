@@ -18,6 +18,7 @@ function Query(sql, inserts){
 		if(connectionError){ defered.reject(connectionError); }
 		else{
 			connection.query(sql, inserts, function(error, rows, fields){
+				//console.log(JSON.stringify(rows[0]))
 				connection.release();
 				if(error){ defered.reject(error); }
 				else { defered.resolve(rows, fields); }
@@ -66,13 +67,24 @@ module.exports = {
 
 	updateUser: function(id, inserts) {
 		var sql = 'UPDATE bruker SET ? WHERE id='+id;
-		//console.log('sql: '+mysql.format(sql, inserts));
 		return new Query(sql,inserts);
 	},
 
 	getProfile: function(id) {
-		console.log('id: '+id);
-		var sql = 'SELECT * FROM profil WHERE bruker_id='+id;
+		var sql = 'SELECT '
+			+'bruker.fornavn, '
+			+'bruker.etternavn, '
+			+'bruker.tlf, '
+			+'bruker.email, '
+			+'bruker.adresse, '
+			+'bruker.utgangsaar, '
+			+'bruker.linje, '
+			+'bruker.bilde, '
+			+'bruker.fodselsdato, '
+			+'profil.bio, '
+			+'profil.filer, '
+			+'profil.cards '
+		+'FROM bruker INNER JOIN profil ON bruker.id=profil.bruker_id WHERE bruker_id='+id;
 		return new Query(sql);
 	}
 };

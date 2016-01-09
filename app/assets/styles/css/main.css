@@ -293,27 +293,6 @@ h2:hover {
 h2:hover span {
   display: inline;
 }
-#googlemaps {
-  width: 500px;
-  height: 400px;
-}
-.circular {
-  border-radius: 50%;
-  overflow: hidden;
-}
-.circular-200 {
-  width: 200px;
-  height: 200px;
-}
-.facebook-link {
-  color: #133783;
-  font-weight: 900;
-}
-.animate-repeat {
-  line-height: 40px;
-  list-style: none;
-  box-sizing: border-box;
-}
 .video-wrapper {
   position: relative;
   padding-bottom: 56.25%;
@@ -381,6 +360,27 @@ h2:hover span {
     background-position: 100% 50%;
     padding: 3% 0;
   }
+}
+#googlemaps {
+  width: 500px;
+  height: 400px;
+}
+.circular {
+  border-radius: 50%;
+  overflow: hidden;
+}
+.circular-200 {
+  width: 200px;
+  height: 200px;
+}
+.facebook-link {
+  color: #133783;
+  font-weight: 900;
+}
+.animate-repeat {
+  line-height: 40px;
+  list-style: none;
+  box-sizing: border-box;
 }
 .forgot-container {
   max-width: 30em;

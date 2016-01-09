@@ -16,15 +16,19 @@
 			var index = allowedUsers.indexOf($stateParams.username);
 			if (index > -1) $scope.username = $stateParams.username;
 			else $state.go('home');*/
+			
 
 			$scope.$on('$stateChangeSuccess',
 		    	function(event, toState, toParams, fromState, fromParams){
 		    		if(toState.name == "user"){
 			    		SearchService.getProfile(toParams.id, function(res) {
-		    				alert(JSON.stringify(res))
+			    			//alert('filer: '+user.filer)
+		    				$scope.user = res; 
 		    			});
 		    		}
 		    	});
+
+			
 
 		}
 		userCtrl.$inject = ['$stateParams', '$scope', 'allowedUsers', '$state', 'SearchService'];

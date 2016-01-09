@@ -66,7 +66,8 @@ app.get('/logout', function (req, res){
 
 app.get('/:id', function (req,res) {
 	User.getProfile(req.params.id, function(error,profile) {
-		console.log('profil: '+JSON.stringify(profile));
+		profile.filer = JSON.parse(profile.filer);
+		profile.cards = JSON.parse(profile.cards);
 		res.status(200).send(profile);
 	})
 })
