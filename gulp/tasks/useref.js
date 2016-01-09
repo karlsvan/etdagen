@@ -22,7 +22,7 @@ module.exports = function(gulp, $, appConfig){
 				.pipe($.sourcemaps.init())
 				// If CSS-file, use autoprefixer and minify
 				.pipe($.if('*.css', $.autoprefixer(autoprefixerOptions)))
-				.pipe($.if('*.css', $.minifyCss()))
+				.pipe($.if('*.css', $.cssnano()))
 				// If JS-file, uglify
 				.pipe($.if('*.js', $.uglify()))
 				.pipe($.sourcemaps.write('.'))

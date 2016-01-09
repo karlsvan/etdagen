@@ -1,8 +1,9 @@
 module.exports = function(gulp, $, appConfig){
 	'use strict';
 
-	var partialFiles 		= $.path.join(appConfig.app, 'partials', '**/*.html'),
-		partialsDistFolder 	= $.path.join(appConfig.dist, 'partials');
+	var partialFiles        = $.path.join(appConfig.app, 'partials', '**/*.html'),
+		partialsDistFolder  = $.path.join(appConfig.dist, 'partials'),
+		htmlminOptions      = {collapseWhitespace: true, removeComments: true};
 
 	/*
 	*	@task: source.partials
@@ -15,7 +16,7 @@ module.exports = function(gulp, $, appConfig){
 			$.util.log('Copying and minifying partials...');
 			gulp.src(partialFiles)
 				.pipe($.plumber())
-				.pipe($.minifyHtml())
+				.pipe($.htmlmin(htmlminOptions))
 				.pipe(gulp.dest(partialsDistFolder));
 				callback(null);
 		});
