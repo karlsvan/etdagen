@@ -21,6 +21,14 @@
 						});
 						callback(users);
 					});
+				}, 
+
+				getProfile : function(id, callback) {
+					$http.get('/'+id).then(function(res) {
+						callback(res.data);
+					}, function(res) {
+						alert(res.data);
+					})
 				}
 			};
 		}

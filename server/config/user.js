@@ -99,5 +99,15 @@ module.exports = {
 
 		});
 		
+	},
+
+	getProfile: function(id,callback) {
+		db.getProfile(id).then(function(rows) {
+
+			console.log('hei: '+JSON.stringify(rows[0]));
+			callback(null,rows[0]);
+		}, function(error) {
+
+		})
 	}
 };
