@@ -1,6 +1,9 @@
 <div id="page-contact" class="container-fluid" flex="column">
 
 	<section class="container-fluid section-padding" layout="column" layout-align="center center">
+		<md-button class="md-fab md-mini md-accent md-hue-2" ng-click="showTabDialog($event)" style="position: absolute; right: 2rem;">
+			<i class="fa fa-external-link"></i>
+		</md-button>
 		<div class="container" layout="row" layout-align="center center" layout-wrap>
 			<div layout="column" ng-repeat="person in contact.boards.y16" style="margin: 1em 2em;" layout-align="center center">
 				<div class="circular circular-200">
@@ -18,7 +21,7 @@
 		<div class="container" layout-gt-md="row" layout="column" layout-align="center center">
 			<div flex class="container-padding" layout="column" layout-align="center start">
 				<div class="md-title">Kontakt oss</div>
-				<p class="md-body-1">Hvis du har spørsmål eller andre hendvendelser angående Elektronikk- og Teknologidagen kan du sende oss en melding, så skal vi svare så fort som mulig. Du kan også ta kontakt på vår <a href="https://www.facebook.com/etdagen/" class="facebook-link">facebook</a> side. Der vil det bli lagt ut informasjon fortløpende.</p>
+				<p class="md-body-1">Hvis du har sp&oslash;rsmål eller andre hendvendelser angående Elektronikk- og Teknologidagen kan du sende oss en melding, så skal vi svare så fort som mulig. Du kan også ta kontakt på vår <a href="https://www.facebook.com/etdagen/" class="facebook-link">facebook</a> side. Der vil det bli lagt ut informasjon fortløpende.</p>
 				<p class="md-body-1">Vennligst fyll ut alle feltene</p>
 			</div>
 			<form name="form" flex class="container-padding" novalidate ng-submit="contact.sendMail()" layout-fill layout="column">
