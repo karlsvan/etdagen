@@ -14,7 +14,7 @@
 						var users = [];
 						res.data.forEach(function(element,index) {
 							users[index]= {
-								img: '/assets/images/avatar.jpg',
+								img: element.bilde || '/assets/images/avatar.jpg',
 								name: element.fornavn+' '+element.etternavn,
 								usertype: 'student'
 							};
