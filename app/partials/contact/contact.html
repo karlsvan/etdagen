@@ -21,7 +21,7 @@
 				<p class="md-body-1">Hvis du har spørsmål eller andre hendvendelser angående Elektronikk- og Teknologidagen kan du sende oss en melding, så skal vi svare så fort som mulig. Du kan også ta kontakt på vår <a href="https://www.facebook.com/etdagen/" class="facebook-link">facebook</a> side. Der vil det bli lagt ut informasjon fortløpende.</p>
 				<p class="md-body-1">Vennligst fyll ut alle feltene</p>
 			</div>
-			<form name="form" flex class="container-padding" novalidate ng-submit="contact.sendMail()" layout-fill>
+			<form name="form" flex class="container-padding" novalidate ng-submit="contact.sendMail()" layout-fill layout="column">
 				<md-input-container>
 				    <label>Navn/Firma</label>
 				    <input ng-model="form.name" required>
