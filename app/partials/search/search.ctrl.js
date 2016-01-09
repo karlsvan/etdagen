@@ -19,7 +19,6 @@
 				SearchService.update(self.searchOptions.searchString, null, function(users){
 					self.users = users;
 				});
-				console.log(self.users);
 			};
 
 			// this.users = [

@@ -59,14 +59,20 @@ module.exports = {
 	},
 
 	searchAll: function(text,coll){
-		var sql = 'SELECT id, fornavn, etternavn, email FROM bruker WHERE MATCH (??) AGAINST (?);';
+		var sql = 'SELECT id, fornavn, etternavn, email, bilde FROM bruker WHERE MATCH (??) AGAINST (?);';
 		var inserts = [coll,text];
 		return new Query(sql,inserts);
 	},
 
 	updateUser: function(id, inserts) {
 		var sql = 'UPDATE bruker SET ? WHERE id='+id;
-		console.log('sql: '+mysql.format(sql, inserts));
+		//console.log('sql: '+mysql.format(sql, inserts));
 		return new Query(sql,inserts);
+	},
+
+	getProfile: function(id) {
+		console.log('id: '+id);
+		var sql = 'SELECT * FROM profil WHERE bruker_id='+id;
+		return new Query(sql);
 	}
 };

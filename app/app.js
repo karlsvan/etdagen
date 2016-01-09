@@ -79,7 +79,7 @@
 					return ['MyBawsUser', 'SuperbUser'];
 				}
 			},
-			url: '/:username',
+			url: '/:id',
 			templateUrl: 'partials/user/user.html',
 			controller: 'userCtrl'
 		});
