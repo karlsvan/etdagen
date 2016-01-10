@@ -68,6 +68,7 @@ app.get('/:id', function (req,res) {
 	User.getProfile(req.params.id, function(error,profile) {
 		profile.filer = JSON.parse(profile.filer);
 		profile.cards = JSON.parse(profile.cards);
+		profile.tags = profile.tags.split(',');
 		res.status(200).send(profile);
 	})
 })
