@@ -1,0 +1,95 @@
+<div>
+  <section class="section-padding" layout="column" layout-align="center center" style="background: #eee;">
+    <div class="container" layout-align="start left">
+      <fieldset>
+        <legend>Knytt kontoer</legend>
+        <div class="container" layout-align="start left">
+          <md-button class="fb-link md-raised" ng-href="../auth/facebook" style="color: #3b5998" aria-label="fb-login"><div class="link-img" layout-fill></div></md-button>
+          <md-button class="google-link md-raised" ng-href="../auth/google" style="color: #d62d20" aria-label="google-login"><div class="link-img" layout-fill></div></md-button>
+          <md-button class="ntnu-link md-raised" ng-href="../auth/feide" style="color: #0057e7" aria-label="ntnu-login"><div class="link-img" layout-fill></div></md-button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Profilbilde</legend>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <md-button type="submit">Last opp</md-button>
+        </form>
+      </fieldset>
+      <fieldset>
+        <legend>CV</legend>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <md-button type="submit">Last opp</md-button>
+        </form>
+      </fieldset>
+      <form name="userSettings">
+        <fieldset>
+          <legend>Kontaktinformasjon</legend>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm="65">
+              <label>Adresse</label>
+              <input ng-model="user.address">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Postnummer</label>
+              <input name="postalCode" ng-model="user.postalCode"
+                     ng-pattern="/^[0-9]{4}$/">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm="20">
+              <label>Poststed</label>
+              <input ng-model="user.city">
+            </md-input-container>
+          </div>
+          <md-input-container class="md-block">
+            <label>Telefonnummer</label>
+            <input ng-model="user.phone"
+                   ng-pattern="/^[0-9]{8}$/">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Epostadresse</label>
+            <input ng-model="user.phone"
+                   ng-pattern="/^[0-9]{8}$/">
+          </md-input-container>
+        </fieldset>
+        <fieldset>
+          <legend>Generell informasjon</legend>
+          <fieldset class="custom-user-field">
+            <legend>
+              <input type="text" value="Blokk 1">
+            </legend>
+            <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm="20">
+                <label>Felt 1</label>
+                <input ng-model="user.customField1.name">
+              </md-input-container>
+              <md-input-container class="md-block" flex>
+                <input ng-model="user.customField1.val">
+              </md-input-container>
+            </div>
+          </fieldset>
+          <md-button>Legg til blokk</md-button>
+        </fieldset>
+        <fieldset>
+          <legend>Tagger</legend>
+
+
+          <md-chips ng-model="SettingsCtrl.selectedVegetables" md-autocomplete-snap="" md-transform-chip="SettingsCtrl.transformChip($chip)" md-require-match="SettingsCtrl.autocompleteDemoRequireMatch">
+            <md-autocomplete md-selected-item="SettingsCtrl.selectedItem" md-search-text="SettingsCtrl.searchText" md-items="item in SettingsCtrl.querySearch(SettingsCtrl.searchText)" md-item-text="item.name" placeholder="legg til tags">
+              <span md-highlight-text="SettingsCtrl.searchText">{{item.name}} :: {{item.type}}</span>
+            </md-autocomplete>
+            <md-chip-template>
+              <span>
+                <strong>{{$chip.name}}</strong>
+                <em>({{$chip.type}})</em>
+              </span>
+            </md-chip-template>
+          </md-chips>
+
+
+        </fieldset>
+        <md-button class="md-raised md-primary">Lagre profil</md-button>
+      </form>
+    </div>
+  </section>
+</div>
