@@ -24,11 +24,21 @@
 				}, 
 
 				getProfile : function(id, callback) {
-					$http.get('/'+id).then(function(res) {
+					$http.get('/user/'+id).then(function(res) {
+						console.log(res.data);
 						callback(res.data);
 					}, function(res) {
-						alert(res.data);
-					})
+						console.log(res.data);
+					});
+				},
+
+				getTags: function(callback) {
+					$http.get('/tags').then(function(res) {
+						//console.log(res.data);
+						callback(res.data);
+					}, function(res) {
+						console.log('getTags error: '+res.data);
+					});
 				}
 			};
 		}

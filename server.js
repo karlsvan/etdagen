@@ -64,14 +64,22 @@ app.get('/logout', function (req, res){
 	req.logout();
 });
 
-app.get('/:id', function (req,res) {
+app.get('/user/:id', function (req,res) {
 	User.getProfile(req.params.id, function(error,profile) {
 		profile.filer = JSON.parse(profile.filer);
 		profile.cards = JSON.parse(profile.cards);
 		profile.tags = profile.tags.split(',');
 		res.status(200).send(profile);
 	})
-})
+});
+
+app.get('/tags', function (req,res) {
+	mysql.getAllTags().then(function(tags) {
+		res.status(200).send(tags);
+	}, function(error) {
+		console.log(error);
+	});
+});
 
 app.post('/register',
 	function (req,res) {

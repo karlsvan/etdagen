@@ -13,6 +13,7 @@ var pool 	= require('./mysql_pool'),
 // ========== Middleware function ==========
 // The Query function queries the database with <sql> and calls the callback function with the arguments of the resulting query(error, rows, fields).
 function Query(sql, inserts){
+	//console.log('sql: '+sql);
 	var defered = q.defer();
 	pool.getConnection(function(connectionError, connection){
 		if(connectionError){ defered.reject(connectionError); }
@@ -94,8 +95,9 @@ module.exports = {
 		return new Query(sql);
 	},
 
-	searchForTag: function(text) {
-		var sql = 'SELECT id, navn FROM tags WHERE MATCH navn AGAINST "'+text+'";';
+	getAllTags: function() {
+		var sql = 'SELECT navn FROM tags;';
+		//console.log(sql);
 		return new Query(sql);
 	},
 

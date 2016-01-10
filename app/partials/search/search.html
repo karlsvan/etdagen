@@ -7,6 +7,20 @@
 			</md-input-container>
 			<md-checkbox ng-model="SearchCtrl.searchOptions.companies" aria-label="companies-checkbox">Bedrifter</md-checkbox>
 			<md-checkbox ng-model="SearchCtrl.searchOptions.students" aria-label="students-checkbox">Studenter</md-checkbox>
+			<md-checkbox ng-model="SearchCtrl.searchOptions.tags" aria-label="tags-checkbox">Tags</md-checkbox>
+
+			<md-chips ng-model="SearchCtrl.selectedTags" md-autocomplete-snap="" md-transform-chip="SearchCtrl.transformChip($chip)" md-require-match="SearchCtrl.autocompleteDemoRequireMatch" ng-if="SearchCtrl.searchOptions.tags" >
+      			<md-autocomplete md-selected-item="SearchCtrl.selectedItem" md-search-text="SearchCtrl.searchText" md-items="item in SearchCtrl.querySearch(SearchCtrl.searchText)" md-item-text="item.navn" placeholder="legg til tags">
+        			<span md-highlight-text="SearchCtrl.searchText">{{item.navn}}</span>
+      			</md-autocomplete>
+     			 <md-chip-template>
+      				<span>
+          				<strong>{{$chip.navn}}</strong>
+          				<em ng-if="$chip.type == 'new'">({{$chip.type}})</em>
+        			</span>
+      			</md-chip-template>
+    		</md-chips>
+
 		</div>
 		<md-content flex>
 			<md-list>
