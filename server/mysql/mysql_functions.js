@@ -103,6 +103,11 @@ module.exports = {
 
 	addTag: function(name) {
 		var sql = 'INSERT INTO tags navn VALUES "'+name+'";'
+	},
+
+	getCompanies: function() {
+		var sql = 'SELECT * from bruker WHERE status="bedriftadmin";';
+		return new Query(sql);
 	}
 
 

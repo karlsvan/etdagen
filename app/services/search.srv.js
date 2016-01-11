@@ -30,15 +30,6 @@
 					}, function(res) {
 						console.log(res.data);
 					});
-				},
-
-				getTags: function(callback) {
-					$http.get('/tags').then(function(res) {
-						//console.log(res.data);
-						callback(res.data);
-					}, function(res) {
-						console.log('getTags error: '+res.data);
-					});
 				}
 			};
 		}

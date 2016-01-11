@@ -159,6 +159,16 @@ api.get('/user', function (req,res){
 	}
 });
 
+api.get('/companies', function (req,res) {
+	mysql.getCompanies().then(function(compObj) {
+		delete compObj.password;
+		delete compObj.salt;
+		res.json(compObj);
+	},function(error) {
+		console.log(error);
+	})
+})
+
 api.get('/company', function (req,res){
 	//var comp = mysql.get.company();
 	var c = {
