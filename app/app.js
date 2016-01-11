@@ -26,11 +26,12 @@
 	}
 	/*@ngInject*/
 	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
-		$urlRouterProvider.otherwise('/home');
+		$urlRouterProvider.otherwise('/');
 
 		$stateProvider
+		// Main navigation pages
 		.state('home', {
-			url: '/home',
+			url: '/',
 			templateUrl: 'partials/home/home.html',
 			controller: 'HomeCtrl as pagehome'
 		})
@@ -49,6 +50,9 @@
 			templateUrl: 'partials/contact/contact.html',
 			controller: 'ContactCtrl as contact'
 		})
+
+
+		// Secondary pages
 		.state('login', {
 			url: '/login',
 			templateUrl: 'partials/login/login.html',
@@ -69,6 +73,11 @@
 			templateUrl: 'partials/forgot/forgot.html',
 			controller: 'forgotCtrl as FORGOT'
 		})
+		.state('announcement', {
+			url: '/announcement/:id',
+			templateUrl: 'partials/announcement/announcement.html',
+			controller: 'announcementCtrl as announcement'
+		})
 		.state('user', {
 			resolve: {
 				allowedUsers: function(){
@@ -80,6 +89,8 @@
 			controller: 'userCtrl'
 		});
 
+
+		// Theming for the app
 		$mdThemingProvider.theme('default')
 		.primaryPalette('red')
 		.accentPalette('brown')

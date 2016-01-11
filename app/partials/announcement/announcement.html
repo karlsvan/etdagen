@@ -1,0 +1,39 @@
+<section class="container-fluid" layout="column" layout-align="start center">
+	<div class="container" layout-gt-md="row" layout="column">
+		<md-card layout="row" layout-gt-md="column" layout-align="space-around" layout-wrap layout-padding>
+			<div style="background: #aaa; width: 100px; height: 100px; margin-right: 1em;" flex="none"></div>
+			<div layout="column">
+				<div class="md-title">Company name</div>
+				<div class="md-body-1">Trondheim area, 7030</div>
+				<div class="md-body-1">job-id: 53810</div>
+			</div>
+			<div layout="column">
+				<div class="md-title">Kontaktperson</div>
+				<div class="md-body-1">Gunnar Bovim Knutsen</div>
+				<div class="md-body-1">Personalansvarlig</div>
+				<div class="md-body-1">92928686<span style="margin:0 0.5em;">|</span>bovim@bank.no</div>
+			</div>
+			<div layout="column">
+				<md-button class="md-primary md-raised">SØK</md-button>
+				<div class="md-body-2">Frist: <span class="subhead">{{announcement.deadline}}</span></div>
+			</div>
+		</md-card>
+		<md-card layout-padding>
+			<div class="md-headline">{{announcement.title}} <span class="md-subhead">{{announcement.employmentType}}</span></div>
+			<md-content border-radius: 5px;" layout="row" layout-align="space-between" layout-wrap>
+				<div layout="column" layout-align="space-between" layout-wrap ng-repeat="counter in [1,2,3]">
+					<div layout="row" layout-margin ng-repeat="obj in announcement.ex | limitTo: 4*counter" ng-if="$index>4*(counter-1)-1">
+						<span class="md-body-1"><span style="display: inline-block; min-width: 70px; margin-right: 1em;color: #999; line-height: 1;">{{obj.key}}</span>{{obj.value}}</span>
+					</div>
+				</div>
+			</md-content>
+			<p style="white-space: pre-line;" class="md-body-1">{{announcement.description}}</p>
+			<div>
+				<span class="md-body-2">Nøkkelord: </span>
+				<span ng-repeat="industry in announcement.industries" class="md-body-1" style="background: #d99; border-radius: 1em; padding: 0.2em 0.5em; margin: 0 0.2em">
+					{{industry}}
+				</span>
+			</div>
+		</md-card>
+	</div>
+</section>
