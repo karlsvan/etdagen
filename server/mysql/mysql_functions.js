@@ -13,6 +13,7 @@ var pool 	= require('./mysql_pool'),
 // ========== Middleware function ==========
 // The Query function queries the database with <sql> and calls the callback function with the arguments of the resulting query(error, rows, fields).
 function Query(sql, inserts){
+	//console.log('sql: '+sql);
 	var defered = q.defer();
 	pool.getConnection(function(connectionError, connection){
 		if(connectionError){ defered.reject(connectionError); }
@@ -71,20 +72,38 @@ module.exports = {
 	},
 
 	getProfile: function(id) {
-		var sql = 'SELECT '
-			+'bruker.fornavn, '
-			+'bruker.etternavn, '
-			+'bruker.tlf, '
-			+'bruker.email, '
-			+'bruker.adresse, '
-			+'bruker.utgangsaar, '
-			+'bruker.linje, '
-			+'bruker.bilde, '
-			+'bruker.fodselsdato, '
-			+'profil.bio, '
-			+'profil.filer, '
-			+'profil.cards '
-		+'FROM bruker INNER JOIN profil ON bruker.id=profil.bruker_id WHERE bruker_id='+id;
+		var sql = 'SELECT ' 
+		+'bruker.fornavn, '
+		+'bruker.etternavn, '
+		+'bruker.tlf, '
+		+'bruker.email, '
+		+'bruker.adresse, '
+		+'bruker.utgangsaar, '
+		+'bruker.linje, '
+		+'bruker.bilde, '
+		+'bruker.fodselsdato, '
+		+'profil.bio, '
+		+'profil.filer, '
+		+'profil.cards, '
+		+'GROUP_CONCAT(tags.navn) AS tags '
+		+'FROM bruker INNER JOIN profil ON bruker.id = profil.bruker_id LEFT JOIN bruker_tags ON bruker.id = bruker_tags.bruker_id LEFT JOIN tags ON bruker_tags.tag_id = tags.id WHERE bruker.id='+id;
 		return new Query(sql);
+	},
+
+	searchByTag: function(tag) {
+		var sql = 'SELECT bruker.fornavn, bruker.etternavn, bruker.bilde, tags.navn AS tag_navn FROM bruker LEFT JOIN bruker_tags ON bruker.id = bruker_tags.bruker_id LEFT JOIN tags ON bruker_tags.tag_id = tags.id WHERE tags.navn="'+tag+'";';
+		return new Query(sql);
+	},
+
+	getAllTags: function() {
+		var sql = 'SELECT navn FROM tags;';
+		//console.log(sql);
+		return new Query(sql);
+	},
+
+	addTag: function(name) {
+		var sql = 'INSERT INTO tags navn VALUES "'+name+'";'
 	}
+
+
 };
