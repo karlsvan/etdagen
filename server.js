@@ -115,6 +115,15 @@ app.post('/contact', function (req,res) {
 
 app.post('/search', function (req,res) {
 	mysql.searchAll(req.body.text,['fornavn','etternavn','email']).then(function successCB(rows, fields){
+
+	//tags are returned as comma separated string, and must be array
+	rows = rows.map(function(row,index,array) {
+		if(row.tags) {
+			row.tags = row.tags.split(',');
+		}
+		return row;
+	});
+	
 	res.send(rows);
 },function errorCB(err) {
 	res.status(500).send(err);

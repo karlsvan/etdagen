@@ -16,7 +16,8 @@
 							users[index]= {
 								img: element.bilde || '/assets/images/avatar.jpg',
 								name: element.fornavn+' '+element.etternavn,
-								usertype: 'student'
+								usertype: 'søker',
+								tags: element.tags
 							};
 						});
 						callback(users);
