@@ -123,7 +123,7 @@ app.post('/search', function (req,res) {
 		}
 		return row;
 	});
-	
+
 	res.send(rows);
 },function errorCB(err) {
 	res.status(500).send(err);
@@ -152,7 +152,7 @@ app.post('/forgot', function (req,res) {
 				}
 			});
 		} else {
-			res.status(404).send('User not found')
+			res.sendStatus(404);
 		}
 	})
 });

@@ -37,7 +37,7 @@
 
 
 		}
-		SearchCtrl.$inject = ['SearchService','$scope'];
+		SearchCtrl.$inject = ['SearchService', '$scope'];
 
 		function filterTags(){
 			return function(users, selectedTags) {
