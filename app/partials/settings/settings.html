@@ -17,7 +17,11 @@
               </div>
             </div>
             <md-card-actions layout="row" layout-align="end center">
-              <md-button type="submit">Last opp</md-button>
+              <div ng-controller="UploadController">
+                <md-button ng-click="showUpload($event)">
+                  Last opp
+                </md-button>
+              </div>
               <md-button type="delete" class="md-warn">Slett</md-button>
             </md-card-actions>
           </md-card-content>
