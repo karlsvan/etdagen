@@ -113,10 +113,10 @@ app.post('/contact', function (req,res) {
 	});
 });
 
-app.post('/search', function (req,res) {
-	mysql.searchAll(req.body.text,['fornavn','etternavn','email']).then(function successCB(rows, fields){
+app.get('/search', function (req,res) {
+	mysql.searchAll().then(function successCB(rows, fields){
 
-	//tags are returned as comma separated string, and must be array
+	//tags are returned as comma separated string, convert to array:
 	rows = rows.map(function(row,index,array) {
 		if(row.tags) {
 			row.tags = row.tags.split(',');

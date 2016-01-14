@@ -8,15 +8,15 @@
 
 			return {
 
-				update : function(text,coll,callback) {
-					var search = {text:text,coll:coll};
-					$http.post('/search',search).then(function successCB(res) {
+				update : function(callback) {
+					$http.get('/search').then(function successCB(res) {
 						var users = [];
 						res.data.forEach(function(element,index) {
 							users[index]= {
 								img: element.bilde || '/assets/images/avatar.jpg',
+								id: element.id,
 								name: element.fornavn+' '+element.etternavn,
-								usertype: 'søker',
+								usertype: element.status,
 								tags: element.tags
 							};
 						});
@@ -26,7 +26,7 @@
 
 				getProfile : function(id, callback) {
 					$http.get('/user/'+id).then(function(res) {
-						console.log(res.data);
+						//console.log(res.data);
 						callback(res.data);
 					}, function(res) {
 						console.log(res.data);

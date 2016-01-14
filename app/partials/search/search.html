@@ -3,7 +3,7 @@
 		<div style="width: 340px; padding: 0 2em;" layout="column">
 			<md-input-container>
 				<label>Brukere</label>
-				<input type="text" ng-model="SearchCtrl.searchOptions.searchString" ng-change="SearchCtrl.update()">
+				<input type="text" ng-model="SearchCtrl.searchOptions.searchString">
 			</md-input-container>
 			<md-checkbox ng-model="SearchCtrl.searchOptions.companies" aria-label="companies-checkbox">Bedrifter</md-checkbox>
 			<md-checkbox ng-model="SearchCtrl.searchOptions.students" aria-label="students-checkbox">Studenter</md-checkbox>
@@ -14,16 +14,16 @@
 		<md-content flex>
 			<md-list>
 				<div ng-show="SearchCtrl.searchOptions.companies">
-					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString  | filter:{usertype:'bedriftadmin'}" ng-click="">
+					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString  | filter:{usertype:'bedriftadmin'} | filterTags:SearchCtrl.searchOptions.selectedTags" ui-sref="user({id:user.id})">
 						<img src="{{user.img}}" alt="" class="md-avatar">
 						<p>{{user.name}}</p>
 						<i class="fa fa-building"></i>
 					</md-list-item>
 				</div>
 				<div ng-show="SearchCtrl.searchOptions.students">
-					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString | filter:{usertype:'søker'} | filterTags:SearchCtrl.searchOptions.selectedTags" ui-sref="user({id:user.id})">
-						<img src="{{user.img}}" alt="" class="md-avatar">
-						<p>{{user.name}}</p>
+					<md-list-item ng-repeat="User in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString | filterType:['soker','crewadmin',null] | filterTags:SearchCtrl.searchOptions.selectedTags" ui-sref="user({id:User.id})">
+						<img src="{{User.img}}" alt="" class="md-avatar">
+						<p>{{User.name}}</p>
 						<i class="fa fa-user"></i>
 					</md-list-item>
 				</div>

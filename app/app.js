@@ -84,11 +84,6 @@
 			controller: 'announcementCtrl as announcement'
 		})
 		.state('user', {
-			resolve: {
-				allowedUsers: function(){
-					return ['MyBawsUser', 'SuperbUser'];
-				}
-			},
 			url: '/user/:id',
 			templateUrl: 'partials/user/user.html',
 			controller: 'userCtrl'
