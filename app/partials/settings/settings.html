@@ -39,6 +39,22 @@
       <md-card>
         <md-card-title>
           <md-card-title-text>
+            <span class="md-headline">Litt om meg</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="row">
+          <md-input-container flex>
+            <label>Beskrivelse</label>
+            <textarea name="bio" ng-model="user.bio" md-maxlength="500"></textarea>
+            <div ng-messages="userForm.bio.$error" ng-show="userForm.bio.$dirty">
+              <div ng-message="md-maxlength">Det er mer en nok!</div>
+            </div>
+          </md-input-container>
+        </md-card-content>
+      </md-card>
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
             <span class="md-headline">Kontaktinformasjon</span>
           </md-card-title-text>
         </md-card-title>
@@ -51,12 +67,11 @@
             </md-input-container>
             <md-input-container flex-gt-sm="50" class="md-block">
               <label>Epostadresse</label>
-              <input ng-model="user.phone"
-              ng-pattern="/^[0-9]{8}$/">
+              <input ng-model="user.email">
             </md-input-container>
           </div>
           <div layout-gt-sm="row">
-            <md-input-container class="md-block" flex-gt-sm="grow">
+            <md-input-container class="md-block" flex-gt-sm="50">
               <label>Adresse</label>
               <input ng-model="user.address">
             </md-input-container>

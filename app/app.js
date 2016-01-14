@@ -61,8 +61,8 @@
 		})
 		.state('settings', {
 			url: '/settings',
-			template: 'partials/settings/settings.html',
-			controller: 'settingsCtrl as SETCTRL'
+			templateUrl: 'partials/settings/settings.html',
+			controller: 'SettingsCtrl as SettingsCtrl'
 		})
 		.state('search', {
 			url: '/search',
