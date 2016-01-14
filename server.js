@@ -115,6 +115,15 @@ app.post('/contact', function (req,res) {
 
 app.post('/search', function (req,res) {
 	mysql.searchAll(req.body.text,['fornavn','etternavn','email']).then(function successCB(rows, fields){
+
+	//tags are returned as comma separated string, and must be array
+	rows = rows.map(function(row,index,array) {
+		if(row.tags) {
+			row.tags = row.tags.split(',');
+		}
+		return row;
+	});
+
 	res.send(rows);
 },function errorCB(err) {
 	res.status(500).send(err);
@@ -143,7 +152,7 @@ app.post('/forgot', function (req,res) {
 				}
 			});
 		} else {
-			res.status(404).send('User not found')
+			res.sendStatus(404);
 		}
 	})
 });
@@ -158,6 +167,16 @@ api.get('/user', function (req,res){
 		res.sendStatus(403);
 	}
 });
+
+api.get('/companies', function (req,res) {
+	mysql.getCompanies().then(function(compObj) {
+		delete compObj.password;
+		delete compObj.salt;
+		res.json(compObj);
+	},function(error) {
+		console.log(error);
+	})
+})
 
 api.get('/company', function (req,res){
 	//var comp = mysql.get.company();

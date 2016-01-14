@@ -21,10 +21,9 @@ Recommended packages and themes (atom)
 - seti-syntax
 - monokai-seti
 - emmet
-- linter
 - pigments
 - linter
-- linter-htmllint
+- linter-htmlhint
 - linter-jshint
 - linter-less
 - minimap

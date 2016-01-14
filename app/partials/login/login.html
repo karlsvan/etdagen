@@ -23,6 +23,12 @@
 				</md-input-container>
 				<md-button class="md-raised md-primary md-hue-2" type="submit" aria-label="submit">Logg inn</md-button>
 			</form>
+			<div ng-messages="LOGIN.error" style="color:red" role="alert">
+              <div ng-message="nameOrPass">
+              	<i class="fa fa-exclamation-triangle"></i>
+              	<span>Feil epost eller passord</span>
+              </div>
+            </div>
 			<div layout="row" layout-margin>
 				<a ui-sref="forgot" class="md-body-1">Glemt passord</a><span class="md-body-1" style="margin: 0 1em;">|</span><a href="" ng-click="LOGIN.adduser()" class="md-body-1">Registrer</a>
 			</div>

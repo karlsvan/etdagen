@@ -16,7 +16,8 @@
 							users[index]= {
 								img: element.bilde || '/assets/images/avatar.jpg',
 								name: element.fornavn+' '+element.etternavn,
-								usertype: 'student'
+								usertype: 'søker',
+								tags: element.tags
 							};
 						});
 						callback(users);
@@ -29,15 +30,6 @@
 						callback(res.data);
 					}, function(res) {
 						console.log(res.data);
-					});
-				},
-
-				getTags: function(callback) {
-					$http.get('/tags').then(function(res) {
-						//console.log(res.data);
-						callback(res.data);
-					}, function(res) {
-						console.log('getTags error: '+res.data);
 					});
 				}
 			};

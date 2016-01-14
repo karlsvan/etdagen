@@ -7,32 +7,21 @@
 			</md-input-container>
 			<md-checkbox ng-model="SearchCtrl.searchOptions.companies" aria-label="companies-checkbox">Bedrifter</md-checkbox>
 			<md-checkbox ng-model="SearchCtrl.searchOptions.students" aria-label="students-checkbox">Studenter</md-checkbox>
-			<md-checkbox ng-model="SearchCtrl.searchOptions.tags" aria-label="tags-checkbox">Tags</md-checkbox>
-
-			<md-chips ng-model="SearchCtrl.selectedTags" md-autocomplete-snap="" md-transform-chip="SearchCtrl.transformChip($chip)" md-require-match="SearchCtrl.autocompleteDemoRequireMatch" ng-if="SearchCtrl.searchOptions.tags" >
-      			<md-autocomplete md-selected-item="SearchCtrl.selectedItem" md-search-text="SearchCtrl.searchText" md-items="item in SearchCtrl.querySearch(SearchCtrl.searchText)" md-item-text="item.navn" placeholder="legg til tags">
-        			<span md-highlight-text="SearchCtrl.searchText">{{item.navn}}</span>
-      			</md-autocomplete>
-     			 <md-chip-template>
-      				<span>
-          				<strong>{{$chip.navn}}</strong>
-          				<em ng-if="$chip.type == 'new'">({{$chip.type}})</em>
-        			</span>
-      			</md-chip-template>
-    		</md-chips>
+			<md-checkbox ng-model="SearchCtrl.searchOptions.tags" aria-label="tags-checkbox" ng-change="SearchCtrl.removeTags()">Tags</md-checkbox>
+			<et-tags ng-if="SearchCtrl.searchOptions.tags" requirematch=true selected-tags="SearchCtrl.searchOptions.selectedTags"></et-tags>
 
 		</div>
 		<md-content flex>
 			<md-list>
 				<div ng-show="SearchCtrl.searchOptions.companies">
-					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString  | filter:{usertype:'bedrift'}" ng-click="">
+					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString  | filter:{usertype:'bedriftadmin'}" ng-click="">
 						<img src="{{user.img}}" alt="" class="md-avatar">
 						<p>{{user.name}}</p>
 						<i class="fa fa-building"></i>
 					</md-list-item>
 				</div>
 				<div ng-show="SearchCtrl.searchOptions.students">
-					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString | filter:{usertype:'student'}" ui-sref="user({})">
+					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString | filter:{usertype:'søker'} | filterTags:SearchCtrl.searchOptions.selectedTags" ui-sref="user({id:user.id})">
 						<img src="{{user.img}}" alt="" class="md-avatar">
 						<p>{{user.name}}</p>
 						<i class="fa fa-user"></i>

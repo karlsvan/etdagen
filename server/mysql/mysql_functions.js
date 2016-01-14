@@ -61,7 +61,7 @@ module.exports = {
 	},
 
 	searchAll: function(text,coll){
-		var sql = 'SELECT id, fornavn, etternavn, email, bilde FROM bruker WHERE MATCH (??) AGAINST (?);';
+		var sql = 'SELECT bruker.id, bruker.fornavn, bruker.etternavn, bruker.email, bruker.bilde, bruker.status, GROUP_CONCAT(tags.navn) AS tags FROM bruker LEFT JOIN bruker_tags ON bruker_tags.bruker_id = bruker.id LEFT JOIN tags ON tags.id = bruker_tags.tag_id WHERE bruker.id IN( SELECT bruker.id FROM bruker WHERE MATCH (??) AGAINST(?) ) GROUP BY bruker.id';
 		var inserts = [coll,text];
 		return new Query(sql,inserts);
 	},
@@ -103,6 +103,11 @@ module.exports = {
 
 	addTag: function(name) {
 		var sql = 'INSERT INTO tags navn VALUES "'+name+'";'
+	},
+
+	getCompanies: function() {
+		var sql = 'SELECT * from bruker WHERE status="bedriftadmin";';
+		return new Query(sql);
 	}
 
 

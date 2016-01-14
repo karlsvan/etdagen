@@ -36,17 +36,16 @@
 				})
 			},
 
-			login : function(credentials) {
+			login : function(credentials,callback) {
 		  		$http.post('/auth/login',credentials).then(function successCB(res) {
 		  				getUser( function (user,loggedIn,error) {
 			  				loggedIn = 1;
 				      		$state.go('user',user.id);
 			      		});
 			      	},function errorCB(res) {
-			      		if(res.data == "Unauthorized"){
-			      			alert('Brukernavn eller passord er feil');
+			      		if(res.status == 401){
+			      			callback();
 			      		}
-			      		$state.reload('login');
 			      	});
 		  	},
 		  	
