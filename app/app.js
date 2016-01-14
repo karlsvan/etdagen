@@ -63,6 +63,11 @@
 			templateUrl: 'partials/register/register.html',
 			controller: 'RegisterCtrl',
 		})
+		.state('settings', {
+			url: '/settings',
+			templateUrl: 'partials/settings/settings.html',
+			controller: 'SettingsCtrl as SettingsCtrl'
+		})
 		.state('search', {
 			url: '/search',
 			templateUrl: 'partials/search/search.html',
