@@ -1,5 +1,40 @@
-<nav id="et-navbar" class="md-whiteframe-1dp" role="navigation">
-	<div class="container">
+<md-toolbar role="navigation" style="background: white;" class="md-whiteframe-1dp">
+	<div class="md-toolbar-tools container" style="margin: 0 auto;">
+		<div style="height: 100%; padding: 0.1em; margin-right: 1.5em;">
+			<img layout-fill src="../../assets/images/ETlogos/logo.svg" alt="E&amp;T-Dagen" ui-active="active" ui-sref="home" class="navbar-nav">
+		</div>
+		<md-button ng-repeat="link in navbar.links.main" ui-active="active" aria-label="{{link.name}}" ui-sref="{{link.state}}" style="height: 100%; line-height: 70px; color: #a03033; margin:0; padding: 0 1em;">
+			<i class="fa {{link.icon}}"></i> {{link.name}}
+		</md-button>
+		<div flex></div>
+		<md-button ng-if="!loggedIn" ui-sref="login" style="height: 100%; color: #a03033; line-height: 70px; padding: 0 1em; margin: 0;" aria-label="logg in">
+			<i class="fa fa-sign-in"></i> Logg inn
+		</md-button>
+		<md-menu md-position-mode="target-right target" md-offset="0 70" style="margin: 0; height: 100%;" ng-if="loggedIn">
+			<md-button ng-click="$mdOpenMenu()" style="height: 100%; line-height: 60px; color: #a03033;">
+				Dropdown
+			</md-button>
+			<md-menu-content>
+				<md-menu-item>
+					<md-button ng-click="user()" style="color: #a03033;" aria-label="user">
+						<i class="fa fa-user"></i> Profil
+					</md-button>
+				</md-menu-item>
+				<md-menu-item>
+					<md-button ng-click="settings()" style="color: #a03033;" aria-label="settings">
+						<i class="fa fa-cog"></i> Instillinger
+					</md-button>
+				</md-menu-item>
+				<md-menu-divider></md-menu-divider>
+				<md-menu-item>
+					<md-button ng-click="logout()" style="color: #a03033;" aria-label="logg ut">
+						<i class="fa fa-sign-out"></i> Logg ut
+					</md-button>
+				</md-menu-item>
+			</md-menu-content>
+		</md-menu>
+	</div>
+	<!-- <div class="container">
 		<div class="brand"><img layout-fill src="../../assets/images/ETlogos/logo.svg" alt="E&amp;T-Dagen" ui-active="active" ui-sref="home" class="navbar-nav"></div>
 		<div class="navbar-nav" ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" md-ink-ripple="#a03033">
 			<i class="fa {{link.icon}}"></i><span> {{link.name}}</span>
@@ -8,10 +43,11 @@
 		<div class="navbar-nav" ng-if="!loggedIn" ui-sref="login">
 			<i class="fa fa-sign-in"></i><span> Logg inn</span>
 		</div>
-		<md-menu ng-if="loggedIn" class="navbar-nav">
-	      <md-button aria-label="" ng-click="$mdOpenMenu()">
-	        <i class="fa fa-cog"></i><span>{{navbar.username}}</span>
-	      </md-button>
+		<md-menu ng-if="loggedIn">
+	      <div ng-click="$mdOpenMenu()" class="navbar-nav">
+	        <i class="fa fa-cog"></i>
+					<span> {{navbar.username}}</span>
+	      </div>
 	      <md-menu-content width="4">
 	      <md-menu-item>
 	          <md-button ng-click="user()">
@@ -34,5 +70,5 @@
 	        </md-menu-item>
 	      </md-menu-content>
 		</md-menu>
-	</div>
-</nav>
+	</div> -->
+</md-toolbar>
