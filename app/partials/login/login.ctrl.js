@@ -30,5 +30,5 @@
 	    }
 
 
-	    LoginCtrl.$inject = ['$state', 'UserService','$scope'];
+	    LoginCtrl.$inject = ['$state', 'UserService', '$scope'];
 })();
