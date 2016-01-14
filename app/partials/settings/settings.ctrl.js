@@ -57,6 +57,7 @@
 			}
 		}
 	}
+	UploadEditor.$inject = ['$scope', '$mdDialog'];
 
 	function SettingsCtrl($scope) {
 		$scope.awesomeThings = [

@@ -5,8 +5,34 @@
 			<i class="fa {{link.icon}}"></i><span> {{link.name}}</span>
 		</div>
 		<div flex></div>
-		<div class="navbar-nav" ng-show="true" ng-click="logout()">
-			<i class="fa {{navbar.links.side[loggedIn].icon}}"></i><span> {{navbar.links.side[loggedIn].name()}}</span>
+		<div class="navbar-nav" ng-if="!loggedIn" ui-sref="login">
+			<i class="fa fa-sign-in"></i><span> Logg inn</span>
 		</div>
+		<md-menu ng-if="loggedIn" class="navbar-nav">
+	      <md-button aria-label="" ng-click="$mdOpenMenu()">
+	        <i class="fa fa-cog"></i><span>{{navbar.username}}</span>
+	      </md-button>
+	      <md-menu-content width="4">
+	      <md-menu-item>
+	          <md-button ng-click="user()">
+	            <i class="fa fa-user"></i>
+	            Din profil
+	          </md-button>
+	        </md-menu-item>
+	        <md-menu-item>
+	          <md-button ng-click="settings()">
+	            <i class="fa fa-cog"></i>
+	            Instillinger
+	          </md-button>
+	        </md-menu-item>
+	        <md-menu-divider></md-menu-divider>
+	        <md-menu-item>
+	          <md-button ng-click="logout()">
+	            <i class="fa fa-sign-out"></i>
+	            Logg ut
+	          </md-button>
+	        </md-menu-item>
+	      </md-menu-content>
+		</md-menu>
 	</div>
 </nav>

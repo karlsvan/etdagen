@@ -12,27 +12,43 @@
 		.controller('NavbarCtrl', NavbarCtrl);
 
 		/*@ngInject*/
-		function NavbarCtrl($scope,UserService) {
+		function NavbarCtrl($scope,UserService,$state) {
+			var self = this;
 			$scope.loggedIn = 0;
-			var username;
+			self.username= '';
 			UserService.init(function(user,loggedIn,error){
 				$scope.loggedIn = loggedIn;
 				if (!error) {
-					username = user.username || user.fornavn || user.email;
+					self.username = user.fornavn;
+					self.id = user.id;
 				};
 			});
+
+			this.openMenu = function($mdOpenMenu, ev) {
+			    $mdOpenMenu(ev);
+    		};
 
 			$scope.$on('$stateChangeStart',
 		    	function(event, toState, toParams, fromState, fromParams){
 		    		if (UserService.getLoggedIn()){
-		    			username = UserService.returnUser().username || UserService.returnUser().fornavn;
-		    			$scope.loggedIn = UserService.getLoggedIn();
+		    			$scope.loggedIn = true;
+		    			var user = UserService.returnUser();
+		    			self.username = user.fornavn;
+		    			self.id = user.id
 		    		}
 		    	})
 			
 			$scope.logout = function() {
 				UserService.logout();
 				$scope.loggedIn=0;
+			}
+
+			$scope.settings = function(){
+				$state.go('settings')
+			}
+
+			$scope.user = function(){
+				$state.go('user',{id:self.id})
 			}
 
 			this.links = {
@@ -51,5 +67,5 @@
 			};
 
 		}
-		NavbarCtrl.$inject = ['$scope', 'UserService'];
+		NavbarCtrl.$inject = ['$scope', 'UserService', '$state'];
 })();

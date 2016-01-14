@@ -8,7 +8,7 @@ auth.post('/login',
 	passport.authenticate('local', { failureFlash: false }),
 	function (req,res) {
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
-		res.redirect('/#/user/:'+req.user.id);
+		res.redirect('/#/user/'+req.user.id);
 	});
 
 auth.get('/facebook',
@@ -19,7 +19,7 @@ auth.get('/facebook/callback',
 	function (req, res) {
 		// Successful authentication, redirect home.
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
-		res.redirect('/#/user/:'+req.user.id);
+		res.redirect('/#/user/'+req.user.id);
 	});
 
 auth.get('/feide',
@@ -30,7 +30,7 @@ auth.get('/feide/callback',
 	function (req, res) {
 		// Successful authentication, redirect home.
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
-		res.redirect('/#/user/:'+req.user.id);
+		res.redirect('/#/user/'+req.user.id);
 	});
 
 auth.get('/google',
@@ -41,7 +41,7 @@ auth.get('/google/callback',
 	function (req, res) {
 		// Successful authentication, redirect home.
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
-		res.redirect('/#/user/:'+req.user.id);
+		res.redirect('/#/user/'+req.user.id);
 	});
 
 auth.get('/ntnu/callback', function (req) {

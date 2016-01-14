@@ -40,7 +40,7 @@
 		  		$http.post('/auth/login',credentials).then(function successCB(res) {
 		  				getUser( function (user,loggedIn,error) {
 			  				loggedIn = 1;
-				      		$state.go('user',user.id);
+				      		$state.go('user',{id:user.id});
 			      		});
 			      	},function errorCB(res) {
 			      		if(res.status == 401){
