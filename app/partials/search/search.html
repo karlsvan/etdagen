@@ -1,6 +1,6 @@
-<div class="container-fluid" layout="column" layout-align="center center">
+<div class="container-fluid" layout="column" layout-align="center center" style="background:#eee">
 	<div class="container" layout="row">
-		<div style="width: 340px; padding: 0 2em;" layout="column">
+		<md-card style="width: 340px; padding: 0 2em; max-height: 500px;" layout="column">
 			<md-input-container>
 				<label>Brukere</label>
 				<input type="text" ng-model="SearchCtrl.searchOptions.searchString">
@@ -10,8 +10,8 @@
 			<md-checkbox ng-model="SearchCtrl.searchOptions.tags" aria-label="tags-checkbox" ng-change="SearchCtrl.removeTags()">Tags</md-checkbox>
 			<et-tags ng-if="SearchCtrl.searchOptions.tags" requirematch=true selected-tags="SearchCtrl.searchOptions.selectedTags"></et-tags>
 
-		</div>
-		<md-content flex>
+		</md-card>
+		<md-card flex style="min-height: 100vh;">
 			<md-list>
 				<div ng-show="SearchCtrl.searchOptions.companies">
 					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString  | filter:{usertype:'bedriftadmin'} | filterTags:SearchCtrl.searchOptions.selectedTags" ui-sref="user({id:user.id})">
@@ -28,6 +28,6 @@
 					</md-list-item>
 				</div>
 			</md-list>
-		</md-content>
+		</md-card>
 	</div>
 </div>
