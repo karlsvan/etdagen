@@ -2,99 +2,145 @@
 	'use strict';
 
 	/**
-	 * @ngdoc function
-	 * @name etApp.controller:SettingsCtrl
-	 * @description
-	 * # SettingsCtrl
-	 * Controller of the etApp
-	 */
+	* @ngdoc function
+	* @name etApp.controller:SettingsCtrl
+	* @description
+	* # SettingsCtrl
+	* Controller of the etApp
+	*/
 	angular.module('etApp')
-	  .controller('SettingsCtrl', SettingsCtrl);
+	.controller('SettingsCtrl', SettingsCtrl)
+	.controller('UploadController', UploadEditor)
 
-		/*@ngInject*/
-	  	function SettingsCtrl($scope) {
-		    $scope.awesomeThings = [
-		      'HTML5 Boilerplate',
-		      'AngularJS',
-		      'Karma'
-		    ];
-				var self = this;
+	/*@ngInject*/
+	function UploadEditor($scope, $mdDialog) {
+		var alert;
 
-    self.readonly = false;
-    self.selectedItem = null;
-    self.searchText = null;
-    self.querySearch = querySearch;
-    self.vegetables = loadVegetables();
-    self.selectedVegetables = [];
-    self.numberBuffer = '';
-    self.autocompleteDemoRequireMatch = false;
-    self.transformChip = transformChip;
+		$scope.showAlert = showAlert;
+		$scope.closeAlert = closeAlert;
+		$scope.showUpload = showCustomUpload;
 
-    /**
-     * Return the proper object when the append is called.
-     */
-    function transformChip(chip) {
-      // If it is an object, it's already a known chip
-      if (angular.isObject(chip)) {
-        return chip;
-      }
+		function showAlert() {
+			$mdDialog
+			.show( alert )
+			.finally(function() {
+				alert = undefined;
+			});
+		}
 
-      // Otherwise, create a new one
-      return { name: chip, type: 'new' }
-    }
+		function closeAlert() {
+			$mdDialog.hide( alert, "finished" );
+			alert = undefined;
+		}
 
-    /**
-     * Search for vegetables.
-     */
-    function querySearch (query) {
-      var results = query ? self.vegetables.filter(createFilterFor(query)) : [];
-      return results;
-    }
+		function showCustomUpload($event) {
+			$mdDialog.show({
+				targetEvent: $event,
+				template:
+			     '<md-dialog aria-label="Upload dialog">' +
+	         '  <md-dialog-content>'+
+					 '		<form class="md-dialog-content" action="upload.php" method="post" enctype="multipart/form-data">' +
+				   '		    Select image to upload:' +
+				   '		    <input type="file" name="fileToUpload" id="fileToUpload">' +
+				   '		    <input type="submit" value="Upload Image" name="submit" ng-click="closeDialog()">' +
+				   '		</form>' +
+	         '  </md-dialog-content>' +
+	         '</md-dialog>',
+				onComplete: afterShowAnimation,
+				locals: { Upload: $scope.userName }
+			});
 
-    /**
-     * Create filter function for a query string
-     */
-    function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
+			// When the 'enter' animation finishes...
 
-      return function filterFn(vegetable) {
-        return (vegetable._lowername.indexOf(lowercaseQuery) === 0) ||
-            (vegetable._lowertype.indexOf(lowercaseQuery) === 0);
-      };
+			function afterShowAnimation(scope, element, options) {
+				// post-show code here: DOM element focus, etc.
+			}
+		}
+	}
 
-    }
+	function SettingsCtrl($scope) {
+		$scope.awesomeThings = [
+			'HTML5 Boilerplate',
+			'AngularJS',
+			'Karma'
+		];
+		var self = this;
 
-    function loadVegetables() {
-      var veggies = [
-        {
-          'name': 'Broccoli',
-          'type': 'Brassica'
-        },
-        {
-          'name': 'Cabbage',
-          'type': 'Brassica'
-        },
-        {
-          'name': 'Carrot',
-          'type': 'Umbelliferous'
-        },
-        {
-          'name': 'Lettuce',
-          'type': 'Composite'
-        },
-        {
-          'name': 'Spinach',
-          'type': 'Goosefoot'
-        }
-      ];
+		self.readonly = false;
+		self.selectedItem = null;
+		self.searchText = null;
+		self.querySearch = querySearch;
+		self.vegetables = loadVegetables();
+		self.selectedVegetables = [];
+		self.numberBuffer = '';
+		self.autocompleteDemoRequireMatch = false;
+		self.transformChip = transformChip;
 
-      return veggies.map(function (veg) {
-        veg._lowername = veg.name.toLowerCase();
-        veg._lowertype = veg.type.toLowerCase();
-        return veg;
-      });
-    }
+		/**
+		* Return the proper object when the append is called.
+		*/
+		function transformChip(chip) {
+			// If it is an object, it's already a known chip
+			if (angular.isObject(chip)) {
+				return chip;
+			}
+
+			// Otherwise, create a new one
+			return { name: chip, type: 'new' };
+		}
+
+		/**
+		* Search for vegetables.
+		*/
+		function querySearch (query) {
+			var results = query ? self.vegetables.filter(createFilterFor(query)) : [];
+			return results;
+		}
+
+		/**
+		* Create filter function for a query string
+		*/
+		function createFilterFor(query) {
+			var lowercaseQuery = angular.lowercase(query);
+
+			return function filterFn(vegetable) {
+				return (vegetable._lowername.indexOf(lowercaseQuery) === 0) ||
+				(vegetable._lowertype.indexOf(lowercaseQuery) === 0);
+			};
 
 		}
-		SettingsCtrl.$inject = ['$scope'];
+
+		function loadVegetables() {
+			var veggies = [
+				{
+					'name': 'Broccoli',
+					'type': 'Brassica'
+				},
+				{
+					'name': 'Cabbage',
+					'type': 'Brassica'
+				},
+				{
+					'name': 'Carrot',
+					'type': 'Umbelliferous'
+				},
+				{
+					'name': 'Lettuce',
+					'type': 'Composite'
+				},
+				{
+					'name': 'Spinach',
+					'type': 'Goosefoot'
+				}
+			];
+
+			return veggies.map(function (veg) {
+				veg._lowername = veg.name.toLowerCase();
+				veg._lowertype = veg.type.toLowerCase();
+				return veg;
+			});
+		}
+
+	}
+	SettingsCtrl.$inject = ['$scope'];
 })();
