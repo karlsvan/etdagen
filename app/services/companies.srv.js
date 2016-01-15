@@ -119,7 +119,7 @@
 			hatteland: {name: 'Hatteland', logo: logoFolder+'hatteland.png', description: null, homepage: 'http://hatteland.com/'},
 			hittite: {name: 'Hittite', logo: logoFolder+'hittite.jpg', description: null, homepage: 'http://hittite.com/'},
 			ideas: {name: 'Ideas', logo: logoFolder+'ideas.png', description: null, homepage: 'http://www.ideas.com/'},
-			jernbaneverket: {name: 'Jernbaneverket', logo: logoFolder+'jernbaneverket.png', description: null, homepage: 'http://www.jernbaneverket.no/'},
+			jernbaneverket: {name: 'Jernbaneverket', logo: logoFolder+'jernbaneverket_0.png', description: null, homepage: 'http://www.jernbaneverket.no/'},
 			norbit: {name: 'Norbit', logo: logoFolder+'norbit.png', description: null, homepage: 'http://web.norbit.no/'},
 			qFree: {name: 'Q-free', logo: logoFolder+'q-free.png', description: null, homepage: 'https://www.q-free.com/'},
 			texas: {name: 'Texas Instruments', logo: logoFolder+'texas.png', description: null, homepage: 'http://www.ti.com/'},
