@@ -68,10 +68,13 @@ module.exports = function (passport){
 		callbackURL: "http://localhost:3000/auth/feide/callback"
 	},
 	function(accessToken, refreshToken, profile, done){
+		var namearr = profile.displayName.split(' ');
+		profile.familyName = namearr.pop();
+		profile.givenName = namearr.join(' ');
 		User.findOrCreate({
 			feideId: profile.id,
-			fornavn: profile.name.givenName,
-			etternavn:profile.name.familyName,
+			fornavn: profile.givenName,
+			etternavn:profile.familyName,
 			email: profile.emails[0],
 			bilde: profile.photos[0]
 		}, function (err, user) {

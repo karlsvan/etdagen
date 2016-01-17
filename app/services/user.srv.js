@@ -53,7 +53,16 @@
 		  		$http.post('/register', cred).then(function sucsessCB(response) {
   					$state.go('home');
   				});
-		  	},
+		  	}, 
+
+			getProfile : function(id, callback) {
+				$http.get('/user/'+id).then(function(res) {
+					//console.log(res.data);
+					callback(res.data);
+				}, function(res) {
+					console.log(res.data);
+				});
+			},
 
 	  		logout : function() {
 	  			loggedIn = 0;

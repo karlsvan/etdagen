@@ -20,10 +20,13 @@
 	.config(configure)
 	.controller('appCtrl', appCtrl);
 
-	function appCtrl(){
+	function appCtrl($cookies,$mdToast){
 		this.name = 'E&T-dagen';
 		this.year = 2016;
+
 	}
+
+	appCtrl.$inject = ['$cookies', '$mdToast'];
 	/*@ngInject*/
 	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 		$urlRouterProvider.otherwise('/');
