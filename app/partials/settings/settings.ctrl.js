@@ -8,9 +8,10 @@
 	* # SettingsCtrl
 	* Controller of the etApp
 	*/
+	UploadEditor.$inject = ['$scope', '$mdDialog'];
 	angular.module('etApp')
 	.controller('SettingsCtrl', SettingsCtrl)
-	.controller('UploadController', UploadEditor)
+	.controller('UploadController', UploadEditor);
 
 	/*@ngInject*/
 	function UploadEditor($scope, $mdDialog) {
@@ -46,15 +47,8 @@
 				   '		</form>' +
 	         '  </md-dialog-content>' +
 	         '</md-dialog>',
-				onComplete: afterShowAnimation,
 				locals: { Upload: $scope.userName }
 			});
-
-			// When the 'enter' animation finishes...
-
-			function afterShowAnimation(scope, element, options) {
-				// post-show code here: DOM element focus, etc.
-			}
 		}
 	}
 
