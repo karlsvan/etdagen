@@ -94,16 +94,21 @@
 
 
 		// Theming for the app
+		var moddedRed = $mdThemingProvider.extendPalette('red', {
+			'A100': '#a03033', // .hue-3
+			'contrastDarkColors': ['50', '100', '200', '300', '400', /*'A100'*/] //hues which contrast should be 'dark' by default
+		});
+		$mdThemingProvider.definePalette('moddedRed', moddedRed);
 		$mdThemingProvider.theme('default')
-		.primaryPalette('red')
-		.accentPalette('brown')
+		.primaryPalette('moddedRed')
+		.accentPalette('grey')
 		.warnPalette('yellow')
 		.backgroundPalette('grey', {
 			'hue-1': '200',
 		});
-		$mdThemingProvider.theme('formTheme')
-		.primaryPalette('red')
-		.warnPalette('deep-orange');
+		// $mdThemingProvider.theme('formTheme')
+		// .primaryPalette('red')
+		// .warnPalette('deep-orange');
 	}
 	configure.$inject = ['$stateProvider', '$urlRouterProvider', '$mdThemingProvider'];
 })();

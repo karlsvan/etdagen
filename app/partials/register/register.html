@@ -1,34 +1,39 @@
-<div>
-
-<form name='registerForm' ng-submit="register()">
-  Fornavn:<br>
-  <input type="text" name="fornavn" ng-model="form.fornavn" placeholder={{user.fornavn}}>
-  <br>
-  Etternavn:<br>
-  <input type="text" name="etternavn" ng-model="form.etternavn" placeholder={{user.etternavn}}>
-  <br>
-  email:<br>
-  <input type="text" name="email" ng-model="form.email" placeholder={{user.email}}>
-  <br>
-  tlf:<br>
-  <input type="text" name="tlf" ng-model="form.tlf" placeholder={{user.tlf}}>
-  <br>
-  utgangsår:<br>
-  <input type="text" name="utgangsaar" ng-model="form.utgangsaar" placeholder={{user.utgangsaar}}>
-  <br>
-  linje:<br>
-  <input type="text" name="linje" ng-model="form.linje" placeholder={{user.linje}}>
-  <br>
-  fødselsdato:<br>
-  <input type="text" name="fodselsdato" ng-model="form.fodelsdato" placeholder={{user.fodseldato}}>
-  <br>
-  brukernavn:<br>
-  <input type="text" name="username" ng-model="form.username">
-  <br>
-  passord:<br>
-  <input type="Password" name="password" ng-model="form.password">
-  <br>
-  <input type="submit" value="Regstrer"/>
-</form>
-
+<div layout="column">
+  <md-input-container>
+    <label>Fornavn</label>
+    <input type="text" ng-model="form.fornavn">
+  </md-input-container>
+  <md-input-container>
+    <label>Etternavn</label>
+    <input type="text" ng-model="form.etternavn">
+  </md-input-container>
+  <md-input-container>
+    <label>Epostadresse</label>
+    <input type="text" ng-model="form.email">
+  </md-input-container>
+  <md-input-container>
+    <label>Telefonnummer</label>
+    <input type="tel" ng-model="form.tlf">
+  </md-input-container>
+  <md-input-container>
+    <label>Utgangsår</label>
+    <input type="text" ng-model="form.utgangsaar">
+  </md-input-container>
+  <md-input-container>
+    <label>Linje</label>
+    <input type="text" ng-model="form.linje">
+  </md-input-container>
+  <md-input-container>
+    <label>Fødselsdato</label>
+    <input type="text" ng-model="form.fodselsdato">
+  </md-input-container>
+  <md-input-container>
+    <label>Brukernavn</label>
+    <input type="text" ng-model="form.username">
+  </md-input-container>
+  <md-input-container>
+    <label>Passord</label>
+    <input type="password" ng-model="form.password">
+  </md-input-container>
+  <md-button class="md-raised md-primary">Registrer bruker</md-button>
 </div>

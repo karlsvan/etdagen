@@ -11,7 +11,8 @@
 	angular.module('etApp')
 	.controller('SettingsCtrl', SettingsCtrl)
 	.controller('UploadController', UploadEditor)
-	.controller('ConnectController',ConnectController)
+	.controller('ConnectController',ConnectController);
+
 
 	/*@ngInject*/
 	function UploadEditor($scope, $mdDialog) {
@@ -47,15 +48,8 @@
 				   '		</form>' +
 	         '  </md-dialog-content>' +
 	         '</md-dialog>',
-				onComplete: afterShowAnimation,
 				locals: { Upload: $scope.userName }
 			});
-
-			// When the 'enter' animation finishes...
-
-			function afterShowAnimation(scope, element, options) {
-				// post-show code here: DOM element focus, etc.
-			}
 		}
 	}
 	UploadEditor.$inject = ['$scope', '$mdDialog'];
@@ -156,7 +150,7 @@
 
 
 	}
-	SettingsCtrl.$inject = ['$scope', 'UserService', '$q', '$mdDialog','$http'];
+	SettingsCtrl.$inject = ['$scope', 'UserService', '$q', '$mdDialog', '$http'];
 
 
 	function ConnectController($scope,$mdDialog,user,connect) {
@@ -172,5 +166,6 @@
 			$scope.provider = 'NTNU';
 		}
 	}
+	ConnectController.$inject = ['$scope', '$mdDialog', 'user', 'connect'];
 	//ConnectController.$inject = ['$scope','user','connect']
 })();

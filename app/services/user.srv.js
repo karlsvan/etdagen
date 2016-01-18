@@ -1,62 +1,40 @@
 (function(){
 	'use strict';
 
-	
+
 	angular.module('etApp')
-	  .factory('UserService', UserService);
-	  	function UserService($http,$state) {
+		.service('UserService', UserService);
+
+		/*@ngInject*/
+		function UserService($http,$state) {
+			var self = this;
 			var loggedIn = 0;
 			var user;
 
-			var getUser = function(cb) {
+			this.getUser = function(cb) {
 				$http.get('/api/user').then(function(res) {
 					loggedIn = 1;
-	    			user = res.data;
-	    			if (cb) {
-	    				cb(user,loggedIn,0);
-	    			};
-	  			}, function(res) {
+					user = res.data;
+					if (cb) {
+						cb(user,loggedIn,0);
+					}
+				}, function(res) {
 					cb(null,0,res.data);
-	  			});
+				});
 			};
 
-			return {
-			getUser: getUser,
 
-			returnUser : function() {
-				return user;
-			},
+			this.returnUser = function() { return user; };
 
-			getLoggedIn : function() {
-				return loggedIn
-			},
+			this.getLoggedIn = function() { return loggedIn; };
 
-			init : function(cb) {
-				getUser(function (user,loggedIn,error) {
+			this.init = function(cb) {
+				self.getUser(function (user,loggedIn,error) {
 					cb(user,loggedIn,error);
-				})
-			},
+				});
+			};
 
-			login : function(credentials,callback) {
-		  		$http.post('/auth/login',credentials).then(function successCB(res) {
-		  				getUser( function (user,loggedIn,error) {
-			  				loggedIn = 1;
-				      		$state.go('user',{id:user.id});
-			      		});
-			      	},function errorCB(res) {
-			      		if(res.status == 401){
-			      			callback();
-			      		}
-			      	});
-		  	},
-		  	
-		  	register : function(cred) {
-		  		$http.post('/register', cred).then(function sucsessCB(response) {
-  					$state.go('home');
-  				});
-		  	}, 
-
-			getProfile : function(id, callback) {
+			this.getProfile = function(id, callback) {
 				$http.get('/user/'+id).then(function(res) {
 					//console.log(res.data);
 					callback(res.data);
@@ -65,7 +43,7 @@
 				});
 			},
 			
-	  		logout : function() {
+	  		this.logout = function() {
 	  			loggedIn = 0;
 	  			user = null;
 				$http.get('/logout').then(function successCB(res) {
@@ -75,12 +53,34 @@
 	    		});
 			}
 
+			this.login = function(credentials,callback) {
+				$http.post('/auth/login',credentials).then(function successCB(/*res*/) {
+					self.getUser( function (user,loggedIn/*,error*/) {
+						loggedIn = 1;
+						$state.go('user',{id:user.id});
+					});
+				},function errorCB(res) {
+					if(res.status == 401){
+						callback();
+					}
+				});
 			};
 
-		};
+			this.register = function(cred) {
+				$http.post('/register', cred).then(function sucsessCB(/*response*/) {
+					$state.go('home');
+				});
+			};
 
-	UserService.$inject = ['$http', '$state'];
-})()
-
-
-
+			this.logout = function() {
+				loggedIn = 0;
+				user = null;
+				$http.get('/logout').then(function successCB(/*res*/) {
+					$state.go('home');
+				},function errorCB(/*res*/) {
+					$state.reload('login');
+				});
+			};
+		}
+		UserService.$inject = ['$http', '$state'];
+})();
