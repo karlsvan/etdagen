@@ -14,14 +14,27 @@ var //db                = require('../mysql/mysql_functions'),
 module.exports = function (passport){
 	// serializeUser function desides what will be stored in session (req.session.passport.user)
 	passport.serializeUser(function (user, done){
-		done(null, user.id);
+		//console.log('serz: '+JSON.stringify(user));
+		if (user.connect) {
+			done(null,{id:user.id,connect: user.connect})
+		} else{
+			done(null, user.id);
+		}
 	});
 
 	// deserializeUser function takes the serialized user and finds the matching user in the database. User object is attached to req.user.
-	passport.deserializeUser(function (id, done){
-		User.findOne({id:id}, function (error, user){
-			done(error, user);
-		});
+	passport.deserializeUser(function (serializedUser, done){
+		console.log('derz: '+JSON.stringify(serializedUser));
+		if (serializedUser.connect) {
+			User.findOne({id:serializedUser.id}, function (error, user){
+				user.connect = serializedUser.connect;
+				done(error, user);
+			});
+		} else {
+			User.findOne({id:serializedUser}, function (error, user){
+				done(error, user);
+			});
+		}
 	});
 
 	var passportStrategyOptions = {
@@ -65,21 +78,28 @@ module.exports = function (passport){
 	passport.use(new FeideStrategy({
 		clientID: '4525efbc-5c83-4362-b20a-ac46a3a78993',
 		clientSecret: '6eff9820-fc3e-46d1-a76d-bad845a68196',
-		callbackURL: "http://localhost:3000/auth/feide/callback"
+		callbackURL: "http://localhost:3000/auth/feide/callback",
+		passReqToCallback: true
 	},
-	function(accessToken, refreshToken, profile, done){
+	function(req, accessToken, refreshToken, profile, done){
 		var namearr = profile.displayName.split(' ');
 		profile.familyName = namearr.pop();
 		profile.givenName = namearr.join(' ');
-		User.findOrCreate({
+		var profil = {
 			feideId: profile.id,
 			fornavn: profile.givenName,
 			etternavn:profile.familyName,
 			email: profile.emails[0],
 			bilde: profile.photos[0]
-		}, function (err, user) {
-			return done(err, user);
-		});
+		}
+		if (req.user) {
+			console.log('allerede logget inn!');
+			req.user.connect = profil;
+		} else {
+			User.findOrCreate(profil, function (err, user) {
+				return done(err, user);
+			});
+		}
 	}));
 
 
@@ -87,35 +107,53 @@ module.exports = function (passport){
 		clientID: '449983121860985',
 		clientSecret: '592186645310e89533f50f3afa1b7535',
 		callbackURL: "http://localhost:3000/auth/facebook/callback",
-		enableProof: false,
+		enableProof: true,
+		passReqToCallback: true,
 		profileFields: ['id', 'name', 'emails','picture.type(large)']
-	}, function(accessToken, refreshToken, profile, done) {
-		User.findOrCreate({
-			facebookId: profile.id,
-			fornavn: profile.name.givenName,
-			etternavn:profile.name.familyName,
-			email: profile.emails[0].value,
-			bilde: profile.photos[0].value
-		}, function (err, user) {
-				return done(err, user);
-		});
+	}, function(req, accessToken, refreshToken, profile, done) {
+		var profil = {
+				facebookId: profile.id,
+				fornavn: profile.name.givenName,
+				etternavn:profile.name.familyName,
+				email: profile.emails[0].value,
+				bilde: profile.photos[0].value
+			}
+		if (req.user) {
+			console.log('allerede logget inn!!');
+			req.user.connect = profil;
+		} else {
+			console.log('ikke logget inn');
+			User.findOrCreate(profil, function (err, user) {
+					return done(err, user);
+			});
+		}
 	}));
 
 	passport.use(new GoogleStrategy({
 		clientID: '735968634827-2v36mg1s3njskrhqjo87b8v8nij3n1ob.apps.googleusercontent.com',
 		clientSecret: 'YTFSfXRL_C9diN0vEkYRDePE',
+		passReqToCallback: true,
 		callbackURL: "http://localhost:3000/auth/google/callback"
-	}, function(accessToken, refreshToken, profile, done) {
+	}, function(req, accessToken, refreshToken, profile, done) {
 		//vi vil ha størrelse på bildet 200x200px
 		profile.photos[0].value = profile.photos[0].value.replace('sz=50','sz=200');
-		User.findOrCreate({
-			googleId: profile.id,
-			fornavn: profile.name.givenName,
-			etternavn:profile.name.familyName,
-			email: profile.emails[0].value,
-			bilde: profile.photos[0].value
-		}, function (err, user) {
-			return done(err, user);
-		});
+		var profil = {
+				googleId: profile.id,
+				fornavn: profile.name.givenName,
+				etternavn:profile.name.familyName,
+				email: profile.emails[0].value,
+				bilde: profile.photos[0].value
+			}
+		if (req.user) {
+			console.log('logget inn');
+			req.user.connect = profil;
+			req.user = User.merge(req.user);
+			return done(null,req.user);
+		} else {
+			console.log('ikke logget inn');
+			User.findOrCreate(profil, function (err, user) {
+				return done(err, user);
+			});
+		}
 	}));
 };

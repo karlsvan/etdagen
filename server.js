@@ -179,14 +179,6 @@ api.get('/companies', function (req,res) {
 	})
 })
 
-api.get('/company', function (req,res){
-	//var comp = mysql.get.company();
-	var c = {
-		nome: 'Texasconductors',
-		status: 'cash'
-	};
-	res.json(c);
-});
 app.all('/:path', function (req, res){ res.redirect('/#'+path); });
 app.use(passport.initialize());
 app.use(passport.session());

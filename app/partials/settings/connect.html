@@ -1,0 +1,37 @@
+<div id="page-connect" class="container" style="max-width:800px;" flex>
+  <div layout-gt-sm="row">
+    <md-card flex-gt-sm="50">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Eksisterende profil</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <div layout-gt-sm="row" ng-repeat="(key, value) in connect">
+          <md-checkbox></md-checkbox>
+          <md-input-container flex>
+            <label>{{key}}</label>
+            <input ng-model="user[key]">
+          </md-input-container>
+        </div>
+      </md-card-content>
+    </md-card>
+    <md-card flex-gt-sm="50">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{provider}} profil</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <div layout-gt-sm="row" ng-repeat="(key, value) in connect">
+          <md-checkbox></md-checkbox>
+          <md-input-container flex>
+            <label>{{key}}</label>
+            <input ng-model="connect[key]">
+          </md-input-container>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
+  <md-button class="md-raised md-primary" ng-click="save()">Lagre</md-button>
+</div>

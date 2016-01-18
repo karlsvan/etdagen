@@ -11,6 +11,7 @@
 	angular.module('etApp')
 	.controller('SettingsCtrl', SettingsCtrl)
 	.controller('UploadController', UploadEditor)
+	.controller('ConnectController',ConnectController)
 
 	/*@ngInject*/
 	function UploadEditor($scope, $mdDialog) {
@@ -59,27 +60,46 @@
 	}
 	UploadEditor.$inject = ['$scope', '$mdDialog'];
 
-	function SettingsCtrl($scope,UserService,$q) {
+	function SettingsCtrl($scope,UserService,$q,$mdDialog,$http) {
 		var self = this;
 		var deffered = $q.defer();
 		$scope.promise = deffered.promise
 	    var keyArr = [],contArr = [];
 
-		$scope.$on('$stateChangeSuccess',
+	    UserService.init(function(user,loggedIn,error) {
+	    	console.log(JSON.stringify(user));
+	    	if (user.connect) {
+					connect(user);
+			}
+			UserService.getProfile(UserService.returnUser().id, function(res) {
+				$scope.user = res;
+				deffered.resolve(res.tags);
+				$scope.cards = toArray(res.cards);
+			});
+	    })
+
+
+		/*$scope.$on('$stateChangeSuccess',
 	    	function(event, toState, toParams, fromState, fromParams){
 	    		if((toState.name == "settings") && UserService.getLoggedIn()){
+	    			console.log('hei')
 		    		UserService.getProfile(UserService.returnUser().id, function(res) {
-		    			//console.log(res);
 	    				$scope.user = res;
 	    				deffered.resolve(res.tags);
 	    				$scope.cards = toArray(res.cards);
+	    				UserService.getUser(function(user,loggedIn,error) {
+	    					if (user.connect) {
+	    						connect(user);
+	    					}
+	    				})
 	    			});
+
 	    		} else {
 	    			deffered.reject('fuck');
 	    		}
 	    	}
 	    );
-
+*/
 	    function toArray(obj) {
 	    	if(typeof obj === 'string') {
 	    		return obj;
@@ -111,11 +131,46 @@
 	    	console.log(JSON.stringify(toObject($scope.cards)));
 	    	//UserService.saveUser($scope.user);
 	    }
+	    
+	    function connect(user) {
+			//console.log(JSON.stringify(resultat.data));
+			$mdDialog.show({
+		      controller: 'ConnectController',
+		      templateUrl: './partials/settings/connect.html',
+		      parent: angular.element(document.body),
+		      clickOutsideToClose:true,
+		      //controllerAs: 'connCtrl',
+		      //bindToController: true,
+		      locals: {
+		      	user: user,
+		      	connect: user.connect
+		      }
+		    })
+		    .then(function(answer) {
+		      $scope.status = 'You said the information was "' + answer + '".';
+		    }, function() {
+		      $scope.status = 'You cancelled the dialog.';
+		    })
 
-
-
+		}
 
 
 	}
-	SettingsCtrl.$inject = ['$scope','UserService','$q'];
+	SettingsCtrl.$inject = ['$scope', 'UserService', '$q', '$mdDialog','$http'];
+
+
+	function ConnectController($scope,$mdDialog,user,connect) {
+		console.log(user);
+		console.log(connect);
+		$scope.user = user;
+		$scope.connect = connect;
+		if (connect.facebookId) {
+			$scope.provider = 'Facebook';
+		} else if (connect.googleId) {
+			$scope.provider = 'Google';			
+		} else if (connect.feideId) {
+			$scope.provider = 'NTNU';
+		}
+	}
+	//ConnectController.$inject = ['$scope','user','connect']
 })();

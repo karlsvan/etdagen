@@ -107,6 +107,15 @@ module.exports = {
 		}, function(error) {
 			callback(error,null);
 		});
+	},
+	merge: function(user) {
+		var conflict = {};
+		for(var key in user.connect) {
+			if (user.connect[key] == user[key]){
+				delete user.connect[key];
+			}
+		}
+		return user;
 	}
 		
 };

@@ -1,4 +1,4 @@
-<div>
+<div id="page-settings">
   <section class="section-padding" layout="column" layout-align="center center" style="background: #eee;">
     <div class="container" style="max-width:800px;">
       <div layout-gt-sm="row">
@@ -169,9 +169,9 @@
           </md-card-title-text>
         </md-card-title>
         <md-card-content layout="row" layout-align="center center">
-          <md-button class="fb-link md-raised" ng-href="../auth/facebook" style="color: #3b5998" aria-label="fb-login"><div class="link-img" layout-fill></div></md-button>
-          <md-button class="google-link md-raised" ng-href="../auth/google" style="color: #d62d20" aria-label="google-login"><div class="link-img" layout-fill></div></md-button>
-          <md-button class="ntnu-link md-raised" ng-href="../auth/feide" style="color: #0057e7" aria-label="ntnu-login"><div class="link-img" layout-fill></div></md-button>
+          <md-button class="fb-link md-raised" ng-if="!(user.facebookId)" ng-href="../auth/connect/facebook" style="color: #3b5998" aria-label="fb-login"><div class="link-img" layout-fill></div></md-button>
+          <md-button class="google-link md-raised" ng-if="!(user.googleId)" ng-href="../auth/connect/google" style="color: #d62d20" aria-label="google-login"><div class="link-img" layout-fill></div></md-button>
+          <md-button class="ntnu-link md-raised" ng-if="!(user.feideId)" ng-href="../auth/connect/feide" style="color: #0057e7" aria-label="ntnu-login"><div class="link-img" layout-fill></div></md-button>
         </md-card-content>
       </md-card>
       <md-button class="md-raised md-primary" ng-click="saveUser()">Lagre profil</md-button>

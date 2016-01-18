@@ -21,6 +21,7 @@
 			};
 
 			return {
+			getUser: getUser,
 
 			returnUser : function() {
 				return user;
@@ -63,7 +64,7 @@
 					console.log(res.data);
 				});
 			},
-
+			
 	  		logout : function() {
 	  			loggedIn = 0;
 	  			user = null;
