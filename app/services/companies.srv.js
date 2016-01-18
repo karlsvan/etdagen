@@ -81,6 +81,7 @@
 				{year: 2014, type: types.partner}
 			],
 			norbit: [
+				{year: 2016, type: types.partner},
 				{year: 2014, type: types.partner}
 			],
 			zedge: [
@@ -144,7 +145,8 @@
 					companies.microsoft,
 					companies.brekkeStrand,
 					companies.indraNavia,
-					companies.jernbaneverket
+					companies.jernbaneverket,
+					companies.norbit
 				],
 				sponsors: []
 			};
