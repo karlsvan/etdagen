@@ -1,74 +1,233 @@
-<md-toolbar role="navigation" style="background: white;" class="md-whiteframe-1dp">
-	<div class="md-toolbar-tools container" style="margin: 0 auto;">
-		<div style="height: 100%; padding: 0.1em; margin-right: 1.5em;">
-			<img layout-fill src="../../assets/images/ETlogos/logo.svg" alt="E&amp;T-Dagen" ui-active="active" ui-sref="home" class="navbar-nav">
-		</div>
-		<md-button ng-repeat="link in navbar.links.main" ui-active="active" aria-label="{{link.name}}" ui-sref="{{link.state}}" style="height: 100%; line-height: 70px; color: #a03033; margin:0; padding: 0 1em;">
-			<i class="fa {{link.icon}}"></i> {{link.name}}
-		</md-button>
-		<div flex></div>
-		<md-button ng-if="!loggedIn" ui-sref="login" style="height: 100%; color: #a03033; line-height: 70px; padding: 0 1em; margin: 0;" aria-label="logg in">
-			<i class="fa fa-sign-in"></i> Logg inn
-		</md-button>
-		<md-menu md-position-mode="target-right target" md-offset="0 70" style="margin: 0; height: 100%;" ng-if="loggedIn">
-			<md-button ng-click="$mdOpenMenu()" style="height: 100%; line-height: 60px; color: #a03033;">
-				Dropdown
+<nav role="navigation" class="navbar md-whiteframe-1dp" layout="column" layout-align="start center">
+	<md-toolbar class="md-accent md-hue-1" layout="column">
+		<md-tabs style="margin-left: 100px; position: absolute; top:25%; width: 100%; max-width: 620px; background-color: transparent;" hide-xs hide-sm ng-show="false">
+			<md-tab ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" aria-label="{{link.name}}">
+				<i class="fa {{link.icon}}" style="margin: 0 0.4rem; width: 1rem; text-align: center;"></i>
+				<span hide-xs hide-sm hide-md>{{link.name}}</span>
+			</md-tab>
+		</md-tabs>
+		<div class="md-toolbar-tools">
+			<div ui-active="active" ui-sref="home" aria-label="HomeNav" class="navbar-brand" flex="none">
+				<img src="../../assets/images/ETlogos/logo.svg" alt="E&amp;T-dagen">
+			</div>
+			<div class="navbar-nav" layout="row" hide-sm hide-xs>
+				<md-button ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" aria-label="{{link.name}}" class="nav-button-flex">
+					<i class="fa {{link.icon}} button-icon icon-left"></i>
+					<span hide-md>{{link.name}}</span>
+				</md-button>
+			</div>
+			<div flex></div>
+			<div ng-show="false">
+				<input type="text">
+			</div>
+			<md-button class="md-primary md-hue-3 md-raised nav-button-flex" ng-if="!loggedIn" ui-sref="login" aria-label="logg in">
+				Logg inn
 			</md-button>
-			<md-menu-content>
-				<md-menu-item>
-					<md-button ng-click="user()" style="color: #a03033;" aria-label="user">
-						<i class="fa fa-user"></i> Profil
+			<md-menu md-position-mode="target-right target" ng-if="loggedIn">
+				<md-button class="md-raised md-primary md-hue-3 nav-button-flex" ng-click="$mdOpenMenu($event)">
+					{{navbar.username}}<i class="fa fa-chevron-down button-icon icon-right"/>
+				</md-button>
+				<md-menu-content>
+					<md-button ui-sref="user({id:navbar.id})" aria-label="user" class="nav-button text-align-left md-primary md-hue-3">
+						<i class="fa fa-user button-icon icon-left"></i> Profil
 					</md-button>
-				</md-menu-item>
-				<md-menu-item>
-					<md-button ng-click="settings()" style="color: #a03033;" aria-label="settings">
-						<i class="fa fa-cog"></i> Instillinger
+					<md-button ui-sref="settings" aria-label="settings" class="nav-button text-align-left md-primary md-hue-3">
+						<i class="fa fa-cog button-icon icon-left"></i> Instillinger
 					</md-button>
-				</md-menu-item>
-				<md-menu-divider></md-menu-divider>
-				<md-menu-item>
-					<md-button ng-click="logout()" style="color: #a03033;" aria-label="logg ut">
-						<i class="fa fa-sign-out"></i> Logg ut
+					<md-button ng-click="logout()" aria-label="logg ut" class="nav-button text-align-left md-primary md-hue-3">
+						<i class="fa fa-sign-out button-icon icon-left"></i> Logg ut
 					</md-button>
-				</md-menu-item>
-			</md-menu-content>
-		</md-menu>
+				</md-menu-content>
+			</md-menu>
+		</div>
+		<md-tabs class="md-hue-1 override-tab-color" md-stretch-tabs="always" hide-gt-sm>
+			<md-tab ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" aria-label="{{link.name}}">
+				<i class="fa {{link.icon}} button-icon icon-both" style="color: #a03033;"></i>
+			</md-tab>
+		</md-tabs>
+	</md-toolbar>
+
+
+	<md-toolbar ng-show="false">
+		<div class="md-toolbar-tools" layout="row">
+			<md-button class="md-icon-button" aria-label="MenuToggle" hide-gt-sm>
+				<i class="fa fa-bars fa-lg"></i>
+			</md-button>
+			<div flex-sm flex-xs layout="row" layout-align="center center">
+				<md-button ui-active="active" ui-sref="home" aria-label="TitleNav">
+					<img src="../../assets/images/ETlogos/logo.svg" alt="">
+				</md-button>
+			</div>
+			<div layout="row" hide-xs hide-sm flex>
+				<div ng-repeat="link in navbar.links.main" layout="column">
+					<md-button ui-active="active" ui-sref="{{link.state}}" aria-label="{{link.name}}" style="text-align: left; margin-top: 0; margin-bottom: 0;">
+						<i class="fa {{link.icon}}" style="margin: 0 0.4rem; width: 1rem; text-align: center;"></i>{{link.name}}
+					</md-button>
+				</div>
+				<div flex></div>
+				<div>
+					<md-button><i class="fa fa-chevron-down"></i></md-button>
+					<ul style="position: absolute; margin: 0; padding: 0; list-style: none;">
+						<li>
+							<md-button>opt1</md-button>
+						</li>
+						<li>
+							<md-button>opt2</md-button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<md-button class="md-icon-button" aria-label="SearchToggle">
+				<i class="fa fa-search fa-lg"></i>
+			</md-button>
+		</div>
+		<div layout="column" hide-gt-sm>
+			<div ng-repeat="link in navbar.links.main" layout="column">
+				<md-button ui-active="active" ui-sref="{{link.state}}" aria-label="{{link.name}}" style="text-align: left; margin-top: 0; margin-bottom: 0;">
+					<i class="fa {{link.icon}}" style="margin: 0 0.4rem; width: 1rem; text-align: center;"></i>{{link.name}}
+				</md-button>
+			</div>
+		</div>
+		<div class="md-toolbar-tools" layout="column" hide-gt-xs hide-xs>
+			<form action="">
+					<input type="text" placeholder="Søk">
+					<button>Søk</button>
+			</form>
+			<!-- <input type="text" style="width: 100%;"> -->
+		</div>
+	</md-toolbar>
+
+	<div class="navbar-header" ng-show="false">
+		<ul layout="row">
+			<li><i class="fa fa-bars"/></li>
+			<li>HOME</li>
+			<li>
+				<div style="position: relative;">
+					<span style="border: 1px solid #999; padding: 2px 0.4em; background: #ccc;"><i class="fa fa-search"></i></span>
+				</div>
+			</li>
+			<li>
+				<div class="dropdown">
+					<md-button class="dropdown-toggle">
+						Toggle
+					</md-button>
+					<ul class="dropdown-content" ng-class="{'hide': !open}">
+						<li><md-button>fcjow</md-button></li>
+						<li><md-button>cvnwcxwqfrghgeeio</md-button></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<ul class="navbar-button-group" style="width: 100%;">
+			<li ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" aria-label="{{link.name}}">
+				<i class="fa {{link.icon}}"></i>{{link.name}}
+			</li>
+			<li layout="column">
+				<div>dropdown</div>
+				<ul layout="column">
+					<li ng-repeat="link in navbar.links.side">
+						<i class="fa {{link.icon}}"></i>{{link.name}}
+					</li>
+				</ul>
+			</li>
+		</ul>
 	</div>
-	<!-- <div class="container">
-		<div class="brand"><img layout-fill src="../../assets/images/ETlogos/logo.svg" alt="E&amp;T-Dagen" ui-active="active" ui-sref="home" class="navbar-nav"></div>
-		<div class="navbar-nav" ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" md-ink-ripple="#a03033">
-			<i class="fa {{link.icon}}"></i><span> {{link.name}}</span>
+
+	<!-- <nav class="top-bar">
+		<div class="title-nav">
+			<ul class="title-area">
+				<li class="toggle-topbar menu-icon">
+					<i class="fa fa-bars"></i>
+				</li>
+				<li class="toggle-topbar-search">
+					<i class="fa fa-search"></i>
+					<i class="fa fa-times"></i>
+				</li>
+				<li class="nav-home">
+					<a href="">HOME</a>
+				</li>
+			</ul>
 		</div>
-		<div flex></div>
-		<div class="navbar-nav" ng-if="!loggedIn" ui-sref="login">
-			<i class="fa fa-sign-in"></i><span> Logg inn</span>
+		<section class="main-nav top-bar-section">
+			<ul class="left">
+				<li ng-repeat="link in navbar.links.main"><i class="fa {{link.icon}}"></i>{{link.name}}</li>
+			</ul>
+		</section>
+		<section class="user-nav top-bar-section">
+			<ul class="right">
+				<li class="nav-parent">
+					<i class="fa fa-cog"></i>Instillinger
+					<ul class="nav-container">
+						<li class="has-dropdown">
+							<a href="">cjuweh</a>
+							<ul>
+								li
+							</ul>
+						</li>
+						<li>
+							<i class="fa fa-user"></i>Profil
+						</li>
+						<li>
+							<i class="fa fa-sign-out"></i>Logg ut
+						</li>
+					</ul>
+				</li>
+				<li class="search-form">
+					<input type="text">
+				</li>
+			</ul>
+		</section>
+	</nav> -->
+	<!-- <div class="navbar-wrapper" layout="row">
+		<md-button ui-active="active" ui-sref="home" layout="column" layout-align="center center" aria-label="HomeNav">
+			<img src="../../assets/images/ETlogos/logo.svg" alt="">
+		</md-button>
+		<div class="navbar-nav collapse-menu" ng-hide="!menuOpen" layout-gt-sm="row" layout="column" flex>
+			<md-button ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" aria-label="{{link.name}}">
+				<i class="fa {{link.icon}}"></i>{{link.name}}
+			</md-button>
+			<div flex></div>
+			<md-button ng-if="!loggedIn" ui-sref="login" aria-label="logg in">
+				<i class="fa fa-sign-in"></i>Logg inn
+			</md-button>
+			<div class="dropdown" ng-if="loggedIn">
+				<md-button flex>
+					{{navbar.username}}<i class="fa fa-chevron-down"></i>
+				</md-button>
+				<md-list class="dropdown-content" layout="column">
+					<md-list-item>
+						<md-button ui-sref="user({id:navbar.id})" aria-label="user">
+							<i class="fa fa-user"></i> Profil
+						</md-button>
+					</md-list-item>
+					<md-list-item>
+						<md-button ui-sref="settings" aria-label="settings">
+							<i class="fa fa-cog"></i> Instillinger
+						</md-button>
+					</md-list-item>
+					<md-divider></md-divider>
+					<md-list-item>
+						<md-button ng-click="logout()" aria-label="logg ut">
+							<i class="fa fa-sign-out"></i> Logg ut
+						</md-button>
+					</md-list-item>
+				</md-list>
+				<div class="dropdown-content" layout="column">
+					<md-button ui-sref="user({id:navbar.id})" aria-label="user">
+						<i class="fa fa-user"></i>Profil
+					</md-button>
+					<md-button ui-sref="settings" aria-label="settings">
+						<i class="fa fa-cog"></i>Instillinger
+					</md-button>
+					<md-button ng-click="logout()" aria-label="logg ut">
+						<i class="fa fa-sign-out"></i>Logg ut
+					</md-button>
+				</div>
+			</div>
 		</div>
-		<md-menu ng-if="loggedIn">
-	      <div ng-click="$mdOpenMenu()" class="navbar-nav">
-	        <i class="fa fa-cog"></i>
-					<span> {{navbar.username}}</span>
-	      </div>
-	      <md-menu-content width="4">
-	      <md-menu-item>
-	          <md-button ng-click="user()">
-	            <i class="fa fa-user"></i>
-	            Din profil
-	          </md-button>
-	        </md-menu-item>
-	        <md-menu-item>
-	          <md-button ng-click="settings()">
-	            <i class="fa fa-cog"></i>
-	            Instillinger
-	          </md-button>
-	        </md-menu-item>
-	        <md-menu-divider></md-menu-divider>
-	        <md-menu-item>
-	          <md-button ng-click="logout()">
-	            <i class="fa fa-sign-out"></i>
-	            Logg ut
-	          </md-button>
-	        </md-menu-item>
-	      </md-menu-content>
-		</md-menu>
+		<div flex-sm flex-xs></div>
+		<md-button ng-click="toggleMenuOpen()" aria-label="MenuToggle" hide-gt-sm>
+			<i class="fa fa-bars"></i>
+		</md-button>
 	</div> -->
-</md-toolbar>
+</nav>
