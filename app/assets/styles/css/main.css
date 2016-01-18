@@ -72,6 +72,48 @@ a {
   padding: 4em 10px;
 }
 /* inject:components:less */
+i.button-icon {
+  width: 1em;
+  text-align: center;
+}
+i.button-icon.icon-left {
+  margin-right: 0.4em;
+}
+i.button-icon.icon-right {
+  margin-left: 0.4em;
+}
+i.button-icon.icon-both {
+  margin: 0 0.4em;
+}
+.nav-button,
+.nav-button-flex {
+  margin: 0;
+  padding: 0 1em;
+}
+.nav-button-flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.text-align-left {
+  text-align: left;
+}
+.text-align-right {
+  text-align: right;
+}
+.navbar-nav {
+  height: 100%;
+}
+.navbar-nav > .md-button {
+  color: #a03033!important;
+}
+.navbar-brand {
+  margin-right: 1em;
+  height: 100%;
+}
+.navbar-brand > img {
+  height: 100%;
+}
 /* endinject */
 /* inject:partials:less */
 .board-links {
