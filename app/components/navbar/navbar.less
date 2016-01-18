@@ -1,71 +1,35 @@
-// nav#et-navbar {
-// 	position: relative;
-// 	font-size: 14px;
-// 	height: 5em;
-// 	background-color: #fefefe;
-//
-// 	> .container {
-// 		position: relative;
-// 		max-width: 1024px;
-// 		margin: 0 auto;
-// 		height: inherit;
-// 		display: flex;
-// 	}
-//
-// 	.brand {
-// 		width: 4.5em;
-// 		display: flex;
-// 		align-items: center;
-// 		flex: 0 0 auto;
-//
-// 		> img {
-// 			width: 100%;
-// 			box-sizing: border-box;
-// 			padding: 0.2em 1em;
-// 		}
-// 	}
-//
-//
-// 	.navbar-nav {
-// 		position: relative;
-// 		cursor: pointer;
-// 		padding: 0 1em;
-// 		user-select: none;
-// 		color: @red-samfundet;
-// 		display: flex;
-// 		align-items: center;
-// 		overflow: hidden;
-// 		background-color: transparent;
-// 		transition: background-color 0.4s ease-in-out;
-// 		> * {
-// 			padding: 0.1em;
-// 		}
-//
-// 		&:hover {
-// 			background-color: fade(@red-samfundet, 8);
-// 		}
-// 	}
-// }
-//
-//
-// @media (max-width: 650px){
-// 	nav#et-navbar {
-// 		> .container {
-// 			max-width: 500px;
-//
-// 			> .brand {
-// 				width: 4em;
-// 			}
-//
-// 			> .navbar-nav {
-// 				flex-grow: 1;
-// 				> i { margin: 0 auto; }
-// 			}
-// 			> .flex, .navbar-nav>span {
-// 				display: none;
-// 			}
-// 		}
-//
-//
-// 	}
-// }
+i.button-icon {
+	width: 1em;
+	text-align: center;
+	&.icon-left { margin-right: 0.4em; }
+	&.icon-right { margin-left: 0.4em; }
+	&.icon-both { margin: 0 0.4em; }
+}
+.nav-button {
+	margin: 0;
+	padding: 0 1em;
+}
+.nav-button-flex {
+	&:extend(.nav-button);
+	display: flex;
+}
+.text-align-left { text-align: left; }
+.text-align-right { text-align: right; }
+
+.navbar-nav {
+	height: 100%;
+	& > .md-button {
+		color: #a03033!important;
+	}
+}
+
+.navbar-brand {
+	margin-right: 1em;
+	//width: 3em;
+	height: 100%;
+	//background: url('../../assets/images/ETlogos/logo.svg');
+	//background-size: contain;
+	> img {
+		height: 100%;
+	}
+}
