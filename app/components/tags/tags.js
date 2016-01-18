@@ -15,10 +15,21 @@
 		    self.querySearch = querySearch;
 		    getTags();
 		    self.selectedTags = [];
+		    self.names = [];
 		    self.numberBuffer = '';
 		    self.autocompleteDemoRequireMatch = false;
 		    self.transformChip = transformChip;
-		    self.names = $scope.selectedTags;
+		    if($scope.promise) {
+			    $scope.promise.then(function(res){
+			    	self.names = res;
+			    	self.selectedTags = res.map(function (tag) {
+		        		tag = {navn:tag}
+		        		return tag;
+			      	});;
+			    },function(error) {
+
+			    });
+			}
 
 		    $scope.removeChip = function(index) {
 		    	self.names.splice(index,1);
@@ -27,7 +38,8 @@
 		     * Return the proper object when the append is called.
 		     */
 		    function transformChip(chip) {
-		    	//$scope.selectedTags.push(chip);
+		      $scope.selectedTags = self.names;
+		      //console.log(self.names);
 		      // If it is an object, it's already a known chip
 		      if (angular.isObject(chip)) {
 		      	self.names.push(chip.navn);
@@ -60,7 +72,6 @@
 
 			function getTags(callback) {
 				$http.get('/tags').then(function(res) {
-					//console.log(res.data);
 					self.tags = res.data.map(function (tag) {
 		        		tag._lowername = tag.navn.toLowerCase();
 		        		tag._lowertype = 'old';
@@ -80,7 +91,8 @@
 	  			replace: false,
 	  			scope: {
 	  				requirematch: '=',
-	  				selectedTags: '=selectedTags'
+	  				selectedTags: '=selectedTags',
+	  				promise: '='
 	  			},
     			templateUrl: './components/tags/et-tags.html',
     			controller: 'TagController as TagController'

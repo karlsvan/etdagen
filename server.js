@@ -66,9 +66,10 @@ app.get('/logout', function (req, res){
 
 app.get('/user/:id', function (req,res) {
 	User.getProfile(req.params.id, function(error,profile) {
-		profile.filer = JSON.parse(profile.filer);
-		profile.cards = JSON.parse(profile.cards);
-		profile.tags = profile.tags.split(',');
+		if (error) {console.log(error)}
+		if (profile.filer){profile.filer = JSON.parse(profile.filer)}
+		if (profile.cards){profile.cards = JSON.parse(profile.cards)}
+		if (profile.tags){profile.tags = profile.tags.split(',')}
 		res.status(200).send(profile);
 	})
 });

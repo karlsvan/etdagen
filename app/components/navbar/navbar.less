@@ -1,71 +1,71 @@
-nav#et-navbar {
-	position: relative;
-	font-size: 14px;
-	height: 5em;
-	background-color: #fefefe;
-
-	> .container {
-		position: relative;
-		max-width: 1024px;
-		margin: 0 auto;
-		height: inherit;
-		display: flex;
-	}
-	
-	.brand {
-		width: 4.5em;
-		display: flex;
-		align-items: center;
-		flex: 0 0 auto;
-
-		> img {
-			width: 100%;
-			box-sizing: border-box;
-			padding: 0.2em 1em;
-		}
-	}
-
-
-	.navbar-nav {
-		position: relative;
-		cursor: pointer;
-		padding: 0 1em;
-		user-select: none;
-		color: @red-samfundet;
-		display: flex;
-		align-items: center;
-		overflow: hidden;
-		background-color: transparent;
-		transition: background-color 0.4s ease-in-out;
-		> * {
-			padding: 0.1em;
-		}
-
-		&:hover {
-			background-color: fade(@red-samfundet, 8);
-		}
-	}
-}
-
-
-@media (max-width: 650px){
-	nav#et-navbar {
-		> .container {
-			max-width: 500px;
-
-			> .brand {
-				width: 4em;
-			}
-
-			> .navbar-nav {
-				flex-grow: 1;
-				> i { margin: 0 auto; }
-			}
-			> .flex, .navbar-nav>span {
-				display: none;
-			}
-		}
-		
-
-	}
-}
+// nav#et-navbar {
+// 	position: relative;
+// 	font-size: 14px;
+// 	height: 5em;
+// 	background-color: #fefefe;
+//
+// 	> .container {
+// 		position: relative;
+// 		max-width: 1024px;
+// 		margin: 0 auto;
+// 		height: inherit;
+// 		display: flex;
+// 	}
+//
+// 	.brand {
+// 		width: 4.5em;
+// 		display: flex;
+// 		align-items: center;
+// 		flex: 0 0 auto;
+//
+// 		> img {
+// 			width: 100%;
+// 			box-sizing: border-box;
+// 			padding: 0.2em 1em;
+// 		}
+// 	}
+//
+//
+// 	.navbar-nav {
+// 		position: relative;
+// 		cursor: pointer;
+// 		padding: 0 1em;
+// 		user-select: none;
+// 		color: @red-samfundet;
+// 		display: flex;
+// 		align-items: center;
+// 		overflow: hidden;
+// 		background-color: transparent;
+// 		transition: background-color 0.4s ease-in-out;
+// 		> * {
+// 			padding: 0.1em;
+// 		}
+//
+// 		&:hover {
+// 			background-color: fade(@red-samfundet, 8);
+// 		}
+// 	}
+// }
+//
+//
+// @media (max-width: 650px){
+// 	nav#et-navbar {
+// 		> .container {
+// 			max-width: 500px;
+//
+// 			> .brand {
+// 				width: 4em;
+// 			}
+//
+// 			> .navbar-nav {
+// 				flex-grow: 1;
+// 				> i { margin: 0 auto; }
+// 			}
+// 			> .flex, .navbar-nav>span {
+// 				display: none;
+// 			}
+// 		}
+//
+//
+// 	}
+// }

@@ -86,7 +86,8 @@ module.exports = {
 		+'profil.filer, '
 		+'profil.cards, '
 		+'GROUP_CONCAT(tags.navn) AS tags '
-		+'FROM bruker INNER JOIN profil ON bruker.id = profil.bruker_id LEFT JOIN bruker_tags ON bruker.id = bruker_tags.bruker_id LEFT JOIN tags ON bruker_tags.tag_id = tags.id WHERE bruker.id='+id;
+		+'FROM bruker LEFT JOIN profil ON bruker.id = profil.bruker_id LEFT JOIN bruker_tags ON bruker.id = bruker_tags.bruker_id LEFT JOIN tags ON bruker_tags.tag_id = tags.id WHERE bruker.id='+id;
+		//console.log(sql);
 		return new Query(sql);
 	},
 

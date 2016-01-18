@@ -12,12 +12,13 @@
 	  .controller('userCtrl', userCtrl);
 
 		/*@ngInject*/
-		function userCtrl($stateParams, $scope, $state, SearchService){
+		function userCtrl($scope, $state, UserService){
 
 			$scope.$on('$stateChangeSuccess',
 		    	function(event, toState, toParams, fromState, fromParams){
 		    		if(toState.name == "user"){
-			    		SearchService.getProfile(toParams.id, function(res) {
+			    		UserService.getProfile(toParams.id, function(res) {
+			    			//console.log(res);
 		    				$scope.user = res; 
 		    			});
 		    		}
@@ -26,5 +27,5 @@
 			
 
 		}
-		userCtrl.$inject = ['$stateParams', '$scope', '$state', 'SearchService'];
+		userCtrl.$inject = ['$scope', '$state', 'UserService'];
 })();

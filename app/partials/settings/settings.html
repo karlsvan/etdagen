@@ -66,18 +66,18 @@
           <div layout-gt-sm="row">
             <md-input-container flex-gt-sm="50" class="md-block">
               <label>Telefonnummer</label>
-              <input ng-model="user.phone"
+              <input type="number" ng-model="user.tlf"
               ng-pattern="/^[0-9]{8}$/">
             </md-input-container>
             <md-input-container flex-gt-sm="50" class="md-block">
               <label>Epostadresse</label>
-              <input ng-model="user.email">
+              <input type="email" ng-model="user.email">
             </md-input-container>
           </div>
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm="50">
               <label>Adresse</label>
-              <input ng-model="user.address">
+              <input ng-model="user.adresse">
             </md-input-container>
             <md-input-container class="md-block" flex="none">
               <label>Postnummer</label>
@@ -91,6 +91,38 @@
           </div>
         </md-card-content>
       </md-card>
+
+
+
+
+      <md-list-item class="container" ng-repeat="card in cards" ng-init="cardIndex = $index">
+        <md-card flex>
+          <md-card-title>
+            <md-card-title-text>
+              <md-input-container >
+                <label>Kategori</label>
+                <textarea ng-model="cards[cardIndex][0]"></textarea>
+            </md-input-container>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <div layout-gt-sm="row" ng-repeat="row in cards[cardIndex][1]">
+              <md-input-container flex="initial">
+                <label>Hva</label>
+                <textarea ng-model="cards[cardIndex][1][$index][0]"></textarea>
+              </md-input-container>
+              <md-input-container flex>
+                <label>Beskrivelse</label>
+                <input ng-model="cards[cardIndex][1][$index][1]">
+              </md-input-container>
+            </div>
+          </md-card-content>
+        </md-card>
+      </md-list-item>
+
+
+
+
       <md-card>
         <md-card-title>
           <md-card-title-text>
@@ -118,36 +150,6 @@
               <input>
             </md-input-container>
           </div>
-          <div layout-gt-sm="row">
-            <md-input-container flex="initial">
-              <label>Lenkenavn</label>
-              <input>
-            </md-input-container>
-            <md-input-container flex>
-              <label>URL</label>
-              <input>
-            </md-input-container>
-          </div>
-          <div layout-gt-sm="row">
-            <md-input-container flex="initial">
-              <label>Lenkenavn</label>
-              <input>
-            </md-input-container>
-            <md-input-container flex>
-              <label>URL</label>
-              <input>
-            </md-input-container>
-          </div>
-          <div layout-gt-sm="row">
-            <md-input-container flex="initial">
-              <label>Lenkenavn</label>
-              <input>
-            </md-input-container>
-            <md-input-container flex>
-              <label>URL</label>
-              <input>
-            </md-input-container>
-          </div>
         </md-card-content>
       </md-card>
       <md-card>
@@ -157,17 +159,7 @@
           </md-card-title-text>
         </md-card-title>
         <md-card-content>
-          <md-chips ng-model="SettingsCtrl.selectedVegetables" md-autocomplete-snap="" md-transform-chip="SettingsCtrl.transformChip($chip)" md-require-match="SettingsCtrl.autocompleteDemoRequireMatch">
-            <md-autocomplete md-selected-item="SettingsCtrl.selectedItem" md-search-text="SettingsCtrl.searchText" md-items="item in SettingsCtrl.querySearch(SettingsCtrl.searchText)" md-item-text="item.name" placeholder="Skriv for å legge inn tagger">
-              <span md-highlight-text="SettingsCtrl.searchText">{{item.name}} :: {{item.type}}</span>
-            </md-autocomplete>
-            <md-chip-template>
-              <span>
-                <strong>{{$chip.name}}</strong>
-                <em>({{$chip.type}})</em>
-              </span>
-            </md-chip-template>
-          </md-chips>
+          <et-tags requirematch=false selected-tags="user.tags" promise="promise"></et-tags>
         </md-card-content>
       </md-card>
       <md-card>
@@ -182,7 +174,7 @@
           <md-button class="ntnu-link md-raised" ng-href="../auth/feide" style="color: #0057e7" aria-label="ntnu-login"><div class="link-img" layout-fill></div></md-button>
         </md-card-content>
       </md-card>
-      <md-button class="md-raised md-primary">Lagre profil</md-button>
+      <md-button class="md-raised md-primary" ng-click="saveUser()">Lagre profil</md-button>
     </div>
   </section>
 </div>

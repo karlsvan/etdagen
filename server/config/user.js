@@ -105,7 +105,7 @@ module.exports = {
 		db.getProfile(id).then(function(rows) {
 			callback(null,rows[0]);
 		}, function(error) {
-
+			callback(error,null);
 		});
 	}
 		

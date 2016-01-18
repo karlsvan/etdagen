@@ -51,90 +51,65 @@
 			});
 		}
 	}
+	UploadEditor.$inject = ['$scope', '$mdDialog'];
 
-	function SettingsCtrl($scope) {
-		$scope.awesomeThings = [
-			'HTML5 Boilerplate',
-			'AngularJS',
-			'Karma'
-		];
+	function SettingsCtrl($scope,UserService,$q) {
 		var self = this;
+		var deffered = $q.defer();
+		$scope.promise = deffered.promise
+	    var keyArr = [],contArr = [];
 
-		self.readonly = false;
-		self.selectedItem = null;
-		self.searchText = null;
-		self.querySearch = querySearch;
-		self.vegetables = loadVegetables();
-		self.selectedVegetables = [];
-		self.numberBuffer = '';
-		self.autocompleteDemoRequireMatch = false;
-		self.transformChip = transformChip;
+		$scope.$on('$stateChangeSuccess',
+	    	function(event, toState, toParams, fromState, fromParams){
+	    		if((toState.name == "settings") && UserService.getLoggedIn()){
+		    		UserService.getProfile(UserService.returnUser().id, function(res) {
+		    			//console.log(res);
+	    				$scope.user = res;
+	    				deffered.resolve(res.tags);
+	    				$scope.cards = toArray(res.cards);
+	    			});
+	    		} else {
+	    			deffered.reject('fuck');
+	    		}
+	    	}
+	    );
 
-		/**
-		* Return the proper object when the append is called.
-		*/
-		function transformChip(chip) {
-			// If it is an object, it's already a known chip
-			if (angular.isObject(chip)) {
-				return chip;
-			}
+	    function toArray(obj) {
+	    	if(typeof obj === 'string') {
+	    		return obj;
+	    	}
+	    	var arr = [];
+	    	var i = 0;
+	    	for (var key in obj) {
+	    		arr[i] = [key];
+	    		arr[i][1] = toArray(obj[key]);
+	    		i++;
+	    	}
+	    	return arr;
+	    }
 
-			// Otherwise, create a new one
-			return { name: chip, type: 'new' };
-		}
+	    function toObject(arr) {
+	    	if(typeof arr === 'string') {
+	    		return arr;
+	    	}
+	    	var obj = {};
+	    	arr.forEach(function(element,index,arr) {
+	    		obj[element[0]] = toObject(element[1]);
+	    	})
 
-		/**
-		* Search for vegetables.
-		*/
-		function querySearch (query) {
-			var results = query ? self.vegetables.filter(createFilterFor(query)) : [];
-			return results;
-		}
+	    	return obj;
+	    }
 
-		/**
-		* Create filter function for a query string
-		*/
-		function createFilterFor(query) {
-			var lowercaseQuery = angular.lowercase(query);
+	    $scope.saveUser = function() {
+	    	//console.log($scope.user);
+	    	console.log(JSON.stringify(toObject($scope.cards)));
+	    	//UserService.saveUser($scope.user);
+	    }
 
-			return function filterFn(vegetable) {
-				return (vegetable._lowername.indexOf(lowercaseQuery) === 0) ||
-				(vegetable._lowertype.indexOf(lowercaseQuery) === 0);
-			};
 
-		}
 
-		function loadVegetables() {
-			var veggies = [
-				{
-					'name': 'Broccoli',
-					'type': 'Brassica'
-				},
-				{
-					'name': 'Cabbage',
-					'type': 'Brassica'
-				},
-				{
-					'name': 'Carrot',
-					'type': 'Umbelliferous'
-				},
-				{
-					'name': 'Lettuce',
-					'type': 'Composite'
-				},
-				{
-					'name': 'Spinach',
-					'type': 'Goosefoot'
-				}
-			];
 
-			return veggies.map(function (veg) {
-				veg._lowername = veg.name.toLowerCase();
-				veg._lowertype = veg.type.toLowerCase();
-				return veg;
-			});
-		}
 
 	}
-	SettingsCtrl.$inject = ['$scope'];
+	SettingsCtrl.$inject = ['$scope','UserService','$q'];
 })();
