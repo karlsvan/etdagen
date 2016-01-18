@@ -37,3 +37,4 @@ Recommended packages and themes (atom)
 - Opplasting/nedlasting av filer (cv, søknad, etc.)
 - Implementering av karma
 - Angular docs
+- Image upload: https://github.com/danialfarid/ng-file-upload
