@@ -24,7 +24,6 @@ module.exports = function (passport){
 
 	// deserializeUser function takes the serialized user and finds the matching user in the database. User object is attached to req.user.
 	passport.deserializeUser(function (serializedUser, done){
-		console.log('derz: '+JSON.stringify(serializedUser));
 		if (serializedUser.connect) {
 			User.findOne({id:serializedUser.id}, function (error, user){
 				user.connect = serializedUser.connect;
@@ -93,8 +92,9 @@ module.exports = function (passport){
 			bilde: profile.photos[0]
 		}
 		if (req.user) {
-			console.log('allerede logget inn!');
 			req.user.connect = profil;
+			req.user = User.merge(req.user);
+			return done(null,req.user);
 		} else {
 			User.findOrCreate(profil, function (err, user) {
 				return done(err, user);
@@ -119,10 +119,10 @@ module.exports = function (passport){
 				bilde: profile.photos[0].value
 			}
 		if (req.user) {
-			console.log('allerede logget inn!!');
 			req.user.connect = profil;
+			req.user = User.merge(req.user);
+			return done(null,req.user);
 		} else {
-			console.log('ikke logget inn');
 			User.findOrCreate(profil, function (err, user) {
 					return done(err, user);
 			});
@@ -145,12 +145,10 @@ module.exports = function (passport){
 				bilde: profile.photos[0].value
 			}
 		if (req.user) {
-			console.log('logget inn');
 			req.user.connect = profil;
 			req.user = User.merge(req.user);
 			return done(null,req.user);
 		} else {
-			console.log('ikke logget inn');
 			User.findOrCreate(profil, function (err, user) {
 				return done(err, user);
 			});

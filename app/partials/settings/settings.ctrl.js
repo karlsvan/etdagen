@@ -61,39 +61,20 @@
 	    var keyArr = [],contArr = [];
 
 	    UserService.init(function(user,loggedIn,error) {
-	    	console.log(JSON.stringify(user));
 	    	if (user.connect) {
 					connect(user);
 			}
 			UserService.getProfile(UserService.returnUser().id, function(res) {
 				$scope.user = res;
-				deffered.resolve(res.tags);
+				if(res.tags) {
+					deffered.resolve(res.tags);
+				} else {
+					deffered.reject();
+				}
 				$scope.cards = toArray(res.cards);
 			});
 	    })
 
-
-		/*$scope.$on('$stateChangeSuccess',
-	    	function(event, toState, toParams, fromState, fromParams){
-	    		if((toState.name == "settings") && UserService.getLoggedIn()){
-	    			console.log('hei')
-		    		UserService.getProfile(UserService.returnUser().id, function(res) {
-	    				$scope.user = res;
-	    				deffered.resolve(res.tags);
-	    				$scope.cards = toArray(res.cards);
-	    				UserService.getUser(function(user,loggedIn,error) {
-	    					if (user.connect) {
-	    						connect(user);
-	    					}
-	    				})
-	    			});
-
-	    		} else {
-	    			deffered.reject('fuck');
-	    		}
-	    	}
-	    );
-*/
 	    function toArray(obj) {
 	    	if(typeof obj === 'string') {
 	    		return obj;
@@ -140,10 +121,14 @@
 		      	connect: user.connect
 		      }
 		    })
-		    .then(function(answer) {
-		      $scope.status = 'You said the information was "' + answer + '".';
+		    .then(function(connect) {
+		    	for(var key in connect) {
+		    		$scope.user[key] = connect[key];
+		    	}
+		    	$http.get('/auth/connect/done')
 		    }, function() {
 		      $scope.status = 'You cancelled the dialog.';
+		      $http.get('/auth/connect/done')
 		    })
 
 		}
@@ -154,16 +139,29 @@
 
 
 	function ConnectController($scope,$mdDialog,user,connect) {
-		console.log(user);
-		console.log(connect);
+		$scope.radio = {};
 		$scope.user = user;
 		$scope.connect = connect;
 		if (connect.facebookId) {
 			$scope.provider = 'Facebook';
+			$scope.user.facebookId = connect.facebookId;
+			delete connect.facebookId;
 		} else if (connect.googleId) {
-			$scope.provider = 'Google';			
+			$scope.provider = 'Google';
+			$scope.user.googleId = connect.googleId;
+			delete connect.googleId;		
 		} else if (connect.feideId) {
 			$scope.provider = 'NTNU';
+			$scope.user.feideId = connect.feideId;
+			delete connect.feideId;
+		}
+		$scope.save = function() {
+			for(var key in $scope.radio) {
+				if($scope.radio[key] != 'new') {
+					delete $scope.connect[key];
+				}
+			}
+			$mdDialog.hide($scope.connect)
 		}
 	}
 	ConnectController.$inject = ['$scope', '$mdDialog', 'user', 'connect'];

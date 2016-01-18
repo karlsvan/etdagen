@@ -23,7 +23,7 @@ auth.get('/facebook/callback',
 		// Successful authentication, redirect home.
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
 		if (req.user.connect) {
-			res.status(200).json(req.user.connect);
+			res.redirect('/#/settings');
 		} else {
 			res.redirect('/#/user/'+req.user.id);
 		}
@@ -42,7 +42,7 @@ auth.get('/feide/callback',
 		// Successful authentication, redirect home.
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
 		if (req.user.connect) {
-			res.status(200).json(req.user.connect);
+			res.redirect('/#/settings');
 		} else {
 			res.redirect('/#/user/'+req.user.id);
 		}
@@ -58,15 +58,21 @@ auth.get('/google/callback',
 	passport.authenticate('google', { failureRedirect: '/#/login' }),
 	function (req, res) {
 		// Successful authentication, redirect home.
-		console.log('success! '+JSON.stringify(req.user));
 		req.sessionOptions.maxAge = 2*24*60*60*1000;
 		if (req.user.connect) {
-			console.log('connect: '+JSON.stringify(req.user.connect));
 			res.redirect('/#/settings');
 		} else {
 			res.redirect('/#/user/'+req.user.id);
 		}
 	});
+
+auth.get('/connect/done',function (req,res) {
+	var user = req.user;
+	delete user.connect;
+	req.login(user, function(error) {
+		res.sendStatus(200);
+	})
+})
 
 auth.get('/ntnu/callback', function (req) {
 	console.log('req: '+JSON.stringify(req.query));

@@ -26,7 +26,7 @@
 		        		tag = {navn:tag}
 		        		return tag;
 			      	});;
-			    },function(error) {
+			    },function() {
 
 			    });
 			}
