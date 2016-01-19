@@ -114,6 +114,20 @@ i.button-icon.icon-both {
 .navbar-brand > img {
   height: 100%;
 }
+.truncate {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+.truncate > span {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /* endinject */
 /* inject:partials:less */
 .board-links {

@@ -1,46 +1,47 @@
 <!doctype html>
 <html class="no-js" ng-app="etApp" ng-controller="appCtrl as app">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
 
 
-        <title ng-bind="app.name +' '+ app.year">E&amp;T-dagen</title>
-        <meta name="description" content="E&amp;T-dagen er en rekrutteringsdag arrangert av studenter ved faglinjen Elektronikk på NTNU.">
-        <meta keywords="E&amp;T-dagen, Rekrutteringsdag, NTNU, Glassgården, Elektronikk">
-        <base href="/">
+		<title ng-bind="app.name +' '+ app.year">E&amp;T-dagen</title>
+		<meta name="description" content="E&amp;T-dagen er en rekrutteringsdag arrangert av studenter ved faglinjen Elektronikk på NTNU.">
+		<meta keywords="E&amp;T-dagen, Rekrutteringsdag, NTNU, Glassgården, Elektronikk">
+		<meta name="google-site-verification" content="xRburtyLDlGNUYPSfAJoDyJxRmQNxnjSPB6Wqbka9aY" />
+		<base href="/">
 
-        <!-- build:css assets/css/vendor.css -->
-            <!-- bower:css -->
-            <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
-            <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
-            <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css assets/css/custom.css -->
-            <!-- custom:css -->
-            <link rel="stylesheet" href="assets/styles/css/main.css">
-            <!-- endcustom -->
-        <!-- endbuild -->
-    </head>
-    <body layout="column" style="height: auto!important;">
-        <!-- Facebook like -->
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.5&appId=170743059677950";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+		<!-- build:css assets/css/vendor.css -->
+			<!-- bower:css -->
+			<link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
+			<link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css" />
+			<!-- endbower -->
+		<!-- endbuild -->
+		<!-- build:css assets/css/custom.css -->
+			<!-- custom:css -->
+			<link rel="stylesheet" href="assets/styles/css/main.css">
+			<!-- endcustom -->
+		<!-- endbuild -->
+	</head>
+	<body layout="column" style="height: auto!important;">
+		<!-- Facebook like -->
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/nb_NO/sdk.js#xfbml=1&version=v2.5&appId=170743059677950";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
 
 
-        <!-- Application content here -->
-        <navbar style="z-index:10;"></navbar>
-        <md-content ui-view style="overflow: hidden;" flex></md-content>
-        <footer class="container-fluid container-padding" layout="column" layout-align="center" style="background: #333; color: rgba(255,255,255,0.87);" ng-cloak>
-            <p class="md-body-2"><i class="fa fa-copyright"></i> <span ng-bind="app.year+' '+app.name"></span></p>
-        </footer>
+		<!-- Application content here -->
+		<navbar style="z-index:10;"></navbar>
+		<md-content ui-view style="overflow: hidden;" flex></md-content>
+		<footer class="container-fluid container-padding" layout="column" layout-align="center" style="background: #333; color: rgba(255,255,255,0.87);" ng-cloak>
+			<p class="md-body-2"><i class="fa fa-copyright"></i> <span ng-bind="app.year+' '+app.name"></span></p>
+		</footer>
 
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -105,4 +106,5 @@
             <!-- endcustom -->
         <!-- endbuild -->
     </body>
+
 </html>

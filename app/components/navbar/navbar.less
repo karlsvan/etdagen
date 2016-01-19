@@ -33,3 +33,13 @@ i.button-icon {
 		height: 100%;
 	}
 }
+.truncate {
+	display: flex;
+	flex-direction: row;
+	> span {
+		display: block;	
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}

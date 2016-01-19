@@ -38,7 +38,7 @@
 				controller: 'boardDialogCtrl',
 				template:
 				'<md-dialog flex="80">'+
-					'<md-toolbar>'+
+					'<md-toolbar class="md-primary md-hue-2">'+
 						'<div class="md-toolbar-tools">'+
 						'<h2>Oversikt over styremedlemmer</h2>'+
 						'<span flex></span>'+

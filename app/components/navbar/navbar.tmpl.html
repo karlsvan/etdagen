@@ -1,5 +1,5 @@
 <nav role="navigation" class="navbar md-whiteframe-1dp" layout="column" layout-align="start center">
-	<md-toolbar class="md-accent md-hue-1" layout="column">
+	<md-toolbar class="md-accent md-hue-1" layout="column" style="max-width: 1200px;">
 		<md-tabs style="margin-left: 100px; position: absolute; top:25%; width: 100%; max-width: 620px; background-color: transparent;" hide-xs hide-sm ng-show="false">
 			<md-tab ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" aria-label="{{link.name}}">
 				<i class="fa {{link.icon}}" style="margin: 0 0.4rem; width: 1rem; text-align: center;"></i>
@@ -13,28 +13,28 @@
 			<div class="navbar-nav" layout="row" hide-sm hide-xs>
 				<md-button ng-repeat="link in navbar.links.main" ui-active="active" ui-sref="{{link.state}}" aria-label="{{link.name}}" class="nav-button-flex">
 					<i class="fa {{link.icon}} button-icon icon-left"></i>
-					<span hide-md>{{link.name}}</span>
+					<span>{{link.name}}</span>
 				</md-button>
 			</div>
 			<div flex></div>
 			<div ng-show="false">
 				<input type="text">
 			</div>
-			<md-button class="md-primary md-hue-3 md-raised nav-button-flex" ng-if="!loggedIn" ui-sref="login" aria-label="logg in">
+			<md-button class="md-primary md-hue-2 md-raised nav-button-flex" ng-if="!loggedIn" ui-sref="login" aria-label="logg in">
 				Logg inn
 			</md-button>
 			<md-menu md-position-mode="target-right target" ng-if="loggedIn">
-				<md-button class="md-raised md-primary md-hue-3 nav-button-flex" ng-click="$mdOpenMenu($event)">
-					{{navbar.username}}<i class="fa fa-chevron-down button-icon icon-right"/>
+				<md-button class="md-raised md-primary md-hue-2 nav-button truncate" ng-click="$mdOpenMenu($event)">
+					<span style="max-width: 100px;">{{navbar.username}}</span><i class="fa fa-chevron-down button-icon icon-right"/>
 				</md-button>
 				<md-menu-content>
-					<md-button ui-sref="user({id:navbar.id})" aria-label="user" class="nav-button text-align-left md-primary md-hue-3">
+					<md-button ui-sref="user({id:navbar.id})" aria-label="user" class="nav-button text-align-left md-primary md-hue-2">
 						<i class="fa fa-user button-icon icon-left"></i> Profil
 					</md-button>
-					<md-button ui-sref="settings" aria-label="settings" class="nav-button text-align-left md-primary md-hue-3">
+					<md-button ui-sref="settings" aria-label="settings" class="nav-button text-align-left md-primary md-hue-2">
 						<i class="fa fa-cog button-icon icon-left"></i> Instillinger
 					</md-button>
-					<md-button ng-click="logout()" aria-label="logg ut" class="nav-button text-align-left md-primary md-hue-3">
+					<md-button ng-click="logout()" aria-label="logg ut" class="nav-button text-align-left md-primary md-hue-2">
 						<i class="fa fa-sign-out button-icon icon-left"></i> Logg ut
 					</md-button>
 				</md-menu-content>

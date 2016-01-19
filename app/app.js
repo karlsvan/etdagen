@@ -8,7 +8,7 @@
 	angular.module('etApp', [
 		'ngAnimate',
 		'ngAria',
-		'ngCookies',
+		//'ngCookies',
 		'ngMessages',
 		'ngResource',
 		'ngRoute',
@@ -21,13 +21,11 @@
 	.config(configure)
 	.controller('appCtrl', appCtrl);
 
-	function appCtrl($cookies,$mdToast){
+	function appCtrl(){
 		this.name = 'E&T-dagen';
 		this.year = 2016;
 
 	}
-
-	appCtrl.$inject = ['$cookies', '$mdToast'];
 	/*@ngInject*/
 	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 		$urlRouterProvider.otherwise('/');

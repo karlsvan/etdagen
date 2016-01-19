@@ -1,43 +1,39 @@
-<div id="page-connect" class="container" style="max-width:800px;" flex>
-  <div layout-gt-sm="row">
-    <md-card flex-gt-sm="50">
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Eksisterende profil</span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-content>
-        <div layout-gt-sm="row" ng-repeat="(key, value) in connect">
-          <md-radio-group ng-model="radio[key]">
-		      <md-radio-button value="exist" class="md-primary">
-		      </md-radio-button>
-		   </md-radio-group>
-		   <md-input-container flex>
-	            <label>{{key}}</label>
-	            <input ng-model="user[key]">
-	       </md-input-container>
-        </div>
-      </md-card-content>
-    </md-card>
-    <md-card flex-gt-sm="50">
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">{{provider}} profil</span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-content>
-        <div layout-gt-sm="row" ng-repeat="(key, value) in connect">
-          <md-radio-group ng-model="radio[key]">
-		      <md-radio-button value="new" class="md-primary">
-		      </md-radio-button>
-		   </md-radio-group>
-		   <md-input-container flex>
-             <label>{{key}}</label>
-             <input ng-model="connect[key]">
-           </md-input-container>
-        </div>
-      </md-card-content>
-    </md-card>
-  </div>
-  <md-button class="md-raised md-primary" ng-click="save()">Lagre</md-button>
+<div style="width: 90%; max-width: 800px;">
+  <md-dialog>
+    <div layout-sm="column" layout-gt-sm="row" flex="grow">
+      <md-dialog-content layout-margin flex-gt-sm="50">
+        <md-list>
+          <md-subheader class="md-no-sticky"><strong>Eksisterende profil</strong></md-subheader>
+          <md-list-item class="md-2-line" ng-repeat="(key, value) in connect">
+            <md-radio-group ng-model="radio[key]" flex="grow" md-ink-ripple="#E60000">
+              <md-radio-button value="exist" class="md-primary">
+                <div class="md-list-item-text">
+                  <h3> {{ user[key] }} </h3>
+                  <p> {{ key }} </p>
+                </div>
+              </md-radio-button>
+            </md-radio-group>
+          </md-list-item>
+        </md-list>
+      </md-dialog-content>
+      <md-dialog-content layout-margin flex-gt-sm="50">
+        <md-list>
+          <md-subheader class="md-no-sticky"><strong>{{ provider }} profil</strong></md-subheader>
+          <md-list-item class="md-2-line" ng-repeat="(key, value) in connect">
+            <md-radio-group ng-model="radio[key]" flex="grow" md-ink-ripple="#E60000">
+              <md-radio-button value="new" class="md-primary">
+                <div class="md-list-item-text">
+                  <h3> {{ connect[key] }} </h3>
+                  <p> {{ key }} </p>
+                </div>
+              </md-radio-button>
+            </md-radio-group>
+          </md-list-item>
+        </md-list>
+      </md-dialog-content>
+    </div>
+    <md-dialog-actions>
+      <md-button class="md-raised md-primary" ng-click="save()">Lagre</md-button>
+    </md-dialog-actions>
+  </md-dialog>
 </div>
