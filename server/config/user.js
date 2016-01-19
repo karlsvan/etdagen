@@ -116,6 +116,14 @@ module.exports = {
 			}
 		}
 		return user;
+	},
+
+	saveFile: function(id,file,cb) {
+		db.saveFile(id,file).then(function() {
+			cb(null);
+		}, function (error) {
+			cb(error);
+		})
 	}
 		
 };

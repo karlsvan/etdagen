@@ -15,7 +15,8 @@
 		'ngSanitize',
 		// 'ngTouch',
 		'ui.router',
-		'ngMaterial'
+		'ngMaterial',
+		'angularFileUpload'
 	])
 	.config(configure)
 	.controller('appCtrl', appCtrl);

@@ -72,7 +72,8 @@ module.exports = {
 	},
 
 	getProfile: function(id) {
-		var sql = 'SELECT ' 
+		var sql = 'SELECT '
+		+'bruker.id, ' 
 		+'bruker.fornavn, '
 		+'bruker.etternavn, '
 		+'bruker.tlf, '
@@ -109,6 +110,12 @@ module.exports = {
 	getCompanies: function() {
 		var sql = 'SELECT * from bruker WHERE status="bedriftadmin";';
 		return new Query(sql);
+	},
+
+	saveFile: function(id,file) {
+		var sql = 'INSERT INTO profil (bruker_id, filer) VALUES (?) ON DUPLICATE KEY UPDATE filer = ?;';
+		var inserts = [[id,file],file];
+		return new Query(sql,inserts);
 	}
 
 

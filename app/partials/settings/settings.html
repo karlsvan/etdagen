@@ -33,9 +33,18 @@
             </md-card-title-text>
           </md-card-title>
           <md-card-content>
+            <div ng-show="user.filer[0].navn">
+              <i class="fa fa-file-o"></i>
+              <label>{{filename}}</label>
+              <md-button ng-click="deleteFile()" ng-show="!item.isSuccess"><i class="fa fa-times"></i>
+              </md-button><i class="fa fa-check"></i>
+            </div>
             <md-card-actions layout="row" layout-align="end center">
-              <md-button type="submit">Last opp</md-button>
-              <md-button type="delete" class="md-warn">Slett</md-button>
+              <md-button>
+                <label for="cv-input">Velg filer</label>  
+              </md-button>
+              <input id="cv-input" type="file" ng-hide=true nv-file-select uploader="uploader">
+              <md-button class="md-warn" ng-click="uploader.uploadAll()">Last opp</md-button>
             </md-card-actions>
           </md-card-content>
         </md-card>
@@ -77,16 +86,16 @@
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm="50">
               <label>Adresse</label>
-              <input ng-model="user.adresse">
+              <input ng-model="user.adresse[0]">
             </md-input-container>
             <md-input-container class="md-block" flex="none">
               <label>Postnummer</label>
-              <input name="postalCode" ng-model="user.postalCode"
+              <input name="postalCode" ng-model="user.adresse[1]"
               ng-pattern="/^[0-9]{4}$/">
             </md-input-container>
             <md-input-container class="md-block" flex="none">
               <label>Poststed</label>
-              <input ng-model="user.city">
+              <input ng-model="user.adresse[2]">
             </md-input-container>
           </div>
         </md-card-content>
@@ -99,21 +108,21 @@
         <md-card flex>
           <md-card-title>
             <md-card-title-text>
-              <md-input-container >
+              <md-input-container>
                 <label>Kategori</label>
-                <textarea ng-model="cards[cardIndex][0]"></textarea>
-            </md-input-container>
+                <textarea ng-model="cards[cardIndex][0]" ng-change="continueCards('head',cardIndex)"></textarea>
+              </md-input-container>
             </md-card-title-text>
           </md-card-title>
           <md-card-content>
             <div layout-gt-sm="row" ng-repeat="row in cards[cardIndex][1]">
               <md-input-container flex="initial">
                 <label>Hva</label>
-                <textarea ng-model="cards[cardIndex][1][$index][0]"></textarea>
+                <textarea ng-model="cards[cardIndex][1][$index][0]" ng-change="continueCards('key',cardIndex, $index)"></textarea>
               </md-input-container>
               <md-input-container flex>
                 <label>Beskrivelse</label>
-                <input ng-model="cards[cardIndex][1][$index][1]">
+                <input ng-model="cards[cardIndex][1][$index][1]" ng-change="continueCards('value',cardIndex, $index)">
               </md-input-container>
             </div>
           </md-card-content>

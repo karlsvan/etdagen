@@ -11,12 +11,25 @@ var express		= require('express'),
 	mail        = require('./server/config/mail.js'),
 	User        = require('./server/config/user.js'),
 	authRoutes  = require('./authRouter.js'),
+	multer      = require('multer'),
+	fs          = require('fs'),
 	passport    = require('passport');require('./server/config/passport.js')(passport);
 
 // ========== Initialize and setup express app ==========
 var app 	= express();
 var env		= app.get('env') || 'development';
 var appConfig = require('./gulpfile');
+
+//for file upload:
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.resolve(__dirname, 'filer'))
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage });
 
 // Support ejs templating for views
 app.set('view engine', 'ejs');
@@ -103,6 +116,36 @@ app.post('/register',
 			});
 		}
 	});
+
+app.post('/upload',upload.single('file'),function (req,res) {
+	var id = req.file.filename.split('_')[0];
+	fs.readdir(path.resolve(__dirname, 'filer'),function(err, files) {
+		if (err) 
+			throw err;
+		var prefix = id+'_'
+		files.forEach(function(elem,index,arr){
+			if(elem.substring(0,prefix.length) == prefix && elem != req.file.filename) {
+				fs.unlink(path.resolve(__dirname, 'filer/'+elem),function() {
+					console.log(path.resolve(__dirname, 'filer/'+elem));
+				})
+			}
+		})
+	});
+	User.saveFile(id,JSON.stringify([{navn:req.file.filename,path:'/filer'}]),function(error) {
+		res.sendStatus(200);
+	})
+
+	//console.log(JSON.stringify(req.file));
+})
+
+app.post('/deleteFile', function (req, res) {
+	var id = req.body.navn.split('_')[0];
+	fs.unlink(path.resolve(__dirname, 'filer/'+req.body.navn),function() {
+		User.saveFile(id,JSON.stringify([]),function(error) {
+			res.sendStatus(200);
+		})
+	})
+})
 
 app.post('/contact', function (req,res) {
 	mail.sendMail(req.body, function(error, info){
