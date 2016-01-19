@@ -2,12 +2,10 @@
 	<!-- Promovideo -->
 	<section id="promo-section" class="container-fluid" layout-align="start center" layout="column" ng-cloak>
 		<div class="container md-whiteframe-12dp" style="background: #222; padding: 2px;">
-			<!-- <div class="video-wrapper">
-				<iframe src="https://www.youtube.com/embed/BZFMVFaBY1w" frameborder="0" allowfullscreen></iframe>
-			</div> -->
-			<video width="100%" controls>
-				<source src="/assets/videos/promo2016.mp4" type="video/mp4">
-			</video>
+			<div class="video-wrapper">
+				<iframe src="https://www.youtube.com/embed/TRpVZ8jxerQ" frameborder="0" allowfullscreen></iframe>
+				<!-- <iframe src="https://www.youtube.com/embed/BZFMVFaBY1w" frameborder="0" allowfullscreen></iframe> -->
+			</div>
 		</div>
 	</section>
 
@@ -22,7 +20,7 @@
 			<md-button class="md-primary md-hue-3 md-raised" hide-sm ui-sref="about">Informasjon</md-button>
 		</div>
 		<md-list flex-md="60" flex-gt-md="50">
-			<div class="md-2-line" ng-show="true"><p class="md-offset md-list-item-text md-body-1" style="color: rgba(230,0,0,0.87)">Programmet er ikke oppdatert fra 2015</p></div>
+			<div class="md-2-line" ng-show="false"><p class="md-offset md-list-item-text md-body-1" style="color: rgba(230,0,0,0.87)">Programmet er ikke oppdatert fra 2015</p></div>
 			<md-list-item ng-repeat="event in pagehome.program" layout="row" class="md-2-line">
 				<img class="md-avatar" ng-src="/assets/images/icons/{{event.icon}}Icon.png" alt="" style="opacity: 0.9;">
 				<div class="md-list-item-text">
