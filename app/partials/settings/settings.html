@@ -10,19 +10,20 @@
           </md-card-title>
           <md-card-content>
             <div layout="row" layout-align="center center">
-              <div style="width: 10rem; height: 10rem; border-radius: 50%;
+              <div ng-if="!bildeUrlShow" style="width: 10rem; height: 10rem; border-radius: 50%;
               background: url({{user.bilde || 'assets/images/avatar.jpg'}}) center;
               background-size: cover; overflow: hidden; border: 0.3rem solid white;
               margin-bottom: 1em;">
               </div>
+              <md-input-container ng-if="bildeUrlShow" flex>
+                <textarea  columns="4" ng-model="user.bilde"></textarea> 
+              </md-input-container>
             </div>
             <md-card-actions layout="row" layout-align="end center">
-              <div ng-controller="UploadController">
-                <md-button ng-click="showUpload($event)">
-                  Last opp
+                <md-button ng-click="bildeUrlShow = !bildeUrlShow; ">
+                  Lagre bilde url
                 </md-button>
-              </div>
-              <md-button type="delete" class="md-warn">Slett</md-button>
+              <md-button type="delete" class="md-warn" ng-click="user.bilde=''">Slett</md-button>
             </md-card-actions>
           </md-card-content>
         </md-card>
@@ -36,15 +37,13 @@
             <div ng-show="user.filer[0].navn">
               <i class="fa fa-file-o"></i>
               <label>{{filename}}</label>
-              <md-button ng-click="deleteFile()" ng-show="!item.isSuccess"><i class="fa fa-times"></i>
-              </md-button><i class="fa fa-check"></i>
             </div>
             <md-card-actions layout="row" layout-align="end center">
               <md-button>
-                <label for="cv-input">Velg filer</label>  
+                <label for="cv-input">Last opp</label>  
               </md-button>
               <input id="cv-input" type="file" ng-hide=true nv-file-select uploader="uploader">
-              <md-button class="md-warn" ng-click="uploader.uploadAll()">Last opp</md-button>
+              <md-button class="md-warn" ng-click="deleteFile()">Slett</md-button>
             </md-card-actions>
           </md-card-content>
         </md-card>
