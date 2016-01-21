@@ -118,6 +118,16 @@ app.post('/register',
 		}
 	});
 
+app.post('/setPass',function (req,res) {
+	User.setPass(req.body,function(error) {
+		if (error){
+			res.status(500).send(error)
+		} else {
+			res.sendStatus(200);
+		}
+	});
+});
+
 app.post('/upload',upload.single('file'),function (req,res) {
 	var id = req.file.filename.split('_')[0];
 	fs.readdir(path.resolve(__dirname, 'filer'),function(err, files) {
@@ -142,7 +152,7 @@ app.post('/upload',upload.single('file'),function (req,res) {
 app.post('/deleteFile', function (req, res) {
 	var id = req.body.navn.split('_')[0];
 	fs.unlink(path.resolve(__dirname, 'filer/'+req.body.navn),function() {
-		User.saveFile(id,JSON.stringify([]),function(error) {
+		User.saveFile(id,'',function(error) {
 			res.sendStatus(200);
 		})
 	})

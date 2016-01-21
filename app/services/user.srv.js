@@ -68,7 +68,7 @@
 
 			this.register = function(cred) {
 				$http.post('/register', cred).then(function sucsessCB(/*response*/) {
-					$state.go('home');
+					$state.go('settings');
 				});
 			};
 
@@ -77,6 +77,14 @@
 					$state.go('user',{id:userSettings.id});
 				},function(error) {
 
+				})
+			}
+
+			this.setPass = function(cred,cb) {
+				$http.post('/setPass',cred).then(function(res) {
+					cb(res)
+				},function(error) {
+					cb(error)
 				})
 			}
 
