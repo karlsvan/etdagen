@@ -72,6 +72,14 @@
 				});
 			};
 
+			this.saveSettings = function(userSettings) {
+				$http.post('/saveSettings',userSettings).then(function(res){
+					$state.go('user',{id:userSettings.id});
+				},function(error) {
+
+				})
+			}
+
 			this.logout = function() {
 				loggedIn = 0;
 				user = null;

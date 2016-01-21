@@ -399,6 +399,74 @@ h2:hover span {
   font-size: 0.8em;
   margin-top: 50px;
 }
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  height: 0;
+}
+.video-wrapper > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.programme-header {
+  background-color: #fff;
+  font-size: 1rem;
+}
+.programme-header > .header-content {
+  margin-top: 20px;
+}
+.programme-header > .header-content img {
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  margin: 0 2em;
+  width: 5em;
+}
+.programme-header > .header-content .md-display-2 {
+  font-size: 3em;
+  line-height: 2em;
+}
+.programme-header > .header-content .md-title {
+  font-size: 2.2em;
+  margin-left: 2.5em;
+}
+.skew-lb,
+.skew-rb {
+  position: relative;
+}
+.skew-lb > *,
+.skew-rb > * {
+  z-index: 1;
+}
+.skew-lb:before,
+.skew-rb:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  top: 50%;
+}
+.skew-lb:before {
+  -webkit-transform: skewY(-3deg);
+          transform: skewY(-3deg);
+}
+.skew-rb:before {
+  -webkit-transform: skewY(3deg);
+          transform: skewY(3deg);
+}
+@media (min-width: 600px) {
+  #promo-section {
+    background: url('/assets/images/ETlogos/logo.svg') no-repeat;
+    background-size: 50% 250%;
+    background-position: 100% 50%;
+    padding: 3% 0;
+  }
+}
 #profiles-container {
   max-width: 1024px;
 }

@@ -78,6 +78,9 @@ module.exports = {
 		+'bruker.etternavn, '
 		+'bruker.tlf, '
 		+'bruker.email, '
+		+'bruker.facebookId, '
+		+'bruker.googleId, '
+		+'bruker.feideId, '
 		+'bruker.adresse, '
 		+'bruker.utgangsaar, '
 		+'bruker.linje, '
@@ -116,6 +119,27 @@ module.exports = {
 		var sql = 'INSERT INTO profil (bruker_id, filer) VALUES (?) ON DUPLICATE KEY UPDATE filer = ?;';
 		var inserts = [[id,file],file];
 		return new Query(sql,inserts);
+	},
+
+	saveProfile: function(userC,userV,userO,profilC,profilV,profilO,tags){
+		var userSql = 'INSERT INTO bruker (??) VALUES (?) ON DUPLICATE KEY UPDATE ?; '
+		var userInserts = [userC,userV,userO];
+		userSql = mysql.format(userSql,userInserts);
+		//console.log('userSql: '+userSql);
+		var profilSql = 'INSERT INTO profil (??) VALUES (?) ON DUPLICATE KEY UPDATE ?; '
+		var profilInserts = [profilC,profilV,profilO];
+		profilSql = mysql.format(profilSql,profilInserts);
+		//console.log('profilSql: '+profilSql);
+		var tagSql = '';
+		tags.forEach(function(elem,index,arr){
+			tagSql = tagSql + 'INSERT INTO tags (navn) VALUES ("'+elem+'") ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id); '+
+			'INSERT INTO bruker_tags (bruker_id,tag_id) VALUES ('+userO.id+',LAST_INSERT_ID()) ON DUPLICATE KEY UPDATE bruker_id=bruker_id ;'
+		})
+		//console.log('tagSql: '+tagSql);
+
+		var sql = userSql + profilSql +tagSql;
+
+		return new Query(sql);
 	}
 
 

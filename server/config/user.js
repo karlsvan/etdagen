@@ -124,6 +124,40 @@ module.exports = {
 		}, function (error) {
 			cb(error);
 		})
+	},
+
+	saveProfile: function(user,cb){
+		var profilValues = [], brukerVaules = [], brukerObj = {}, profilObj = {};
+		var brukerColumns = ['id','fornavn','etternavn','tlf','email','facebookId','googleId','feideId','adresse','utgangsaar','linje','bilde','fodselsdato'];
+		var profilColumns = ['bio','filer','cards'];
+		brukerColumns.forEach(function(elem,index,arr){
+			if(typeof user[elem] === 'object') {
+				brukerVaules.push(JSON.stringify(user[elem]));
+				brukerObj[elem] = JSON.stringify(user[elem]);
+			} else {
+				brukerVaules.push(user[elem]);
+				brukerObj[elem] = user[elem];
+			}
+		});
+		profilColumns.forEach(function(elem,index,arr){
+			if(typeof user[elem] === 'object') {
+				profilValues.push(JSON.stringify(user[elem]));
+				profilObj[elem] = JSON.stringify(user[elem]);
+			} else {
+				profilValues.push(user[elem]);
+				profilObj[elem] = user[elem];
+			}
+		});
+		profilColumns.unshift('bruker_id');
+		profilValues.unshift(user.id);
+		profilObj.bruker_id = user.id
+
+		db.saveProfile(brukerColumns,brukerVaules,brukerObj,profilColumns,profilValues,profilObj,user.tags).then(function(rows) {
+			//console.log(JSON.stringify(rows));
+			cb(null)
+		},function(error) {
+			cb(error)
+		})
 	}
 		
 };
