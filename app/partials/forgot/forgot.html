@@ -1,5 +1,19 @@
-<div id="page-forgot" class="container-fluid" flex>
-	<section class="container-fluid" layout="column" layout-align="center center">
+<div id="page-forgot" class="container-fluid" layout="column" layout-align="start center">
+	<section class="container" layout="column" layout-align="center center">
+		<div style="min-height: 200px; width: 100%; max-width: 800px; margin: 3rem 0;" layout="row" layout-align="center center">
+			<div class="md-body" style="margin: 0 2em;">
+				Skriv inn eposten din i feltet ved siden av og en epost vil bli sendt dit hvis eposten ligger i databasen.
+			</div>
+			<form name="forgotForm" class="login-content" ng-submit="FORGOT.getNewPass(email)" layout="column" layout-fill>
+				<md-input-container>
+					<label>Epost</label>
+					<input type="email" ng-model="email.text" required>
+				</md-input-container>
+				<md-button class="md-raised md-primary md-hue-2" type="submit" aria-label="submit">Få nytt passord</md-button>
+			</form>
+		</div>
+	</section>
+	<section class="container-fluid" layout="column" layout-align="center center" ng-if="false">
 		<md-content layout-fill layout-margin class="container container-padding section-padding md-hue-1 forgot-container" layout="column" layout-align="center center">
 			<form name="forgotForm" class="login-content" ng-submit="FORGOT.getNewPass(email)" layout="column" layout-fill>
 				<md-input-container>

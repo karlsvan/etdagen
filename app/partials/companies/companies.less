@@ -1,3 +1,15 @@
 #page-companies {
-
+	.list-item(@background-image, @color){
+		background: url(@background-image) center no-repeat;
+		background-size: cover;
+		&:before {
+			background-color: @color;
+			content: '';
+			display: block;
+			height: 100%;
+			position: absolute;
+			width: 100%;
+		}
+	}
+	.list-item-0 { .list-item('/assets/images/backgrounds/eloptic.jpg', rgba(255,255,255,0.8)); }
 }

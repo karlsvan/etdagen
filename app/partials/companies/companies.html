@@ -2,18 +2,20 @@
 	<section class="container-fluid container-padding" layout="column" layout-align="center center">
 			<h1 class="md-display-1">Bedrifter som deltar på Elektronikk- og Teknologidagen {{app.year}}</h1>
 	</section>
-	<section class="container-fluid" style="background: url(/assets/images/backgrounds/eloptic.jpg) center no-repeat; background-size: cover;">
-		<div class="container-fluid" layout="column" layout-align="center center" style="background: rgba(255,255,255, 0.8);">
-			<div class="container" layout="column" layout-align="center center">
-				<div class="section-padding" layout-gt-sm="row" layout="column" layout-align-sm="center center" ng-repeat="company in pagecomp.companies.collaborators">
-					<md-button flex="none" style="width: 200px; min-height: 150px; background: url({{company.logo}}) center no-repeat; background-size: contain;" aria-label="toProfile{{company.name}}" ng-href="{{company.homepage}}"></md-button>
+	<section id="samarbeidspartnere">
+		<md-list layout="column">
+			<md-list-item class="container-fluid list-item-{{$index}}" ng-repeat="company in pagecomp.companies.collaborators">
+				<div class="container section-padding" style="margin: 0 auto;" layout-gt-sm="row" layout="column" layout-align-sm="center center" layout-align-xs="center center">
+					<md-button flex="none" aria-label="toProfile{{company.name}}" ng-href="{{company.homepage}}">
+						<img src="{{company.logo}}" alt="{{company.logo}}">
+					</md-button>
 					<div class="container container-padding">
 						<div class="md-headline title-padding">{{company.name}} <span class="md-subhead">Samarbeidspartner</span></div>
 						<p class="md-body-1">{{company.description}}</p>
 					</div>
 				</div>
-			</div>
-		</div>
+			</md-list-item>
+		</md-list>
 	</section>
 
 	<section class="container-fluid section-padding-2x" layout="column" layout-align="center center">

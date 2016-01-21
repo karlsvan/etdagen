@@ -195,6 +195,18 @@ i.button-icon.icon-both {
 #board-background {
   background-color: #ef5350;
 }
+#page-companies .list-item-0 {
+  background: url('/assets/images/backgrounds/eloptic.jpg') center no-repeat;
+  background-size: cover;
+}
+#page-companies .list-item-0:before {
+  background-color: rgba(255, 255, 255, 0.8);
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
 #googlemaps {
   width: 500px;
   height: 400px;
@@ -256,6 +268,50 @@ i.button-icon.icon-both {
   max-width: 30em;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+}
+.login-with-button {
+  position: relative;
+  height: 40px;
+  padding: 0.3em 0.6em;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: transparent!default;
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0.5em;
+  min-width: 250px;
+}
+.login-with-button.facebook {
+  background: #3b5998;
+  color: white;
+}
+.login-with-button.google {
+  background: white;
+  color: rgba(0, 0, 0, 0.54);
+}
+.login-with-button.feide {
+  background: #BE1527;
+  color: white;
+}
+.login-with-button > .logo-container {
+  background: transparent;
+  height: 100%;
+  width: auto;
+}
+.login-with-button > .logo-container > svg,
+.login-with-button > .logo-container img {
+  height: 100%;
+}
+.login-with-button > .text-container {
+  margin: auto 1em;
 }
 #et-profile {
   background-color: #eee;
