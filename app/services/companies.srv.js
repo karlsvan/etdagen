@@ -146,7 +146,8 @@
 					companies.brekkeStrand,
 					companies.indraNavia,
 					companies.jernbaneverket,
-					companies.norbit
+					companies.norbit,
+					companies.autronica
 				],
 				sponsors: []
 			};

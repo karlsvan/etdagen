@@ -19,16 +19,16 @@
 	  				boye.users = users;
 	  			});
 	  		};
-
+			var avatar = '/assets/images/avatar.png';
 		    this.users = [
-					{img: '/assets/images/avatar.jpg', name: 'Eric Northman', usertype: 'student'},
-					{img: '/assets/images/avatar.jpg', name: 'Winston Eastman', usertype: 'student'},
-					{img: '/assets/images/avatar.jpg', name: 'Kanye Westman', usertype: 'student'},
-					{img: '/assets/images/avatar.jpg', name: 'Charlie Southman', usertype: 'student'},
-					{img: '/assets/images/avatar.jpg', name: 'hr Winston Southbeach', usertype: 'student'},
-					{img: '/assets/images/avatar.jpg', name: 'Noshow Inc.', usertype: 'bedrift'},
-					{img: '/assets/images/avatar.jpg', name: 'Northman AS', usertype: 'bedrift'},
-					{img: '/assets/images/avatar.jpg', name: 'Winston Company', usertype: 'bedrift'}
+					{img: avatar, name: 'Eric Northman', usertype: 'student'},
+					{img: avatar, name: 'Winston Eastman', usertype: 'student'},
+					{img: avatar, name: 'Kanye Westman', usertype: 'student'},
+					{img: avatar, name: 'Charlie Southman', usertype: 'student'},
+					{img: avatar, name: 'hr Winston Southbeach', usertype: 'student'},
+					{img: avatar, name: 'Noshow Inc.', usertype: 'bedrift'},
+					{img: avatar, name: 'Northman AS', usertype: 'bedrift'},
+					{img: avatar, name: 'Winston Company', usertype: 'bedrift'}
 				];
 
 			this.userField = '';

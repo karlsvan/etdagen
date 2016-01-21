@@ -4,8 +4,8 @@ module.exports = function(gulp, $, appConfig){
 	var fileToInjectInto 	= appConfig.indexFile,
 		wiredepOptions 		= {
 			overrides: {
-				'font-awesome': { 'main': [ 'css/font-awesome.css' ] },
-				'angular-material': { 'main': [ 'angular-material.js', 'angular-material.css' ] }
+				'font-awesome': { 'main': [ 'css/font-awesome.css' ] }
+				//'angular-material': { 'main': [ 'angular-material.js', 'angular-material.css' ] }
 			}
 		};
 

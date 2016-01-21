@@ -11,12 +11,12 @@
           <md-card-content>
             <div layout="row" layout-align="center center">
               <div ng-if="!bildeUrlShow" style="width: 10rem; height: 10rem; border-radius: 50%;
-              background: url({{user.bilde || 'assets/images/avatar.jpg'}}) center;
+              background: url({{user.bilde || 'assets/images/avatar.png'}}) center;
               background-size: cover; overflow: hidden; border: 0.3rem solid white;
               margin-bottom: 1em;">
               </div>
               <md-input-container ng-if="bildeUrlShow" flex>
-                <textarea  columns="4" ng-model="user.bilde"></textarea> 
+                <textarea  columns="4" ng-model="user.bilde"></textarea>
               </md-input-container>
             </div>
             <md-card-actions layout="row" layout-align="end center">
@@ -40,7 +40,7 @@
             </div>
             <md-card-actions layout="row" layout-align="end center">
               <md-button>
-                <label for="cv-input">Last opp</label>  
+                <label for="cv-input">Last opp</label>
               </md-button>
               <input id="cv-input" type="file" ng-hide=true nv-file-select uploader="uploader">
               <md-button class="md-warn" ng-click="deleteFile()">Slett</md-button>
