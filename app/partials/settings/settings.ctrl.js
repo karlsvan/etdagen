@@ -302,5 +302,5 @@
 			}
 		}
 	}
-	ConnectController.$inject = ['$scope', '$mdDialog', 'id', 'UserService'];
+	PasswordController.$inject = ['$scope', '$mdDialog', 'id', 'UserService'];
 })();

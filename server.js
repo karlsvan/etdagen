@@ -98,24 +98,13 @@ app.get('/tags', function (req,res) {
 
 app.post('/register',
 	function (req,res) {
-		if(req.user){
-			//bruker er logget inn, oppdater
-			User.update(req.body, function(error, info) {
-				if(error) {
-					console.log(error);
-				} else {
-					console.log(info);
-				}
-			});
-		} else {
-			User.adduser(req.body, function(error,info) {
-				if (error) {
-					console.log('error: '+error);
-				} else {
-					res.status(200).send(info);
-				}
-			});
-		}
+		User.adduser(req.body, function(error) {
+			if (error) {
+				res.status(500).send(error);
+			} else {
+				res.sendStatus(200)
+			}
+		});
 	});
 
 app.post('/setPass',function (req,res) {

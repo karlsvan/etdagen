@@ -38,34 +38,24 @@ module.exports = {
 		});
 	},
 
-	//User.prototype.adduser = function(obj, callback) {
-	adduser: function(obj,callback){
-		var userobj = {
-			fornavn: obj.fornavn.$modelValue,
-			etternavn: obj.etternavn.$modelValue,
-			tlf: obj.tlf.$modelValue,
-			email: obj.email.$modelValue,
-			status: 'soker',
-			inaktiv:'',
-			password:'',
-			username:obj.username.$modelValue,
-			salt:'',
-			adresse:'',
-			nasjonalitet:'',
-			utgangsaar: obj.utgangsaar.$modelValue,
-			linje: obj.linje.$modelValue,
-			fodselsdato: obj.fodselsdato.$modelValue
-		};
-
-		auth.hash(obj.password.$modelValue, function(err, hashed) {
-			userobj.password = hashed.hash; // Hashed password
-			userobj.salt = hashed.salt; // Salt
-			db.adduser(userobj).then(function successCB(rows) {
-				callback(rows[0]);
-			},function errorCB(error) {
-				callback(error);
-			});
-		});
+	adduser: function(userobj,callback) {
+		userobj.status = 'soker';
+		console.log(JSON.stringify(userobj));
+		db.findUsers({email:userobj.email}).then(function successCB(rows) {
+			if(rows.length == 0) {
+				auth.hash(userobj.password, function(err, hashed) {
+					userobj.password = hashed.hash; // Hashed password
+					userobj.salt = hashed.salt; // Salt
+					db.adduser(userobj).then(function successCB(rows) {
+						callback(null);
+					},function errorCB(error) {
+						callback(error);
+					});
+				});
+			} else {
+				callback('Bruker eksisterer')
+			}
+		})
 	},
 
 	update: function(id,obj,callback) {

@@ -23,7 +23,9 @@
 		    	});
 
   			$scope.register = function() {
-  				UserService.register($scope.registerForm)
+  				UserService.register($scope.registerForm,function(error){
+  					$scope.error = error;
+  				})
   			}
 		}
 		RegisterCtrl.$inject = ['$scope', 'UserService'];
