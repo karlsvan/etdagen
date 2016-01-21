@@ -345,6 +345,18 @@ i.button-icon.icon-both {
   margin: 0.5em;
   min-width: 250px;
 }
+.login-with-button.facebook {
+  background: #3b5998;
+  color: white;
+}
+.login-with-button.google {
+  background: white;
+  color: rgba(0, 0, 0, 0.54);
+}
+.login-with-button.feide {
+  background: #BE1527;
+  color: white;
+}
 .login-with-button > .logo-container {
   background: transparent;
   height: 100%;
@@ -355,7 +367,7 @@ i.button-icon.icon-both {
   height: 100%;
 }
 .login-with-button > .text-container {
-  margin: 0 1em;
+  margin: auto 1em;
 }
 #et-profile {
   background-color: #eee;
