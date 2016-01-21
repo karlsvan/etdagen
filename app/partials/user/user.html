@@ -1,8 +1,71 @@
-<div class="container-fluid" layout="column" layout-align="start center">
-	<div style="height: 8rem; width: 100%; background: #eee;"></div>
-	<div class="container" layout="column" layout-align="center center" style="position: relative; top: -5rem;">
+<div class="container-fluid" layout="column" layout-align="start center" style="background: #eee; min-height: 100vh;">
+	<section class="container md-whiteframe-1dp" style="background: white;" layout-padding layout-margin layout="row">
+		<div layout="column">
+			<div class="image-container">
+				<div class="md-whiteframe-5dp" style="width: 10rem; height: 10rem; border-radius: 50%;
+				background: url({{user.bilde || 'assets/images/avatar.png'}}) center;
+				background-size: cover; overflow: hidden; border: 0.3rem solid white;
+				margin-bottom: 1em;">
+				</div>
+			</div>
+			<section>
+				<h2 class="md-title">{{user.fornavn+' '+user.etternavn}}</h2>
+				<ul style="list-style: none; margin: 0; padding: 0;">
+					<li ng-if="user.adresse">
+						<span>Adresse:</span>
+						<span>{{user.adresse[0]+', '+user.adresse[1]+' '+user.adresse[2]}}</span>
+					</li>
+					<li ng-if="user.email">{{user.email}}</li>
+					<li ng-if="user.tlf">{{user.tlf}}</li>
+				</ul>
+			</section>
+		</div>
+		<div layout="column" flex>
+			<section>
+				<md-subheader>Filer</md-subheader>
+				<ul layout="row" style="list-style: none; margin: 0; padding: 0; border-radius: 4px; border: 1px solid rgba(0,0,0,0.20); min-height: 40px;" layout-padding>
+					<li ng-if="!user.filer">Ingen filer</li>
+					<li ng-repeat="fil in user.filer" style="margin: 0 1em;">
+						<a>
+							<i class="fa fa-file-text-o"></i>
+							<span>{{fil.navn}}</span>
+						</a>
+					</li>
+				</ul>
+			</section>
+			<!-- <section>
+				<md-subheader>Om meg</md-subheader>
+				<md-content>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo voluptatibus facilis sunt quidem, voluptatem aliquid ipsum numquam ea sed corporis non, hic! Vero quam eos eum neque ullam ex harum?
+				</md-content>
+			</section>
+			<section>
+				<md-subheader>Utdanning</md-subheader>
+				<md-content>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo voluptatibus facilis sunt quidem, voluptatem aliquid ipsum numquam ea sed corporis non, hic! Vero quam eos eum neque ullam ex harum?
+				</md-content>
+			</section>
+			<section>
+				<md-subheader>Erfaringer</md-subheader>
+				<md-content>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo voluptatibus facilis sunt quidem, voluptatem aliquid ipsum numquam ea sed corporis non, hic! Vero quam eos eum neque ullam ex harum?
+				</md-content>
+			</section> -->
+			<div ng-if="!user.cards" style="margin-top: 1em;" layout-padding>Ingen kort lagt til</div>
+			<section ng-repeat="(cardname,content) in user.cards">
+				<md-subheader>{{cardname}}</md-subheader>
+				<md-content ng-repeat="(description, text) in content">
+					<div>{{description}}</div>
+					<div>{{text}}</div>
+				</md-content>
+			</section>
+		</div>
+	</section>
+
+	<!-- <div style="height: 8rem; width: 100%; background: #eee;"></div> -->
+	<div class="container" layout="column" layout-align="center center" style="position: relative; top: -5rem;" ng-if="false">
 		<div style="width: 10rem; height: 10rem; border-radius: 50%;
-		background: url({{user.bilde || 'assets/images/avatar.jpg'}}) center;
+		background: url({{user.bilde || 'assets/images/avatar.png'}}) center;
 		background-size: cover; overflow: hidden; border: 0.3rem solid white;
 		margin-bottom: 1em;">
 		</div>
@@ -17,7 +80,7 @@
 			<md-button><i class="fa fa-facebook fa-2x"></i></md-button>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" ng-if="false">
 		<div class="md-body-2" style="margin-left: 2rem;">Filer</div>
 		<md-card style="border: 1px solid #ddd; border-radius: 4px; padding: 1em; margin: 1rem;" layout="column">
 			<div layout="row">
@@ -28,7 +91,7 @@
 			</div>
 		</md-card>
 	</div>
-	<md-list-iten class="container" ng-repeat="(cardname,content) in user.cards">
+	<md-list-iten class="container" ng-repeat="(cardname,content) in user.cards" ng-if="false">
 		<div class="md-body-2" style="margin-left: 2rem;">{{cardname}}</div>
 		<md-card style="border: 1px solid #ddd; border-radius: 4px; padding: 2em; margin: 1rem;" layout="column">
 			<div layout="row" ng-repeat="(description, text) in content" style="margin:0.5em 0">
@@ -38,5 +101,5 @@
 
 		</md-card>
 	</md-list-item>
-	
+
 </div>
