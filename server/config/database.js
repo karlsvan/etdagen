@@ -9,7 +9,8 @@ module.exports = {
 			database : 'etdagen'
 		},
 		connection_opt: {
-			connectionLimit: 100
+			connectionLimit: 100,
+			multipleStatements: true
 		},
 		options: {
 			log: true

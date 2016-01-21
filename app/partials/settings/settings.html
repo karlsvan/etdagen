@@ -74,7 +74,7 @@
           <div layout-gt-sm="row">
             <md-input-container flex-gt-sm="50" class="md-block">
               <label>Telefonnummer</label>
-              <input type="number" ng-model="user.tlf"
+              <input type="text" ng-model="user.tlf"
               ng-pattern="/^[0-9]{8}$/">
             </md-input-container>
             <md-input-container flex-gt-sm="50" class="md-block">
@@ -130,7 +130,7 @@
 
 
 
-
+      <!--
       <md-card>
         <md-card-title>
           <md-card-title-text>
@@ -160,6 +160,7 @@
           </div>
         </md-card-content>
       </md-card>
+      -->
       <md-card>
         <md-card-title>
           <md-card-title-text>
@@ -178,9 +179,9 @@
         </md-card-title>
         <md-card-content layout="row" layout-align="center center">
           <script></script>
-          <md-button class="fb-link md-raised" ng-if="!(user.facebookId.length > 0)" ng-href="../auth/connect/facebook" style="color: #3b5998" aria-label="fb-login"><div class="link-img" layout-fill></div></md-button>
-          <md-button class="google-link md-raised" ng-if="!(user.googleId.length > 0)" ng-href="../auth/connect/google" style="color: #d62d20" aria-label="google-login"><div class="link-img" layout-fill></div></md-button>
-          <md-button class="ntnu-link md-raised" ng-if="!(user.feideId.length > 0)" ng-href="../auth/connect/feide" style="color: #0057e7" aria-label="ntnu-login"><div class="link-img" layout-fill></div></md-button>
+          <md-button class="fb-link md-raised" ng-if="!user.facebookId" ng-click="setCookie('/auth/connect/facebook')" style="color: #3b5998" aria-label="fb-login"><div class="link-img" layout-fill></div></md-button>
+          <md-button class="google-link md-raised" ng-if="!user.googleId" ng-click="setCookie('/auth/connect/google')" style="color: #d62d20" aria-label="google-login"><div class="link-img" layout-fill></div></md-button>
+          <md-button class="ntnu-link md-raised" ng-if="!user.feideId" ng-click="setCookie('/auth/connect/feide')" style="color: #0057e7" aria-label="ntnu-login"><div class="link-img" layout-fill></div></md-button>
         </md-card-content>
       </md-card>
       <md-button class="md-raised md-primary" ng-click="saveUser()">Lagre profil</md-button>

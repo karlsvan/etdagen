@@ -8,7 +8,7 @@
 	angular.module('etApp', [
 		'ngAnimate',
 		'ngAria',
-		//'ngCookies',
+		'ngCookies',
 		'ngMessages',
 		'ngResource',
 		'ngRoute',

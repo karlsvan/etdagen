@@ -54,7 +54,7 @@
 	}
 	UploadEditor.$inject = ['$scope', '$mdDialog'];
 
-	function SettingsCtrl($scope,UserService,$q,$mdDialog,$http,FileUploader) {
+	function SettingsCtrl($scope,UserService,$q,$mdDialog,$http,FileUploader,$cookies,$window) {
 		var self = this;
 		var deffered = $q.defer();
 		$scope.promise = deffered.promise
@@ -74,6 +74,11 @@
 					connect(user);
 			}
 			UserService.getProfile(UserService.returnUser().id, function(res) {
+				var settings = $cookies.getObject('settings');
+				if (settings) {
+					res = settings;
+					$cookies.remove('settings');
+				}
 				$scope.user = res;
 				if(res.tags) {
 					deffered.resolve(res.tags);
@@ -109,6 +114,13 @@
 	    			$scope.cards[cardIndex][1].push(['','']);
 	    		}
 	    	}
+	    }
+
+	    $scope.setCookie = function(url) {
+	    	$scope.user.cards = toObject($scope.cards);
+	    	console.log(JSON.stringify($scope.user))
+	    	$cookies.putObject('settings',$scope.user);
+	    	$window.location.href = url;
 	    }
 
 	    function populateCards(cards) {
@@ -185,18 +197,17 @@
 	    }
 
 	    $scope.saveUser = function() {
-	    	
+	    	$scope.user.cards = toObject($scope.cards);
+	    	UserService.saveSettings($scope.user);
 	    }
 	    
 	    function connect(user) {
-			//console.log(JSON.stringify(resultat.data));
+			
 			$mdDialog.show({
 		      controller: 'ConnectController',
 		      templateUrl: './partials/settings/connect.html',
 		      parent: angular.element(document.body),
 		      clickOutsideToClose:true,
-		      //controllerAs: 'connCtrl',
-		      //bindToController: true,
 		      locals: {
 		      	user: user,
 		      	connect: user.connect
@@ -208,7 +219,6 @@
 		    	}
 		    	$http.get('/auth/connect/done')
 		    }, function() {
-		      $scope.status = 'You cancelled the dialog.';
 		      $http.get('/auth/connect/done')
 		    })
 
@@ -216,7 +226,7 @@
 
 
 	}
-	SettingsCtrl.$inject = ['$scope', 'UserService', '$q', '$mdDialog', '$http', 'FileUploader'];
+	SettingsCtrl.$inject = ['$scope', 'UserService', '$q', '$mdDialog', '$http', 'FileUploader', '$cookies', '$window'];
 
 
 	function ConnectController($scope,$mdDialog,user,connect) {
@@ -241,6 +251,13 @@
 				if($scope.radio[key] != 'new') {
 					delete $scope.connect[key];
 				}
+			}
+			if ($scope.provider == 'Facebook') {
+				$scope.connect.facebookId = $scope.user.facebookId;
+			} else if ($scope.provider == 'Google') {
+				$scope.connect.googleId = $scope.user.googleId;
+			} else if ($scope.provider == 'NTNU') {
+				$scope.connect.feideId = $scope.user.feideId;
 			}
 			$mdDialog.hide($scope.connect)
 		}

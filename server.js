@@ -80,6 +80,7 @@ app.get('/logout', function (req, res){
 app.get('/user/:id', function (req,res) {
 	User.getProfile(req.params.id, function(error,profile) {
 		if (error) {console.log(error)}
+		if (profile.adresse){profile.adresse = JSON.parse(profile.adresse)}
 		if (profile.filer){profile.filer = JSON.parse(profile.filer)}
 		if (profile.cards){profile.cards = JSON.parse(profile.cards)}
 		if (profile.tags){profile.tags = profile.tags.split(',')}
@@ -144,6 +145,15 @@ app.post('/deleteFile', function (req, res) {
 		User.saveFile(id,JSON.stringify([]),function(error) {
 			res.sendStatus(200);
 		})
+	})
+})
+
+app.post('/saveSettings', function (req,res) {
+	User.saveProfile(req.body, function(error) {
+		if (error)
+			throw error
+		console.log('JAAA');
+		res.sendStatus(200);
 	})
 })
 
