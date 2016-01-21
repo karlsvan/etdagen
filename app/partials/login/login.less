@@ -1,61 +1,46 @@
-
-.link(@img) {
-	.link-img {
-		background: url("/assets/images/icons/@{img}.png") center no-repeat;
-		background-size: contain;
+#page-login {
+	.login-container {
+		max-width: 30em;
+		border: 1px solid rgba(0,0,0,0.1);
+		border-radius: 10px;
 	}
-	width: 10em;
-	height: 5em;
-	padding: 1em;
-}
 
-.fb-link { .link(facebook) }
-.google-link {.link(google) }
-.feide-link { .link(feide) }
-.ntnu-link { .link(ntnu) }
-
-.login-container {
-	max-width: 30em;
-	border: 1px solid rgba(0,0,0,0.1);
-	border-radius: 10px;
-}
-
-
-.login-with-button {
-	&.facebook {
-		background: #3b5998;
-		color: rgba(255,255,255,0.54);
-	}
-	&.google {
-		background: white;
-		color: rgba(0,0,0,0.54);
-	}
-	&.feide {
-		background: #BE1527;
-		color: color: rgba(255,255,255,0.54);;
-	}
-	position: relative;
-	height: 40px;
-	padding: 0.3em 0.6em;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	background: transparent!default;
-	border: none;
-	border-radius: 4px;
-	overflow: hidden;
-	margin: 0.5em;
-	min-width: 250px;
-
-	> .logo-container {
-		background: transparent;
-		height: 100%;
-		width: auto;
-		> svg, img {
-			height: 100%;
+	.login-with-button {
+		&.facebook {
+			background: #3b5998;
+			color: white;
 		}
-	}
-	> .text-container {
-		margin: auto 1em;
+		&.google {
+			background: white;
+			color: rgba(0,0,0,0.54);
+		}
+		&.feide {
+			background: #BE1527;
+			color: white;
+		}
+		position: relative;
+		height: 40px;
+		padding: 0.3em 0.6em;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		background: transparent!default;
+		border: none;
+		border-radius: 4px;
+		overflow: hidden;
+		margin: 0.5em;
+		min-width: 250px;
+
+		> .logo-container {
+			background: transparent;
+			height: 100%;
+			width: auto;
+			> svg, img {
+				height: 100%;
+			}
+		}
+		> .text-container {
+			margin: auto 1em;
+		}
 	}
 }

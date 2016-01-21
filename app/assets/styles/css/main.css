@@ -195,6 +195,18 @@ i.button-icon.icon-both {
 #board-background {
   background-color: #ef5350;
 }
+#page-companies .list-item-0 {
+  background: url('/assets/images/backgrounds/eloptic.jpg') center no-repeat;
+  background-size: cover;
+}
+#page-companies .list-item-0:before {
+  background-color: rgba(255, 255, 255, 0.8);
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
 #googlemaps {
   width: 500px;
   height: 400px;

@@ -23,12 +23,12 @@ var appConfig = require('./gulpfile');
 //for file upload:
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.resolve(__dirname, 'filer'))
+    cb(null, path.resolve(__dirname, 'filer'));
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname)
+    cb(null, file.originalname);
   }
-})
+});
 var upload = multer({ storage: storage });
 
 // Support ejs templating for views
@@ -54,7 +54,7 @@ app.use(logger('dev'));
 // Support parsing of json- and URL-encoded bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieSession({ 
+app.use(cookieSession({
 	name: 'user',
 	secret: 'GlennThaBaws',
     cookie: {
@@ -120,7 +120,7 @@ app.post('/register',
 app.post('/upload',upload.single('file'),function (req,res) {
 	var id = req.file.filename.split('_')[0];
 	fs.readdir(path.resolve(__dirname, 'filer'),function(err, files) {
-		if (err) 
+		if (err)
 			throw err;
 		var prefix = id+'_'
 		files.forEach(function(elem,index,arr){
@@ -190,7 +190,7 @@ app.post('/forgot', function (req,res) {
 						else {
 							res.status(200).send('success');
 						}
-						
+
 					})
 
 				}
