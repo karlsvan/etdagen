@@ -12,21 +12,9 @@
 	  .controller('HomeCtrl', HomeCtrl);
 
 		/*@ngInject*/
-		function HomeCtrl(NewsService){
-			this.news = NewsService.getNews();
-
-			this.tiles = (function(){
-				var ret = [],
-					color =  ['red', 'green', 'darkBlue', 'pink', 'yellow', 'purple'];
-				for(var i=0; i<12; i++){
-					ret.push({
-						background: color[Math.round(Math.random()*(color.length-1))],
-						span: { row: Math.round(Math.random()*(3-1)+1), col: Math.round(Math.random()*(3-1)+1) }
-					});
-				}
-				return ret;
-			})();
-
+		function HomeCtrl(){
+			
+			
 			this.program = [
 				{time: '10.00-15.00', action: 'Bedrifter på stand i Glassgården', place: 'Glassgården', icon: 'Tie'},
 				{time: '10.00-15.00', action: 'Quiz! Gevinster på 500kr og 250kr gavekort midtbyen', icon: 'question'},
@@ -46,5 +34,4 @@
 				{time: '15.15', action: 'Sommerjobbmaraton', place: 'glassgården', icon: 'Stopwatch'}*/
 			];
 		}
-		HomeCtrl.$inject = ['NewsService'];
 })();
