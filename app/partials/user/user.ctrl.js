@@ -42,5 +42,5 @@
 			
 
 		}
-		userCtrl.$inject = ['$scope', '$state', 'UserService','$q'];
+		userCtrl.$inject = ['$scope', '$state', 'UserService', '$q'];
 })();

@@ -78,7 +78,7 @@ module.exports = function (passport){
 	passport.use(new FeideStrategy({
 		clientID: '4525efbc-5c83-4362-b20a-ac46a3a78993',
 		clientSecret: '6eff9820-fc3e-46d1-a76d-bad845a68196',
-		callbackURL: "http://localhost:3000/auth/feide/callback",
+		callbackURL: "/auth/feide/callback",
 		passReqToCallback: true
 	},
 	function(req, accessToken, refreshToken, profile, done){
@@ -107,7 +107,7 @@ module.exports = function (passport){
 	passport.use(new FacebookStrategy({
 		clientID: '449983121860985',
 		clientSecret: '592186645310e89533f50f3afa1b7535',
-		callbackURL: "http://localhost:3000/auth/facebook/callback",
+		callbackURL: "/auth/facebook/callback",
 		enableProof: true,
 		passReqToCallback: true,
 		profileFields: ['id', 'name', 'emails','picture.type(large)']
@@ -134,7 +134,7 @@ module.exports = function (passport){
 		clientID: '735968634827-2v36mg1s3njskrhqjo87b8v8nij3n1ob.apps.googleusercontent.com',
 		clientSecret: 'YTFSfXRL_C9diN0vEkYRDePE',
 		passReqToCallback: true,
-		callbackURL: "http://localhost:3000/auth/google/callback"
+		callbackURL: "/auth/google/callback"
 	}, function(req, accessToken, refreshToken, profile, done) {
 		//vi vil ha størrelse på bildet 200x200px
 		profile.photos[0].value = profile.photos[0].value.replace('sz=50','sz=200');
