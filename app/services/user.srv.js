@@ -42,18 +42,18 @@
 					console.log(res.data);
 				});
 			},
-			
-	  		this.logout = function() {
-	  			loggedIn = 0;
-	  			user = null;
-				$http.get('/logout').then(function successCB(res) {
-	    			$state.go('home');
-		      	},function errorCB(res) {
-		      		$state.reload('login');
-	    		});
-			}
 
-			this.login = function(credentials,callback) {
+			this.logout = function() {
+				loggedIn = 0;
+				user = null;
+				$http.get('/logout').then(function successCB(/*res*/) {
+					$state.go('home');
+				}, function errorCB(/*res*/) {
+					$state.reload('login');
+				});
+			};
+
+			this.login = function(credentials, callback) {
 				$http.post('/auth/login',credentials).then(function successCB(/*res*/) {
 					self.getUser( function (user,loggedIn/*,error*/) {
 						loggedIn = 1;
@@ -68,29 +68,27 @@
 
 			this.register = function(cred,cb) {
 				$http.post('/register', cred).then(function sucsessCB(/*response*/) {
-					$state.go('settings');
-				},function(error){
+					$state.go('home');
+				}, function(error){
 					if(error.status == 500) {
-						cb(error.data)
+						cb(error.data);
 					}
 				});
 			};
 
 			this.saveSettings = function(userSettings) {
-				$http.post('/saveSettings',userSettings).then(function(res){
+				$http.post('/saveSettings',userSettings).then(function(/*res*/){
 					$state.go('user',{id:userSettings.id});
-				},function(error) {
-
-				})
-			}
+				});
+			};
 
 			this.setPass = function(cred,cb) {
 				$http.post('/setPass',cred).then(function(res) {
-					cb(res)
+					cb(res);
 				},function(error) {
-					cb(error)
-				})
-			}
+					cb(error);
+				});
+			};
 
 			this.logout = function() {
 				loggedIn = 0;

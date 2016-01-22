@@ -39,14 +39,16 @@ module.exports = {
 	},
 
 	adduser: function(userobj,callback) {
-		userobj.status = 'soker';
+		userobj.status='student';
 		console.log(JSON.stringify(userobj));
 		db.findUsers({email:userobj.email}).then(function successCB(rows) {
+			console.log(JSON.stringify(rows));
 			if(rows.length == 0) {
 				auth.hash(userobj.password, function(err, hashed) {
 					userobj.password = hashed.hash; // Hashed password
 					userobj.salt = hashed.salt; // Salt
-					db.adduser(userobj).then(function successCB(rows) {
+					console.log(JSON.stringify(userobj));
+					db.addUser(userobj).then(function successCB(rows) {
 						callback(null);
 					},function errorCB(error) {
 						callback(error);
@@ -84,11 +86,11 @@ module.exports = {
 					console.log(error);
 					callback(error,null);
 				});
-			
+
 			});
 
 		});
-		
+
 	},
 
 	getProfile: function(id,callback) {
@@ -137,7 +139,7 @@ module.exports = {
 							console.log(error);
 							cb(error);
 						});
-					
+
 					});
 				} else if(user.password.length < 64) {
 					var sha1 = crypto.createHash('sha1');
@@ -156,7 +158,7 @@ module.exports = {
 								console.log(error);
 								cb(error);
 							});
-						
+
 						});
 					}
 				} else if (user.password.length == 64){
@@ -176,7 +178,7 @@ module.exports = {
 									console.log(error);
 									cb(error);
 								});
-							
+
 							});
 						} else {
 							cb('Wrong password');
@@ -222,5 +224,5 @@ module.exports = {
 			cb(error)
 		})
 	}
-		
+
 };
