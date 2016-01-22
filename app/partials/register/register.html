@@ -1,9 +1,20 @@
 <div class="container-fluid" layout="column" layout-align="start center">
 	<section class="container" layout="column" layout-margin style="max-width: 600px;">
-		<md-input-container ng-repeat="opt in RegisterCtrl.registerOptions">
-			<label>{{opt.label}}</label>
-			<input type="opt.inputType" ng-bind="opt.model">
-		</md-input-container>
-		<md-button class="md-raised md-primary" ng-click="RegisterCtrl.reg()">Registrer</md-button>
+		<md-content ng-if="RegisterCtrl.formError" layout-padding class="md-primary"
+				style="background: rgb(255,214,0); border-radius: 4px; color: rgba(0,0,0,0.86);">
+			{{RegisterCtrl.formError}}
+		</md-content>
+		<form name="registerForm" layout="column">
+			<md-input-container ng-repeat="opt in RegisterCtrl.registerOptions">
+				<label>{{opt.label}}</label>
+				<input ng-if="opt.model !='rpassword'" name="{{opt.model}}" type="{{opt.inputType}}" ng-model="form[opt.model]" ng-required="opt.required">
+				<input ng-if="opt.model =='rpassword'" name="{{opt.model}}" type="{{opt.inputType}}" ng-model="form[opt.model]" ng-required="opt.required" ng-pattern="form.password">
+				<ng-messages for="registerForm[opt.model].$error" role="alert">
+					<ng-message when="pattern">Passord er ikke identisk</ng-message>
+					<ng-message when="required">Dette feltet er påkrevd</ng-message>
+				</ng-messages>
+			</md-input-container>
+			<md-button class="md-raised md-primary md-hue-2" ng-click="RegisterCtrl.register()">Registrer</md-button>
+		</form>
 	</section>
 </div>

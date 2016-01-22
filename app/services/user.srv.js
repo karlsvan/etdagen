@@ -68,7 +68,7 @@
 
 			this.register = function(cred,cb) {
 				$http.post('/register', cred).then(function sucsessCB(/*response*/) {
-					$state.go('settings');
+					$state.go('home');
 				}, function(error){
 					if(error.status == 500) {
 						cb(error.data);

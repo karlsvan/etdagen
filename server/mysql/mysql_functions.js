@@ -56,6 +56,7 @@ module.exports = {
 			}
 			var inserts = [keys,values];
 			var sql = 'INSERT INTO bruker (??) VALUES (?);';
+			console.log('sql: '+mysql.format(sql,inserts));
 			return new Query(sql,inserts);
 		}
 	},
@@ -73,7 +74,7 @@ module.exports = {
 
 	getProfile: function(id) {
 		var sql = 'SELECT '
-		+'bruker.id, ' 
+		+'bruker.id, '
 		+'bruker.fornavn, '
 		+'bruker.etternavn, '
 		+'bruker.tlf, '
@@ -131,10 +132,12 @@ module.exports = {
 		profilSql = mysql.format(profilSql,profilInserts);
 		//console.log('profilSql: '+profilSql);
 		var tagSql = '';
-		tags.forEach(function(elem,index,arr){
-			tagSql = tagSql + 'INSERT INTO tags (navn) VALUES ("'+elem+'") ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id); '+
-			'INSERT INTO bruker_tags (bruker_id,tag_id) VALUES ('+userO.id+',LAST_INSERT_ID()) ON DUPLICATE KEY UPDATE bruker_id=bruker_id ;'
-		})
+		if (tags) {
+			tags.forEach(function(elem,index,arr){
+				tagSql = tagSql + 'INSERT INTO tags (navn) VALUES ("'+elem+'") ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id); '+
+				'INSERT INTO bruker_tags (bruker_id,tag_id) VALUES ('+userO.id+',LAST_INSERT_ID()) ON DUPLICATE KEY UPDATE bruker_id=bruker_id ;'
+			})
+		}
 		//console.log('tagSql: '+tagSql);
 
 		var sql = userSql + profilSql +tagSql;
