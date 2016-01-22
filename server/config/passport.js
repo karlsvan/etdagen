@@ -52,7 +52,7 @@ module.exports = function (passport){
 				if (!user) {
 					return done(null, false);
 				} else {
-					if (user.id < 500) {
+					if (user.password.length < 64) {
 						var sha1 = crypto.createHash('sha1');
 						sha1.update(password+user.salt);
 						if (user.password != sha1.digest('hex')) {
@@ -61,6 +61,7 @@ module.exports = function (passport){
 							return done(null, user);
 						}
 					} else {
+						//husk keylen i passport-local-authenticate skal være 32
 						auth.verify(password,{hash:user.password,salt:user.salt},function(err,verified){
 							if(verified){
 								return done(null, user);

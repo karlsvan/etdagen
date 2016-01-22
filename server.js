@@ -98,25 +98,24 @@ app.get('/tags', function (req,res) {
 
 app.post('/register',
 	function (req,res) {
-		if(req.user){
-			//bruker er logget inn, oppdater
-			User.update(req.body, function(error, info) {
-				if(error) {
-					console.log(error);
-				} else {
-					console.log(info);
-				}
-			});
+		User.adduser(req.body, function(error) {
+			if (error) {
+				res.status(500).send(error);
+			} else {
+				res.sendStatus(200)
+			}
+		});
+	});
+
+app.post('/setPass',function (req,res) {
+	User.setPass(req.body,function(error) {
+		if (error){
+			res.status(500).send(error)
 		} else {
-			User.adduser(req.body, function(error,info) {
-				if (error) {
-					console.log('error: '+error);
-				} else {
-					res.status(200).send(info);
-				}
-			});
+			res.sendStatus(200);
 		}
 	});
+});
 
 app.post('/upload',upload.single('file'),function (req,res) {
 	var id = req.file.filename.split('_')[0];
@@ -142,7 +141,7 @@ app.post('/upload',upload.single('file'),function (req,res) {
 app.post('/deleteFile', function (req, res) {
 	var id = req.body.navn.split('_')[0];
 	fs.unlink(path.resolve(__dirname, 'filer/'+req.body.navn),function() {
-		User.saveFile(id,JSON.stringify([]),function(error) {
+		User.saveFile(id,'',function(error) {
 			res.sendStatus(200);
 		})
 	})

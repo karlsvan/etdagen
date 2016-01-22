@@ -16,6 +16,7 @@
 			var self = this;
 			$scope.loggedIn = 0;
 			self.username= '';
+			$scope.host = location.host;
 			UserService.init(function(user,loggedIn,error){
 				$scope.loggedIn = loggedIn;
 				if (!error) {

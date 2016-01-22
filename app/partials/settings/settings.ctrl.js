@@ -11,7 +11,8 @@
 	angular.module('etApp')
 	.controller('SettingsCtrl', SettingsCtrl)
 	.controller('UploadController', UploadEditor)
-	.controller('ConnectController',ConnectController);
+	.controller('ConnectController',ConnectController)
+	.controller('PasswordController',PasswordController);
 
 
 	/*@ngInject*/
@@ -86,7 +87,7 @@
 					deffered.reject();
 				}
 				$scope.cards = populateCards(res.cards);
-				if (res.filer[0]) {
+				if (res.filer) {
 					var arr = res.filer[0].navn.split('_');
 			    	arr.shift();
 			    	$scope.filename = arr.join('_');
@@ -121,6 +122,23 @@
 	    	console.log(JSON.stringify($scope.user))
 	    	$cookies.putObject('settings',$scope.user);
 	    	$window.location.href = url;
+	    }
+
+	    $scope.changePass = function() {
+	    	$mdDialog.show({
+		      controller: 'PasswordController',
+		      templateUrl: './partials/settings/password.html',
+		      parent: angular.element(document.body),
+		      clickOutsideToClose:true,
+		      locals: {
+		      	id: $scope.user.id
+		      }
+		    })
+		    .then(function() {
+
+		    }, function() {
+
+		    })
 	    }
 
 	    function populateCards(cards) {
@@ -263,5 +281,26 @@
 		}
 	}
 	ConnectController.$inject = ['$scope', '$mdDialog', 'user', 'connect'];
-	//ConnectController.$inject = ['$scope','user','connect']
+
+	function PasswordController($scope,$mdDialog,id,UserService) {
+		$scope.savePass = function(cred) {
+			if ($scope.PassForm.$valid){
+				cred.id = id;
+				UserService.setPass(cred,function(res) {
+					if(res.status == 200) {
+						var text = 'OK!';
+					} else if (res.status = 500) {
+						var text = res.data;
+					}
+					$mdDialog.show({
+		      			template:'<h1>'+text+'</h1>',
+		      			parent: angular.element(document.body),
+		      			clickOutsideToClose:true
+
+	      			});
+				})
+			}
+		}
+	}
+	PasswordController.$inject = ['$scope', '$mdDialog', 'id', 'UserService'];
 })();

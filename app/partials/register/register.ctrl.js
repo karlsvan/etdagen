@@ -27,9 +27,8 @@
 			{label: 'Passord', inputType: 'password', model: form+'.password'},
 			{label: 'Bekreft Passord', inputType: 'password', model: form+'.rpassword'}
 		];
-		this.reg = function() { console.log($scope.form); }
+		this.reg = function() { console.log($scope.form); };
 		this.register = function() { UserService.register($scope.registerForm); };
 	}
 	RegisterCtrl.$inject = ['$scope', 'UserService'];
-
 })();

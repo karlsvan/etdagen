@@ -38,34 +38,24 @@ module.exports = {
 		});
 	},
 
-	//User.prototype.adduser = function(obj, callback) {
-	adduser: function(obj,callback){
-		var userobj = {
-			fornavn: obj.fornavn.$modelValue,
-			etternavn: obj.etternavn.$modelValue,
-			tlf: obj.tlf.$modelValue,
-			email: obj.email.$modelValue,
-			status: 'soker',
-			inaktiv:'',
-			password:'',
-			username:obj.username.$modelValue,
-			salt:'',
-			adresse:'',
-			nasjonalitet:'',
-			utgangsaar: obj.utgangsaar.$modelValue,
-			linje: obj.linje.$modelValue,
-			fodselsdato: obj.fodselsdato.$modelValue
-		};
-
-		auth.hash(obj.password.$modelValue, function(err, hashed) {
-			userobj.password = hashed.hash; // Hashed password
-			userobj.salt = hashed.salt; // Salt
-			db.adduser(userobj).then(function successCB(rows) {
-				callback(rows[0]);
-			},function errorCB(error) {
-				callback(error);
-			});
-		});
+	adduser: function(userobj,callback) {
+		userobj.status = 'soker';
+		console.log(JSON.stringify(userobj));
+		db.findUsers({email:userobj.email}).then(function successCB(rows) {
+			if(rows.length == 0) {
+				auth.hash(userobj.password, function(err, hashed) {
+					userobj.password = hashed.hash; // Hashed password
+					userobj.salt = hashed.salt; // Salt
+					db.adduser(userobj).then(function successCB(rows) {
+						callback(null);
+					},function errorCB(error) {
+						callback(error);
+					});
+				});
+			} else {
+				callback('Bruker eksisterer')
+			}
+		})
 	},
 
 	update: function(id,obj,callback) {
@@ -82,7 +72,7 @@ module.exports = {
 		var newPass='',userobj={};
 		crypto.randomBytes(9, function(ex, buf) {
 			newPass = buf.toString('base64');
-			console.log('pass: '+newPass+'  length: '+newPass.length);
+			//console.log('pass: '+newPass+'  length: '+newPass.length);
 
 			auth.hash(newPass, function(err, hashed) {
 				userobj.password = hashed.hash; // Hashed password
@@ -124,6 +114,79 @@ module.exports = {
 		}, function (error) {
 			cb(error);
 		})
+	},
+
+	setPass: function(cred,cb) {
+		var userobj = {};
+		db.findUsers({id:cred.id}).then(function successCB(rows) {
+			if (rows.length === 0) {
+				cb('User not found');
+			} else {
+				var user = rows[0];
+				//gamle passord var kortere
+				if (!user.password) {
+					auth.hash(cred.new, function(err, hashed) {
+						if (err)
+							cb(err);
+						userobj.password = hashed.hash; // Hashed password
+						userobj.salt = hashed.salt; // Salt
+						console.log('yo')
+						db.updateUser(cred.id,userobj).then(function(rows) {
+							cb(null);
+						}, function(error) {
+							console.log(error);
+							cb(error);
+						});
+					
+					});
+				} else if(user.password.length < 64) {
+					var sha1 = crypto.createHash('sha1');
+					sha1.update(cred.old+user.salt);
+					if (user.password != sha1.digest('hex')) {
+						cb('Wrong password');
+					} else {
+						auth.hash(cred.new, function(err, hashed) {
+							if (err)
+								cb(err);
+							userobj.password = hashed.hash; // Hashed password
+							userobj.salt = hashed.salt; // Salt
+							db.updateUser(cred.id,userobj).then(function(rows) {
+								cb(null);
+							}, function(error) {
+								console.log(error);
+								cb(error);
+							});
+						
+						});
+					}
+				} else if (user.password.length == 64){
+					//nye passord er lengde 64 i hex
+					auth.verify(cred.old,{hash:user.password,salt:user.salt},function(error,verified){
+						if (error)
+							cb(err);
+						if(verified){
+							auth.hash(cred.new, function(error, hashed) {
+								if (error)
+									cb(err);
+								userobj.password = hashed.hash; // Hashed password
+								userobj.salt = hashed.salt; // Salt
+								db.updateUser(cred.id,userobj).then(function(rows) {
+									cb(null);
+								}, function(error) {
+									console.log(error);
+									cb(error);
+								});
+							
+							});
+						} else {
+							cb('Wrong password');
+						}
+					});
+				}
+			}
+		}, function errorCB(error) {
+			cb(error);
+		});
 	},
 
 	saveProfile: function(user,cb){
