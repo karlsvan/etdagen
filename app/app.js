@@ -13,7 +13,7 @@
 		'ngResource',
 		'ngRoute',
 		'ngSanitize',
-		// 'ngTouch',
+		// 'ngTouch', //not compatible with angular-material
 		'ui.router',
 		'ngMaterial',
 		'angularFileUpload'
@@ -24,7 +24,6 @@
 	function appCtrl(){
 		this.name = 'E&T-dagen';
 		this.year = 2016;
-
 	}
 	/*@ngInject*/
 	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
@@ -63,7 +62,7 @@
 		.state('register', {
 			url: '/register/:user',
 			templateUrl: 'partials/register/register.html',
-			controller: 'RegisterCtrl',
+			controller: 'RegisterCtrl as RegisterCtrl',
 		})
 		.state('settings', {
 			url: '/settings',
