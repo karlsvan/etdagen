@@ -67,11 +67,15 @@
 			};
 
 			this.register = function(cred,cb) {
-				$http.post('/register', cred).then(function sucsessCB(/*response*/) {
-					$state.go('home');
+				$http.post('/register', cred).then(function sucsessCB(resp) {
+					$http.post('/forgot', {text:resp.data}).then(function successCB(res) {
+				    	cb(null,'Passord har blitt sendt til din email')
+				    }, function errorCB(res) {
+				    	cb(null,'Bruker opprettet, men feil ved passord-generering. Vennlist se "Glemt passord"')
+				    });
 				}, function(error){
 					if(error.status == 500) {
-						cb(error.data);
+						cb(error.data,null);
 					}
 				});
 			};

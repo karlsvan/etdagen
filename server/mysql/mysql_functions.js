@@ -56,7 +56,6 @@ module.exports = {
 			}
 			var inserts = [keys,values];
 			var sql = 'INSERT INTO bruker (??) VALUES (?);';
-			console.log('sql: '+mysql.format(sql,inserts));
 			return new Query(sql,inserts);
 		}
 	},

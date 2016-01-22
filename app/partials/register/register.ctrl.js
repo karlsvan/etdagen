@@ -20,9 +20,9 @@
 			{label: 'Fornavn',			inputType: 'text',		model: 'fornavn',		required: true},
 			{label: 'Etternavn',		inputType: 'text',		model: 'etternavn',		required: true},
 			{label: 'Epost',			inputType: 'email',		model: 'email',			required: true},
-			{label: 'Passord',			inputType: 'password',	model: 'password',		required: true},
+			/*{label: 'Passord',			inputType: 'password',	model: 'password',		required: true},
 			{label: 'Bekreft Passord',	inputType: 'password',	model: 'rpassword',		required: true},
-			/* Optional register fields */
+			 Optional register fields */
 			/*{label: 'Telefonnummer',	inputType: 'number',	model: 'tlf',			required: false},
 			{label: 'Utgangsår', 		inputType: 'number',	model: 'utgangsaar',	required: false},
 			{label: 'Linje',			inputType: 'text',		model: 'linje',			required: false},
@@ -31,14 +31,16 @@
 		];
 		this.register = function() {
 			if($scope.registerForm.$valid) {
-				delete $scope.form.rpassword;
-				alert(JSON.stringify($scope.form));
-				UserService.register($scope.form, function(error){
-					self.formError = error;
-					alert(JSON.stringify(error));
+				//delete $scope.form.rpassword;
+				UserService.register($scope.form, function(error,info){
+					if(error) {
+						self.formError = error;
+					} else {
+						self.formError = info;
+					}
 				});
 			}
-			else {self.formError = 'Vennligst fyll inn påkrevde felt'; alert('feil')}
+			else {self.formError = 'Vennligst fyll inn påkrevde felt';}
 		};
 	}
 	RegisterCtrl.$inject = ['$scope', 'UserService'];

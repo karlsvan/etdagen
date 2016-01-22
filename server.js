@@ -98,11 +98,11 @@ app.get('/tags', function (req,res) {
 
 app.post('/register',
 	function (req,res) {
-		User.adduser(req.body, function(error) {
+		User.adduser(req.body, function(error,email) {
 			if (error) {
 				res.status(500).send(error);
 			} else {
-				res.sendStatus(200)
+				res.status(200).send(email);
 			}
 		});
 	});
@@ -151,7 +151,6 @@ app.post('/saveSettings', function (req,res) {
 	User.saveProfile(req.body, function(error) {
 		if (error)
 			throw error
-		console.log('JAAA');
 		res.sendStatus(200);
 	})
 })
@@ -188,6 +187,7 @@ app.get('/filer/:filename',function (req,res) {
 })
 
 app.post('/forgot', function (req,res) {
+	console.log('email: '+JSON.stringify(req.body));
 	User.findOne({email:req.body.text}, function(error,user) {
 		if (error) {
 			console.log(error);

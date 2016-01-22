@@ -16,6 +16,7 @@ module.exports = {
 		}
 		db.findUsers(userSearch).then(function successCB(rows){
 				if(rows.length === 0) {
+					obj.status = 'student';
 					db.addUser(obj).then(function successCB(rows) {
 						db.findUsers({id:rows.insertId}).then(function successCB(rows) {
 							callback(null,rows[0]);
@@ -40,22 +41,16 @@ module.exports = {
 
 	adduser: function(userobj,callback) {
 		userobj.status='student';
-		console.log(JSON.stringify(userobj));
+		//console.log(JSON.stringify(userobj));
 		db.findUsers({email:userobj.email}).then(function successCB(rows) {
-			console.log(JSON.stringify(rows));
 			if(rows.length == 0) {
-				auth.hash(userobj.password, function(err, hashed) {
-					userobj.password = hashed.hash; // Hashed password
-					userobj.salt = hashed.salt; // Salt
-					console.log(JSON.stringify(userobj));
-					db.addUser(userobj).then(function successCB(rows) {
-						callback(null);
-					},function errorCB(error) {
-						callback(error);
-					});
+				db.addUser(userobj).then(function successCB(rows) {
+					callback(null,userobj.email);
+				},function errorCB(error) {
+					callback(error,null);
 				});
 			} else {
-				callback('Bruker eksisterer')
+				callback('Bruker eksisterer',null)
 			}
 		})
 	},
