@@ -14,14 +14,14 @@
 		<md-card flex style="min-height: 100vh;">
 			<md-list>
 				<div ng-show="SearchCtrl.searchOptions.companies">
-					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString  | filter:{usertype:'bedriftadmin'} | filterTags:SearchCtrl.searchOptions.selectedTags" ui-sref="user({id:user.id})">
+					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString  | filterType:['bedrift','bedrift_betalt'] | filterTags:SearchCtrl.searchOptions.selectedTags" ui-sref="user({id:user.id})">
 						<img src="{{user.img}}" alt="" class="md-avatar">
 						<p>{{user.name}}</p>
 						<i class="fa fa-building"></i>
 					</md-list-item>
 				</div>
 				<div ng-show="SearchCtrl.searchOptions.students">
-					<md-list-item ng-repeat="User in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString | filterType:['soker','crewadmin',null] | filterTags:SearchCtrl.searchOptions.selectedTags" ui-sref="user({id:User.id})">
+					<md-list-item ng-repeat="User in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString | filterType:['student','crew',null] | filterTags:SearchCtrl.searchOptions.selectedTags" ui-sref="user({id:User.id})">
 						<img src="{{User.img}}" alt="" class="md-avatar">
 						<p>{{User.name}}</p>
 						<i class="fa fa-user"></i>

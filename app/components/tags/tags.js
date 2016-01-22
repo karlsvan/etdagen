@@ -9,7 +9,7 @@
 	  	function TagController($http,$scope){
 	  		var self = this;
 
-		    self.readonly = false;
+		    self.readonly = $scope.readonly || false;
 		    self.selectedItem = null;
 		    self.searchText = null;
 		    self.querySearch = querySearch;
@@ -92,7 +92,8 @@
 	  			scope: {
 	  				requirematch: '=',
 	  				selectedTags: '=selectedTags',
-	  				promise: '='
+	  				promise: '=',
+	  				readonly: '='
 	  			},
     			templateUrl: './components/tags/et-tags.html',
     			controller: 'TagController as TagController'

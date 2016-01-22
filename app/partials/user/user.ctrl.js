@@ -12,20 +12,35 @@
 	  .controller('userCtrl', userCtrl);
 
 		/*@ngInject*/
-		function userCtrl($scope, $state, UserService){
+		function userCtrl($scope, $state, UserService,$q){
+			var deffered = $q.defer();
+			$scope.promise = deffered.promise
 
 			$scope.$on('$stateChangeSuccess',
 		    	function(event, toState, toParams, fromState, fromParams){
 		    		if(toState.name == "user"){
 			    		UserService.getProfile(toParams.id, function(res) {
 			    			//console.log(res);
-		    				$scope.user = res; 
+		    				$scope.user = res;
+		    				if(res.tags) {
+								deffered.resolve(res.tags);
+							} else {
+								deffered.reject();
+							}
 		    			});
+		    			UserService.getUser(function(user,loggedIn,error) {
+		    				if (user.status == 'bedrift_betalt'  || user.status == 'crew') {
+		    					$scope.displayFile = true;
+		    					var arr = $scope.user.filer[0].navn.split('_');
+						    	arr.shift();
+						    	$scope.filename = arr.join('_');
+		    				}
+		    			})
 		    		}
 		    	});
 
 			
 
 		}
-		userCtrl.$inject = ['$scope', '$state', 'UserService'];
+		userCtrl.$inject = ['$scope', '$state', 'UserService','$q'];
 })();

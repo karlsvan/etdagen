@@ -1,4 +1,4 @@
-  <md-chips ng-model="TagController.selectedTags" md-autocomplete-snap="" md-transform-chip="TagController.transformChip($chip)" md-require-match="requirematch" md-on-remove="removeChip($index)">
+  <md-chips ng-model="TagController.selectedTags" md-autocomplete-snap="" md-transform-chip="TagController.transformChip($chip)" md-require-match="requirematch" md-on-remove="removeChip($index)" readonly="TagController.readonly">
   	<md-autocomplete md-selected-item="TagController.selectedItem" md-search-text="TagController.searchText" md-items="item in TagController.querySearch(TagController.searchText)" md-item-text="item.navn" placeholder="legg til tags" md-select-on-match=true>
   		<span md-highlight-text="TagController.searchText">{{item.navn}}</span>
   	</md-autocomplete>
