@@ -16,7 +16,7 @@
 								img: element.bilde || '/assets/images/avatar.png',
 								id: element.id,
 								name: element.fornavn+' '+element.etternavn,
-								usertype: element.status || 'student',
+								usertype: element.status,
 								tags: element.tags
 							};
 						});

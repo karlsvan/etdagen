@@ -22,7 +22,10 @@ module.exports = {
 							callback(null,rows[0]);
 						}, function errorCB(error) { callback(error,null); });
 					},function errorCB (error){ callback(error,null); });
-				} else { callback(null,rows[0]); }
+				} else { 
+					db.updateUser(rows[0].id,{status:'student'});
+					callback(null,rows[0]);
+				}
 			}, function errorCB(error) { callback(error,null); }
 		);
 	},
@@ -32,6 +35,7 @@ module.exports = {
 			if (rows.length === 0) {
 				callback(null,null);
 			} else {
+				db.updateUser(rows[0].id,{status:'student'});
 				callback(null,rows[0]);
 			}
 		}, function errorCB(error) {
