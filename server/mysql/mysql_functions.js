@@ -41,9 +41,13 @@ function append(){
 // ========== Exports ==========
 module.exports = {
 	findUsers: function (specs){
-		//var sql = specs ? append('SELECT * FROM bruker WHERE ?', specs) : append('SELECT * FROM bruker');
-		//console.log('sql: '+sql);
-		return new Query('SELECT * FROM bruker WHERE ?',specs);
+		var inserts = [];
+		var sql = 'SELECT * FROM bruker WHERE ';
+		for(var key in specs) {
+			sql = sql + mysql.escapeId(key)+'='+mysql.escape(specs[key])+' OR ';
+		}
+		sql = sql.slice(0,-4);
+		return new Query(sql,inserts);
 	},
 
 	addUser: function (user){

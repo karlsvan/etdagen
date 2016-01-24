@@ -220,7 +220,9 @@
 	    }
 	    
 	    function connect(user) {
-			
+			if (Object.keys(user.connect).length == 0) {
+				return;
+			}
 			$mdDialog.show({
 		      controller: 'ConnectController',
 		      templateUrl: './partials/settings/connect.html',
@@ -264,6 +266,7 @@
 			$scope.user.feideId = connect.feideId;
 			delete connect.feideId;
 		}
+
 		$scope.save = function() {
 			for(var key in $scope.radio) {
 				if($scope.radio[key] != 'new') {
