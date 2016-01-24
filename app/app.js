@@ -21,10 +21,24 @@
 	.config(configure)
 	.controller('appCtrl', appCtrl);
 
-	function appCtrl(){
+	function appCtrl($scope, $mdDialog){
 		this.name = 'E&T-dagen';
 		this.year = 2016;
+		$scope.showAlert = function(ev) {
+			$mdDialog.show(
+				$mdDialog.alert()
+				.parent(angular.element(document.querySelector('#popupContainer')))
+				.clickOutsideToClose(true)
+				.title('Informasjonskapsler')
+				.textContent('Denne siden bruker informasjonskapsler for å forbedre brukeropplevelsen.')
+				.ariaLabel('Informasjonskapsler')
+				.ok('Forstått!')
+				.targetEvent(ev)
+			);
+		};
 	}
+	appCtrl.$inject = ['$scope', '$mdDialog'];
+
 	/*@ngInject*/
 	function configure($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 		$urlRouterProvider.otherwise('/');
