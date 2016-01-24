@@ -21,22 +21,34 @@
 					settingCardType: '=', /* Either text or list */
 					visible: '=', /* Visibility in profile */
 					cardTitle: '=?',
-					list: '=?'
-					// htmlcontent: '=?'
+					list: '=?',
+					htmlcontent: '=?',
+					deleteCard: '&?',
+					saveCard: '&?'
 				},
 				templateUrl: './components/setting-card/setting-card.tmpl.html',
-				controller: 'settingCardCtrl as settingCard'
+				controller: 'settingCardCtrl as settingCard',
+				link: function(scope, elem, attrs){
+					scope.$watch(attrs.htmlcontent, function(v){console.log(v);});
+				}
 			};
 		}
 
 		/*@ngInject*/
 		function settingCardCtrl($scope){
-			var testvar = 'Testvar';
-			$scope.htmlcontent = testvar;
-			$scope.addListField = function(){ $scope.list.push(['','']); };
-			$scope.deleteListField = function(index) { $scope.list.splice(index, 1); };
-			$scope.toggleVisible = function(){ $scope.visible = !$scope.visible; };
-			$scope.showHtmlContent = function(){ console.log($scope.htmlcontent); };
+			var self = this;
+			self.addListField = function(){ $scope.list.push(['','']); };
+			self.deleteListField = function(index) { $scope.list.splice(index, 1); };
+			self.toggleVisible = function(){ $scope.visible = !$scope.visible; };
+			self.showHtmlContent = function(){
+				console.log({cardTitle: $scope.cardTitle, settingCardType: $scope.settingCardType, visible: $scope.visible, list: $scope.list, htmlcontent: self.htmlcontent});
+				// console.log('cardTitle: ', $scope.cardTitle);
+				// console.log('settingCardType: ', $scope.settingCardType);
+				// console.log('visible: ', $scope.visible);
+				// console.log('list: ', $scope.list);
+				// console.log('htmlcontent: ', self.htmlcontent);
+			};
+			self.deleteCard = function(index){console.log('index: ', index); };
 		}
 		settingCardCtrl.$inject = ['$scope'];
 })();

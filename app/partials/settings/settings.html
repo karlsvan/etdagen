@@ -62,10 +62,12 @@
 							</md-input-container>
 						</ms-list-item>
 					</md-list>
-					<md-button class="md-raised" aria-label="SaveCard" style="background: #2ECC71; color: white;">
-						<md-tooltip md-direction="top">Lagre endringer</md-tooltip>
-						<i class="fa fa-check"></i>
-					</md-button>
+					<div layout="row" layout-align="end">
+						<md-button class="md-raised" aria-label="SaveCard" style="background: #2ECC71; color: white;" ng-click="saveUser()">
+							<md-tooltip md-direction="top">Lagre endringer</md-tooltip>
+							<i class="fa fa-save"></i>
+						</md-button>
+					</div>
 				</div>
 			</section>
 			<section layout-padding flex>
@@ -167,19 +169,41 @@
 			</section>
 		</div>
 		<div layout="column" class="container">
-			<section layout-padding>
+			<section layout-margin class="md-whiteframe-2dp" style="border-radius: 4px; overflow: hidden;">
 				<md-subheader>Kort</md-subheader>
 				<div layout="column">
 					<div layout="column">
-						<setting-card setting-card-type="'liste'" visible="false" card-title="'Utdanning'" list="[['Juni 08 - Juli 09', 'Skolen vgs']]"></setting-card>
-						<setting-card setting-card-type="'text'" visible="false"></setting-card>
+						<div ng-if="!cardlist.length">Du har ingen kort</div>
+						<setting-card ng-repeat="card in cardlist"
+							setting-card-type="card.settingCardType"
+							visible="card.visible"
+							card-title="card.cardTitle"
+							list="card.list"
+							htmlcontent="card.htmlcontent"
+							delete-card="deleteCard($index)">
+						</setting-card>
 					</div>
-					<div layout="row" layout-align="end"><md-button class="md-raised" style="background: #19B5FE; color: white;"><i class="fa fa-plus-circle"></i></md-button></div>
+					<div layout="row" layout-align="end">
+						<div style="margin-bottom: 2em;">
+							<md-button class="md-raised"  aria-label="AddCardMenu" style="background: #19B5FE; color: white;" ng-click="addNewTextCard()">
+								<md-tooltip md-direction="bottom">Nytt tekst-kort</md-tooltip>
+								<i class="fa fa-paragraph"></i>
+							</md-button>
+							<md-button class="md-raised" aria-label="AddCardMenu" style="background: #19B5FE; color: white;" ng-click="addNewListCard()">
+								<md-tooltip md-direction="bottom">Nytt liste-kort</md-tooltip>
+								<i class="fa fa-list"></i>
+							</md-button>
+							<md-button class="md-raised" aria-label="AddCardMenu" style="background: #2ECC71; color: white;" ng-click="saveUser()">
+								<md-tooltip md-direction="bottom">Lagre</md-tooltip>
+								<i class="fa fa-save"></i>
+							</md-button>
+						</div>
+					</div>
 				</div>
 			</section>
 		</div>
 	</div>
-  <section class="section-padding" layout="column" layout-align="center center" style="background: #eee;">
+  <section class="section-padding" layout="column" layout-align="center center" style="background: #eee;" ng-show="false">
     <div class="container" style="max-width:800px;">
       <div layout-gt-sm="row">
         <md-card flex-gt-sm="50">

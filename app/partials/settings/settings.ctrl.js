@@ -56,6 +56,27 @@
 	UploadEditor.$inject = ['$scope', '$mdDialog'];
 
 	function SettingsCtrl($scope,UserService,$q,$mdDialog,$http,FileUploader,$cookies,$window) {
+		// $scope.oldCardlist = [
+		// 	{ settingCardType: 'tekst', visible: true, cardTitle: 'Bio', htmlcontent: '' },
+		// 	{ settingCardType: 'liste', visible: false, cardTitle: 'Utdanning', list: [['Juni 08 - Juli 09', 'Skolen vgs']] }
+		// ];
+		// $scope.cardlist = $scope.oldCardlist;
+		$scope.cardlist = [];
+
+		$scope.addNewTextCard = function(){
+			$scope.cardlist.push({ settingCardType: 'tekst', visible: false, cardTitle: '', htmlcontent: '' });
+		};
+		$scope.addNewListCard = function(){
+			$scope.cardlist.push({ settingCardType: 'liste', visible: false, cardTitle: '', list: [['','']] });
+		};
+		$scope.deleteCard = function(index){ $scope.cardlist.splice(index, 1); };
+		// $scope.saveCard = function(index){  }
+
+
+
+
+
+
 		var deffered = $q.defer();
 		$scope.promise = deffered.promise;
 		// var keyArr = [],contArr = [];
@@ -67,10 +88,9 @@
 			$scope.user.filer = [{navn:item.file.name,path:'/filer'}];
 		};
 
-		UserService.init(function(user /*,loggedIn,error*/) {
-			if (user.connect) {
-					connect(user);
-			}
+		UserService.init( function(user) {
+			if (user.connect) connect(user);
+
 			UserService.getProfile(UserService.returnUser().id, function(res) {
 				var settings = $cookies.getObject('settings');
 				if (settings) {
@@ -83,7 +103,10 @@
 				} else {
 					deffered.reject();
 				}
-				$scope.cards = populateCards(res.cards);
+
+				$scope.cards = populateCards(res.cards); //Populate the scope with the users cards
+				$scope.cardlist = $scope.cards;
+
 				if (res.filer) {
 					var arr = res.filer[0].navn.split('_');
 					arr.shift();
@@ -133,18 +156,28 @@
 			});
 		};
 
+
 		function populateCards(cards) {
-			if(typeof cards === 'object') {cards = toArray(cards); }
-			if(cards.length < 1) {
-				cards = [['Ny info om deg',[['stikkord','text'],['stikkord','text']]]];
-				return cards;
+			if (!(cards instanceof Array)){
+				console.error('cards is not an array.\n', cards);
+				return []; // return empty
 			} else {
-				for (var i = cards.length - 1; i >= 0; i--) {
-					cards[i][1].push(['','']);
-				}
-				cards.push(['',[['','']]]);
+				console.log(cards);
 				return cards;
 			}
+
+
+			// if(typeof cards === 'object') {cards = toArray(cards); }
+			// if(cards.length < 1) {
+			// 	cards = [['Ny info om deg',[['stikkord','text'],['stikkord','text']]]];
+			// 	return cards;
+			// } else {
+			// 	for (var i = cards.length - 1; i >= 0; i--) {
+			// 		cards[i][1].push(['','']);
+			// 	}
+			// 	cards.push(['',[['','']]]);
+			// 	return cards;
+			// }
 		}
 
 		function equalArray(arr1,arr2) {
@@ -197,7 +230,8 @@
 		}
 
 		$scope.saveUser = function() {
-			$scope.user.cards = toObject($scope.cards);
+			// $scope.user.cards = toObject($scope.cards);
+			$scope.user.cards = $scope.cardlist;
 			UserService.saveSettings($scope.user);
 		};
 
