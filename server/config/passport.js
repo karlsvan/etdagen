@@ -125,7 +125,7 @@ module.exports = function (passport){
 			return done(null,req.user);
 		} else {
 			User.findOrCreate(profil, function (err, user) {
-					return done(err, user);
+				return done(err, user);
 			});
 		}
 	}));

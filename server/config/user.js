@@ -6,25 +6,43 @@ var db       = require('../mysql/mysql_functions.js'),
 
 module.exports = {
 	findOrCreate: function (obj,callback) {
-		var userSearch;
+		var userSearch = {email:obj.email};
 		if (obj.facebookId) {
-			userSearch = {facebookId:obj.facebookId};
+			userSearch.facebookId = obj.facebookId;
 		} else if (obj.googleId) {
-			userSearch = {googleID:obj.googleId};
+			userSearch.googleID = obj.googleId;
 		} else if (obj.feideId) {
-			userSearch = {feideId:obj.feideId};
+			userSearch.feideId = obj.feideId;
 		}
-		db.findUsers(userSearch).then(function successCB(rows){
-				if(rows.length === 0) {
-					obj.status = 'student';
-					db.addUser(obj).then(function successCB(rows) {
-						db.findUsers({id:rows.insertId}).then(function successCB(rows) {
-							callback(null,rows[0]);
+		db.findUsers(userSearch).then(function successCB(rows1){
+				obj.status = 'student';
+				if(rows1.length === 0) {
+					db.addUser(obj).then(function successCB(rows2) {
+						db.findUsers({id:rows2.insertId}).then(function successCB(rows3) {
+							callback(null,rows3[0]);
 						}, function errorCB(error) { callback(error,null); });
 					},function errorCB (error){ callback(error,null); });
-				} else { 
-					db.updateUser(rows[0].id,{status:'student'});
-					callback(null,rows[0]);
+				} else if(rows1.length === 1) {
+					var userUpdate = {};
+					if (obj.facebookId) {
+						userUpdate.facebookId = obj.facebookId;
+					} else if (obj.googleId) {
+						userUpdate.googleID = obj.googleId;
+					} else if (obj.feideId) {
+						userUpdate.feideId = obj.feideId;
+					}
+					db.updateUser(rows1[0].id,userUpdate).then(function successCB(rows2) {
+						db.findUsers({id:rows2.insertId}).then(function successCB(rows3) {
+							if(rows3.length == 0){
+								callback(null,rows1[0]);
+							} else {
+								callback(null,rows3[0]);
+							}
+							callback(null,rows[0]);
+						}, function errorCB(error) { callback(error,null); });
+					});
+				} else {
+					callback('En bruker med denne email adressen eksisterer allerede. Vennlist logg in med denne brukeren og knytt sammen kontoene i instillinger',null);
 				}
 			}, function errorCB(error) { callback(error,null); }
 		);
