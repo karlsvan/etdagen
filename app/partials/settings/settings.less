@@ -7,3 +7,67 @@
 .dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
   font-size: 0.8em;
   margin-top: 50px; }
+
+.ta-toolbar {
+	background-color: rgba(200,200,200,0.54);
+	margin-bottom: 2px;
+}
+
+.ta-scroll-window.form-control {
+	border: 1px solid rgba(0,0,0,0.36);
+}
+
+.ta-button-group {
+	display: flex;
+	flex-direction: row;
+	margin: 2px;
+	> .ta-button {
+		height: auto;
+		width: auto;
+		min-height: auto;
+		min-width: auto;
+		line-height: inherit;
+		border-radius: 4px;
+		padding: 6px 12px;
+		margin: 0;
+		&:first-child {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+		&:last-child {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+		&:not(:first-child):not(:last-child) { border-radius: 0; }
+	}
+
+	> .ta-button:not([disabled]) {
+		color: #333;
+		background-color: #fff;
+		border-color: #ccc;
+		&:active, &.active {
+			color: #333;
+			background-color: #e0e0e0;
+			border-color: #adadad;
+		}
+		&:hover {
+			color: #333;
+			background-color: #ebebeb;
+			border-color: #adadad;
+		}
+
+	}
+
+	> .ta-button[disabled] {
+		background-color: rgb(221,221,221);
+		color: rgba(0,0,0,0.54);
+	}
+}
+
+.ta-button {
+	border-radius: 4px;
+	border: 1px solid transparent;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+}

@@ -1,4 +1,4 @@
-(function() {
+	(function() {
 	'use strict';
 
 	/*
@@ -16,7 +16,8 @@
 		// 'ngTouch', //not compatible with angular-material
 		'ui.router',
 		'ngMaterial',
-		'angularFileUpload'
+		'angularFileUpload',
+		'textAngular'
 	])
 	.config(configure)
 	.controller('appCtrl', appCtrl);
@@ -87,7 +88,7 @@
 		.state('user', {
 			url: '/user/:id',
 			templateUrl: 'partials/user/user.html',
-			controller: 'userCtrl'
+			controller: 'userCtrl as userCtrl'
 		});
 
 
