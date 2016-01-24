@@ -25,7 +25,7 @@
 			</md-button>
 			<md-menu md-position-mode="target-right target" ng-if="loggedIn">
 				<md-button class="md-raised md-primary md-hue-2 nav-button truncate" ng-click="$mdOpenMenu($event)" aria-label="UserDropdown">
-					<span style="max-width: 100px;">{{navbar.username}}</span><i class="fa fa-chevron-down button-icon icon-right"/>
+					<span style="max-width: 100px;">{{navbar.username}}<i class="fa fa-chevron-down button-icon icon-right"/></span>
 				</md-button>
 				<md-menu-content>
 					<md-button ui-sref="user({id:navbar.id})" aria-label="user" class="nav-button text-align-left md-primary md-hue-2">
