@@ -1,0 +1,67 @@
+<md-card>
+	<md-card-header>
+		<md-card-header-text layout="row" layout-align="start center">
+			<md-input-container style="margin: 0; position: relative; top: 0.5em;" md-no-float>
+				<input type="text" placeholder="Untitled" ng-model="cardTitle">
+			</md-input-container>
+			<div class="md-subhead" layout-margin>{{settingCardType}}</div>
+			<div flex></div>
+			<div>
+				<md-button class="md-fab md-mini" ng-click="settingCard.toggleVisible()" aria-label="ToggleVisible">
+					<md-tooltip md-direction="left">Synlighet</md-tooltip>
+					<i class="fa fa-eye" ng-show="visible"></i>
+					<i class="fa fa-eye-slash" ng-show="!visible"></i>
+				</md-button>
+			</div>
+		</md-card-header-text>
+	</md-card-header>
+
+	<md-card-content ng-if="settingCardType=='liste'">
+		<md-list>
+			<md-list-item layout="row" layout-align="start end" ng-repeat="obj in list">
+				<div flex layout-gt-sm="row" layout="column">
+					<md-input-container md-no-float style="margin: 0; position: relative; top: 1.1em;">
+						<input type="text" placeholder="key" ng-model="obj[0]">
+					</md-input-container>
+					<md-input-container md-no-float style="margin: 0; position: relative; top: 1.1em;" flex>
+						<input type="text" placeholder="value" ng-model="obj[1]">
+					</md-input-container>
+				</div>
+				<md-button class="md-primary md-raised" aria-label="DeleteField" ng-click="settingCard.deleteListField($index)">
+					<md-tooltip md-direction="top">Slett felt</md-tooltip>
+					<i class="fa fa-trash"></i>
+				</md-button>
+			</md-list-item>
+		</md-list>
+
+		<div layout="row" layout-align="end">
+			<md-button class="md-raised" aria-label="AddField" style="background: #19B5FE; color: white;" ng-click="settingCard.addListField()">
+				<md-tooltip md-direction="left">Legg til felt</md-tooltip>
+				<i class="fa fa-plus-circle"></i>
+			</md-button>
+		</div>
+	</md-card-content>
+
+	<md-card-content ng-if="settingCardType=='tekst'">
+		<text-angular ng-model="htmlcontent" ng-change="settingCard.htmlcontent = htmlcontent" name="htmlcontent"
+			ta-toolbar-class="ta-toolbar layout-row layout-wrap"
+			ta-toolbar-group-class="ta-button-group layout-row layout-wrap"
+			ta-toolbar-button-class="ta-button"
+			ta-toolbar-button-active-class="active"
+			ta-toolbar="[['h1','h2','h3','h4','h5','h6','p','pre','quote',
+						'bold','italics','underline','strikeThrough','ul','ol','undo','redo','clear',
+						'justifyLeft','justifyCenter','justifyRight','justifyFull','indent','outdent','insertLink']]">
+		</text-angular>
+	</md-card-content>
+
+	<md-card-actions layout="row" layout-align="end">
+		<md-button class="md-raised" aria-label="SaveCard" style="background: #2ECC71; color: white;" ng-click="settingCard.showHtmlContent()" ng-if="false">
+			<md-tooltip md-direction="top">Lagre endringer</md-tooltip>
+			<i class="fa fa-check"></i>
+		</md-button>
+		<md-button class="md-primary md-raised" aria-label="DeleteCard" ng-click="deleteCard()">
+			<md-tooltip md-direction="top">Slett dette kortet</md-tooltip>
+			<i class="fa fa-trash"></i>
+		</md-button>
+	</md-card-actions>
+</md-card>

@@ -30,7 +30,13 @@
 	border-radius: 4px;
 	overflow: hidden;
 	margin: 0.5em;
-	min-width: 270px;
+	min-width: 250px;
+	text-decoration: none;
+	&.disabled, &[disabled]{
+		background: grey;
+		color: rgba(0,0,0,0.8);
+		cursor: default;
+	}
 
 	> .logo-container {
 		background: transparent;
@@ -43,5 +49,6 @@
 	}
 	> .text-container {
 		margin: auto 1em;
+		text-decoration: none;
 	}
 }

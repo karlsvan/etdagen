@@ -1,6 +1,6 @@
-<div class="container-fluid" layout="column" layout-align="center center" style="background: #eee; height: 100%">
-	<div class="container" layout="row">
-		<md-card id="search-options" style="width: 340px; padding: 0 2em;" layout="column">
+<div class="container-fluid" layout="column" layout-align="center center" style="background:#eee">
+	<div class="container" layout-gt-sm="row" layout="column">
+		<md-card style="width: 340px; padding: 1em 2em; max-height: 500px;" layout="column">
 			<md-input-container>
 				<label>Brukere</label>
 				<input type="text" ng-model="SearchCtrl.searchOptions.searchString">
@@ -14,7 +14,7 @@
 			<md-list>
 				<div ng-show="SearchCtrl.searchOptions.companies">
 					<md-list-item ng-repeat="user in SearchCtrl.users | filter:SearchCtrl.searchOptions.searchString  | filterType:['bedrift','bedrift_betalt'] | filterTags:SearchCtrl.searchOptions.selectedTags" ui-sref="user({id:user.id})">
-						<img src="{{user.img}}" alt="" class="md-avatar">
+						<img src="{{user.img}}" class="md-avatar" style="border-radius: 0; height: auto;">
 						<p>{{user.name}}</p>
 						<i class="fa fa-building"></i>
 					</md-list-item>

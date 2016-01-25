@@ -33,11 +33,6 @@ h4 {
 h5 {
   font-size: 1em !default;
 }
-/* Links */
-a {
-  text-decoration: none;
-  color: inherit;
-}
 .container,
 .container-fluid {
   position: relative;
@@ -222,6 +217,11 @@ i.button-icon.icon-both {
 .facebook-link {
   color: #133783;
   font-weight: 900;
+  text-decoration: none;
+}
+.mailto-link {
+  text-decoration: none;
+  color: inherit;
 }
 .forgot-container {
   max-width: 30em;
@@ -320,6 +320,7 @@ i.button-icon.icon-both {
   overflow: hidden;
   margin: 0.5em;
   min-width: 250px;
+  text-decoration: none;
 }
 .login-with-button.facebook {
   background: #3b5998;
@@ -333,6 +334,12 @@ i.button-icon.icon-both {
   background: #BE1527;
   color: white;
 }
+.login-with-button.disabled,
+.login-with-button[disabled] {
+  background: grey;
+  color: rgba(0, 0, 0, 0.8);
+  cursor: default;
+}
 .login-with-button > .logo-container {
   background: transparent;
   height: 100%;
@@ -344,6 +351,7 @@ i.button-icon.icon-both {
 }
 .login-with-button > .text-container {
   margin: auto 1em;
+  text-decoration: none;
 }
 #page-profile {
   background-color: #eee;
@@ -398,6 +406,84 @@ h2:hover span {
 .dialogdemoBasicUsage .footer > code {
   font-size: 0.8em;
   margin-top: 50px;
+}
+.ta-toolbar {
+  background-color: rgba(200, 200, 200, 0.54);
+  margin-bottom: 2px;
+}
+.ta-scroll-window.form-control {
+  border: 1px solid rgba(0, 0, 0, 0.36);
+}
+.ta-button-group {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 2px;
+}
+.ta-button-group > .ta-button {
+  height: auto;
+  width: auto;
+  min-height: auto;
+  min-width: auto;
+  line-height: inherit;
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin: 0;
+}
+.ta-button-group > .ta-button:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ta-button-group > .ta-button:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.ta-button-group > .ta-button:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+.ta-button-group > .ta-button:not([disabled]) {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.ta-button-group > .ta-button:not([disabled]):active,
+.ta-button-group > .ta-button:not([disabled]).active {
+  color: #333;
+  background-color: #e0e0e0;
+  border-color: #adadad;
+}
+.ta-button-group > .ta-button:not([disabled]):hover {
+  color: #333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.ta-button-group > .ta-button[disabled] {
+  background-color: #dddddd;
+  color: rgba(0, 0, 0, 0.54);
+}
+.ta-button {
+  border-radius: 4px;
+  border: 1px solid transparent;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+dl.dl-table dt,
+dl.dl-table dd {
+  display: inline-block;
+  vertical-align: text-top;
+  text-align: left;
+}
+dl.dl-table dt {
+  width: 150px;
+}
+.bordered {
+  border: 1px solid rgba(0, 0, 0, 0.54);
+  border-radius: 4px;
+  padding: 1em;
 }
 #profiles-container {
   max-width: 1024px;

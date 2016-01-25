@@ -83,13 +83,13 @@ app.get('/logout', function (req, res){
 
 app.get('/user/:id', function (req,res) {
 	User.getProfile(req.params.id, function(error,profile) {
-		if (error) {console.log(error)}
-		if (profile.adresse){profile.adresse = JSON.parse(profile.adresse)}
-		if (profile.filer){profile.filer = JSON.parse(profile.filer)}
-		if (profile.cards){profile.cards = JSON.parse(profile.cards)}
-		if (profile.tags){profile.tags = profile.tags.split(',')}
+		if (error) { console.log(error); }
+		if (profile.adresse){ profile.adresse = JSON.parse(profile.adresse); }
+		if (profile.filer){ profile.filer = JSON.parse(profile.filer); }
+		if (profile.cards){ profile.cards = JSON.parse(profile.cards); }
+		if (profile.tags){ profile.tags = profile.tags.split(','); }
 		res.status(200).send(profile);
-	})
+	});
 });
 
 app.get('/tags', function (req,res) {
@@ -114,27 +114,24 @@ app.post('/register',
 app.post('/setPass',function (req,res) {
 	User.setPass(req.body,function(error) {
 		if (error){
-			res.status(500).send(error)
+			res.status(500).send(error);
 		} else {
 			res.sendStatus(200);
 		}
 	});
 });
 
-
-
-app.post('/saveSettings', function (req,res) {
+app.post('/saveSettings', function (req, res) {
 	User.saveProfile(req.body, function(error) {
-		if (error)
-			throw error
+		if (error) throw error;
 		res.sendStatus(200);
-	})
-})
+	});
+});
 
 app.post('/contact', function (req,res) {
 	mail.sendMail(req.body, function(error, info){
 		if(error){
-			res.status(500).send(error)
+			res.status(500).send(error);
 		} else {
 			res.status(200).send(info);
 		}

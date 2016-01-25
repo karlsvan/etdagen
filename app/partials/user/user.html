@@ -1,6 +1,6 @@
 <div class="container-fluid" layout="column" layout-align="start center" style="background: #eee; min-height: 100vh;">
-	<section class="container md-whiteframe-1dp" style="background: white;" layout-padding layout-margin layout="row">
-		<div layout="column">
+	<section class="container md-whiteframe-1dp" style="background: white;" layout-padding layout-margin layout-gt-sm="row" layout="column">
+		<div layout-gt-sm="column" layout="row" style="max-width: 200px; padding: 1em;">
 			<div class="image-container">
 				<div class="md-whiteframe-5dp" style="width: 10rem; height: 10rem; border-radius: 50%;
 				background: url({{user.bilde || 'assets/images/avatar.png'}}) center;
@@ -10,61 +10,71 @@
 			</div>
 			<section>
 				<h2 class="md-title">{{user.fornavn+' '+user.etternavn}}</h2>
-				<ul style="list-style: none; margin: 0; padding: 0; width: 280px;">
-					<li ng-if="user.adresse">
-						<span>Adresse:</span>
-						<span>{{user.adresse[0]+', '+user.adresse[1]+' '+user.adresse[2]}}</span>
+				<ul style="list-style: none; margin: 0; padding: 0;">
+					<li style="margin-bottom: 1em;" ng-if="user.status == 'student'">
+						<div class="li-head" style="color: rgba(0,0,0,0.54);">Linje</div>
+						<div class="li-body" style="margin-left: 1em;" ng-if="user.linje && user.linje != 'null'">{{user.linje + ' ' + user.utgangsaar}}</div>
 					</li>
-					<li ng-if="user.email">{{user.email}}</li>
-					<li ng-if="user.tlf">{{user.tlf}}</li>
-					<br>
-					<et-tags requirematch=false selected-tags="user.tags" readonly='true' promise="promise"></et-tags>
+					<li style="margin-bottom: 1em;" ng-if="user.tags">
+						<div class="li-head" style="color: rgba(0,0,0,0.54);">Tags</div>
+						<div class="li-body" style="margin-left: 1em;" layout="row" layout-wrap>
+							<!-- <et-tags requirematch=false selected-tags="user.tags" readonly='true' promise="promise"></et-tags> -->
+							<div class="tag" style="background-color: #eee; border-radius: 1em; padding: 0.3em 0.8em;" ng-repeat="tag in user.tags">{{tag}}</div>
+						</div>
+					</li>
+					<!-- <li style="width: 100%; height: 1px; background-color: rgba(0,0,0,0.36); margin-bottom: 1em;"></li> -->
+					<li style="margin-bottom: 1em;">
+						<div class="li-head" style="color: rgba(0,0,0,0.54);">Epost</div>
+						<div class="li-body" style="margin-left: 1em;">{{user.email}}</div>
+					</li>
+					<li style="margin-bottom: 1em;">
+						<div class="li-head" style="color: rgba(0,0,0,0.54);">Telefon</div>
+						<div class="li-body" style="margin-left: 1em;" ng-if="user.tlf">{{user.tlf}}</div>
+						<!-- <div class="li-body" style="margin-left: 1em;" ng-if="!user.tlf">Ingen telefon</div> -->
+					</li>
+					<li style="margin-bottom: 1em;">
+						<div class="li-head" style="color: rgba(0,0,0,0.54);">Adresse</div>
+						<div class="li-body" style="margin-left: 1em;" ng-if="user.adresse">{{user.adresse[0]+', '+user.adresse[1]+' '+user.adresse[2]}}</div>
+						<!-- <div class="li-body" style="margin-left: 1em;" ng-if="!user.adresse">Ingen adresse</div> -->
+					</li>
+					<!-- <li style="margin-bottom: 1em;" ng-if="user.fodselsdato && user.fodselsdato !== '0000-00-00'">
+						<div class="li-head" style="color: rgba(0,0,0,0.54);">Fødselsdato</div>
+						<div class="li-body" style="margin-left: 1em;">{{user.fodselsdato}}</div>
+					</li> -->
 				</ul>
 			</section>
 		</div>
 		<div layout="column" flex>
-			<section ng-if="displayFile">
+			<section ng-if="authorizedToSeeFiles">
 				<md-subheader>Filer</md-subheader>
-				<ul layout="row" style="list-style: none; margin: 0; padding: 0; border-radius: 4px; border: 1px solid rgba(0,0,0,0.20); min-height: 40px;" layout-padding>
-					<li ng-if="!user.filer">Ingen filer</li>
-					<li ng-repeat="fil in user.filer" style="margin: 0 1em;">
-						<a target="_self" href="/filer/{{user.filer[0].navn}}" download="{{filename}}">
-							<i class="fa fa-file-text-o"></i>
-							<label>{{filename}}</label>
-						</a>
-					</li>
-				</ul>
+				<div class="bordered">
+					<ul layout="row" style="list-style: none; margin: 0; padding: 0;">
+						<li ng-if="!user.filer">Ingen filer</li>
+						<li ng-repeat="fil in user.filer" style="margin: 0 1em;">
+							<a target="_self" href="/filer/{{user.filer[0].navn}}" download="{{filename}}">
+								<i class="fa fa-file-text-o"></i>
+								<label>{{filename}}</label>
+							</a>
+						</li>
+					</ul>
+				</div>
 			</section>
-
-			<section ng-if="user.bio">
-				<md-subheader>Bio</md-subheader>
-				<txt>{{user.bio}}</txt>
-			</section>
-			<!-- <section>
-				<md-subheader>Om meg</md-subheader>
-				<md-content>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo voluptatibus facilis sunt quidem, voluptatem aliquid ipsum numquam ea sed corporis non, hic! Vero quam eos eum neque ullam ex harum?
-				</md-content>
-			</section>
-			<section>
-				<md-subheader>Utdanning</md-subheader>
-				<md-content>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo voluptatibus facilis sunt quidem, voluptatem aliquid ipsum numquam ea sed corporis non, hic! Vero quam eos eum neque ullam ex harum?
-				</md-content>
-			</section>
-			<section>
-				<md-subheader>Erfaringer</md-subheader>
-				<md-content>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo voluptatibus facilis sunt quidem, voluptatem aliquid ipsum numquam ea sed corporis non, hic! Vero quam eos eum neque ullam ex harum?
-				</md-content>
-			</section> -->
 
 			<div ng-if="!user.cards" style="margin-top: 1em;" layout-padding>Ingen kort lagt til</div>
-			<section ng-repeat="(cardname,content) in user.cards">
-				<md-subheader>{{cardname}}</md-subheader>
-				<md-content ng-repeat="(description, text) in content">
-					<span><txt>{{description}}</txt>  :  <txt>{{text}}</txt></span>
-				</md-content>
+			<section>
+				<md-subheader ng-repeat-start="card in user.cards | filter:true:card.visible">{{card.cardTitle}}</md-subheader>
+				<div class="bordered" ng-if="card.settingCardType === 'liste'">
+					<dl class="dl-table" ng-repeat="elem in card.list">
+						<dt><div><strong>{{elem[0]}}</strong></div></dt>
+						<dd><div><i>{{elem[1]}}</i></div></dd>
+					</dl>
+				</div>
+				<div class="bordered" ng-if="card.settingCardType === 'tekst'" ng-repeat-end>
+					<dl class="dl-table" ng-repeat="elem in card.list">
+						<dt><div class="md-body-1"><strong>{{elem[0]}}</strong></div></dt>
+						<dd><div>{{elem[1]}}</div></dd>
+					</dl>
+				</div>
 			</section>
 		</div>
 	</section>
