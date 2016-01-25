@@ -20,5 +20,5 @@
 				controller: 'NavbarCtrl as navbar'
 			};
 		}
-		navbar.$inject = ['$window'];
+		navbar.$inject = [];
 })();

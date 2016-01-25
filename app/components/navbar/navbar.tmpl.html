@@ -20,6 +20,10 @@
 			<div ng-show="false">
 				<input type="text">
 			</div>
+			<md-button class="md-fab md-mini" ui-sref="search" md-ink-ripple="#a03033" style="color: #a03033;">
+				<md-tooltip md-direction="left">Søk</md-tooltip>
+				<i class="fa fa-search"></i>
+			</md-button>
 			<md-button class="md-primary md-hue-2 md-raised nav-button-flex" ng-if="!loggedIn" ng-href="http://{{host}}/#/login" aria-label="logg in">
 				Logg inn
 			</md-button>
