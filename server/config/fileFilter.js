@@ -2,7 +2,7 @@ var path		= require('path'),
 	User        = require('./user.js'),
     fs          = require('fs');
 
-var maxSize = 50000000;
+var maxSize = 5000000;
 
 module.exports = function(req, file, cb) {
 	//console.log('file: '+JSON.stringify(file));
@@ -13,7 +13,7 @@ module.exports = function(req, file, cb) {
 			if(err.code =='ENOENT'){
 				fs.mkdirSync(directory)
 			} else {
-				throw err
+				throw err;
 			}
 		if(files && files.length > 0) {
 			files.forEach(function(elem,index,arr){
@@ -26,12 +26,12 @@ module.exports = function(req, file, cb) {
 						if (totSize < maxSize) {
 							//console.log('totSize: '+totSize);
 							User.addFile(req.user.id,{name:file.originalname,size:req.body.size},function(error) {
-								cb(null, true)
+								cb(null, true);
 							})
 							
 						} else {
 							//console.log('totSizee: '+totSize);
-							cb(null, false)
+							cb(null, false);
 						}
 					}
 				});

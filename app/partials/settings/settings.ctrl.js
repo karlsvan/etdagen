@@ -46,10 +46,10 @@
 		    item.formData.push({size: item.file.size});
 		}
 		$scope.uploader.onSuccessItem = function(item, response, status, headers) {
-			console.log('yey!');
+			$scope.user.filer.push({name:item.file.name,size:item.file.size});
 		}
 		$scope.uploader.onErrorItem = function(item, response, status, headers) {
-			console.log('For stor fil');
+			alert('Filen er for stor, alle har tilgang til 5MB hver');
 		}
 
 
@@ -74,13 +74,14 @@
 					deffered.reject();
 				}
 				$scope.cards = populateCards(res.cards);
+				$scope.cardlist = $scope.cards;
 			});
 	    })
 
-	    $scope.deleteFile = function(file,index) {
+	    $scope.deleteFile = function(index,file) {
 	    	file.index = index;
 	    	$http.post('/deleteFile',file).then(function() {
-	    		$scope.user.filer.slice(index,1);
+	    		$scope.user.filer.splice(index,1);
 	    	})
 	    }
 
@@ -167,7 +168,9 @@
 	    }
 
 	    $scope.saveUser = function() {
-	    	$scope.user.cards = toObject($scope.cards);
+	    	//	    	$scope.user.cards = toObject($scope.cards);
+	    	console.log('cardslist: '+$scope.cardlist);
+			$scope.user.cards = $scope.cardlist;
 	    	UserService.saveSettings($scope.user);
 	    };
 	    

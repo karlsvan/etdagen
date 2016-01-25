@@ -220,8 +220,8 @@ app.post('/upload',upload.single('file'),function (req,res) {
 });
 
 app.post('/deleteFile', function (req, res) {
-	fs.unlink(path.resolve(__dirname, 'filer/'+req.body.name),function() {
-		User.deleteFile(id,req.body.index,function(error) {
+	fs.unlink(path.resolve(__dirname, 'filer',req.user.id.toString(),req.body.name),function() {
+		User.deleteFile(req.user.id,req.body.index,function(error) {
 			res.sendStatus(200);
 		})
 	})

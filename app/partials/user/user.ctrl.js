@@ -19,7 +19,7 @@
 			$scope.$on('$stateChangeSuccess', function(event, toState, toParams/*, fromState, fromParams*/) {
 				if(toState.name == "user"){
 					UserService.getProfile(toParams.id, function(res) {
-						console.log(res);
+						//console.log(res);
 						$scope.user = res;
 						if(res.tags) deffered.resolve(res.tags);
 						else deffered.reject();
