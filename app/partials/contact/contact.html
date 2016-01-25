@@ -11,7 +11,7 @@
 				</div>
 				<div class="md-headline">{{person.position.title}}</div>
 				<div class="md-body-1">{{person.name}}</div>
-				<a ng-href="mailto:{{person.mail}}" ng-if="person.mail"><i class="fa fa-envelope"></i> {{person.mail}}</a>
+				<a class="mailto-link" ng-href="mailto:{{person.mail}}" ng-if="person.mail"><i class="fa fa-envelope"></i> {{person.mail}}</a>
 				<div ng-if="person.phone"><i class="fa fa-phone"></i> {{person.phone}}</div>
 			</div>
 		</div>
