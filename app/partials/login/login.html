@@ -6,8 +6,7 @@
 			<span>Feil epost eller passord</span>
 		  </div>
 		</div>
-
-		<div style="min-height: 200px; width: 100%; max-width: 800px; margin: 3rem 0;" layout="row">
+		<div style="min-height: 200px; width: 100%; max-width: 800px; margin: 3rem 0;" layout-gt-sm="row" layout-sm="column">
 			<div flex layout="column" layout-align="center center" style="margin: 0 1em;">
 				<a class="login-with-button facebook md-whiteframe-1dp" ng-href="../auth/facebook" md-ink-ripple>
 					<div class="logo-container">
@@ -97,23 +96,23 @@
 				</form>
 			</div>
 		</div>
-
-		<div>
+		<div layout-margin>
 			<a ui-sref="forgot" class="md-body-1">Glemt passord</a><span class="md-body-1" style="margin: 0 1em;">|</span><a href="" ng-click="LOGIN.adduser()" class="md-body-1">Registrer</a>
 		</div>
 	</section>
 	<section class="container-fluid" layout="column" layout-align="center center" ng-if="false">
-		<h2 class="md-headline">Logg inn med</h2>
 		<div class="container" layout="row" layout-align="center center">
 			<md-button class="fb-link md-raised" ng-href="../auth/facebook" style="color: #3b5998" aria-label="fb-login"><div class="link-img" layout-fill></div></md-button>
 			<md-button class="google-link md-raised" ng-href="../auth/google" style="color: #d62d20" aria-label="google-login"><div class="link-img" layout-fill></div></md-button>
 			<md-button class="ntnu-link md-raised" ng-href="../auth/feide" style="color: #0057e7" aria-label="ntnu-login"><div class="link-img" layout-fill></div></md-button>
 		</div>
+		<!--
 		<div class="md-margin" layout="row" layout-align="center center">
 			<div style="width: 100px; height: 1px; background: rgba(50,50,50,0.5);"></div>
 			<div class="md-body-1 md-padding">eller</div>
 			<div style="width: 100px; height: 1px; background: rgba(50,50,50,0.5);"></div>
 		</div>
+		-->
 		<md-content layout-fill layout-margin class="container container-padding section-padding md-hue-1 login-container" layout="column" layout-align="center center">
 			<form name="loginForm" class="login-content" ng-submit="LOGIN.login(credentials)" layout="column" layout-fill>
 				<md-input-container>
