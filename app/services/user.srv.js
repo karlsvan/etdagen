@@ -9,7 +9,7 @@
 		function UserService($http,$state) {
 			var self = this;
 			var loggedIn = 0;
-			var user;
+			var user = 0;
 
 			this.getUser = function(cb) {
 				$http.get('/api/user').then(function success(res) {
@@ -19,9 +19,7 @@
 				}, function(res) { cb(null, 0, res.data); });
 			};
 
-
 			this.returnUser = function() { return user; };
-
 			this.getLoggedIn = function() { return loggedIn; };
 
 			/*
@@ -54,7 +52,7 @@
 				}, function failure(res) {
 					console.error(res.data);
 				});
-			},
+			};
 
 			this.logout = function() {
 				loggedIn = 0;
@@ -81,11 +79,11 @@
 
 			this.register = function(cred,cb) {
 				$http.post('/register', cred).then(function sucsessCB(resp) {
-					$http.post('/forgot', {text:resp.data}).then(function successCB(res) {
-				    	cb(null,'Passord har blitt sendt til din email')
-				    }, function errorCB(res) {
-				    	cb(null,'Bruker opprettet, men feil ved passord-generering. Vennlist se "Glemt passord"')
-				    });
+					$http.post('/forgot', {text:resp.data}).then(function successCB(/*res*/) {
+						cb(null,'Passord har blitt sendt til din email');
+					}, function errorCB(/*res*/) {
+						cb(null,'Bruker opprettet, men feil ved passord-generering. Vennlist se "Glemt passord"');
+					});
 				}, function(error){
 					if(error.status == 500) {
 						cb(error.data,null);
@@ -104,16 +102,6 @@
 					cb(res);
 				},function(error) {
 					cb(error);
-				});
-			};
-
-			this.logout = function() {
-				loggedIn = 0;
-				user = null;
-				$http.get('/logout').then(function successCB(/*res*/) {
-					$state.go('home');
-				},function errorCB(/*res*/) {
-					$state.reload('login');
 				});
 			};
 		}

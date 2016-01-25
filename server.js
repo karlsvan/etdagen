@@ -79,13 +79,13 @@ app.get('/logout', function (req, res){
 
 app.get('/user/:id', function (req,res) {
 	User.getProfile(req.params.id, function(error,profile) {
-		if (error) {console.log(error)}
-		if (profile.adresse){profile.adresse = JSON.parse(profile.adresse)}
-		if (profile.filer){profile.filer = JSON.parse(profile.filer)}
-		if (profile.cards){profile.cards = JSON.parse(profile.cards)}
-		if (profile.tags){profile.tags = profile.tags.split(',')}
+		if (error) { console.log(error); }
+		if (profile.adresse){ profile.adresse = JSON.parse(profile.adresse); }
+		if (profile.filer){ profile.filer = JSON.parse(profile.filer); }
+		if (profile.cards){ profile.cards = JSON.parse(profile.cards); }
+		if (profile.tags){ profile.tags = profile.tags.split(','); }
 		res.status(200).send(profile);
-	})
+	});
 });
 
 app.get('/tags', function (req,res) {
@@ -110,7 +110,7 @@ app.post('/register',
 app.post('/setPass',function (req,res) {
 	User.setPass(req.body,function(error) {
 		if (error){
-			res.status(500).send(error)
+			res.status(500).send(error);
 		} else {
 			res.sendStatus(200);
 		}
@@ -122,43 +122,42 @@ app.post('/upload',upload.single('file'),function (req,res) {
 	fs.readdir(path.resolve(__dirname, 'filer'),function(err, files) {
 		if (err)
 			throw err;
-		var prefix = id+'_'
+		var prefix = id+'_';
 		files.forEach(function(elem,index,arr){
 			if(elem.substring(0,prefix.length) == prefix && elem != req.file.filename) {
 				fs.unlink(path.resolve(__dirname, 'filer/'+elem),function() {
 					console.log(path.resolve(__dirname, 'filer/'+elem));
-				})
+				});
 			}
-		})
+		});
 	});
 	User.saveFile(id,JSON.stringify([{navn:req.file.filename,path:'/filer'}]),function(error) {
 		res.sendStatus(200);
-	})
+	});
 
 	//console.log(JSON.stringify(req.file));
-})
+});
 
 app.post('/deleteFile', function (req, res) {
 	var id = req.body.navn.split('_')[0];
 	fs.unlink(path.resolve(__dirname, 'filer/'+req.body.navn),function() {
 		User.saveFile(id,'',function(error) {
 			res.sendStatus(200);
-		})
-	})
-})
+		});
+	});
+});
 
-app.post('/saveSettings', function (req,res) {
+app.post('/saveSettings', function (req, res) {
 	User.saveProfile(req.body, function(error) {
-		if (error)
-			throw error
+		if (error) throw error;
 		res.sendStatus(200);
-	})
-})
+	});
+});
 
 app.post('/contact', function (req,res) {
 	mail.sendMail(req.body, function(error, info){
 		if(error){
-			res.status(500).send(error)
+			res.status(500).send(error);
 		} else {
 			res.status(200).send(info);
 		}

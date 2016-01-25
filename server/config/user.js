@@ -22,7 +22,7 @@ module.exports = {
 							callback(null,rows[0]);
 						}, function errorCB(error) { callback(error,null); });
 					},function errorCB (error){ callback(error,null); });
-				} else { 
+				} else {
 					db.updateUser(rows[0].id,{status:'student'});
 					callback(null,rows[0]);
 				}
@@ -47,16 +47,16 @@ module.exports = {
 		userobj.status='student';
 		//console.log(JSON.stringify(userobj));
 		db.findUsers({email:userobj.email}).then(function successCB(rows) {
-			if(rows.length == 0) {
+			if(rows.length === 0) {
 				db.addUser(userobj).then(function successCB(rows) {
 					callback(null,userobj.email);
 				},function errorCB(error) {
 					callback(error,null);
 				});
 			} else {
-				callback('Bruker eksisterer',null)
+				callback('Bruker eksisterer',null);
 			}
-		})
+		});
 	},
 
 	update: function(id,obj,callback) {
@@ -85,11 +85,8 @@ module.exports = {
 					console.log(error);
 					callback(error,null);
 				});
-
 			});
-
 		});
-
 	},
 
 	getProfile: function(id,callback) {
@@ -114,7 +111,7 @@ module.exports = {
 			cb(null);
 		}, function (error) {
 			cb(error);
-		})
+		});
 	},
 
 	setPass: function(cred,cb) {
@@ -214,14 +211,14 @@ module.exports = {
 		});
 		profilColumns.unshift('bruker_id');
 		profilValues.unshift(user.id);
-		profilObj.bruker_id = user.id
+		profilObj.bruker_id = user.id;
 
 		db.saveProfile(brukerColumns,brukerVaules,brukerObj,profilColumns,profilValues,profilObj,user.tags).then(function(rows) {
 			//console.log(JSON.stringify(rows));
-			cb(null)
+			cb(null);
 		},function(error) {
-			cb(error)
-		})
+			cb(error);
+		});
 	}
 
 };
