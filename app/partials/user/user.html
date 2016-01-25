@@ -70,10 +70,11 @@
 					</dl>
 				</div>
 				<div class="bordered" ng-if="card.settingCardType === 'tekst'" ng-repeat-end>
-					<dl class="dl-table" ng-repeat="elem in card.list">
+					<div ng-bind-html="card.htmlcontent"></div>
+					<!-- <dl class="dl-table" ng-repeat="elem in card.list">
 						<dt><div class="md-body-1"><strong>{{elem[0]}}</strong></div></dt>
 						<dd><div>{{elem[1]}}</div></dd>
-					</dl>
+					</dl> -->
 				</div>
 			</section>
 		</div>
