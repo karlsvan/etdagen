@@ -202,11 +202,6 @@ i.button-icon.icon-both {
   position: absolute;
   width: 100%;
 }
-.forgot-container {
-  max-width: 30em;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
 #googlemaps {
   width: 500px;
   height: 400px;
@@ -227,6 +222,11 @@ i.button-icon.icon-both {
 .mailto-link {
   text-decoration: none;
   color: inherit;
+}
+.forgot-container {
+  max-width: 30em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 .video-wrapper {
   position: relative;
@@ -296,42 +296,6 @@ i.button-icon.icon-both {
     padding: 3% 0;
   }
 }
-#page-profile {
-  background-color: #eee;
-}
-#profile-main {
-  max-width: 1000px;
-}
-#profile-picture {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #b71c1c;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  border-radius: 50%;
-  width: 240px;
-  height: 240px;
-  margin: 10px;
-  margin-bottom: 20px;
-}
-.profile-basics-table {
-  line-height: 100%;
-}
-.profile-basics-table td {
-  vertical-align: top;
-}
-.profile-basics-table i {
-  opacity: 0.6;
-}
-.profile-basics-table span {
-  opacity: 0.5;
-}
-h2:hover {
-  cursor: pointer;
-}
-h2:hover span {
-  display: inline;
-}
 #page-login .login-container {
   max-width: 30em;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -389,24 +353,46 @@ h2:hover span {
   margin: auto 1em;
   text-decoration: none;
 }
+#page-profile {
+  background-color: #eee;
+}
+#profile-main {
+  max-width: 1000px;
+}
+#profile-picture {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #b71c1c;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
+  width: 240px;
+  height: 240px;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+.profile-basics-table {
+  line-height: 100%;
+}
+.profile-basics-table td {
+  vertical-align: top;
+}
+.profile-basics-table i {
+  opacity: 0.6;
+}
+.profile-basics-table span {
+  opacity: 0.5;
+}
+h2:hover {
+  cursor: pointer;
+}
+h2:hover span {
+  display: inline;
+}
 .animate-repeat {
   line-height: 40px;
   list-style: none;
   box-sizing: border-box;
-}
-dl.dl-table dt,
-dl.dl-table dd {
-  display: inline-block;
-  vertical-align: text-top;
-  text-align: left;
-}
-dl.dl-table dt {
-  width: 150px;
-}
-.bordered {
-  border: 1px solid rgba(0, 0, 0, 0.54);
-  border-radius: 4px;
-  padding: 1em;
 }
 .dialogdemoBasicUsage #popupContainer {
   position: relative;
@@ -484,6 +470,20 @@ dl.dl-table dt {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
+}
+dl.dl-table dt,
+dl.dl-table dd {
+  display: inline-block;
+  vertical-align: text-top;
+  text-align: left;
+}
+dl.dl-table dt {
+  width: 150px;
+}
+.bordered {
+  border: 1px solid rgba(0, 0, 0, 0.54);
+  border-radius: 4px;
+  padding: 1em;
 }
 #profiles-container {
   max-width: 1024px;

@@ -11,9 +11,9 @@
 			<section>
 				<h2 class="md-title">{{user.fornavn+' '+user.etternavn}}</h2>
 				<ul style="list-style: none; margin: 0; padding: 0;">
-					<li style="margin-bottom: 1em;">
+					<li style="margin-bottom: 1em;" ng-if="user.status == 'student'">
 						<div class="li-head" style="color: rgba(0,0,0,0.54);">Linje</div>
-						<div class="li-body" style="margin-left: 1em;">{{user.linje + ' ' + user.utgangsaar}}</div>
+						<div class="li-body" style="margin-left: 1em;" ng-if="user.linje && user.linje != 'null'">{{user.linje + ' ' + user.utgangsaar}}</div>
 					</li>
 					<li style="margin-bottom: 1em;" ng-if="user.tags">
 						<div class="li-head" style="color: rgba(0,0,0,0.54);">Tags</div>
@@ -30,22 +30,22 @@
 					<li style="margin-bottom: 1em;">
 						<div class="li-head" style="color: rgba(0,0,0,0.54);">Telefon</div>
 						<div class="li-body" style="margin-left: 1em;" ng-if="user.tlf">{{user.tlf}}</div>
-						<div class="li-body" style="margin-left: 1em;" ng-if="!user.tlf">Ingen telefon</div>
+						<!-- <div class="li-body" style="margin-left: 1em;" ng-if="!user.tlf">Ingen telefon</div> -->
 					</li>
 					<li style="margin-bottom: 1em;">
 						<div class="li-head" style="color: rgba(0,0,0,0.54);">Adresse</div>
 						<div class="li-body" style="margin-left: 1em;" ng-if="user.adresse">{{user.adresse[0]+', '+user.adresse[1]+' '+user.adresse[2]}}</div>
-						<div class="li-body" style="margin-left: 1em;" ng-if="!user.adresse">Ingen adresse</div>
+						<!-- <div class="li-body" style="margin-left: 1em;" ng-if="!user.adresse">Ingen adresse</div> -->
 					</li>
-					<li style="margin-bottom: 1em;" ng-if="user.fodselsdato && user.fodselsdato !== '0000-00-00'">
+					<!-- <li style="margin-bottom: 1em;" ng-if="user.fodselsdato && user.fodselsdato !== '0000-00-00'">
 						<div class="li-head" style="color: rgba(0,0,0,0.54);">Fødselsdato</div>
 						<div class="li-body" style="margin-left: 1em;">{{user.fodselsdato}}</div>
-					</li>
+					</li> -->
 				</ul>
 			</section>
 		</div>
 		<div layout="column" flex>
-			<section ng-if="!authorizedToSeeFiles">
+			<section ng-if="authorizedToSeeFiles">
 				<md-subheader>Filer</md-subheader>
 				<div class="bordered">
 					<ul layout="row" style="list-style: none; margin: 0; padding: 0;">
@@ -65,22 +65,14 @@
 				<md-subheader ng-repeat-start="card in user.cards | filter:true:card.visible">{{card.cardTitle}}</md-subheader>
 				<div class="bordered" ng-if="card.settingCardType === 'liste'">
 					<dl class="dl-table" ng-repeat="elem in card.list">
-						<dt>
-							<div class="md-body-1"><strong>{{elem[0]}}</strong></div>
-						</dt>
-						<dd>
-							<div><i>{{elem[1]}}</i></div>
-						</dd>
+						<dt><div><strong>{{elem[0]}}</strong></div></dt>
+						<dd><div><i>{{elem[1]}}</i></div></dd>
 					</dl>
 				</div>
 				<div class="bordered" ng-if="card.settingCardType === 'tekst'" ng-repeat-end>
 					<dl class="dl-table" ng-repeat="elem in card.list">
-						<dt>
-							<div class="md-body-1"><strong>{{elem[0]}}</strong></div>
-						</dt>
-						<dd>
-							<div><i>{{elem[1]}}</i></div>
-						</dd>
+						<dt><div class="md-body-1"><strong>{{elem[0]}}</strong></div></dt>
+						<dd><div>{{elem[1]}}</div></dd>
 					</dl>
 				</div>
 			</section>
