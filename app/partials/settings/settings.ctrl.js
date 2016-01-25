@@ -98,6 +98,11 @@
 					$cookies.remove('settings');
 				}
 				$scope.user = res;
+				$scope.userConnectedTo = {
+					facebook: !(res.facebookId === '' || res.facebookId === 'null' || res.facebookId === null || res.facebookId === 0 || !res.facebookId),
+					google: !(res.googleId === '' || res.googleId === 'null' || res.googleId === null || res.googleId === 0 || !res.googleId),
+					feide: !(res.feideId === '' || res.feideId === 'null' || res.feideId === null || res.feideId === 0 || !res.feideId)
+				};
 				if(res.tags) {
 					deffered.resolve(res.tags);
 				} else {
@@ -138,7 +143,8 @@
 		};
 
 		$scope.setCookie = function(url) {
-			$scope.user.cards = toObject($scope.cards);
+			// $scope.user.cards = toObject($scope.cards);
+			$scope.user.cards = $scope.cards;
 			// console.log(JSON.stringify($scope.user));
 			$cookies.putObject('settings',$scope.user);
 			$window.location.href = url;
@@ -222,7 +228,7 @@
 				return arr;
 			}
 			var obj = {};
-			arr.forEach(function(element/*,index,arr*/) {
+			arr.forEach(function(element,index,arr) {
 				if (element[0] === '' || element[1] === '') return;
 				obj[element[0]] = toObject(element[1]);
 			});
@@ -292,6 +298,7 @@
 			}
 			$mdDialog.hide($scope.connect);
 		};
+		$scope.cancel = function() { $mdDialog.cancel(); };
 	}
 	ConnectController.$inject = ['$scope', '$mdDialog', 'user', 'connect'];
 

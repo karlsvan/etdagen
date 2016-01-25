@@ -1,7 +1,7 @@
 <div id="page-settings">
 	<div class="container-fluid" layout="column" layout-align="start center" style="background: #eee;">
 		<div layout-gt-sm="row" layout="column" class="container">
-			<section layout-padding flex>
+			<section flex layout-margin class="md-whiteframe-2dp" style="border-radius: 4px; overflow: hidden;">
 				<md-subheader>Profilbilde</md-subheader>
 				<div layout="row">
 					<div ng-if="!bildeUrlShow" style="width: 10rem; height: 10rem; border-radius: 50%;
@@ -13,49 +13,67 @@
 						<md-input-container>
 							<input ng-model="user.bilde"></input>
 						</md-input-container>
-						<div layout="row">
-							<md-button class="md-raised" ng-click="bildeUrlShow = !bildeUrlShow; ">Lagre bilde url</md-button>
-							<md-button class="md-raised" type="delete" ng-click="user.bilde=''">Slett</md-button>
+						<div layout="row" layout-align="end">
+							<md-button class="md-raised" aria-label="SaveImage" style="background: #2ECC71; color: white;" ng-click="saveUser()">
+								<md-tooltip md-direction="top">Lagre</md-tooltip>
+								<i class="fa fa-save"></i>
+							</md-button>
+							<md-button class="md-primary md-raised" ng-click="user.bilde=''" type="delete">
+								<md-tooltip md-direction="top">Slett bildeurl</md-tooltip>
+								<i class="fa fa-trash"></i>
+							</md-button>
 						</div>
 					</div>
 				</div>
 			</section>
-			<section layout-padding flex>
+			<section flex layout-margin class="md-whiteframe-2dp" style="border-radius: 4px; overflow: hidden;">
 				<md-subheader>
 					<div>CV (kan bare sees av bedrifter)</div>
 				</md-subheader>
 				<div>
 					<md-list>
-						<md-list-item>
-							<div flex>entilfeldigfil.docs</div>
-							<md-button class="md-primary md-raised"><i class="fa fa-trash"></i></md-button>
+						<md-list-item ng-if="user.filer.length < 1">Ingen filer</md-list-item>
+						<md-list-item ng-repeat="file in user.filer">
+							<div flex>{{file.name +' '+ file.size}}</div>
+							<md-button class="md-primary md-raised" ng-click="deleteFile($index)"><i class="fa fa-trash"></i></md-button>
 						</md-list-item>
-						<md-list-item>
+						<md-list-item style="padding: 0;">
 							<div flex></div>
-							<md-button class="md-raised" style="background: #19B5FE; color: white;"><i class="fa fa-plus-circle"></i></md-button>
+							<label class="md-button md-raised" style="background: #19B5FE; color: white;" for="cv-input"><i class="fa fa-plus-circle"></i></label>
+							<input id="cv-input" type="file" ng-hide="true" nv-file-select uploader="uploader">
 						</md-list-item>
 					</md-list>
 				</div>
 			</section>
 		</div>
 		<div layout-gt-sm="row" layout="column" class="container">
-			<section layout-padding flex>
+			<section flex layout-margin class="md-whiteframe-2dp" style="border-radius: 4px; overflow: hidden;">
 				<md-subheader>Kontaktinformasjon</md-subheader>
 				<div>
 					<md-list>
-						<ms-list-item layout="row">
+						<md-list-item layout="row">
+							<md-input-container flex style="margin: 0; position: relative; top: 1.1em;">
+								<label>Linje</label>
+								<input type="text" ng-model="user.linje">
+							</md-input-container>
+							<md-input-container flex style="margin: 0; position: relative; top: 1.1em;">
+								<label>Utgangsår</label>
+								<input type="text" ng-model="user.utgangsaar">
+							</md-input-container>
+						</md-list-item>
+						<md-list-item layout="row">
 							<md-input-container flex style="margin: 0; position: relative; top: 1.1em;">
 								<label>Epostadresse</label>
 								<input type="text" ng-model="user.email">
 							</md-input-container>
-						</ms-list-item>
-						<ms-list-item layout="row">
+						</md-list-item>
+						<md-list-item layout="row">
 							<md-input-container flex style="margin: 0; position: relative; top: 1.1em;">
 								<label>Telefon</label>
 								<input type="text" ng-model="user.tlf">
 							</md-input-container>
-						</ms-list-item>
-						<ms-list-item layout="row">
+						</md-list-item>
+						<md-list-item layout="row">
 							<div layout="row" flex>
 								<md-input-container flex style="margin: 0; position: relative; top: 1.1em;">
 									<label>Adresse</label>
@@ -70,7 +88,10 @@
 									<input type="text" ng-model="user.adresse[2]">
 								</md-input-container>
 							</div>
-						</ms-list-item>
+						</md-list-item>
+						<md-list-item layout="row">
+							<et-tags requirematch=false selected-tags="user.tags" promise="promise" flex></et-tags>
+						</md-list-item>
 					</md-list>
 					<div layout="row" layout-align="end">
 						<md-button class="md-raised" aria-label="SaveCard" style="background: #2ECC71; color: white;" ng-click="saveUser()">
@@ -80,12 +101,12 @@
 					</div>
 				</div>
 			</section>
-			<section layout-padding flex>
+			<section layout-margin class="md-whiteframe-2dp" style="border-radius: 4px; overflow: hidden;">
 				<md-subheader>Koble sammen kontoer</md-subheader>
 				<div>
 					<md-list>
 						<md-list-item>
-							<a class="login-with-button facebook md-whiteframe-1dp" ng-click="setCookie('/auth/connect/facebook')" md-ink-ripple>
+							<a class="login-with-button facebook md-whiteframe-1dp" ng-click="userConnectedTo.facebook || setCookie('/auth/connect/facebook')" md-ink-ripple ng-disabled="userConnectedTo.facebook">
 								<div class="logo-container">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 216" style="height: 100%;">
 										<path fill="white" d="
@@ -97,16 +118,17 @@
 										</path>
 									</svg>
 								</div>
-								<div class="text-container">Knytt til Facebook</div>
+								<div class="text-container" ng-if="!userConnectedTo.facebook">Knytt til Facebook</div>
+								<div class="text-container" ng-if="userConnectedTo.facebook">Knyttet til Facebook</div>
 							</a>
-							<div flex></div>
+							<!-- <div flex></div>
 							<md-button class="md-raised" style="background-color: #ECF0F1;" aria-label="Connect">
 								<md-tooltip md-direction="right">Koble til</md-tooltip>
 								<i class="fa fa-link"></i>
-							</md-button>
+							</md-button> -->
 						</md-list-item>
 						<md-list-item>
-							<a class="login-with-button google md-whiteframe-1dp" ng-click="setCookie('/auth/connect/google')" md-ink-ripple>
+							<a class="login-with-button google md-whiteframe-1dp" ng-click="userConnectedTo.google || setCookie('/auth/connect/google')" md-ink-ripple ng-disabled="userConnectedTo.google">
 								<div class="logo-container">
 									<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 										height="100%" viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
@@ -130,16 +152,17 @@
 										</g>
 									</svg>
 								</div>
-								<div class="text-container">Knytt til Goolge</div>
+								<div class="text-container" ng-if="!userConnectedTo.google">Knytt til Goolge</div>
+								<div class="text-container" ng-if="userConnectedTo.google">Knyttet til Goolge</div>
 							</a>
-							<div flex></div>
+							<!-- <div flex></div>
 							<md-button class="md-raised" style="background-color: #ECF0F1;" aria-label="Connect">
 								<md-tooltip md-direction="right">Koble til</md-tooltip>
 								<i class="fa fa-link"></i>
-							</md-button>
+							</md-button> -->
 						</md-list-item>
 						<md-list-item>
-							<a class="login-with-button feide md-whiteframe-1dp" ng-click="setCookie('/auth/connect/feide')" md-ink-ripple>
+							<a class="login-with-button feide md-whiteframe-1dp" ng-click="userConnectedTo.feide || setCookie('/auth/connect/feide')" md-ink-ripple ng-disabled="userConnectedTo.feide">
 								<div class="logo-container">
 									<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
 										height="100%" viewBox="0 0 600.000000 600.000000"
@@ -166,13 +189,14 @@
 										</g>
 									</svg>
 								</div>
-								<div class="text-container">Knytt til Feide</div>
+								<div class="text-container" ng-if="!userConnectedTo.feide">Knytt til Feide</div>
+								<div class="text-container" ng-if="userConnectedTo.feide">Knyttet til Feide</div>
 							</a>
-							<div flex></div>
+							<!-- <div flex></div>
 							<md-button class="md-raised" style="background-color: #ECF0F1;" aria-label="Connect">
 								<md-tooltip md-direction="right">Koble til</md-tooltip>
 								<i class="fa fa-link"></i>
-							</md-button>
+							</md-button> -->
 						</md-list-item>
 					</md-list>
 				</div>

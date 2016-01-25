@@ -315,6 +315,7 @@ i.button-icon.icon-both {
   overflow: hidden;
   margin: 0.5em;
   min-width: 250px;
+  text-decoration: none;
 }
 .login-with-button.facebook {
   background: #3b5998;
@@ -328,6 +329,12 @@ i.button-icon.icon-both {
   background: #BE1527;
   color: white;
 }
+.login-with-button.disabled,
+.login-with-button[disabled] {
+  background: grey;
+  color: rgba(0, 0, 0, 0.8);
+  cursor: default;
+}
 .login-with-button > .logo-container {
   background: transparent;
   height: 100%;
@@ -339,6 +346,7 @@ i.button-icon.icon-both {
 }
 .login-with-button > .text-container {
   margin: auto 1em;
+  text-decoration: none;
 }
 #page-profile {
   background-color: #eee;
