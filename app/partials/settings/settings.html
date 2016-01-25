@@ -28,18 +28,21 @@
 			</section>
 			<section flex layout-margin class="md-whiteframe-2dp" style="border-radius: 4px; overflow: hidden;">
 				<md-subheader>
-					<div>Filer (kan bare sees av bedrifter)</div>
+					<div>Filer (maks 50MB totalt)</div>
 				</md-subheader>
 				<div>
 					<md-list>
 						<md-list-item ng-if="user.filer.length < 1">Ingen filer</md-list-item>
 						<md-list-item ng-repeat="file in user.filer">
 							<div flex>{{file.name +' '+ file.size}}</div>
-							<md-button class="md-primary md-raised" ng-click="deleteFile($index)"><i class="fa fa-trash"></i></md-button>
+							<md-button class="md-primary md-raised" ng-click="deleteFile($index, file)"><i class="fa fa-trash"></i></md-button>
 						</md-list-item>
 						<md-list-item style="padding: 0;">
 							<div flex></div>
-							<label class="md-button md-raised" style="background: #19B5FE; color: white;" for="cv-input"><i class="fa fa-plus-circle"></i></label>
+							<label class="md-button md-raised" style="background: #19B5FE; color: white;" for="cv-input">
+								<md-tooltip md-direction="left">Ny fil</md-tooltip>
+								<i class="fa fa-plus-circle"></i>
+							</label>
 							<input id="cv-input" type="file" ng-hide="true" nv-file-select uploader="uploader">
 						</md-list-item>
 					</md-list>
