@@ -114,7 +114,7 @@
 				}
 				$scope.uploader.onAfterAddingFile = function(item) {
 					item.file.name = res.id+'_'+item.file.name;
-					console.log(item.file.name);
+					// console.log(item.file.name);
 				};
 			});
 		});
@@ -139,7 +139,7 @@
 
 		$scope.setCookie = function(url) {
 			$scope.user.cards = toObject($scope.cards);
-			console.log(JSON.stringify($scope.user));
+			// console.log(JSON.stringify($scope.user));
 			$cookies.putObject('settings',$scope.user);
 			$window.location.href = url;
 		};
@@ -162,7 +162,7 @@
 				console.error('cards is not an array.\n', cards);
 				return []; // return empty
 			} else {
-				console.log(cards);
+				// console.log(cards);
 				return cards;
 			}
 
@@ -181,7 +181,7 @@
 		}
 
 		function equalArray(arr1,arr2) {
-			console.log(arr1+' | '+arr2);
+			// console.log(arr1+' | '+arr2);
 			if (arr1.length != arr2.length) {
 				return false;
 			}
@@ -232,6 +232,7 @@
 		$scope.saveUser = function() {
 			// $scope.user.cards = toObject($scope.cards);
 			$scope.user.cards = $scope.cardlist;
+			// console.log($scope.user);
 			UserService.saveSettings($scope.user);
 		};
 

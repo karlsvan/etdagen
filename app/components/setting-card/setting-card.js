@@ -27,10 +27,7 @@
 					saveCard: '&?'
 				},
 				templateUrl: './components/setting-card/setting-card.tmpl.html',
-				controller: 'settingCardCtrl as settingCard',
-				link: function(scope, elem, attrs){
-					scope.$watch(attrs.htmlcontent, function(v){console.log(v);});
-				}
+				controller: 'settingCardCtrl as settingCard'
 			};
 		}
 
@@ -42,11 +39,6 @@
 			self.toggleVisible = function(){ $scope.visible = !$scope.visible; };
 			self.showHtmlContent = function(){
 				console.log({cardTitle: $scope.cardTitle, settingCardType: $scope.settingCardType, visible: $scope.visible, list: $scope.list, htmlcontent: self.htmlcontent});
-				// console.log('cardTitle: ', $scope.cardTitle);
-				// console.log('settingCardType: ', $scope.settingCardType);
-				// console.log('visible: ', $scope.visible);
-				// console.log('list: ', $scope.list);
-				// console.log('htmlcontent: ', self.htmlcontent);
 			};
 			self.deleteCard = function(index){console.log('index: ', index); };
 		}
