@@ -88,6 +88,7 @@ module.exports = {
 		+'bruker.adresse, '
 		+'bruker.utgangsaar, '
 		+'bruker.linje, '
+		+'bruker.status, '
 		+'bruker.bilde, '
 		+'bruker.fodselsdato, '
 		+'profil.bio, '
@@ -96,6 +97,11 @@ module.exports = {
 		+'GROUP_CONCAT(tags.navn) AS tags '
 		+'FROM bruker LEFT JOIN profil ON bruker.id = profil.bruker_id LEFT JOIN bruker_tags ON bruker.id = bruker_tags.bruker_id LEFT JOIN tags ON bruker_tags.tag_id = tags.id WHERE bruker.id='+id;
 		//console.log(sql);
+		return new Query(sql);
+	},
+
+	getFiles: function(id) {
+		var sql = 'SELECT filer FROM profil WHERE bruker_id='+id;
 		return new Query(sql);
 	},
 
@@ -119,7 +125,7 @@ module.exports = {
 		return new Query(sql);
 	},
 
-	saveFile: function(id,file) {
+	saveFiles: function(id,file) {
 		var sql = 'INSERT INTO profil (bruker_id, filer) VALUES (?) ON DUPLICATE KEY UPDATE filer = ?;';
 		var inserts = [[id,file],file];
 		return new Query(sql,inserts);

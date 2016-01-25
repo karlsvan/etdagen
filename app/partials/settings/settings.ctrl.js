@@ -10,65 +10,26 @@
 	*/
 	angular.module('etApp')
 	.controller('SettingsCtrl', SettingsCtrl)
-	.controller('UploadController', UploadEditor)
 	.controller('ConnectController',ConnectController)
 	.controller('PasswordController',PasswordController);
 
 
 	/*@ngInject*/
-	function UploadEditor($scope, $mdDialog) {
-		var alert;
-
-		$scope.showAlert = showAlert;
-		$scope.closeAlert = closeAlert;
-		$scope.showUpload = showCustomUpload;
-
-		function showAlert() {
-			$mdDialog
-			.show( alert )
-			.finally(function() {
-				alert = undefined;
-			});
-		}
-
-		function closeAlert() {
-			$mdDialog.hide( alert, "finished" );
-			alert = undefined;
-		}
-
-		function showCustomUpload($event) {
-			$mdDialog.show({
-				targetEvent: $event,
-				template:
-			     '<md-dialog aria-label="Upload dialog">' +
-	         '  <md-dialog-content>'+
-					 '		<form class="md-dialog-content" action="upload.php" method="post" enctype="multipart/form-data">' +
-				   '		    Select image to upload:' +
-				   '		    <input type="file" name="fileToUpload" id="fileToUpload">' +
-				   '		    <input type="submit" value="Upload Image" name="submit" ng-click="closeDialog()">' +
-				   '		</form>' +
-	         '  </md-dialog-content>' +
-	         '</md-dialog>',
-				locals: { Upload: $scope.userName }
-			});
-		}
-	}
-	UploadEditor.$inject = ['$scope', '$mdDialog'];
-
 	function SettingsCtrl($scope,UserService,$q,$mdDialog,$http,FileUploader,$cookies,$window) {
 		var self = this;
 		var deffered = $q.defer();
 		$scope.promise = deffered.promise
 	    var keyArr = [],contArr = [];
 	    $scope.uploader = new FileUploader({url: '/upload',autoUpload:true,removeAfterUpload:true});
-	    $scope.uploader.onSuccessItem = function(item, response, status, headers) {
-	    	var arr = item.file.name.split('_');
-	    	arr.shift();
-	    	$scope.filename = arr.join('_');
-	    	$scope.user.filer = [{navn:item.file.name,path:'/filer'}];
-	    }
-
-	    
+	    $scope.uploader.onAfterAddingFile = function(item) {
+		    item.formData.push({size: item.file.size});
+		}
+		$scope.uploader.onSuccessItem = function(item, response, status, headers) {
+			console.log('yey!');
+		}
+		$scope.uploader.onErrorItem = function(item, response, status, headers) {
+			console.log('For stor fil');
+		}
 
 	    UserService.init(function(user,loggedIn,error) {
 	    	if (user.connect) {
@@ -87,15 +48,6 @@
 					deffered.reject();
 				}
 				$scope.cards = populateCards(res.cards);
-				if (res.filer) {
-					var arr = res.filer[0].navn.split('_');
-			    	arr.shift();
-			    	$scope.filename = arr.join('_');
-			    }
-				$scope.uploader.onAfterAddingFile = function(item) {
-			    	item.file.name = res.id+'_'+item.file.name;
-			    	console.log(item.file.name);
-			    }
 			});
 	    })
 

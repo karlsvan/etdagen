@@ -127,11 +127,30 @@ module.exports = {
 		return user;
 	},
 
-	saveFile: function(id,file,cb) {
-		db.saveFile(id,file).then(function() {
-			cb(null);
-		}, function (error) {
-			cb(error);
+	addFile: function(id,file,cb) {
+		db.getFiles(id).then(function(rows) {
+			if(rows[0].filer) {var filer = JSON.parse(rows[0].filer)} else {var filer = []}
+			filer.push(file);
+			filer = JSON.stringify(filer);
+			db.saveFiles(id,filer).then(function() {
+				cb(null);
+			}, function (error) {
+				cb(error);
+			})
+		})
+		
+	},
+
+	deleteFile: function(id,index,cb) {
+		db.getFiles(id).then(function(rows) {
+			var filer = JSON.parse(rows[0].filer);
+			filer.splice(index,1);
+			filer = JSON.stringify(filer);
+			db.saveFiles(id,filer).then(function() {
+				cb(null);
+			}, function (error) {
+				cb(error);
+			})
 		})
 	},
 

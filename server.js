@@ -10,6 +10,7 @@ var express		= require('express'),
 	cookieSession = require('cookie-session'),
 	mail        = require('./server/config/mail.js'),
 	User        = require('./server/config/user.js'),
+	fileFilter  = require('./server/config/fileFilter.js'),
 	authRoutes  = require('./authRouter.js'),
 	multer      = require('multer'),
 	fs          = require('fs'),
@@ -23,13 +24,16 @@ var appConfig = require('./gulpfile');
 //for file upload:
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.resolve(__dirname, 'filer'));
+  	var filepath = path.resolve(__dirname, 'filer/'+req.user.id);
+  	filepath = filepath.toString();
+    cb(null, filepath);
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
   }
 });
-var upload = multer({ storage: storage });
+var upload = multer({ storage: storage, fileFilter: fileFilter });
+
 
 // Support ejs templating for views
 app.set('view engine', 'ejs');
@@ -117,35 +121,7 @@ app.post('/setPass',function (req,res) {
 	});
 });
 
-app.post('/upload',upload.single('file'),function (req,res) {
-	var id = req.file.filename.split('_')[0];
-	fs.readdir(path.resolve(__dirname, 'filer'),function(err, files) {
-		if (err)
-			throw err;
-		var prefix = id+'_'
-		files.forEach(function(elem,index,arr){
-			if(elem.substring(0,prefix.length) == prefix && elem != req.file.filename) {
-				fs.unlink(path.resolve(__dirname, 'filer/'+elem),function() {
-					console.log(path.resolve(__dirname, 'filer/'+elem));
-				})
-			}
-		})
-	});
-	User.saveFile(id,JSON.stringify([{navn:req.file.filename,path:'/filer'}]),function(error) {
-		res.sendStatus(200);
-	})
 
-	//console.log(JSON.stringify(req.file));
-})
-
-app.post('/deleteFile', function (req, res) {
-	var id = req.body.navn.split('_')[0];
-	fs.unlink(path.resolve(__dirname, 'filer/'+req.body.navn),function() {
-		User.saveFile(id,'',function(error) {
-			res.sendStatus(200);
-		})
-	})
-})
 
 app.post('/saveSettings', function (req,res) {
 	User.saveProfile(req.body, function(error) {
@@ -235,9 +211,27 @@ api.get('/companies', function (req,res) {
 	})
 })
 
-app.all('/:path', function (req, res){ res.redirect('/#'+path); });
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.post('/upload',upload.single('file'),function (req,res) {
+	if (req.file) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(500);
+	}
+});
+
+app.post('/deleteFile', function (req, res) {
+	fs.unlink(path.resolve(__dirname, 'filer/'+req.body.name),function() {
+		User.deleteFile(id,req.body.index,function(error) {
+			res.sendStatus(200);
+		})
+	})
+});
+
+app.all('/:path', function (req, res){ res.redirect('/#'+path); });
+
 app.use('/api',api);
 app.use('/auth',authRoutes);
 module.exports.app = app;
