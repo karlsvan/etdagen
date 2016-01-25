@@ -43,7 +43,7 @@
 	</md-card-content>
 
 	<md-card-content ng-if="settingCardType=='tekst'">
-		<text-angular ng-model="htmlcontent" ng-change="settingCard.htmlcontent = htmlcontent" name="htmlcontent"
+		<text-angular ng-model="htmlcontent" ng-change="settingCard.updateHtmlcontent(htmlcontent)" name="htmlcontent"
 			ta-toolbar-class="ta-toolbar layout-row layout-wrap"
 			ta-toolbar-group-class="ta-button-group layout-row layout-wrap"
 			ta-toolbar-button-class="ta-button"

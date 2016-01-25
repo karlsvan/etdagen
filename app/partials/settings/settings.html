@@ -97,6 +97,9 @@
 						</md-list-item>
 					</md-list>
 					<div layout="row" layout-align="end">
+						<md-button class="md-raised" aria-label="SaveCard" ng-click="changePass()">
+							Bytt passord
+						</md-button>
 						<md-button class="md-raised" aria-label="SaveCard" style="background: #2ECC71; color: white;" ng-click="saveUser()">
 							<md-tooltip md-direction="top">Lagre endringer</md-tooltip>
 							<i class="fa fa-save"></i>
@@ -216,7 +219,7 @@
 							visible="card.visible"
 							card-title="card.cardTitle"
 							list="card.list"
-							htmlcontent="card.htmlcontent"
+							htmlcontent="cardlist[$index].htmlcontent"
 							delete-card="deleteCard($index)">
 						</setting-card>
 					</div>

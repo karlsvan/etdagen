@@ -32,7 +32,7 @@
 		}
 
 		/*@ngInject*/
-		function settingCardCtrl($scope){
+		function settingCardCtrl($scope, $attrs){
 			var self = this;
 			self.addListField = function(){ $scope.list.push(['','']); };
 			self.deleteListField = function(index) { $scope.list.splice(index, 1); };
@@ -41,6 +41,9 @@
 				console.log({cardTitle: $scope.cardTitle, settingCardType: $scope.settingCardType, visible: $scope.visible, list: $scope.list, htmlcontent: self.htmlcontent});
 			};
 			self.deleteCard = function(index){console.log('index: ', index); };
+			self.updateHtmlcontent = function(htmlcontent){
+				$scope.htmlcontent = htmlcontent;
+			}
 		}
-		settingCardCtrl.$inject = ['$scope'];
+		settingCardCtrl.$inject = ['$scope', '$attrs'];
 })();
