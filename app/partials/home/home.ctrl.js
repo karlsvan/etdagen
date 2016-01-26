@@ -13,11 +13,11 @@
 
 		/*@ngInject*/
 		function HomeCtrl(){
-			
-			
+
+
 			this.program = [
 				{time: '10.00-15.00', action: 'Bedrifter på stand i Glassgården', place: 'Glassgården', icon: 'Tie'},
-				{time: '10.00-15.00', action: 'Quiz! Gevinster på 500kr og 250kr gavekort midtbyen', place: 'Glassgården', icon: 'question'},
+				{time: '10.00-15.00', action: 'Quiz! Vinn musicbox og gavekort', place: 'Glassgården', icon: 'question'},
 				{time: '10.05', action: 'Ballongslipp', place: 'Glassgården', icon: 'Balloon'},
 				{time: '12.05', action: 'Kakespising med bedriftene', place: 'Glassgården', icon: 'cake'},
 				{time: '14.15', action: 'Bedriftspresentasjon med Norsk Elektro Optikk', place: 'EL1', icon: 'Tie'},
