@@ -41,7 +41,7 @@
 				    <label>Melding</label>
 					<textarea ng-model="form.message" columns="5" style="min-height:200px;" required></textarea>
 				</md-input-container>
-				<md-button class="md-primary md-hue-2 md-raised" layout-fill style="margin: 0; height: 15px;">Send</md-button>
+				<md-button class="md-primary md-hue-2 md-raised" layout-fill style="margin: 0; height: 15px;" ng-click="contact.sendMail()">Send</md-button>
 			</form>
 		</div>
 	</section>
