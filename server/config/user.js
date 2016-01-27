@@ -126,9 +126,11 @@ module.exports = {
 
 	addFile: function(id,file,cb) {
 		db.getFiles(id).then(function(rows) {
-			if(rows[0].filer) {var filer = JSON.parse(rows[0].filer)} else {var filer = []}
+			console.log('rows: '+JSON.stringify(rows));
+			if(rows[0] && rows[0].filer) {var filer = JSON.parse(rows[0].filer)} else {var filer = []}
 			filer.push(file);
 			filer = JSON.stringify(filer);
+			console.log('filer: '+filer);
 			db.saveFiles(id,filer).then(function() {
 				cb(null);
 			}, function (error) {

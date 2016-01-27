@@ -5,16 +5,19 @@ var path		= require('path'),
 var maxSize = 5000000;
 
 module.exports = function(req, file, cb) {
-	//console.log('file: '+JSON.stringify(file));
+	console.log('file: '+JSON.stringify(file));
+	console.log('req: '+JSON.stringify(req.body));
 	var totSize = 0;
 	var directory = path.resolve(__dirname, '../../filer/'+req.user.id);
 	fs.readdir(directory,function(err, files) {
-		if (err)
+		if (err) {
+			console.log(err);
 			if(err.code =='ENOENT'){
 				fs.mkdirSync(directory)
 			} else {
 				throw err;
 			}
+		}
 		if(files && files.length > 0) {
 			files.forEach(function(elem,index,arr){
 				fs.stat(directory+'/'+elem,function(err,stats) {
@@ -26,6 +29,8 @@ module.exports = function(req, file, cb) {
 						if (totSize < maxSize) {
 							//console.log('totSize: '+totSize);
 							User.addFile(req.user.id,{name:file.originalname,size:req.body.size},function(error) {
+								if (error)
+									console.log(err);
 								cb(null, true);
 							})
 							
@@ -39,6 +44,8 @@ module.exports = function(req, file, cb) {
 		} else {
 			if(req.body.size < maxSize) {
 				User.addFile(req.user.id,{name:file.originalname,size:req.body.size},function(error) {
+					if (error)
+						console.log(err);
 					cb(null, true)
 				})
 			} else {
