@@ -38,3 +38,4 @@ Recommended packages and themes (atom)
 - Implementering av karma
 - Angular docs
 - Image upload: https://github.com/danialfarid/ng-file-upload
+- Husk å logge av på sanntid dingdongs
