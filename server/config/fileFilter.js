@@ -5,8 +5,6 @@ var path		= require('path'),
 var maxSize = 5000000;
 
 module.exports = function(req, file, cb) {
-	console.log('file: '+JSON.stringify(file));
-	console.log('req: '+JSON.stringify(req.body));
 	var totSize = 0;
 	var directory = path.resolve(__dirname, '../../filer/'+req.user.id);
 	fs.readdir(directory,function(err, files) {
