@@ -39,6 +39,20 @@
 			alert('Filen er for stor, alle har tilgang til 5MB hver');
 		};
 
+		$scope.imgUploader = new FileUploader({url: '/upload',autoUpload:true,removeAfterUpload:true});
+		$scope.imgUploader.onAfterAddingFile = function(item) {
+			var ext = item.file.name.split('.').pop();
+			item.file.name = 'userAvatar.'+ext;
+			item.formData.push({size: item.file.size});
+		};
+		$scope.imgUploader.onSuccessItem = function(item, response, status, headers) {
+			$scope.user.bilde = '/filer/'+$scope.user.id+'/'+item.file.name;
+			$window.location.reload();
+		};
+		$scope.imgUploader.onErrorItem = function(item, response, status, headers) {
+			alert('Filen er for stor, alle har tilgang til 5MB hver');
+		};
+
 
 		UserService.init( function(user) {
 			if (user.connect) connect(user);

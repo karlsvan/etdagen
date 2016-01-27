@@ -53,7 +53,7 @@ module.exports = {
 			if (rows.length === 0) {
 				callback(null,null);
 			} else {
-				db.updateUser(rows[0].id,{status:'student'});
+				// if (obj.username) db.updateUser(rows[0].id,{status:'student'});
 				callback(null,rows[0]);
 			}
 		}, function errorCB(error) {
@@ -136,7 +136,7 @@ module.exports = {
 				cb(error);
 			})
 		})
-		
+
 	},
 
 	deleteFile: function(id,index,cb) {

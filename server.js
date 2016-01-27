@@ -155,9 +155,9 @@ app.get('/search', function (req,res) {
 });
 });
 
-app.get('/filer/:filename',function (req,res) {
-	res.download(path.resolve(__dirname, 'filer/'+req.params.filename));
-})
+app.get('/filer/:userid/:filename',function (req,res) {
+	res.download(path.resolve(__dirname, 'filer', req.params.userid, req.params.filename));
+});
 
 app.post('/forgot', function (req,res) {
 	console.log('email: '+JSON.stringify(req.body));

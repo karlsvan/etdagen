@@ -3,13 +3,39 @@
 		<div layout-gt-sm="row" layout="column" class="container">
 			<section flex layout-margin class="md-whiteframe-2dp" style="border-radius: 4px; overflow: hidden;">
 				<md-subheader>Profilbilde</md-subheader>
+				<div layout="row" ng-if="false">
+					<div ng-if="!bildeUrlShow" style="width: 10rem; height: 10rem; border-radius: 50%;
+						background: url({{user.bilde || 'assets/images/avatar.png'}}) center;
+						background-size: cover; overflow: hidden; border: 0.3rem solid white;
+						margin-bottom: 1em; background-color: white; margin: 1em;">
+					</div>
+					<div layout="column" layout-align="end end" flex>
+						<div layout="row" layout-align="end">
+							<div ng-bind="user.bilde.split('/').pop()"></div>
+							<label class="md-button md-raised" style="background: #19B5FE; color: white;" for="img-input">
+								<md-tooltip md-direction="left">Last opp bilde</md-tooltip>
+								<i class="fa fa-plus-circle"></i>
+							</label>
+							<input id="img-input" type="file" ng-hide="true" nv-file-select uploader="imgUploader">
+						</div>
+						<div layout="row" layout-align="end" ng-hide="true">
+							<md-input-container>
+								<label>Bildeurl</label>
+								<input type="text">
+							</md-input-container>
+							<div>
+								<md-button class="md-raised">Bruk url</md-button>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div layout="row">
 					<div ng-if="!bildeUrlShow" style="width: 10rem; height: 10rem; border-radius: 50%;
 						background: url({{user.bilde || 'assets/images/avatar.png'}}) center;
 						background-size: cover; overflow: hidden; border: 0.3rem solid white;
 						margin-bottom: 1em;">
 					</div>
-					<div layout="column" flex style="padding: 1em;">
+					<div layout="column" flex style="padding: 1em;" ng-if="!(user.status === 'bedrift' || user.status === 'bedrift_betalt')">
 						<md-input-container>
 							<input ng-model="user.bilde" aria-label="ImageLink"></input>
 						</md-input-container>
@@ -33,8 +59,8 @@
 				<div>
 					<md-list>
 						<md-list-item ng-if="user.filer.length < 1">Ingen filer</md-list-item>
-						<md-list-item ng-repeat="file in user.filer">
-							<div flex>{{file.name +' '+ file.size}}</div>
+						<md-list-item ng-repeat="file in user.filer" ng-if="file.name != user.bilde.split('/').pop()">
+							<div flex>{{file.name +' '+ file.size/1000+'kB'}}</div>
 							<md-button class="md-primary md-raised" ng-click="deleteFile($index, file)"><i class="fa fa-trash"></i></md-button>
 						</md-list-item>
 						<md-list-item style="padding: 0;">
@@ -54,7 +80,7 @@
 				<md-subheader>Informasjon</md-subheader>
 				<div>
 					<md-list>
-						<md-list-item layout="row">
+						<md-list-item layout="row" ng-if="!(user.status === 'bedrift' || user.status === 'bedrift_betalt')">
 							<md-input-container flex style="margin: 0; position: relative; top: 1.1em;">
 								<label>Linje</label>
 								<input type="text" ng-model="user.linje">
