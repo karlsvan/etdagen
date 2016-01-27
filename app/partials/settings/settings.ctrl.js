@@ -32,6 +32,7 @@
 			item.formData.push({size: item.file.size});
 		};
 		$scope.uploader.onSuccessItem = function(item, response, status, headers) {
+			if(!$scope.user.filer){$scope.user.filer = []}
 			$scope.user.filer.push({name: item.file.name, size: item.file.size});
 		};
 		$scope.uploader.onErrorItem = function(item, response, status, headers) {
