@@ -1,8 +1,8 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var partialFiles        = $.path.join(appConfig.app, 'partials', '**/*.html'),
-		partialsDistFolder  = $.path.join(appConfig.dist, 'partials'),
+	var partialFiles        = $.path.join(config.dirs.app, 'partials', '**/*.html'),
+		partialsDistFolder  = $.path.join(config.dirs.dist, 'partials'),
 		htmlminOptions      = {collapseWhitespace: true, removeComments: true};
 
 	/*

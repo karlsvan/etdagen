@@ -2,14 +2,14 @@
 'use strict';
 // ========== Module dependencies ==========
 // Vendor dependencies
-var app     = require('../../server').app,
+var app     = require('../server').app,
 	debug = require('debug')('server:server'),
 	http  = require('http');
 
 
 // ========== Server setup ==========
 // Get port from environment and store in Express. Create an http server listening to the provided port, on all network interfaces.
-var port    = normalizePort(process.env.PORT || '3000');
+var port    = normalizePort(process.env.PORT || '4000');
 	app.set('port', port);
 
 var server = http.createServer(app);

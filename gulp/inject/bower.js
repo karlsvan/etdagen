@@ -1,7 +1,7 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var fileToInjectInto 	= appConfig.indexFile,
+	var fileToInjectInto 	= config.files.index,
 		wiredepOptions 		= {
 			overrides: {
 				'font-awesome': { 'main': [ 'css/font-awesome.css' ] }

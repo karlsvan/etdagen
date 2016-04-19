@@ -1,11 +1,11 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var fileWithReferences 	= appConfig.indexFile,
+	var fileWithReferences 	= config.files.index,
 		autoprefixerOptions = { browsers: ['last 2 versions'] },
-		distFolder 			= appConfig.dist,
-		outputDestinations 	= [ $.path.join(appConfig.dist, 'assets', 'js'),
-								$.path.join(appConfig.dist, 'assets', 'css') ];
+		distFolder 			= config.dirs.dist,
+		outputDestinations 	= [ $.path.join(config.dirs.dist, 'assets', 'js'),
+								$.path.join(config.dirs.dist, 'assets', 'css') ];
 
 	/*
 	*	@task: useref

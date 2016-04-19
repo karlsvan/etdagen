@@ -6,20 +6,20 @@ var express		= require('express'),
 	logger      = require('morgan'),
     bodyParser  = require('body-parser'),
 	favicon		= require('serve-favicon'),
-	mysql       = require('./server/mysql/mysql_functions.js'),
+	mysql       = require('./mysql/mysql_functions.js'),
 	cookieSession = require('cookie-session'),
-	mail        = require('./server/config/mail.js'),
-	User        = require('./server/config/user.js'),
-	fileFilter  = require('./server/config/fileFilter.js'),
+	mail        = require('./config/mail.js'),
+	User        = require('./config/user.js'),
+	fileFilter  = require('./config/fileFilter.js'),
 	authRoutes  = require('./authRouter.js'),
 	multer      = require('multer'),
 	fs          = require('fs'),
-	passport    = require('passport');require('./server/config/passport.js')(passport);
+	passport    = require('passport');require('./config/passport.js')(passport);
 
 // ========== Initialize and setup express app ==========
 var app 	= express();
 var env		= app.get('env') || 'development';
-var appConfig = require('./gulpfile');
+var config = require('../gulpfile');
 
 //for file upload:
 var storage = multer.diskStorage({
@@ -40,13 +40,13 @@ app.set('view engine', 'ejs');
 
 // Set views path and serve static files
 if(env === 'development'){
-	app.set('views', path.resolve(appConfig.app));
-	app.use(express.static(path.resolve(appConfig.app)));
-	app.use('/bower_components', express.static(path.resolve(__dirname, 'bower_components')));
+	app.set('views', config.dirs.app);
+	app.use(express.static(config.dirs.app));
+	app.use('/bower_components', express.static(path.resolve('bower_components')));
 }
 else if (env === 'production') {
-	app.set('views', appConfig.dist);
-	app.use(express.static(appConfig.dist));
+	app.set('views', config.dirs.dist);
+	app.use(express.static(config.dirs.dist));
 }
 else app.error('Node environment is invalid.');
 
@@ -157,7 +157,7 @@ app.get('/search', function (req,res) {
 
 app.get('/filer/:filename',function (req,res) {
 	res.download(path.resolve(__dirname, 'filer/'+req.params.filename));
-})
+});
 
 app.post('/forgot', function (req,res) {
 	console.log('email: '+JSON.stringify(req.body));
@@ -177,14 +177,14 @@ app.post('/forgot', function (req,res) {
 							res.status(200).send('success');
 						}
 
-					})
+					});
 
 				}
 			});
 		} else {
 			res.sendStatus(404);
 		}
-	})
+	});
 });
 
 api.get('/user', function (req,res){
@@ -205,8 +205,8 @@ api.get('/companies', function (req,res) {
 		res.json(compObj);
 	},function(error) {
 		console.log(error);
-	})
-})
+	});
+});
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -223,8 +223,8 @@ app.post('/deleteFile', function (req, res) {
 	fs.unlink(path.resolve(__dirname, 'filer',req.user.id.toString(),req.body.name),function() {
 		User.deleteFile(req.user.id,req.body.index,function(error) {
 			res.sendStatus(200);
-		})
-	})
+		});
+	});
 });
 
 app.all('/:path', function (req, res){ res.redirect('/#'+path); });

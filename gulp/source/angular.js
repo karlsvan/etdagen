@@ -1,8 +1,8 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var appFile 	= $.path.join(appConfig.app, 'app.js'),
-		distFolder 	= appConfig.dist;
+	var appFile 	= $.path.join(config.dirs.app, 'app.js'),
+		distFolder 	= config.dirs.dist;
 
 	/*
 	*	@task: source.angular

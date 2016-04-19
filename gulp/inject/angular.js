@@ -1,10 +1,10 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var fileToInjectInto 	=   appConfig.indexFile,
-		filesToInject 		= [ $.path.join(appConfig.app, 'components', '**/*.js'),
-								$.path.join(appConfig.app, 'partials', '**/*.js'),
-								$.path.join(appConfig.app, 'services', '**/*.js') ],
+	var fileToInjectInto 	=   config.files.index,
+	filesToInject 		= [ $.path.join(config.dirs.components, '**/*.js'),
+									$.path.join(config.dirs.partials, '**/*.js'),
+									$.path.join(config.dirs.services, '**/*.js') ],
 		injectOptions 		= { relative: true, starttag: '<!-- angular:{{ext}} -->', endtag: '<!-- endangular -->' };
 
 	/*

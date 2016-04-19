@@ -1,9 +1,9 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var fileToInjectInto 	=   appConfig.indexFile,
-		filesToInject 		= [ $.path.join(appConfig.app, 'assets', 'styles', '**/*.css'),
-								$.path.join(appConfig.app, 'assets', 'scripts', '**/*.js') ],
+	var fileToInjectInto 	=   config.files.index,
+		filesToInject 		= [ $.path.join(config.dirs.app, 'assets', 'styles', '**/*.css'),
+								$.path.join(config.dirs.app, 'assets', 'scripts', '**/*.js') ],
 		injectOptions 		= { relative: true, starttag: '<!-- custom:{{ext}} -->', endtag: '<!-- endcustom -->'};
 
 	/*

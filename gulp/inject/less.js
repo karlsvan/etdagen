@@ -1,11 +1,11 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var fileToInjectInto 	= appConfig.mainLessFile,
+	var fileToInjectInto 	= $.path.resolve('app', 'styles', 'main.less'),
 		filesToInject 		= {
-			mixins: 	$.path.join(appConfig.app, 'assets', 'styles', 'mixins', '*.less'),
-			components: $.path.join(appConfig.app, 'components', '**/*.less'),
-			partials: 	$.path.join(appConfig.app, 'partials', '**/*.less')
+			mixins: 	$.path.join(config.dirs.app, 'assets', 'styles', 'mixins', '*.less'),
+			components: $.path.join(config.dirs.app, 'components', '**/*.less'),
+			partials: 	$.path.join(config.dirs.app, 'partials', '**/*.less')
 		},
 		injectOptions 		= {
 			mixins: 	{ relative: true, starttag: '/* inject:mixins:{{ext}} */', endtag: '/* endinject */'},

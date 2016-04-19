@@ -2,7 +2,7 @@
 
 var express   = require('express'),
 	auth      = express.Router(),
-	passport  = require('passport');require('./server/config/passport.js')(passport);
+	passport  = require('passport');require('./config/passport.js')(passport);
 
 auth.post('/login',
 	passport.authenticate('local', { failureFlash: false }),

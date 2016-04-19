@@ -1,10 +1,10 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var lessFiles 	= [ $.path.join(appConfig.app, 'assets', 'styles', '**/*.less'),
-						$.path.join(appConfig.app, 'components', '**/*.less'),
-						$.path.join(appConfig.app, 'partials', '**/*.less') ],
-		htmlFiles 	= 	$.path.join(appConfig.app, '**/*.{html, ejs}');
+	var lessFiles 	= [ $.path.join(config.dirs.app, 'assets', 'styles', '**/*.less'),
+						$.path.join(config.dirs.app, 'components', '**/*.less'),
+						$.path.join(config.dirs.app, 'partials', '**/*.less') ],
+		htmlFiles 	= 	$.path.join(config.dirs.app, '**/*.{html, ejs}');
 
 	/*
 	*	@task: serve.watch

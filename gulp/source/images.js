@@ -1,8 +1,8 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var imageFiles 			= $.path.join(appConfig.app, 'assets', 'images', '**/*'),
-		imagesDistFolder 	= $.path.join(appConfig.dist, 'assets', 'images');
+	var imageFiles 			= $.path.join(config.dirs.app, 'assets', 'images', '**/*'),
+		imagesDistFolder 	= $.path.join(config.dirs.dist, 'assets', 'images');
 
 	/*
 	*	@task: source.images

@@ -1,10 +1,10 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var fontFiles 			= $.path.join(appConfig.root, 'bower_components', 'materialize', 'font', '**', '*.{eot,svg,ttf,woff,woff2}'),
-		fontsFiles 			= $.path.join(appConfig.root, 'bower_components', 'font-awesome', 'fonts', '*.{eot,svg,ttf,woff,woff2}'),
-		fontDistFolder 		= $.path.join(appConfig.dist, 'assets', 'font'),
-		fontsDistFolder 	= $.path.join(appConfig.dist, 'assets', 'fonts');
+	var fontFiles 			= $.path.join(config.dirs.root, 'bower_components', 'materialize', 'font', '**', '*.{eot,svg,ttf,woff,woff2}'),
+		fontsFiles 			= $.path.join(config.dirs.root, 'bower_components', 'font-awesome', 'fonts', '*.{eot,svg,ttf,woff,woff2}'),
+		fontDistFolder 		= $.path.join(config.dirs.dist, 'assets', 'font'),
+		fontsDistFolder 	= $.path.join(config.dirs.dist, 'assets', 'fonts');
 
 	/*
 	*	@task: source.fonts

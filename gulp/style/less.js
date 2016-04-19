@@ -1,8 +1,8 @@
-module.exports = function(gulp, $, appConfig){
+module.exports = function(gulp, $, config){
 	'use strict';
 
-	var fileToConvert 		= $.path.join(appConfig.app, 'assets', 'styles', 'main.less'),
-		outputDestination 	= $.path.join(appConfig.app, 'assets', 'styles', 'css'),
+	var fileToConvert 		= $.path.join(config.dirs.app, 'assets', 'styles', 'main.less'),
+		outputDestination 	= $.path.join(config.dirs.app, 'assets', 'styles', 'css'),
 		autoprefixerOpt 	= { browsers:['last 2 versions'] };
 
 	/*
