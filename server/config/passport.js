@@ -47,7 +47,10 @@ module.exports = function (passport){
 	// ET-login : Login with the ET-user
 	passport.use(new LocalStrategy(
 		function(username, password, done) {
-			User.findOne({email:username}, function (err, user, msg) {
+			var searchobj = {};
+			if(username.split('@').pop() === 'etdagen') searchobj = {username: username};
+			else { searchobj = {email:username}; }
+			User.findOne(searchobj, function (err, user, msg) {
 				if (err) { return done(err); }
 				if (!user) {
 					return done(null, false);

@@ -53,7 +53,7 @@ module.exports = {
 			if (rows.length === 0) {
 				callback(null,null);
 			} else {
-				db.updateUser(rows[0].id,{status:'student'});
+				// if (obj.username) db.updateUser(rows[0].id,{status:'student'});
 				callback(null,rows[0]);
 			}
 		}, function errorCB(error) {
@@ -126,18 +126,17 @@ module.exports = {
 
 	addFile: function(id,file,cb) {
 		db.getFiles(id).then(function(rows) {
-			console.log('rows: '+JSON.stringify(rows));
-			if(rows[0] && rows[0].filer) {var filer = JSON.parse(rows[0].filer)} else {var filer = []}
+			//if(rows[0] && rows[0].filer) {var filer = JSON.parse(rows[0].filer)} else {var filer = []}
+			var filer = (rows[0] && rows[0].filer) ? JSON.parse(rows[0].filer) : [];
 			filer.push(file);
 			filer = JSON.stringify(filer);
-			console.log('filer: '+filer);
 			db.saveFiles(id,filer).then(function() {
 				cb(null);
 			}, function (error) {
 				cb(error);
 			})
 		})
-		
+
 	},
 
 	deleteFile: function(id,index,cb) {
@@ -240,12 +239,17 @@ module.exports = {
 			}
 		});
 		profilColumns.forEach(function(elem,index,arr){
-			if(typeof user[elem] === 'object') {
-				profilValues.push(JSON.stringify(user[elem]));
-				profilObj[elem] = JSON.stringify(user[elem]);
+			if(user[elem]) {
+				if(typeof user[elem] === 'object') {
+					profilValues.push(JSON.stringify(user[elem]));
+					profilObj[elem] = JSON.stringify(user[elem]);
+				} else {
+					profilValues.push(user[elem]);
+					profilObj[elem] = user[elem];
+				}
 			} else {
-				profilValues.push(user[elem]);
-				profilObj[elem] = user[elem];
+				profilValues.push('');
+				profilObj[elem] = '';
 			}
 		});
 		profilColumns.unshift('bruker_id');

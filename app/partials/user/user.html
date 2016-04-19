@@ -51,9 +51,9 @@
 					<ul layout="row" style="list-style: none; margin: 0; padding: 0;">
 						<li ng-if="!user.filer">Ingen filer</li>
 						<li ng-repeat="fil in user.filer" style="margin: 0 1em;">
-							<a target="_self" href="/filer/{{user.filer[0].navn}}" download="{{filename}}">
+							<a target="_self" href="/filer/{{user.id}}/{{user.filer[$index].name}}" download="{{user.filer[$index].name}}">
 								<i class="fa fa-file-text-o"></i>
-								<label>{{filename}}</label>
+								<label>{{user.filer[$index].name}}</label>
 							</a>
 						</li>
 					</ul>
